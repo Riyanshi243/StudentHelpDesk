@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".AdminPage"
+            android:exported="false" />
+        <activity
+            android:name=".StudentPage"
+            android:exported="false" />
+        <activity
             android:name=".RegisterCollege"
             android:exported="false" />
         <activity
