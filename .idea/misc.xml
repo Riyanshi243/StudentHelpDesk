@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/bottomline.xml" value="0.19166666666666668" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_main.xml" value="0.16145833333333334" />
       </map>
     </option>
