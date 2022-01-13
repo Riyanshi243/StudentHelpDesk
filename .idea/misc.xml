@@ -11,6 +11,13 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_register_college.xml" value="0.16145833333333334" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_signup.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_page.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/college_register_questions.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/date_input_layout.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/edit_text_layout.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/multiline_text_layout.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/number_decimal_layout.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/numeric_text_layout.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/radio_button_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/help.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/logout.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/logout_notif.xml" value="0.17552083333333332" />
