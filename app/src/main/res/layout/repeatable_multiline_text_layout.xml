@@ -33,10 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/background_gray"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="numberDecimal"
+            android:inputType="textMultiLine"
             android:textColor="@color/hint_text"
             android:textSize="20dp"
             android:hint="Your " />

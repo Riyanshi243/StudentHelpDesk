@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".StudentUploadDocuments"
+            android:exported="false" />
+        <activity
+            android:name=".StudentGetAcademicData"
+            android:exported="false" />
+        <activity
+            android:name=".StudentGetPersonalData"
+            android:exported="false" />
+        <activity
+            android:name=".StudentCheckRequestStatus"
+            android:exported="false" />
+        <activity
             android:name=".AdminPage"
             android:exported="false" />
         <activity

@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/box_bg"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Question:"
+            android:text="ENTER YOUR "
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -33,36 +33,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/background_gray"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
+            android:inputType="textPersonName"
             android:textColor="@color/hint_text"
             android:textSize="20dp"
-            android:hint="Enter your question..." />
+            android:hint="Your " />
 
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Compulsory Field"
-            android:textSize="20dp"/>
 
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Changeable Field"
-            android:textSize="20dp"/>
-
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="20dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
