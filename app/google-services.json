@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "693030487728",
+    "firebase_url": "https://studenthelpdesk-fec38-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "studenthelpdesk-fec38",
+    "storage_bucket": "studenthelpdesk-fec38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693030487728:android:c15c5a81306c690b52dd75",
+        "android_client_info": {
+          "package_name": "com.example.studenthelpdesk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693030487728-u0sdjffg6ghoqu139u6uad8ahnerpf9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDz9RzKuj0UxX2W7NcI0nQ_pmJ1OnE20V8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693030487728-u0sdjffg6ghoqu139u6uad8ahnerpf9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
