@@ -39,7 +39,7 @@
 
 
             <EditText
-                android:id="@+id/email2"
+                android:id="@+id/adminemail"
                 android:layout_width="match_parent"
                 android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
