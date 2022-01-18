@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_white"
+    tools:context=".StudentSendRequestToChangeData">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:fontFamily="casual"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="Hello ID"
+                android:textColor="@color/black"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/currentVal_"
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="Current Value of "
+                android:textColor="@color/black"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/currentVal"
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="CURRENT VALUE"
+                android:textColor="@color/black"
+                android:background="@color/background_gray"
+                android:textSize="24dp" />
+
+            <EditText
+                android:id="@+id/newcurrentval"
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:hint="New value that needs to be placed"
+                android:inputType="textPersonName"
+                android:textColor="@color/hint_text"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/reasontochange"
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="start|top"
+                android:hint="Reason to change your field"
+                android:inputType="textMultiLine"
+                android:textColor="@color/hint_text"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <Button
+                android:id="@+id/send_request"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+
+                android:text="SEND REQUEST" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
