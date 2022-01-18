@@ -29,7 +29,7 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/ans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -41,7 +41,7 @@
             android:hint="Enter your question..." />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/compulsoryfield"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -49,7 +49,7 @@
             android:textSize="20dp"/>
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/changefield"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -57,7 +57,7 @@
             android:textSize="20dp"/>
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/dropdown"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="20dp"

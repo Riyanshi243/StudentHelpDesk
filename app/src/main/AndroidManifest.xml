@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".StudentReviewAllData"
+            android:exported="false" />
+        <activity
             android:name=".StudentUploadDocuments"
             android:exported="false" />
         <activity

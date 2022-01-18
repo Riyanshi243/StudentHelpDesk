@@ -23,7 +23,7 @@
             android:layout_marginRight="10dp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/signup_img"
                 android:layout_width="421dp"
                 android:layout_height="149dp"
                 android:layout_marginTop="10dp"
@@ -39,7 +39,7 @@
 
 
             <EditText
-                android:id="@+id/adminemail"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
 
 
             <EditText
-                android:id="@+id/password2"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 android:textColorLink="@color/black"
                 tools:ignore="SpeakableTextPresentCheck" />
             <EditText
-                android:id="@+id/confirmpassword2"
+                android:id="@+id/confirmpassword"
                 android:layout_width="match_parent"
                 android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/signup"
                 android:layout_width="157dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
