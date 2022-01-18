@@ -38,7 +38,7 @@
                 android:textSize="24dp" />
 
             <TextView
-                android:id="@+id/currentVal_"
+                android:id="@+id/currentVal_msg"
                 android:layout_width="match_parent"
                 android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
