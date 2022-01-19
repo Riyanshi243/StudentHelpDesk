@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Student-Help/app/src/main/res/layout/activity_register_college.xml" value="0.22" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/activity_register_college2.xml" value="0.20416666666666666" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/activity_register_college3.xml" value="0.19010416666666666" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/college_register_questions.xml" value="0.20416666666666666" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/date_input_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/edit_text_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/edit_text_layout_with_extra_layout.xml" value="0.18" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/text_view_layout.xml" value="0.18" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/bottomline.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_add.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_date_calendar.xml" value="0.19166666666666668" />

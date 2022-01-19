@@ -25,6 +25,12 @@
             android:name=".StudentCheckRequestStatus"
             android:exported="false" />
         <activity
+            android:name=".RegisterCollege3"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege2"
+            android:exported="false" />
+        <activity
             android:name=".AdminPage"
             android:exported="false" />
         <activity
