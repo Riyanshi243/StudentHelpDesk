@@ -24,9 +24,9 @@ public class RegisterCollege2 extends AppCompatActivity {
         setContentView(R.layout.activity_register_college2);
         ll=findViewById(R.id.linearL);
         allData=RegisterCollege.allData;
-        View questionRepeatable = getLayoutInflater().inflate(R.layout.edit_text_layout, null);
-        TextView question=questionRepeatable.findViewById(R.id.Heading2);
-        EditText answer=questionRepeatable.findViewById(R.id.EditText);
+        View questionRepeatable = getLayoutInflater().inflate(R.layout.repeatable_edit_text_layout, null);
+        TextView question = questionRepeatable.findViewById(R.id.Ques);
+        EditText answer = questionRepeatable.findViewById(R.id.editTextTextMultiLine);
         answer.setHint(ansHint);
         question.setText(deptQ);
         departmentName=new ArrayList<>();
@@ -40,9 +40,9 @@ public class RegisterCollege2 extends AppCompatActivity {
 
         Log.d("hi","hi");
         if(lastQuestionFilled()) {
-            View questionRepeatable = getLayoutInflater().inflate(R.layout.edit_text_layout, null);
-            TextView question = questionRepeatable.findViewById(R.id.Heading2);
-            EditText answer = questionRepeatable.findViewById(R.id.EditText);
+            View questionRepeatable = getLayoutInflater().inflate(R.layout.repeatable_edit_text_layout, null);
+            TextView question = questionRepeatable.findViewById(R.id.Ques);
+            EditText answer = questionRepeatable.findViewById(R.id.editTextTextMultiLine);
             answer.setHint(ansHint);
             question.setText(deptQ);
             ll.addView(questionRepeatable);
@@ -53,7 +53,7 @@ public class RegisterCollege2 extends AppCompatActivity {
     {
         for (int i = 0; i < numberOfDept; i++) {
                 View question1 = ll.getChildAt(i);
-                EditText ans = question1.findViewById(R.id.EditText);
+                EditText ans = question1.findViewById(R.id.editTextTextMultiLine);
                 String dept = ans.getText().toString();
                 if (i < departmentName.size()) {
                     departmentName.set(i, dept);
@@ -68,7 +68,7 @@ public class RegisterCollege2 extends AppCompatActivity {
     public boolean lastQuestionFilled()
     {
         View question1 = ll.getChildAt(numberOfDept-1);
-        EditText ans=question1.findViewById(R.id.EditText);
+        EditText ans=question1.findViewById(R.id.editTextTextMultiLine);
         String dept=ans.getText().toString();
         if(dept.length()==0) {
             ans.setError("Enter data here");
