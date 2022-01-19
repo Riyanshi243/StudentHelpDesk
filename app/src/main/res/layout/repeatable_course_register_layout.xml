@@ -11,7 +11,6 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +32,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/background_gray"
-            android:ems="10"
             android:gravity="start|top"
             android:inputType="textPersonName"
-            android:textColor="@color/hint_text"
+            android:textColor="@color/black"
             android:textSize="20dp"
             android:hint="Your " />
 
@@ -59,24 +56,29 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="106dp"
             android:layout_gravity="center"
             android:foregroundGravity="center_vertical|center"
             android:gravity="center_horizontal|center_vertical">
 
             <Button
-                android:id="@+id/complete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Button" />
-
-            <ImageButton
                 android:id="@+id/addsubQ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|center_horizontal|end"
-                app:srcCompat="@drawable/ic_baseline_add" />
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:text="ADD NEW BRANCH" />
+
+            <Button
+                android:id="@+id/complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="SAVE THIS COURSE" />
+
+
         </TableRow>
 
 

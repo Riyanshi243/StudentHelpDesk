@@ -146,7 +146,8 @@
                 android:text="@string/already_a_user_nlogin_instead"
                 android:textAlignment="center"
                 android:textColor="@color/blue_text"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:layout_marginBottom="60dp" />
         </LinearLayout>
     </ScrollView>
 
