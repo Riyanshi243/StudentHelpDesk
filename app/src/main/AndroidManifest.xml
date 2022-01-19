@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".AdminCreateNewAccount"
+            android:exported="false" />
+        <activity
+            android:name=".CompanySignUp"
+            android:exported="false" />
+        <activity
+            android:name=".AdminSignUp"
+            android:exported="false" />
+        <activity
             android:name=".StudentReviewAllData"
             android:exported="false" />
         <activity
@@ -40,7 +49,7 @@
             android:name=".RegisterCollege"
             android:exported="false" />
         <activity
-            android:name=".Signup"
+            android:name=".StudentSignup"
             android:exported="false" />
         <activity
             android:name=".Login"
