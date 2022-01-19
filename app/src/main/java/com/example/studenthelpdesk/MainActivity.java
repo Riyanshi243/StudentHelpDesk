@@ -41,13 +41,15 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private static int SPLASH_SCREEN_TIME_OUT=2000;
     static boolean isadmin=true,done=true;
-    /*
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView text = (TextView) findViewById(R.id.textView);
+        startActivity(new Intent(MainActivity.this, RegisterCollege.class));
+        finish();
+        /*TextView text = (TextView) findViewById(R.id.textView);
         if(!isConnected(this)){
             showCustomDialog();
         }
@@ -142,12 +144,11 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             });
-        }
-    }*/
+        }*/
+    }
 
     public void letTheUserLoggedIn(View view)
     {
-        //Toast.makeText(MainActivity.this,"HIIIIII",Toast.LENGTH_LONG).show();
 
 
     }

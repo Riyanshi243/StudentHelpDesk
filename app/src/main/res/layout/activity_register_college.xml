@@ -132,6 +132,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
 
+                android:onClick="next"
                 android:text="REGISTER" />
 
             <TextView
@@ -141,6 +142,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
 
+                android:onClick="toLogin"
                 android:text="@string/already_a_user_nlogin_instead"
                 android:textAlignment="center"
                 android:textColor="@color/blue_text"
