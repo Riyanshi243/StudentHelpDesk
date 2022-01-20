@@ -7,6 +7,31 @@ public class CollegeRegistrationData {
     private String Uname,SAdminemail,password,CName,Location;
     private ArrayList<String> deptName,courseName;
     private ArrayList<ArrayList<String>> branchForEachCourse;
+    private CollegeRegisterQuestions questions_personal[],questions_academic[],questions_upload[];
+
+    public void setQuestions_academic(CollegeRegisterQuestions[] questions_academic) {
+        this.questions_academic = questions_academic;
+    }
+
+    public void setQuestions_personal(CollegeRegisterQuestions[] questions_personal) {
+        this.questions_personal = questions_personal;
+    }
+
+    public void setQuestions_upload(CollegeRegisterQuestions[] questions_upload) {
+        this.questions_upload = questions_upload;
+    }
+
+    public CollegeRegisterQuestions[] getQuestions_academic() {
+        return questions_academic;
+    }
+
+    public CollegeRegisterQuestions[] getQuestions_personal() {
+        return questions_personal;
+    }
+
+    public CollegeRegisterQuestions[] getQuestions_upload() {
+        return questions_upload;
+    }
 
     public void setBranchForEachCourse(ArrayList<ArrayList<String>> branchForEachCourse) {
         this.branchForEachCourse = branchForEachCourse;

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +52,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                 allData.setCourseName(courseName);
                 allData.setBranchForEachCourse(branchOfEachCourse);
                 //intent to registration step 4
+                startActivity(new Intent(RegisterCollege3.this,RegisterCollege4_PersonalQuestions.class));
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -85,6 +87,8 @@ public class RegisterCollege3 extends AppCompatActivity {
                 if(lastBranch.getText().toString().length()!=0) {
                     EditText subq = new EditText(questionRepeatable.getContext());
                     subq.setHint(subQHint);
+
+                    //subq.setFocusable(true);
                     subQuestions.addView(subq);
                 }
                 else
@@ -123,8 +127,11 @@ public class RegisterCollege3 extends AppCompatActivity {
                 for(int i=0;i<branchNumber;i++)
                 {
                     TextView thisBranch = new TextView(permanentDataView.getContext());
-                    thisBranch.setText(allbranch.get(i));
-                    subHeading.addView(thisBranch);
+                    if(i<allbranch.size())
+                    {
+                        thisBranch.setText(allbranch.get(i));
+                        subHeading.addView(thisBranch);
+                    }
                 }
                 ll.addView(permanentDataView);
             }
