@@ -9,7 +9,7 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
@@ -45,7 +45,7 @@
                 android:paddingLeft="5dp"
                 android:text="Enter all the courses along with branches you want to connect from your college. If no branch for any particular course, then add course name as branch name once and SAVE."
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
             <LinearLayout
                 android:id="@+id/linearL"
@@ -58,10 +58,10 @@
             <Button
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="60dp"
                 android:onClick="saveAndNext"
                 android:text="SAVE AND NEXT" />
 
