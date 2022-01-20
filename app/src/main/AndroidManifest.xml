@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".RegisterCollege7"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege6_UploadData"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege5_AcademicQuestions"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege4_PersonalQuestions"
+            android:exported="false" />
+        <activity
             android:name=".StudentReviewAllData"
             android:exported="false" />
         <activity
