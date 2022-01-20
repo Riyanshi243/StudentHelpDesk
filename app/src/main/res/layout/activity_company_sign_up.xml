@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     android:background="@drawable/bg_white"
-
-    tools:context=".RegisterCollege">
+    tools:context=".CompanySignUp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,68 +16,104 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical">
+            android:layout_marginRight="10dp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/signup_img"
                 android:layout_width="421dp"
                 android:layout_height="149dp"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/register_college" />
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/signup" />
 
             <ProgressBar
-                android:id="@+id/progressBar_college"
+                android:id="@+id/progressBar5"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="invisible" />
 
             <EditText
-                android:id="@+id/uname"
+                android:id="@+id/repre"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:ems="10"
-                android:hint="Enter unique College UserName"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
                 android:paddingLeft="5dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textColorLink="@color/black" />
-
-            <EditText
-                android:id="@+id/cname"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:ems="10"
-                android:hint="Enter College Name"
+                android:hint="Enter Name of Company Representative"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:paddingLeft="5dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@android:color/darker_gray"
-                android:textColorLink="@color/black" />
+                android:textColorLink="@color/black"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <EditText
-                android:id="@+id/adminemail"
+                android:id="@+id/emailrepre"
                 android:layout_width="match_parent"
+                android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:ems="10"
-                android:hint="Enter Super Admin emailID"
+                android:hint="Enter Representative EmailId"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textColorLink="@color/black"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/phonerepre"
+                android:layout_width="match_parent"
                 android:paddingLeft="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Enter Representative contact number"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textColorLink="@color/black"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Enter Company location"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textColorLink="@color/black"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Enter email provided by college admin"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@android:color/darker_gray"
@@ -88,8 +122,9 @@
 
 
             <EditText
-                android:id="@+id/password2"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
+                android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
@@ -97,7 +132,6 @@
                 android:hint="Enter Password"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                android:paddingLeft="5dp"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
                 android:textColor="@color/black"
@@ -105,10 +139,10 @@
                 android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/black"
                 tools:ignore="SpeakableTextPresentCheck" />
-
             <EditText
-                android:id="@+id/confirmpassword2"
+                android:id="@+id/confirmpassword"
                 android:layout_width="match_parent"
+                android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
@@ -116,7 +150,6 @@
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                android:paddingLeft="5dp"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
                 android:textColor="@color/black"
@@ -125,15 +158,16 @@
                 android:textColorLink="@color/black"
                 tools:ignore="SpeakableTextPresentCheck" />
 
+
+
             <Button
-                android:id="@+id/register"
+                android:id="@+id/signup"
                 android:layout_width="157dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
 
-                android:onClick="next"
-                android:text="REGISTER" />
+                android:text="SIGN-UP" />
 
             <TextView
                 android:id="@+id/login"
@@ -142,13 +176,11 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
 
-                android:onClick="toLogin"
                 android:text="@string/already_a_user_nlogin_instead"
                 android:textAlignment="center"
                 android:textColor="@color/blue_text"
                 android:textStyle="italic"
-                android:layout_marginBottom="60dp" />
+                android:layout_marginBottom="60dp"/>
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,15 @@
             android:name=".RegisterCollege4_PersonalQuestions"
             android:exported="false" />
         <activity
+            android:name=".AdminCreateNewAccount"
+            android:exported="false" />
+        <activity
+            android:name=".CompanySignUp"
+            android:exported="false" />
+        <activity
+            android:name=".AdminSignUp"
+            android:exported="false" />
+        <activity
             android:name=".StudentReviewAllData"
             android:exported="false" />
         <activity

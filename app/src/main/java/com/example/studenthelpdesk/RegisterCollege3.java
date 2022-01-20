@@ -64,12 +64,12 @@ public class RegisterCollege3 extends AppCompatActivity {
     }
     void getWorkingView()
     {
-        View questionRepeatable = getLayoutInflater().inflate(R.layout.edit_text_layout_with_extra_layout, null);
+        View questionRepeatable = getLayoutInflater().inflate(R.layout.repeatable_course_register_layout, null);
         TextView question=questionRepeatable.findViewById(R.id.Heading2);
         EditText currentCourseName=questionRepeatable.findViewById(R.id.EditText);
         TextView heading=questionRepeatable.findViewById(R.id.Heading);
         LinearLayout subQuestions=questionRepeatable.findViewById(R.id.AddSubQuestions);
-        ImageButton addQuestion=questionRepeatable.findViewById(R.id.addsubQ);
+        Button addQuestion=questionRepeatable.findViewById(R.id.addsubQ);
         Button done=questionRepeatable.findViewById(R.id.complete);
         currentCourseName.setHint(ansHint);
         question.setText(courseQ);
@@ -120,7 +120,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                 branchOfEachCourse.add(allbranch);
                 courseName.add(currentCourseName.getText().toString());
                 ll.removeView(questionRepeatable);
-                View permanentDataView = getLayoutInflater().inflate(R.layout.text_view_layout, null);
+                View permanentDataView = getLayoutInflater().inflate(R.layout.repeatable_text_view_layout, null);
                 TextView heading=permanentDataView.findViewById(R.id.Heading2);
                 heading.setText(currentCourseName.getText().toString());
                 LinearLayout subHeading=permanentDataView.findViewById(R.id.subHeadings);
