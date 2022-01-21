@@ -2,6 +2,7 @@ package com.example.studenthelpdesk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,7 +38,7 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
         for(int i=0;i<numberOfQuestions;i++)
         {
             CollegeRegisterQuestions thisQuestion=new CollegeRegisterQuestions();
-            View repeatableView=linearLayout.getChildAt(numberOfQuestions-1);
+            View repeatableView=linearLayout.getChildAt(i);
             EditText question=repeatableView.findViewById(R.id.ans);
             CheckBox cumpolsary=repeatableView.findViewById(R.id.compulsoryfield);
             CheckBox changeable=repeatableView.findViewById(R.id.changefield);
@@ -49,7 +50,7 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
             allAcademicQuestion[i]=thisQuestion;
         }
         allData.setQuestions_academic(allAcademicQuestion);
-        Log.e("Hi", Arrays.toString(allAcademicQuestion));
+        startActivity(new Intent(RegisterCollege5_AcademicQuestions.this,RegisterCollege6_UploadData.class));
     }
     public boolean previusQuestionDone()
     {
