@@ -74,7 +74,8 @@
                 android:layout_marginTop="55dp"
                 android:layout_gravity="center"
 
-                android:text="CREATE ACCOUNT" />
+                android:text="CREATE ACCOUNT"
+                android:layout_marginBottom="60dp"/>
 
         </LinearLayout>
     </ScrollView>

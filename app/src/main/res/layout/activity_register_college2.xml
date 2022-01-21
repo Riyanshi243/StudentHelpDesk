@@ -9,10 +9,10 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -41,7 +41,7 @@
                 android:paddingLeft="5dp"
                 android:text="Enter all the departments you want to connect from your college"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
             <LinearLayout
                 android:id="@+id/linearL"
@@ -54,10 +54,11 @@
             <Button
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:onClick="saveAndNext"
-                android:text="SAVE AND NEXT" />
+                android:text="SAVE AND NEXT"
+                android:layout_marginBottom="60dp"/>
 
         </LinearLayout>
     </ScrollView>

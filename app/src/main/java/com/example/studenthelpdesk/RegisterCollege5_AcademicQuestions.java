@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.Arrays;
 
@@ -23,6 +26,10 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
         setContentView(R.layout.activity_register_college5_academic_questions);
         linearLayout = findViewById(R.id.linearL);
         allData=RegisterCollege.allData;
+        //These fields are required by the database so they are compulsary questions from the developer
+        setCompulsaryQuestions("Course");
+        setCompulsaryQuestions("Branch");
+        setCompulsaryQuestions("Year");
         //all academinc questions can be added by admin
         addQuestion();
     }
@@ -67,7 +74,7 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
     {
         View questionRepeatable=getLayoutInflater().inflate(R.layout.repeatable_college_register_questions,null);
         Spinner dropdown = questionRepeatable.findViewById(R.id.dropdown);
-        String[] list={"Single line String","Multiline String","Numerical Value","Numerical Decimal","Gender Choices","Date"};
+        String[] list={"SingleLine String","Multiline String","Numerical Value","Numerical Decimal Value","Gender Choices","Date Picker"};
         ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
         dropdown.setAdapter(spinnerList);
         linearLayout.addView(questionRepeatable);
@@ -77,5 +84,31 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
         //3-string multiline
         //4-radio
         //5-date
+    }
+    public void setCompulsaryQuestions(String value)
+    {
+        View questionRepeatable=getLayoutInflater().inflate(R.layout.repeatable_college_register_questions,null);
+        Spinner dropdown = questionRepeatable.findViewById(R.id.dropdown);
+        String[] list={"Single line String"};
+        ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
+        dropdown.setAdapter(spinnerList);
+        linearLayout.addView(questionRepeatable);
+        TextView questionhead=questionRepeatable.findViewById(R.id.Ques);
+        String s=questionhead.getText()+" *";
+        questionhead.setText(s);
+        EditText question=questionRepeatable.findViewById(R.id.ans);
+        question.setText(value);
+        question.setFocusable(false);
+        question.setFocusableInTouchMode(false);
+        question.setClickable(false);
+        CheckBox cumpolsary=questionRepeatable.findViewById(R.id.compulsoryfield);
+        cumpolsary.setChecked(true);
+        cumpolsary.setFocusable(false);
+        cumpolsary.setFocusableInTouchMode(false);
+        cumpolsary.setClickable(false);
+        CheckBox changeable=questionRepeatable.findViewById(R.id.changefield);
+        changeable.setFocusable(false);
+        changeable.setFocusableInTouchMode(false);
+        changeable.setClickable(false);
     }
 }
