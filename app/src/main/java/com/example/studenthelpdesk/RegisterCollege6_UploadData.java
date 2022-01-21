@@ -38,7 +38,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         for(int i=0;i<numberOfQuestions;i++)
         {
             CollegeRegisterQuestions thisQuestion=new CollegeRegisterQuestions();
-            View repeatableView=linearLayout.getChildAt(numberOfQuestions-1);
+            View repeatableView=linearLayout.getChildAt(i);
             EditText question=repeatableView.findViewById(R.id.ans);
             CheckBox cumpolsary=repeatableView.findViewById(R.id.compulsoryfield);
             CheckBox changeable=repeatableView.findViewById(R.id.changefield);
@@ -49,7 +49,6 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
             allUploadQuestion[i]=thisQuestion;
         }
         allData.setQuestions_upload(allUploadQuestion);
-        Log.e("Hi", Arrays.toString(allUploadQuestion));
         //intent to registration step 7
         startActivity(new Intent(RegisterCollege6_UploadData.this,RegisterCollege7.class));
     }
@@ -93,6 +92,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         cumpolsary.setFocusableInTouchMode(false);
         cumpolsary.setClickable(false);
         CheckBox changeable=questionRepeatable.findViewById(R.id.changefield);
+        changeable.setChecked(true);
         changeable.setFocusable(false);
         changeable.setFocusableInTouchMode(false);
         changeable.setClickable(false);

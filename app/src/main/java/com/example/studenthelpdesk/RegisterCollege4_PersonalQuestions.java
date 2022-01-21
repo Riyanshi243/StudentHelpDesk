@@ -39,7 +39,7 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
         for(int i=0;i<numberOfQuestions;i++)
         {
             CollegeRegisterQuestions thisQuestion=new CollegeRegisterQuestions();
-            View repeatableView=linearLayout.getChildAt(numberOfQuestions-1);
+            View repeatableView=linearLayout.getChildAt(i);
             EditText question=repeatableView.findViewById(R.id.ans);
             CheckBox cumpolsary=repeatableView.findViewById(R.id.compulsoryfield);
             CheckBox changeable=repeatableView.findViewById(R.id.changefield);

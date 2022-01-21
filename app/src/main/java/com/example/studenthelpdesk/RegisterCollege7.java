@@ -1,11 +1,29 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RegisterCollege7 extends AppCompatActivity {
     CollegeRegistrationData allData;
@@ -13,11 +31,303 @@ public class RegisterCollege7 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_college7);
-        AlertDialog.Builder ab=new AlertDialog.Builder(this);
-        ab.setTitle("DATA UPLOADING");
-        ProgressBar progressBar=new ProgressBar(this);
-        progressBar.setVisibility(View.VISIBLE);
-        ab.setView(progressBar);
-        ab.create().show();
+        ProgressBar progressBar=findViewById(R.id.progressBar2);
+        allData=RegisterCollege.allData;
+        TextView t=new TextView(this);
+        t.setText("Data Uploading");
+        t.setTextSize(25);
+        LinearLayout cl=findViewById(R.id.cl);
+        cl.addView(t);
+        FirebaseFirestore f1=FirebaseFirestore.getInstance();
+        //storing basic information about every single user on the app
+        DocumentReference forGeneralInformation = f1.collection("All Users On App").document(allData.getSAdminemail());
+        HashMap<String,Object> generaInfoAdmin=new HashMap<>();
+        generaInfoAdmin.put("College",allData.getUname());
+        generaInfoAdmin.put("Category","Admin");
+        generaInfoAdmin.put("Department","Main Admin");
+        generaInfoAdmin.put("New",false);
+
+        forGeneralInformation.set(generaInfoAdmin).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                //storing basic information about college
+                DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
+                HashMap<String,Object> basicInfoOfCollege=new HashMap<>();
+
+                TextView t=new TextView(RegisterCollege7.this);
+                t.setText("Uploading college data...");
+                t.setTextSize(25);
+                cl.addView(t);
+                basicInfoOfCollege.put("Location",allData.getLocation());
+                basicInfoOfCollege.put("Name",allData.getCName());
+                basicInfoOfCollege.put("Departments",allData.getDeptName());
+                basicInfoOfCollege.put("Courses",allData.getCourseName());
+                basicInfoOfCollege.put("Main Admin",allData.getSAdminemail());
+                collegeInformation.set(basicInfoOfCollege).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        ArrayList<ArrayList<String>> allbranch = allData.getBranchForEachCourse();
+                        ArrayList<String> allcourseName = allData.getCourseName();
+                        for(int i=0;i<allbranch.size();i++)
+                        {
+                            DocumentReference branchInfo = collegeInformation.collection("Branches").document(allcourseName.get(i));
+                            ArrayList<String> itsBranch = allbranch.get(i);
+                            HashMap<String,Object> branches=new HashMap<>();
+                            branches.put("Branches",itsBranch);
+                            int finalI = i;
+                            branchInfo.set(branches).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    TextView t=new TextView(RegisterCollege7.this);
+                                    t.setText("Course and Branches Uploading..."+ finalI);
+                                    t.setTextSize(25);
+                                    cl.addView(t);
+                                }
+                            });
+
+                        }//all branches uploaded
+                        TextView t=new TextView(RegisterCollege7.this);
+                        t.setText("Course and Branches Uploaded...");
+                        t.setTextSize(25);
+                        cl.addView(t);
+                        DocumentReference personalQuestion = collegeInformation.collection("Questions").document("Personal Question");
+                        TextView t1=new TextView(RegisterCollege7.this);
+                        t1.setText("Personal Questions uploading");
+                        t1.setTextSize(25);
+                        cl.addView(t1);
+                        CollegeRegisterQuestions[] personalQuestionArray = allData.getQuestions_personal();
+                        HashMap<String,Object> tot=new HashMap<>();
+                        tot.put("Total",personalQuestionArray.length);
+                        personalQuestion.set(tot).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                HashMap<String, Object> questionDetails[] = new HashMap[personalQuestionArray.length];
+
+                                for (int i=0;i<personalQuestionArray.length;i++) {
+                                    CollegeRegisterQuestions currentQuestion = personalQuestionArray[i];
+                                    Log.e("Personal question" + i, currentQuestion.getQuestion());
+                                    HashMap<String,Object> questionDetailsp=new HashMap<>();
+                                    questionDetailsp.put("Question", currentQuestion.getQuestion());
+                                    questionDetailsp.put("Type", currentQuestion.getType());
+                                    questionDetailsp.put("Compulsory", currentQuestion.isCumplolsory());
+                                    questionDetailsp.put("Editable", currentQuestion.isChangeable());
+                                    questionDetails[i]=questionDetailsp;
+                                }
+                                for (int i=0;i<personalQuestionArray.length;i++) {
+                                    DocumentReference currentQuestionDoc = personalQuestion.collection(i + "").document(i + "");
+                                    int finalI = i;
+                                    currentQuestionDoc.set(questionDetails[i]).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            TextView t=new TextView(RegisterCollege7.this);
+                                            t.setText("Personal Question Uploading..."+ finalI);
+                                            t.setTextSize(25);
+                                            cl.addView(t);
+                                        }
+                                    });
+                                }//Personal questions added
+                                DocumentReference academicQuestion = collegeInformation.collection("Questions").document("Academic Question");
+                                TextView t1=new TextView(RegisterCollege7.this);
+                                t1.setText("Academic Questions uploading");
+                                t1.setTextSize(25);
+                                cl.addView(t1);
+                                CollegeRegisterQuestions[] academicQuestionArray = allData.getQuestions_academic();
+                                HashMap<String,Object> tot=new HashMap<>();
+                                tot.put("Total",academicQuestionArray.length);
+                                academicQuestion.set(tot).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        for (int i=0;i<academicQuestionArray.length;i++)
+                                        {
+                                            DocumentReference currentQuestionDoc = academicQuestion.collection(i + "").document(i + "");
+                                            HashMap<String,Object> questionDetails=new HashMap<>();
+                                            CollegeRegisterQuestions currentQuestion=academicQuestionArray[i];
+                                            questionDetails.put("Question",currentQuestion.getQuestion());
+                                            questionDetails.put("Type",currentQuestion.getType());
+                                            questionDetails.put("Compulsory",currentQuestion.isCumplolsory());
+                                            questionDetails.put("Editable",currentQuestion.isChangeable());
+                                            int finalI = i;
+                                            currentQuestionDoc.set(questionDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    TextView t=new TextView(RegisterCollege7.this);
+                                                    t.setText("Academic Question Uploading..."+ finalI);
+                                                    t.setTextSize(25);
+                                                    cl.addView(t);
+                                                }
+                                            });
+                                        }//Academic questions added
+                                        DocumentReference uploadQuestion = collegeInformation.collection("Questions").document("Upload Question");
+                                        TextView t1=new TextView(RegisterCollege7.this);
+                                        t1.setText("Upload Questions uploading");
+                                        t1.setTextSize(25);
+                                        cl.addView(t1);
+                                        CollegeRegisterQuestions[] uploadQuestionArray = allData.getQuestions_upload();
+                                        HashMap<String,Object> tot=new HashMap<>();
+                                        tot.put("Total",uploadQuestionArray.length);
+                                        uploadQuestion.set(tot).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                for (int i=0;i<uploadQuestionArray.length;i++)
+                                                {
+                                                    DocumentReference currentQuestionDoc = uploadQuestion.collection(i + "").document(i + "");
+                                                    HashMap<String,Object> questionDetails=new HashMap<>();
+                                                    CollegeRegisterQuestions currentQuestion=uploadQuestionArray[i];
+                                                    questionDetails.put("Question",currentQuestion.getQuestion());
+                                                    questionDetails.put("Type",currentQuestion.getType());
+                                                    questionDetails.put("Compulsory",currentQuestion.isCumplolsory());
+                                                    questionDetails.put("Editable",currentQuestion.isChangeable());
+                                                    int finalI = i;
+                                                    currentQuestionDoc.set(questionDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            TextView t=new TextView(RegisterCollege7.this);
+                                                            t.setText("Academic Question Uploading..."+ finalI);
+                                                            t.setTextSize(25);
+                                                            cl.addView(t);
+                                                        }
+                                                    });
+                                                }//Upload questions added
+                                                DocumentReference userInfo = collegeInformation.collection("UsersInfo").document("Admin").collection("Main Admin").document(allData.getSAdminemail());
+                                                HashMap<String , Object> user=new HashMap<>();
+                                                user.put("Name",allData.getCName()+" Main Admin");
+                                                userInfo.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        FirebaseAuth fauth = FirebaseAuth.getInstance();
+                                                        TextView t=new TextView(RegisterCollege7.this);
+                                                        t.setText("Admin Information Uploading...\n Signing In");
+                                                        t.setTextSize(25);
+                                                        cl.addView(t);
+                                                        fauth.createUserWithEmailAndPassword(allData.getSAdminemail(),allData.getPassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                                            @Override
+                                                            public void onSuccess(AuthResult authResult) {
+                                                                DocumentReference collegeTillNow = f1.collection("All Users On App").document("All Colleges");
+                                                                collegeTillNow.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                    @Override
+                                                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                        if(documentSnapshot.exists())
+                                                                        {
+                                                                            ArrayList<String> collegeNames= (ArrayList<String>) documentSnapshot.get("Colleges");
+                                                                            collegeNames.add(allData.getCName()+","+allData.getLocation());
+                                                                            HashMap<String,Object> c=new HashMap<>();
+                                                                            c.put("Colleges",collegeNames);
+                                                                            collegeTillNow.update(c).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                @Override
+                                                                                public void onSuccess(Void unused) {
+                                                                                    TextView t=new TextView(RegisterCollege7.this);
+                                                                                    t.setText("PROCESS COMPLETE");
+                                                                                    t.setTextSize(40);
+                                                                                    cl.addView(t);
+                                                                                    Toast.makeText(RegisterCollege7.this,"College Registered",Toast.LENGTH_SHORT).show();
+                                                                                    startActivity(new Intent(RegisterCollege7.this,Login.class));
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            ArrayList<String> collegeNames= new ArrayList<>();
+                                                                            collegeNames.add(allData.getCName()+","+allData.getLocation());
+                                                                            HashMap<String,Object> c=new HashMap<>();
+                                                                            c.put("Colleges",collegeNames);
+                                                                            collegeTillNow.set(c).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                @Override
+                                                                                public void onSuccess(Void unused) {
+                                                                                    TextView t=new TextView(RegisterCollege7.this);
+                                                                                    t.setText("PROCESS COMPLETE");
+                                                                                    t.setTextSize(40);
+                                                                                    cl.addView(t);
+                                                                                    Toast.makeText(RegisterCollege7.this,"College Registered",Toast.LENGTH_SHORT).show();
+                                                                                    startActivity(new Intent(RegisterCollege7.this,Login.class));
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    }
+                                                                });
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                                                progressBar.setVisibility(View.GONE);
+                                                                TextView t=new TextView(RegisterCollege7.this);
+                                                                t.setText("FAILED");
+                                                                t.setTextSize(40);
+                                                                cl.addView(t);
+                                                            }
+                                                        });
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                                        progressBar.setVisibility(View.GONE);
+                                                        TextView t=new TextView(RegisterCollege7.this);
+                                                        t.setText("FAILED");
+                                                        t.setTextSize(40);
+                                                        cl.addView(t);
+                                                    }
+                                                });
+                                            }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                                progressBar.setVisibility(View.GONE);
+                                                TextView t=new TextView(RegisterCollege7.this);
+                                                t.setText("FAILED");
+                                                t.setTextSize(40);
+                                                cl.addView(t);
+                                            }
+                                        });;
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                        progressBar.setVisibility(View.GONE);
+                                        TextView t=new TextView(RegisterCollege7.this);
+                                        t.setText("FAILED");
+                                        t.setTextSize(40);
+                                        cl.addView(t);
+                                    }
+                                });;
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
+                                TextView t=new TextView(RegisterCollege7.this);
+                                t.setText("FAILED");
+                                t.setTextSize(40);
+                                cl.addView(t);
+                            }
+                        });;
+            }//basic admin info uploaded
+        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        TextView t=new TextView(RegisterCollege7.this);
+                        t.setText("FAILED");
+                        t.setTextSize(40);
+                        cl.addView(t);
+                    }
+                });;
+    }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                TextView t=new TextView(RegisterCollege7.this);
+                t.setText("FAILED");
+                t.setTextSize(40);
+                cl.addView(t);
+            }
+        });;
     }
 }
