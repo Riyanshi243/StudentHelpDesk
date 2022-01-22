@@ -209,9 +209,12 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                                         if(documentSnapshot.exists())
                                                                         {
                                                                             ArrayList<String> collegeNames= (ArrayList<String>) documentSnapshot.get("Colleges");
+                                                                            ArrayList<String> collegeIds= (ArrayList<String>) documentSnapshot.get("IDs");
                                                                             collegeNames.add(allData.getCName()+","+allData.getLocation());
+                                                                            collegeIds.add(allData.getUname());
                                                                             HashMap<String,Object> c=new HashMap<>();
                                                                             c.put("Colleges",collegeNames);
+                                                                            c.put("IDs",collegeIds);
                                                                             collegeTillNow.update(c).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                 @Override
                                                                                 public void onSuccess(Void unused) {
@@ -227,9 +230,13 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                                         else
                                                                         {
                                                                             ArrayList<String> collegeNames= new ArrayList<>();
+                                                                            ArrayList<String> collegeIds= new ArrayList<>();
                                                                             collegeNames.add(allData.getCName()+","+allData.getLocation());
+                                                                            collegeIds.add(allData.getUname());
                                                                             HashMap<String,Object> c=new HashMap<>();
                                                                             c.put("Colleges",collegeNames);
+                                                                            c.put("IDs",collegeIds);
+
                                                                             collegeTillNow.set(c).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                 @Override
                                                                                 public void onSuccess(Void unused) {
