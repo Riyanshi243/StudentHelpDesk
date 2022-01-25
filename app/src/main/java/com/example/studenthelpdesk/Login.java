@@ -39,10 +39,13 @@ public class Login extends AppCompatActivity {
                         else if(category.equalsIgnoreCase("Student"))
                         {
                             //intent to student page
+                            startActivity(new Intent(Login.this,StudentPage.class));
                         }
                         else if(category.equalsIgnoreCase("Company"))
                         {
-                            //intent to student page
+                            //intent to company page
+                            //Company page abhi bana nhi hai
+                            
                         }
                     }
                 });

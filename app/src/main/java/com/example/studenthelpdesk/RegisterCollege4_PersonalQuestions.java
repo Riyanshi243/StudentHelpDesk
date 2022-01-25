@@ -74,12 +74,14 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
         ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
         dropdown.setAdapter(spinnerList);
         linearLayout.addView(questionRepeatable);
-        //0-nuemerical
-        //1-neumeric decimal
-        //2-string 1 line
-        //3-string multiline
+        ///0-string 1 line
+        //1-string multiline
+        // 2-nuemerical
+        //3-neumeric decimal
         //4-radio
         //5-date
+        //6-upload
+        //7-dropdown
     }
 
 }
