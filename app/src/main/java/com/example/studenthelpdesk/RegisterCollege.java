@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class RegisterCollege extends AppCompatActivity {
     //this instance will be referred to untill registration is completed
     static CollegeRegistrationData allData;
-    EditText uname,cname,password,password2,adminmail;
+    EditText uname,cname,password,password2,adminmail,location;
     FirebaseFirestore firebaseFirestores;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class RegisterCollege extends AppCompatActivity {
         allData=new CollegeRegistrationData();
         uname=findViewById(R.id.uname);
         cname=findViewById(R.id.cname);
+        location=findViewById(R.id.clocation);
         adminmail=findViewById(R.id.adminemail);
         password=findViewById(R.id.password2);
         password2=findViewById(R.id.confirmpassword2);
@@ -50,6 +51,7 @@ public class RegisterCollege extends AppCompatActivity {
                         allData.setPassword(password.getText().toString());
                         allData.setUname(uname.getText().toString());
                         allData.setCName(cname.getText().toString());
+                        allData.setLocation(location.getText().toString());
                         //intent to college registration step 2
                         startActivity(new Intent(RegisterCollege.this, RegisterCollege2.class));
                         finish();
