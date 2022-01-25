@@ -64,16 +64,66 @@ public class RegisterCollege extends AppCompatActivity {
     public void toLogin(View v)
     {
         //Intent to login
+        startActivity(new Intent(RegisterCollege.this,Login.class));
     }
 
     public Boolean checkConstraints()
     {
         final Boolean[] flag = {true};
         //everything not empty
+        if(uname.getText().toString().length()==0)
+        {
+            uname.setError("Enter Username");
+             return false;
+        }
+
+        if(cname.getText().toString().length()==0)
+        {
+            cname.setError("Enter College Name");
+             return false;
+        }
+        if(password.getText().toString().length()==0)
+        {
+            password.setError("Enter Password");
+             return false;
+        }
+        if(password2.getText().toString().length()==0)
+        {
+            password2.setError("Enter Confirm Password");
+             return false;
+        }
+        if(adminmail.getText().toString().length()==0)
+        {
+            adminmail.setError("Enter Mail");
+             return false;
+        }
+         if(location.getText().toString().length()==0)
+        {
+            location.setError("Enter Location");
+             return false;
+        }
         //check if valid mail
-        //check if passwords match
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String email=adminmail.getText().toString().trim();
+        if(!email.matches(emailPattern))
+        {
+            adminmail.setError("Enter valid mail");
+             return false;
+        }
+       
+                    //check if passwords match
+        if(password.getText().toString().equals(password2.getText().toString())==false)
+        {
+            password2.setError("Enter correct password");
+             return false;
+        }
         //check if password length greater than 8
-        //check if username already exists
+        if(password.getText().toString().length()< 8)
+        {
+            password.setError("Enter atleast 8 characters");
+             return false;
+        }
+
 
         return flag[0];
     }
