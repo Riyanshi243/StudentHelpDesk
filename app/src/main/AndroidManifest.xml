@@ -41,10 +41,10 @@
             android:name=".StudentUploadDocuments"
             android:exported="false" />
         <activity
-            android:name=".StudentGetAcademicData"
+            android:name=".StudentSignup2_AcademicData"
             android:exported="false" />
         <activity
-            android:name=".StudentGetPersonalData"
+            android:name=".StudentSignup1_PersonalData"
             android:exported="false" />
         <activity
             android:name=".StudentCheckRequestStatus"
@@ -66,7 +66,7 @@
             android:exported="false"/>
             <!--android:windowSoftInputMode="stateVisible|adjustPan"/> -->
         <activity
-            android:name=".StudentSignup"
+            android:name=".Signup"
             android:exported="false" />
         <activity
             android:name=".Login"

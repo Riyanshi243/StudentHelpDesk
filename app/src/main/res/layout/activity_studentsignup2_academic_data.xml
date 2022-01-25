@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentGetAcademicData">
+    tools:context=".StudentSignup2_AcademicData">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,6 +39,12 @@
                 android:layout_marginTop="20dp"
                 android:visibility="invisible" />
 
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+
             <Button
                 android:id="@+id/next"
                 android:layout_width="152dp"
@@ -47,6 +53,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="50dp"
 
+                android:onClick="saveAndNext"
                 android:text="NEXT" />
         </LinearLayout>
     </ScrollView>
