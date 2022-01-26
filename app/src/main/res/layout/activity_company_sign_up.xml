@@ -4,14 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_white"
     tools:context=".CompanySignUp">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="122dp">
@@ -19,17 +16,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            android:background="@drawable/head_img">
 
-            <ImageView
-                android:id="@+id/signup_img"
-                android:layout_width="421dp"
-                android:layout_height="149dp"
+            <TextView
+                android:id="@+id/head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/signup" />
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+
+                android:text="SIGNUP"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+
 
             <ProgressBar
                 android:id="@+id/progressBar5"
@@ -37,6 +45,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="invisible" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="casual"
+                android:paddingLeft="5dp"
+                android:text="Hey Company Representative, Please fill up your required details here!"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/repre"
@@ -106,70 +134,13 @@
                 android:textColorLink="@color/black"
                 tools:ignore="SpeakableTextPresentCheck" />
 
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:hint="Enter email provided by college admin"
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp"
-                android:paddingLeft="5dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textColorLink="@color/black"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:hint="Enter Password"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:paddingLeft="5dp"
-                android:selectAllOnFocus="false"
-                android:singleLine="false"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textColorLink="@color/black"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <EditText
-                android:id="@+id/confirmpassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:hint="Confirm Password"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:paddingLeft="5dp"
-                android:selectAllOnFocus="false"
-                android:singleLine="false"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textColorLink="@color/black"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-
             <Button
                 android:id="@+id/signup"
                 android:layout_width="157dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-
+                android:background="@drawable/roundedbutton"
                 android:text="SIGN-UP" />
 
             <TextView
@@ -184,6 +155,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/blue_text"
                 android:textStyle="italic" />
+        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
