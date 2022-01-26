@@ -5,3 +5,6 @@ Or for student to change an information as fickle as their phone number, have to
 Placement cell sends long form every few months to students for their updated information which is a tedious task.
 Our app solved all these problems by providing a single platform to both students and admins to view review and change data.
 We also have notifications to be sent to students from administration.
+
+SRS : https://drive.google.com/file/d/1IdAruPYf7qmc4y8g4nCg9b5-hlDrtnk9/view?usp=sharing
+SDS : https://drive.google.com/file/d/1ArhLNCaqu5epGF9Qnf42WeaxDvzxElot/view?usp=sharing
