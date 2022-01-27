@@ -89,6 +89,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity {
             View nView=getLayoutInflater().inflate(R.layout.repeatable_edit_text_layout,null);
             TextView ques=nView.findViewById(R.id.Ques);
             ques.setText(q);
+            //nView.setBackgroundColor(R.color.white);
             return nView;
         }
         if(i==1)

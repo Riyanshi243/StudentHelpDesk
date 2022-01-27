@@ -2,10 +2,12 @@ package com.example.studenthelpdesk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,7 +16,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class StudentSignup1_PersonalData extends AppCompatActivity {
+import java.text.DateFormat;
+import java.util.Calendar;
+
+public class StudentSignup1_PersonalData extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     StudentData studentData;
     LinearLayout ll;
     @Override
@@ -29,7 +34,6 @@ public class StudentSignup1_PersonalData extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()==false) {
-                    Log.e("Error", "Zzzzzzz"+studentData.getCollegeid());
                     return;
                 }
                 long noOfQuestions= (long) documentSnapshot.get("Total");
@@ -44,6 +48,11 @@ public class StudentSignup1_PersonalData extends AppCompatActivity {
                             String question= (String) documentSnapshot.get("Question");
                             long type=(long)documentSnapshot.get("Type");
                             View addQues=getType(type,question);
+                            if(addQues==null){
+
+                                Log.e("hi",type+"");
+                                return;
+                            }
                             if(compulsory==true)
                                 addQues.setId(finalI);
                             else
@@ -61,9 +70,14 @@ public class StudentSignup1_PersonalData extends AppCompatActivity {
         for(int i=0;i<quesNumber;i++)
         {
             View v=ll.getChildAt(i);
-            Log.e("Question",v.getId()+"");
+            int id=v.getId();
+            if(id>0)
+            {
+
+            }
         }
         //check if all compulsary data filled and then move to next
+
         //intent to step 2
         startActivity(new Intent(StudentSignup1_PersonalData.this,StudentSignup2_AcademicData.class));
     }
@@ -71,7 +85,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity {
     View getType(long i,String q)
     {
         
-        if(i==3)
+        if(i==2)
         {
             //numeric
             View nView=getLayoutInflater().inflate(R.layout.repeatable_numeric_text_layout,null);
@@ -79,7 +93,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity {
             ques.setText(q);
             return nView;
         }
-        if(i==4)
+        if(i==3)
         {
             //numeric decimal
             View nView=getLayoutInflater().inflate(R.layout.repeatable_number_decimal_layout,null);
@@ -115,8 +129,19 @@ public class StudentSignup1_PersonalData extends AppCompatActivity {
         {
             //date
             View nView=getLayoutInflater().inflate(R.layout.repeatable_date_input_layout,null);
-            TextView ques=nView.findViewById(R.id.Ques);
+            TextView ques=nView.findViewById(R.id.dobtext);
             ques.setText(q);
+            Button datePicker =nView.findViewById(R.id.btPickDate);
+            TextView datePicked=nView.findViewById(R.id.tvDate);
+            datePicker.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DatePicker mDatePickerDialogFragment;
+                    mDatePickerDialogFragment = new DatePicker();
+                    mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
+                    datePicked.setText(selectedDate);
+                }
+            });
             return nView;
         }
         if(i==6)
@@ -129,6 +154,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity {
         }
         if(i==7)
         {
+
             //dropdown
             /*View nView=getLayoutInflater().inflate(R.layout.repeatable_dropdown,null);
             TextView ques=nView.findViewById(R.id.Ques);
@@ -136,5 +162,16 @@ public class StudentSignup1_PersonalData extends AppCompatActivity {
             return nView;*/
         }
         return null;
+    }
+    String selectedDate="";
+    @Override
+    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.set(Calendar.YEAR, year);
+        mCalendar.set(Calendar.MONTH, month);
+        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
+
     }
 }

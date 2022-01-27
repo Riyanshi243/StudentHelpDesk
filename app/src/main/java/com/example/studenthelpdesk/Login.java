@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +22,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
+
+    }
+    public void Login(View view)
+    {
         FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
@@ -45,11 +50,15 @@ public class Login extends AppCompatActivity {
                         {
                             //intent to company page
                             //Company page abhi bana nhi hai
-                            
+
                         }
                     }
                 });
             }
         });
+    }
+    public void signUp(View v)
+    {
+        startActivity(new Intent(Login.this,Signup.class));
     }
 }
