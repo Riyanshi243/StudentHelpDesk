@@ -90,26 +90,27 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <TextView
+                android:id="@+id/forgetPassword"
+                android:layout_width="136dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:gravity="right"
+                android:text="Forgot Password"
+                android:textColor="@color/blue_text"
+                android:textStyle="italic" />
 
             <Button
                 android:id="@+id/login"
                 android:layout_width="157dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/roundedbutton"
                 android:text="LOGIN" />
-            <TextView
-                android:id="@+id/forgetPassword"
-                android:layout_width="136dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                android:gravity="center"
 
-                android:text="Forgot Password"
-                android:textColor="@color/blue_text"
-                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/signin"
@@ -128,12 +129,11 @@
 
             <TextView
                 android:id="@+id/college_register"
-                android:layout_width="103dp"
-                android:layout_height="60dp"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-
                 android:text="New here? Register your college!"
                 android:textColor="@color/blue_text"
                 android:textStyle="italic" />
