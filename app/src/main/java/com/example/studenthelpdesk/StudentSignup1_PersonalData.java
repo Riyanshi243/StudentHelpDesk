@@ -2,6 +2,7 @@ package com.example.studenthelpdesk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -82,7 +83,8 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
         startActivity(new Intent(StudentSignup1_PersonalData.this,StudentSignup2_AcademicData.class));
     }
 
-    View getType(long i,String q)
+    @SuppressLint("ResourceAsColor")
+    View getType(long i, String q)
     {
         
         if(i==2)

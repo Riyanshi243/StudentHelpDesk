@@ -35,7 +35,7 @@ public class RegisterCollege7 extends AppCompatActivity {
         allData=RegisterCollege.allData;
         TextView t=new TextView(this);
         t.setText("Data Uploading");
-        t.setTextSize(25);
+        t.setTextSize(16);
         LinearLayout cl=findViewById(R.id.cl);
         cl.addView(t);
         FirebaseFirestore f1=FirebaseFirestore.getInstance();
@@ -56,7 +56,7 @@ public class RegisterCollege7 extends AppCompatActivity {
 
                 TextView t=new TextView(RegisterCollege7.this);
                 t.setText("Uploading college data...");
-                t.setTextSize(25);
+                t.setTextSize(16);
                 cl.addView(t);
                 basicInfoOfCollege.put("Location",allData.getLocation());
                 basicInfoOfCollege.put("Name",allData.getCName());
@@ -80,7 +80,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                 public void onSuccess(Void unused) {
                                     TextView t=new TextView(RegisterCollege7.this);
                                     t.setText("Course and Branches Uploading..."+ finalI);
-                                    t.setTextSize(25);
+                                    t.setTextSize(16);
                                     cl.addView(t);
                                 }
                             });
@@ -88,12 +88,12 @@ public class RegisterCollege7 extends AppCompatActivity {
                         }//all branches uploaded
                         TextView t=new TextView(RegisterCollege7.this);
                         t.setText("Course and Branches Uploaded...");
-                        t.setTextSize(25);
+                        t.setTextSize(16);
                         cl.addView(t);
                         DocumentReference personalQuestion = collegeInformation.collection("Questions").document("Personal Question");
                         TextView t1=new TextView(RegisterCollege7.this);
                         t1.setText("Personal Questions uploading");
-                        t1.setTextSize(25);
+                        t1.setTextSize(16);
                         cl.addView(t1);
                         CollegeRegisterQuestions[] personalQuestionArray = allData.getQuestions_personal();
                         HashMap<String,Object> tot=new HashMap<>();
@@ -121,7 +121,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                         public void onSuccess(Void unused) {
                                             TextView t=new TextView(RegisterCollege7.this);
                                             t.setText("Personal Question Uploading..."+ finalI);
-                                            t.setTextSize(25);
+                                            t.setTextSize(16);
                                             cl.addView(t);
                                         }
                                     });
@@ -129,7 +129,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                 DocumentReference academicQuestion = collegeInformation.collection("Questions").document("Academic Question");
                                 TextView t1=new TextView(RegisterCollege7.this);
                                 t1.setText("Academic Questions uploading");
-                                t1.setTextSize(25);
+                                t1.setTextSize(16);
                                 cl.addView(t1);
                                 CollegeRegisterQuestions[] academicQuestionArray = allData.getQuestions_academic();
                                 HashMap<String,Object> tot=new HashMap<>();
@@ -152,7 +152,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                 public void onSuccess(Void unused) {
                                                     TextView t=new TextView(RegisterCollege7.this);
                                                     t.setText("Academic Question Uploading..."+ finalI);
-                                                    t.setTextSize(25);
+                                                    t.setTextSize(16);
                                                     cl.addView(t);
                                                 }
                                             });
@@ -160,7 +160,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                         DocumentReference uploadQuestion = collegeInformation.collection("Questions").document("Upload Question");
                                         TextView t1=new TextView(RegisterCollege7.this);
                                         t1.setText("Upload Questions uploading");
-                                        t1.setTextSize(25);
+                                        t1.setTextSize(16);
                                         cl.addView(t1);
                                         CollegeRegisterQuestions[] uploadQuestionArray = allData.getQuestions_upload();
                                         HashMap<String,Object> tot=new HashMap<>();
@@ -183,7 +183,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                         public void onSuccess(Void unused) {
                                                             TextView t=new TextView(RegisterCollege7.this);
                                                             t.setText("Academic Question Uploading..."+ finalI);
-                                                            t.setTextSize(25);
+                                                            t.setTextSize(16);
                                                             cl.addView(t);
                                                         }
                                                     });
@@ -197,7 +197,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                         FirebaseAuth fauth = FirebaseAuth.getInstance();
                                                         TextView t=new TextView(RegisterCollege7.this);
                                                         t.setText("Admin Information Uploading...\n Signing In");
-                                                        t.setTextSize(25);
+                                                        t.setTextSize(16);
                                                         cl.addView(t);
                                                         fauth.createUserWithEmailAndPassword(allData.getSAdminemail(),allData.getPassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                                             @Override
@@ -231,7 +231,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                                         {
                                                                             ArrayList<String> collegeNames= new ArrayList<>();
                                                                             ArrayList<String> collegeIds= new ArrayList<>();
-                                                                            collegeNames.add(allData.getCName()+","+allData.getLocation());
+                                                                            collegeNames.add(allData.getCName().trim()+", "+allData.getLocation());
                                                                             collegeIds.add(allData.getUname());
                                                                             HashMap<String,Object> c=new HashMap<>();
                                                                             c.put("Colleges",collegeNames);

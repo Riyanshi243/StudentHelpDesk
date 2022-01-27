@@ -46,8 +46,8 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_get_personal_data.xml" value="0.12635869565217392" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_page.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_review_all_data.xml" value="0.12635869565217392" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_send_request_to_change_data.xml" value="0.16666666666666666" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_upload_documents.xml" value="0.12635869565217392" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_send_request_to_change_data.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_upload_documents.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_studentsignup1_personal_data.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_studentsignup2_academic_data.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/college_register_questions.xml" value="0.22" />
@@ -62,10 +62,11 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_college_register_questions.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_course_register_layout.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_date_input_layout.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_dropdown.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_edit_text_layout.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_multiline_text_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_number_decimal_layout.xml" value="0.16666666666666666" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_numeric_text_layout.xml" value="0.1358695652173913" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_numeric_text_layout.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_radio_button_layout.xml" value="0.1358695652173913" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_student_request_status_box.xml" value="0.1358695652173913" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_text_view_layout.xml" value="0.3333333333333333" />

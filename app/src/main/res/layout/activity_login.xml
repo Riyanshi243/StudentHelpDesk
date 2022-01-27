@@ -96,7 +96,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="25dp"
                 android:gravity="right"
                 android:text="Forgot Password"
                 android:textColor="@color/blue_text"
@@ -114,27 +114,26 @@
 
             <TextView
                 android:id="@+id/signin"
-                android:layout_width="103dp"
-                android:layout_height="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="50dp"
                 android:gravity="center"
-
                 android:onClick="signUp"
                 android:text="@string/no_account_ncreate_one"
                 android:textColor="@color/blue_text"
                 android:textStyle="italic" />
 
 
-
             <TextView
                 android:id="@+id/college_register"
-                android:layout_width="200dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="New here? Register your college!"
+                android:onClick="register"
+                android:text="@string/new_here_register_your_college"
                 android:textColor="@color/blue_text"
                 android:textStyle="italic" />
         </LinearLayout>

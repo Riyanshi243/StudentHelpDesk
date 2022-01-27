@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -18,12 +20,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 public class Signup extends AppCompatActivity {
-    Spinner collge;
+    AutoCompleteTextView collge;
     EditText email,password1,password2;
     ArrayList<String> listName,listId;
     static AdminData adminData;
     static StudentData studentData;
     static CompanyData companyData;
+    int cnumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,12 @@ public class Signup extends AppCompatActivity {
                 listId=(ArrayList<String>) documentSnapshot.get("IDs");
                 ArrayAdapter spinnerList=new ArrayAdapter(Signup.this,android.R.layout.simple_spinner_item,listName);
                 collge.setAdapter(spinnerList);
+                collge.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                        cnumber=arg2;
+                    }
+                });
             }
         });
     }
@@ -51,7 +60,8 @@ public class Signup extends AppCompatActivity {
     public void next(View v)
     {
         //get the college selected
-        int i=collge.getSelectedItemPosition();
+        int i=cnumber;
+        //i=collge.getListSelection();
         if(allDataFilled()==false)
         {
             return;

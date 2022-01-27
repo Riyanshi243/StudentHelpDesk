@@ -4,14 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_white"
     tools:context=".StudentSendRequestToChangeData">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,21 +18,44 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            android:background="@drawable/head_img">
+
+            <TextView
+                android:id="@+id/head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="EDIT REQUEST TO ADMIN"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+
+        </LinearLayout>
+
 
             <TextView
                 android:id="@+id/welcome"
                 android:layout_width="match_parent"
                 android:paddingLeft="5dp"
                 android:fontFamily="casual"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:text="Hello ID"
                 android:textColor="@color/black"
                 android:textSize="24dp" />
+
 
             <TextView
                 android:id="@+id/currentVal_msg"
@@ -44,6 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:text="Current Value of "
                 android:textColor="@color/black"
                 android:textSize="24dp" />
@@ -56,6 +78,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="CURRENT VALUE"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/black"
                 android:background="@color/background_gray"
                 android:textSize="24dp" />
@@ -66,6 +90,8 @@
                 android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="50dp"
                 android:hint="New value that needs to be placed"
                 android:inputType="textPersonName"
@@ -79,6 +105,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="start|top"
                 android:hint="Reason to change your field"
                 android:inputType="textMultiLine"
@@ -91,8 +119,9 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-
-                android:text="SEND REQUEST" />
+                android:background="@drawable/roundedbutton"
+                android:text="SEND REQUEST"
+                android:layout_marginBottom="50dp"/>
 
         </LinearLayout>
     </ScrollView>
