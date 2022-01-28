@@ -13,14 +13,6 @@ public class AdminPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
-         create_new_user=(ImageView)findViewById(R.id. create_new_user);
-         search_user=(ImageView)findViewById(R.id. search_user);
-         view_all_data=(ImageView)findViewById(R.id. view_all_data);
-         send_notif=(ImageView)findViewById(R.id. send_notif);
-         faq=(ImageView)findViewById(R.id. faq);
-        lockdatabase=(ImageView)findViewById(R.id. send_notif);//ye send notif kaise h?
-        //ye sab delete hone wale h
-
 
 
 

@@ -4,306 +4,372 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_white"
     tools:context=".AdminPage">
-
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="260dp"
+                android:background="@drawable/head_img2"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginBottom="24dp"
-
-                    android:fontFamily="casual"
-                    android:gravity="center_horizontal"
-                    android:text="Welcome to Admin's Page"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <GridLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnCount="1"
-                android:columnOrderPreserved="false"
-                android:rowCount="3">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="12dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp"
-                    tools:targetApi="lollipop">
-
-
-                </androidx.cardview.widget.CardView>
-
-
-                <ImageView
-                    android:id="@+id/create_new_user"
+                    android:id="@+id/head"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_row="0"
-                    android:layout_column="0"
-
-                    android:src="@drawable/create_user"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-            </GridLayout>
-
-            <GridLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnCount="1"
-                android:columnOrderPreserved="false"
-                android:rowCount="3">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="12dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp"
-                    tools:targetApi="lollipop">
-
-
-                </androidx.cardview.widget.CardView>
-
-
-                <ImageView
-                    android:id="@+id/search_user"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_row="0"
-                    android:layout_column="0"
-
-                    android:src="@drawable/search_user" />
-
-            </GridLayout>
-
-            <GridLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnCount="1"
-                android:columnOrderPreserved="false"
-                android:rowCount="3">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="12dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp"
-                    tools:targetApi="lollipop">
-
-
-                </androidx.cardview.widget.CardView>
-
-                <ImageView
-                    android:id="@+id/view_all_data"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_row="0"
-                    android:layout_column="0"
-
-                    android:src="@drawable/view_all_data" />
-
-            </GridLayout>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnCount="1"
-                android:columnOrderPreserved="false"
-                android:rowCount="1">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="12dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp"
-                    tools:ignore="UnusedAttribute">
-
-                </androidx.cardview.widget.CardView>
-
-
-                <ImageView
-                    android:id="@+id/see_req"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_row="0"
-                    android:layout_column="0"
-
-                    android:src="@drawable/data_change_requests" />
-            </GridLayout>
-
-
-            <GridLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnCount="1"
-                android:columnOrderPreserved="false"
-                android:rowCount="3">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="12dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp"
-                    tools:targetApi="lollipop">
-
-
-                </androidx.cardview.widget.CardView>
-
-
-                <ImageView
-                    android:id="@+id/send_notif"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_row="0"
-                    android:layout_column="0"
-
-                    android:src="@drawable/send_notif"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-            </GridLayout>
-            <GridLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnCount="1"
-                android:columnOrderPreserved="false"
-                android:rowCount="3">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="12dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp"
-                    tools:targetApi="lollipop">
-
-
-                </androidx.cardview.widget.CardView>
-
-
-                <ImageView
-                    android:id="@+id/faq"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_row="0"
-                    android:layout_column="0"
-
-                    android:src="@drawable/faq"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-            </GridLayout>
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnCount="1"
-                android:columnOrderPreserved="false"
-                android:rowCount="1">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="12dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp"
-                    tools:ignore="UnusedAttribute">
-
-                </androidx.cardview.widget.CardView>
-
-
-                <ImageView
-                    android:id="@+id/lockdatabase"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_row="0"
-                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:src="@drawable/lock_database" />
-            </GridLayout>
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="WELCOME"
+                    android:textColor="@color/white"
+                    android:textSize="32dp" />
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="190dp"
+                    android:layout_height="157dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/admin_profile_img"
+                    app:civ_border_color="@color/black"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_color="@color/black" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar4"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_bg_black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.029">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        app:srcCompat="@drawable/ic_baseline_person_add" />
+
+                    <TextView
+                        android:id="@+id/create_new_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:text="CREATE NEW USER >"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </TableRow>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_bg_black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.029">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        app:srcCompat="@drawable/ic_baseline_search_person" />
+
+                    <TextView
+                        android:id="@+id/search_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:text="SEARCH STUDENT >"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </TableRow>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_bg_black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.029">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        app:srcCompat="@drawable/ic_baseline_all_student" />
+
+                    <TextView
+                        android:id="@+id/view_All_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:text="VIEW ALL STUDENT DATA >"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </TableRow>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_bg_black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.029">
+
+                <TextView
+                    android:id="@+id/requests_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="You have received a total of "
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/to_request_status_page"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="SEE ALL EDIT REQUESTS >"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/layout_bg_black"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.029">
+
+            <com.ncorti.slidetoact.SlideToActView
+                android:id="@+id/example_gray_on_green"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="6dp"
+                app:animation_duration="250"
+                app:inner_color="@color/white"
+                app:outer_color="@color/black"
+                app:slider_height="50dp"
+                app:slider_locked="false"
+                app:text="LOCK THE DATABASE"
+                app:area_margin="-8dp"
+                app:slider_icon="@drawable/ic_baseline_lock_24"
+                app:text_size="20sp" />
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_bg_black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.029">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        app:srcCompat="@drawable/ic_baseline_notifications" />
+
+                    <TextView
+                        android:id="@+id/notification"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:text="SEND NOTIFICATIONS >"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </TableRow>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_bg_black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.029">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_baseline_message_faq" />
+                    <TextView
+                        android:id="@+id/FAQ"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="ANSWER FAQ >"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </TableRow>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/layout_bg_black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.029">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_baseline_help" />
+
+                    <TextView
+                        android:id="@+id/help"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="HELP >"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+                </TableRow>
+
+            </LinearLayout>
+
+
+
 
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
