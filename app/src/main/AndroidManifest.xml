@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
-
+        <activity
+            android:name=".CompanyPage"
+            android:exported="false" />
         <activity
             android:name=".AdminViewAllRequests"
             android:exported="false" />
@@ -48,7 +50,7 @@
             android:exported="false" />
         <activity
             android:name=".StudentCheckRequestStatus"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".RegisterCollege3"
             android:exported="false" />
@@ -63,8 +65,7 @@
             android:exported="false" />
         <activity
             android:name=".RegisterCollege"
-            android:exported="false"/>
-            <!--android:windowSoftInputMode="stateVisible|adjustPan"/> -->
+            android:exported="false" /> <!-- android:windowSoftInputMode="stateVisible|adjustPan"/> -->
         <activity
             android:name=".Signup"
             android:exported="false" />
