@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
-            android:name=".CompanyPage"
+            android:name=".StudentSignupDone"
             android:exported="false" />
         <activity
             android:name=".AdminViewAllRequests"
@@ -30,9 +30,8 @@
         <activity
             android:name=".AdminCreateNewAccount"
             android:exported="false" />
-        <activity
-            android:name=".CompanySignUp"
-            android:exported="false" />
+
+
         <activity
             android:name=".AdminSignUp"
             android:exported="false" />

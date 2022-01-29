@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:clickable="true"
             android:orientation="horizontal"
             android:paddingLeft="5dp">
 
@@ -43,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:checked="true"
+                android:clickable="true"
                 android:onClick="onRadioButtonClicked"
                 android:text="MALE" />
 
@@ -51,6 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
+                android:clickable="true"
                 android:onClick="onRadioButtonClicked"
                 android:text="FEMALE" />
 
@@ -58,6 +61,7 @@
                 android:id="@+id/not"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:onClick="onRadioButtonClicked"
                 android:text="OTHERS" />
 

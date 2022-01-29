@@ -1,7 +1,15 @@
 package com.example.studenthelpdesk;
 
 public class AdminData {
-    String email,password;
+    private String email,password,collegeId;
+
+    public void setCollegeId(String collegeId) {
+        this.collegeId = collegeId;
+    }
+
+    public String getCollegeId() {
+        return collegeId;
+    }
 
     public String getEmail() {
         return email;
