@@ -80,12 +80,13 @@
                 android:id="@+id/done"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
+                android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="55dp"
-                android:layout_gravity="center"
+                android:layout_marginBottom="60dp"
                 android:background="@drawable/roundedbutton"
-                android:text="CREATE ACCOUNT"
-                android:layout_marginBottom="60dp"/>
+                android:onClick="createUser"
+                android:text="CREATE ACCOUNT" />
 
         </LinearLayout>
     </ScrollView>

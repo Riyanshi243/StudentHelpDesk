@@ -12,6 +12,8 @@ import android.provider.Settings;
         import androidx.appcompat.app.AppCompatActivity;
 
         import android.view.View;
+        import android.os.Handler;
+import android.os.Looper;
 /*
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(MainActivity.this, AdminPage.class));
+        startActivity(new Intent(MainActivity.this, Login.class));
         finish();
         /*TextView text = (TextView) findViewById(R.id.textView);
         if(!isConnected(this)){

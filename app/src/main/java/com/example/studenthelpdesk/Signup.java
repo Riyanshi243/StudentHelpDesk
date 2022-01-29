@@ -1,5 +1,6 @@
 package com.example.studenthelpdesk;
 
+import android.app.ProgressDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,7 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,6 +30,7 @@ public class Signup extends AppCompatActivity {
     static StudentData studentData;
     static CompanyData companyData;
     int cnumber;
+         private Button signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,8 @@ public class Signup extends AppCompatActivity {
         email=findViewById(R.id.email);
         password1=findViewById(R.id.password);
         password2=findViewById(R.id.confirmpassword);
+        signup= (Button) findViewById(R.id.signup);
+
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference allcllgName = f.collection("All Users On App").document("All Colleges");
         allcllgName.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -56,6 +62,7 @@ public class Signup extends AppCompatActivity {
             }
         });
     }
+
 
     public void next(View v)
     {
@@ -91,7 +98,7 @@ public class Signup extends AppCompatActivity {
                                         if(category.equalsIgnoreCase("Admin"))
                                         {
                                             adminData.setEmail(email.getText().toString());
-                                            adminData.setPassword(email.getText().toString());
+                                            adminData.setPassword(password1.getText().toString());
                                             //intent to admin signup page
                                             startActivity(new Intent(Signup.this,AdminSignUp.class));
                                             
@@ -99,7 +106,7 @@ public class Signup extends AppCompatActivity {
                                         else if(category.equalsIgnoreCase("Student"))
                                         {
                                             studentData.setEmail(email.getText().toString());
-                                            studentData.setPassword(email.getText().toString());
+                                            studentData.setPassword(password1.getText().toString());
                                             studentData.setCollegeid(collegeId);
                                             //intent to student signup step 1 page
                                             startActivity(new Intent(Signup.this,StudentSignup1_PersonalData.class));
@@ -107,7 +114,7 @@ public class Signup extends AppCompatActivity {
                                         else if(category.equalsIgnoreCase("Company"))
                                         {
                                             companyData.setEmail(email.getText().toString());
-                                            companyData.setPassword(email.getText().toString());
+                                            companyData.setPassword(password1.getText().toString());
                                             //intent to company signup page
                                             //Company page abhi bana nhi hai
 
@@ -125,6 +132,8 @@ public class Signup extends AppCompatActivity {
                                 else
                                 {
                                     email.setError("This user does not belong to selected college");
+                                 //    pbar.setVisibility(View.INVISIBLE);
+                              //  signup.setEnabled(true);
                                     return;
                                 }
 
@@ -146,22 +155,30 @@ public class Signup extends AppCompatActivity {
 
     boolean allDataFilled()
     {
+        signup.setEnabled(false);
+        ProgressBar pbar =findViewById(R.id.progressBar5);
+        pbar.setVisibility(View.VISIBLE);
+        adminData=new AdminData();
         //check all constraints here
-         if(email.getText().toString().length()==0)
-        {
-            email.setError("Enter Mail");
-             return false;
+         if (email.getText().toString().length()==0||!email.getText().toString().contains("@")){
+            email.setError("EMAIL IS REQUIRED");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+         }
+         if(password1.getText().toString().length()==0) {
+            password1.setError("PASSWORD IS REQUIRED");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+ }
 
-        }
-        if(password1.getText().toString().length()==0)
+        if(!password2.getText().toString().equals(password1.getText().toString()))
         {
-            password1.setError("Enter Mail");
-             return false;
-        }
-        if(password2.getText().toString().length()==0)
-        {
-            password2.setError("Enter Mail");
-             return false;
+            password2.setError("PASSWORDS DO NOT MATCH");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
         }
 
 
@@ -171,19 +188,28 @@ public class Signup extends AppCompatActivity {
         if(!email1.matches(emailPattern))
         {
             email.setError("Enter valid mail");
-             return false;
+             pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+
         }
 //check if password length greater than 8
         if(password1.getText().toString().length()< 8)
         {
             password1.setError("Enter atleast 8 characters");
-             return false;
+             pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+
         }
         //check if both passwords match
         if(password1.getText().toString().equals(password2.getText().toString())==false)
         {
-            password2.setError("Enter correct password");
-             return false;
+            password2.setError("Passwords do not match");
+             pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+
         }
         return true;
     }

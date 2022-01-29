@@ -12,47 +12,55 @@
         <entry key="..\:/Student-Help/app/src/main/res/layout/edit_text_layout_with_extra_layout.xml" value="0.18" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/repeatable_edit_text_layout.xml" value="0.16296296296296298" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/text_view_layout.xml" value="0.18" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_admin_create_new_account.xml" value="0.11820652173913043" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_admin_page.xml" value="0.1" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_admin_view_all_requests.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_login.xml" value="0.10144927536231885" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_register_college.xml" value="0.10144927536231885" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_register_college2.xml" value="0.14673913043478262" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_signup.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_student_get_personal_data.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_student_signup_done.xml" value="0.14673913043478262" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_student_upload_documents.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_studentsignup1_personal_data.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_studentsignup2_academic_data.xml" value="0.1" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_date_input_layout.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_dropdown.xml" value="0.14673913043478262" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_edit_text_layout.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_multiline_text_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_number_decimal_layout.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_numeric_text_layout.xml" value="0.14666666666666667" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_radio_button_layout.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_text_view_layout.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_upload_document.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/student_activity_signup.xml" value="0.39323220536756126" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/bottomline.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_add.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_delete.xml" value="0.19166666666666668" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_message_faq.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/layout_bg.xml" value="0.19166666666666668" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/layout_bg_black.xml" value="0.19166666666666668" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/round_img_layout.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/roundedbutton.xml" value="0.19166666666666668" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_create_new_account.xml" value="0.16666666666666666" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_page.xml" value="0.22" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_sign_up.xml" value="0.16666666666666666" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_create_new_account.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_page.xml" value="0.13333333333333333" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_sign_up.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_view_all_requests.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_sign_up.xml" value="0.16666666666666666" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_main.xml" value="0.16145833333333334" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_register_college.xml" value="0.16145833333333334" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_register_college2.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_register_college3.xml" value="0.16666666666666666" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_register_college4_personal_questions.xml" value="0.16666666666666666" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_register_college4_personal_questions.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_register_college5_academic_questions.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_register_college6_upload_data.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_register_college7.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_signup.xml" value="0.17552083333333332" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_check_request_status.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_check_request_status.xml" value="0.12635869565217392" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_get_academic_data.xml" value="0.11005434782608696" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_get_personal_data.xml" value="0.12635869565217392" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_page.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_page.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_review_all_data.xml" value="0.12635869565217392" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_send_request_to_change_data.xml" value="0.22" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_upload_documents.xml" value="0.22" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_studentsignup1_personal_data.xml" value="0.17552083333333332" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_studentsignup2_academic_data.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_send_request_to_change_data.xml" value="0.16666666666666666" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_student_upload_documents.xml" value="0.12635869565217392" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/college_register_questions.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/date_input_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/edit_text_layout.xml" value="0.17552083333333332" />
@@ -61,18 +69,17 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/number_decimal_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/numeric_text_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/radio_button_layout.xml" value="0.17552083333333332" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_admin_view_requests.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_admin_view_requests.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_college_register_questions.xml" value="0.16666666666666666" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_course_register_layout.xml" value="0.16666666666666666" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_date_input_layout.xml" value="0.22" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_dropdown.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_course_register_layout.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_date_input_layout.xml" value="0.12635869565217392" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_edit_text_layout.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_multiline_text_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_number_decimal_layout.xml" value="0.16666666666666666" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_numeric_text_layout.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_numeric_text_layout.xml" value="0.1358695652173913" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_radio_button_layout.xml" value="0.1358695652173913" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_student_request_status_box.xml" value="0.1358695652173913" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_text_view_layout.xml" value="0.3333333333333333" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_text_view_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_upload_document.xml" value="0.1358695652173913" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/student_activity_signup.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/text_view_layout.xml" value="0.17552083333333332" />

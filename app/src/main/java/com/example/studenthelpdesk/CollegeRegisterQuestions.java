@@ -1,9 +1,18 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
+
 public class CollegeRegisterQuestions {
     private String question;
     private boolean changeable,compulsory;
     private int type;
+
+    @NonNull
+    @Override
+    public String toString() {
+        String s=question+" "+changeable+" "+compulsory+" "+type;
+        return s;
+    }
 
     public void setChangeable(boolean changeable) {
         this.changeable = changeable;

@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.Arrays;
 
@@ -23,7 +24,7 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
         setContentView(R.layout.activity_register_college4_personal_questions);
         linearLayout = findViewById(R.id.linearL);
         allData=RegisterCollege.allData;
-
+        setCompulsaryQuestions("Name",0);
         //all other questions can be added by admin
         addQuestion();
     }
@@ -51,7 +52,6 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
             allPersonalQuestion[i]=thisQuestion;
         }
         allData.setQuestions_personal(allPersonalQuestion);
-        Log.e("Hi", Arrays.toString(allPersonalQuestion));
         //intent to registration step 5
         startActivity(new Intent(RegisterCollege4_PersonalQuestions.this,RegisterCollege5_AcademicQuestions.class));
     }
@@ -82,6 +82,33 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
         //5-date
         //6-upload
         //7-dropdown
+    }
+    public void setCompulsaryQuestions(String value,int i)
+    {
+        View questionRepeatable=getLayoutInflater().inflate(R.layout.repeatable_college_register_questions,null);
+        Spinner dropdown = questionRepeatable.findViewById(R.id.dropdown);
+        String[] list={"SingleLine String"};
+        ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
+        dropdown.setAdapter(spinnerList);
+        dropdown.setSelection(i);
+        linearLayout.addView(questionRepeatable);
+        TextView questionhead=questionRepeatable.findViewById(R.id.Ques);
+        String s=questionhead.getText()+" *";
+        questionhead.setText(s);
+        EditText question=questionRepeatable.findViewById(R.id.ans);
+        question.setText(value);
+        question.setFocusable(false);
+        question.setFocusableInTouchMode(false);
+        question.setClickable(false);
+        CheckBox cumpolsary=questionRepeatable.findViewById(R.id.compulsoryfield);
+        cumpolsary.setChecked(true);
+        cumpolsary.setFocusable(false);
+        cumpolsary.setFocusableInTouchMode(false);
+        cumpolsary.setClickable(false);
+        CheckBox changeable=questionRepeatable.findViewById(R.id.changefield);
+        changeable.setFocusable(false);
+        changeable.setFocusableInTouchMode(false);
+        changeable.setClickable(false);
     }
 
 }

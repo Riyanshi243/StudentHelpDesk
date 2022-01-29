@@ -29,7 +29,7 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
         //These fields are required by the database so they are compulsary questions from the developer
         setCompulsaryQuestions("Course",7);
         setCompulsaryQuestions("Branch",7);
-        setCompulsaryQuestions("Year",0);
+        setCompulsaryQuestions("Year",7);
         //all academic questions can be added by admin
         addQuestion();
     }
@@ -91,10 +91,11 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
     {
         View questionRepeatable=getLayoutInflater().inflate(R.layout.repeatable_college_register_questions,null);
         Spinner dropdown = questionRepeatable.findViewById(R.id.dropdown);
-        String[] list={"SingleLine String","Multiline String","Numerical Value","Numerical Decimal Value","Gender Choices","Date Picker","upload","Choice"};
+        String[] list={"SingleLine String","Multiline String","Numerical Value","Numerical Decimal Value","Gender Choices","Date Picker","Upload","Choice"};
         ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
         dropdown.setAdapter(spinnerList);
         dropdown.setSelection(i);
+        dropdown.setClickable(false);
         linearLayout.addView(questionRepeatable);
         TextView questionhead=questionRepeatable.findViewById(R.id.Ques);
         String s=questionhead.getText()+" *";
