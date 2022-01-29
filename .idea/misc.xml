@@ -34,15 +34,33 @@
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_text_view_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_upload_document.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/student_activity_signup.xml" value="0.39323220536756126" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1875" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/bottomline.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_add.xml" value="0.19166666666666668" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_all_student.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.1875" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_delete.xml" value="0.19166666666666668" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_lock_open.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_message_faq.xml" value="0.19166666666666668" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_notifications.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_notifications_bell_on.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_person_add.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_preview_doc.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_search_person.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_three_dots.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_thumb_up.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_upload_file.xml" value="0.1875" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_round_add_24.xml" value="0.1875" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/layout_bg.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/roundedbutton.xml" value="0.19166666666666668" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_create_new_account.xml" value="0.17552083333333332" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_page.xml" value="0.13333333333333333" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_sign_up.xml" value="0.17552083333333332" />
+
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_create_new_account.xml" value="0.16666666666666666" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_page.xml" value="0.16666666666666666" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_sign_up.xml" value="0.16666666666666666" />
+
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_view_all_requests.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_page.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_sign_up.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_main.xml" value="0.16145833333333334" />

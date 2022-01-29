@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminPage">
+    tools:context=".CompanyPage">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:layout_width="190dp"
                     android:layout_height="157dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/admin_profile_img"
+                    android:src="@drawable/company_profile_img"
                     app:civ_border_color="@color/black"
                     app:civ_border_width="1dp"
                     app:civ_shadow="true"
@@ -55,89 +55,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:visibility="invisible" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/layout_bg_black"
-                android:layout_marginTop="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.029">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:onClick="createNewUser"
-                    tools:ignore="TouchTargetSizeCheck">
-
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="30dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        app:srcCompat="@drawable/ic_baseline_person_add" />
-
-                    <TextView
-                        android:id="@+id/create_new_user"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:onClick="createNewUser"
-                        android:paddingLeft="15dp"
-                        android:text="CREATE NEW USER >"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
-
-                </TableRow>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/layout_bg_black"
-                android:layout_marginTop="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.029">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="30dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        app:srcCompat="@drawable/ic_baseline_search_person" />
-
-                    <TextView
-                        android:id="@+id/search_user"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:paddingLeft="15dp"
-                        android:text="SEARCH STUDENT >"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
-
-                </TableRow>
 
             </LinearLayout>
 
@@ -173,84 +90,13 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:paddingLeft="15dp"
-                        android:text="VIEW ALL STUDENT DATA >"
+                        android:text="VIEW ELIGIBLE STUDENTS' DATA >"
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
                 </TableRow>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/layout_bg_black"
-                android:layout_marginTop="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.029">
-
-                <TextView
-                    android:id="@+id/requests_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="You have received a total of "
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20dp" />
-                <TextView
-                    android:id="@+id/to_request_status_page"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="SEE ALL EDIT REQUESTS >"
-                    android:gravity="center"
-                    android:paddingLeft="5dp"
-                    android:textColor="@color/white"
-                    android:textSize="20dp" />
-
-            </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/layout_bg_black"
-            android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.029">
-
-            <com.ncorti.slidetoact.SlideToActView
-                android:id="@+id/example_gray_on_green"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="6dp"
-                app:area_margin="4dp"
-                app:icon_margin="8dp"
-                app:animation_duration="250"
-                app:inner_color="@color/white"
-                app:outer_color="@color/black"
-                app:slider_height="50dp"
-                app:slider_locked="false"
-                app:text="LOCK THE DATABASE>"
-                app:slider_icon="@drawable/ic_baseline_lock_24"
-                app:text_size="20sp" />
-
-        </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -285,45 +131,6 @@
                         android:layout_marginBottom="10dp"
                         android:paddingLeft="15dp"
                         android:text="SEND NOTIFICATIONS >"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
-
-                </TableRow>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/layout_bg_black"
-                android:layout_marginTop="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.029">
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <ImageView
-                        android:id="@+id/imageView7"
-                        android:layout_width="30dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        app:srcCompat="@drawable/ic_baseline_message_faq" />
-                    <TextView
-                        android:id="@+id/FAQ"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="ANSWER FAQ >"
-                        android:paddingLeft="15dp"
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
