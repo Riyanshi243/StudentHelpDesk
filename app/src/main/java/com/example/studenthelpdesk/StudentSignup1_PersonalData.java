@@ -367,7 +367,7 @@ int noOfq=0;
         if(i==0)
         {
             //single line string
-            View nView=getLayoutInflater().inflate(R.layout.repeatable_edit_text_layout,null);
+            View nView=getLayoutInflater().inflate(R.layout.repeatable_edit_text_white_layout,null);
             TextView ques=nView.findViewById(R.id.Ques);
             ques.setText(q);
             ques.setId(qNumber);

@@ -136,7 +136,7 @@ public class RegisterCollege extends AppCompatActivity {
                     //check if passwords match
         if(password.getText().toString().equals(password2.getText().toString())==false)
         {
-            password2.setError("Enter correct password");
+            password2.setError("PASSWORD IS REQUIRED");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;

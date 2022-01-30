@@ -1,9 +1,7 @@
 package com.example.studenthelpdesk;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,20 +21,19 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
-public class RegisterCollege7 extends AppCompatActivity {
+public class RegisterCollege8 extends AppCompatActivity {
     CollegeRegistrationData allData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_college7);
+        setContentView(R.layout.activity_register_college8);
         ProgressBar progressBar=findViewById(R.id.progressBar2);
         allData=RegisterCollege.allData;
         TextView t=new TextView(this);
-        t.setText("Data Uploading");
-        t.setTextSize(16);
+        t.setText("Data Uploading... PLEASE DO NOT PRESS BACK OR EXIT");
+        t.setTextSize(22);
         LinearLayout cl=findViewById(R.id.cl);
         cl.addView(t);
         FirebaseFirestore f1=FirebaseFirestore.getInstance();
@@ -55,7 +52,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                 DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
                 HashMap<String,Object> basicInfoOfCollege=new HashMap<>();
 
-                TextView t=new TextView(RegisterCollege7.this);
+                TextView t=new TextView(RegisterCollege8.this);
                 t.setText("Uploading college data...");
                 t.setTextSize(16);
                 cl.addView(t);
@@ -79,7 +76,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                             branchInfo.set(branches).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    TextView t=new TextView(RegisterCollege7.this);
+                                    TextView t=new TextView(RegisterCollege8.this);
                                     t.setText("Course and Branches Uploading..."+ finalI);
                                     t.setTextSize(16);
                                     cl.addView(t);
@@ -87,12 +84,12 @@ public class RegisterCollege7 extends AppCompatActivity {
                             });
 
                         }//all branches uploaded
-                        TextView t=new TextView(RegisterCollege7.this);
+                        TextView t=new TextView(RegisterCollege8.this);
                         t.setText("Course and Branches Uploaded...");
                         t.setTextSize(16);
                         cl.addView(t);
                         DocumentReference personalQuestion = collegeInformation.collection("Questions").document("Personal Question");
-                        TextView t1=new TextView(RegisterCollege7.this);
+                        TextView t1=new TextView(RegisterCollege8.this);
                         t1.setText("Personal Questions uploading");
                         t1.setTextSize(16);
                         cl.addView(t1);
@@ -120,7 +117,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                     currentQuestionDoc.set(questionDetails[i]).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
-                                            TextView t=new TextView(RegisterCollege7.this);
+                                            TextView t=new TextView(RegisterCollege8.this);
                                             t.setText("Personal Question Uploading..."+ finalI);
                                             t.setTextSize(16);
                                             cl.addView(t);
@@ -128,7 +125,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                     });
                                 }//Personal questions added
                                 DocumentReference academicQuestion = collegeInformation.collection("Questions").document("Academic Question");
-                                TextView t1=new TextView(RegisterCollege7.this);
+                                TextView t1=new TextView(RegisterCollege8.this);
                                 t1.setText("Academic Questions uploading");
                                 t1.setTextSize(16);
                                 cl.addView(t1);
@@ -151,7 +148,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                             currentQuestionDoc.set(questionDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
-                                                    TextView t=new TextView(RegisterCollege7.this);
+                                                    TextView t=new TextView(RegisterCollege8.this);
                                                     t.setText("Academic Question Uploading..."+ finalI);
                                                     t.setTextSize(16);
                                                     cl.addView(t);
@@ -159,7 +156,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                             });
                                         }//Academic questions added
                                         DocumentReference uploadQuestion = collegeInformation.collection("Questions").document("Upload Question");
-                                        TextView t1=new TextView(RegisterCollege7.this);
+                                        TextView t1=new TextView(RegisterCollege8.this);
                                         t1.setText("Upload Questions uploading");
                                         t1.setTextSize(16);
                                         cl.addView(t1);
@@ -182,7 +179,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                     currentQuestionDoc.set(questionDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
                                                         public void onSuccess(Void unused) {
-                                                            TextView t=new TextView(RegisterCollege7.this);
+                                                            TextView t=new TextView(RegisterCollege8.this);
                                                             t.setText("Academic Question Uploading..."+ finalI);
                                                             t.setTextSize(16);
                                                             cl.addView(t);
@@ -196,7 +193,7 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Void unused) {
                                                         FirebaseAuth fauth = FirebaseAuth.getInstance();
-                                                        TextView t=new TextView(RegisterCollege7.this);
+                                                        TextView t=new TextView(RegisterCollege8.this);
                                                         t.setText("Admin Information Uploading...\n Signing In");
                                                         t.setTextSize(16);
                                                         cl.addView(t);
@@ -219,12 +216,12 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                                             collegeTillNow.update(c).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                 @Override
                                                                                 public void onSuccess(Void unused) {
-                                                                                    TextView t=new TextView(RegisterCollege7.this);
+                                                                                    TextView t=new TextView(RegisterCollege8.this);
                                                                                     t.setText("PROCESS COMPLETE");
                                                                                     t.setTextSize(40);
                                                                                     cl.addView(t);
-                                                                                    Toast.makeText(RegisterCollege7.this,"College Registered",Toast.LENGTH_SHORT).show();
-                                                                                    startActivity(new Intent(RegisterCollege7.this,Login.class));
+                                                                                    Toast.makeText(RegisterCollege8.this,"College Registered",Toast.LENGTH_SHORT).show();
+                                                                                    startActivity(new Intent(RegisterCollege8.this,Login.class));
                                                                                 }
                                                                             });
                                                                         }
@@ -241,12 +238,12 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                                             collegeTillNow.set(c).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                 @Override
                                                                                 public void onSuccess(Void unused) {
-                                                                                    TextView t=new TextView(RegisterCollege7.this);
+                                                                                    TextView t=new TextView(RegisterCollege8.this);
                                                                                     t.setText("PROCESS COMPLETE");
                                                                                     t.setTextSize(40);
                                                                                     cl.addView(t);
-                                                                                    Toast.makeText(RegisterCollege7.this,"College Registered",Toast.LENGTH_SHORT).show();
-                                                                                    startActivity(new Intent(RegisterCollege7.this,Login.class));
+                                                                                    Toast.makeText(RegisterCollege8.this,"College Registered",Toast.LENGTH_SHORT).show();
+                                                                                    startActivity(new Intent(RegisterCollege8.this,Login.class));
                                                                                 }
                                                                             });
                                                                         }
@@ -256,9 +253,9 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                         }).addOnFailureListener(new OnFailureListener() {
                                                             @Override
                                                             public void onFailure(@NonNull Exception e) {
-                                                                Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(RegisterCollege8.this,e.toString(),Toast.LENGTH_SHORT).show();
                                                                 progressBar.setVisibility(View.GONE);
-                                                                TextView t=new TextView(RegisterCollege7.this);
+                                                                TextView t=new TextView(RegisterCollege8.this);
                                                                 t.setText("FAILED");
                                                                 t.setTextSize(40);
                                                                 cl.addView(t);
@@ -268,9 +265,9 @@ public class RegisterCollege7 extends AppCompatActivity {
                                                 }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(RegisterCollege8.this,e.toString(),Toast.LENGTH_SHORT).show();
                                                         progressBar.setVisibility(View.GONE);
-                                                        TextView t=new TextView(RegisterCollege7.this);
+                                                        TextView t=new TextView(RegisterCollege8.this);
                                                         t.setText("FAILED");
                                                         t.setTextSize(40);
                                                         cl.addView(t);
@@ -280,9 +277,9 @@ public class RegisterCollege7 extends AppCompatActivity {
                                 }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RegisterCollege8.this,e.toString(),Toast.LENGTH_SHORT).show();
                                                 progressBar.setVisibility(View.GONE);
-                                                TextView t=new TextView(RegisterCollege7.this);
+                                                TextView t=new TextView(RegisterCollege8.this);
                                                 t.setText("FAILED");
                                                 t.setTextSize(40);
                                                 cl.addView(t);
@@ -293,9 +290,9 @@ public class RegisterCollege7 extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterCollege8.this,e.toString(),Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
-                                        TextView t=new TextView(RegisterCollege7.this);
+                                        TextView t=new TextView(RegisterCollege8.this);
                                         t.setText("FAILED");
                                         t.setTextSize(40);
                                         cl.addView(t);
@@ -305,9 +302,9 @@ public class RegisterCollege7 extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterCollege8.this,e.toString(),Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
-                                TextView t=new TextView(RegisterCollege7.this);
+                                TextView t=new TextView(RegisterCollege8.this);
                                 t.setText("FAILED");
                                 t.setTextSize(40);
                                 cl.addView(t);
@@ -317,9 +314,9 @@ public class RegisterCollege7 extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterCollege8.this,e.toString(),Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
-                        TextView t=new TextView(RegisterCollege7.this);
+                        TextView t=new TextView(RegisterCollege8.this);
                         t.setText("FAILED");
                         t.setTextSize(40);
                         cl.addView(t);
@@ -329,9 +326,9 @@ public class RegisterCollege7 extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(RegisterCollege7.this,e.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterCollege8.this,e.toString(),Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
-                TextView t=new TextView(RegisterCollege7.this);
+                TextView t=new TextView(RegisterCollege8.this);
                 t.setText("FAILED");
                 t.setTextSize(40);
                 cl.addView(t);

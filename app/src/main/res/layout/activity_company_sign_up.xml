@@ -134,6 +134,29 @@
                 android:textColorLink="@color/black"
                 tools:ignore="SpeakableTextPresentCheck" />
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="5dp"
+                    android:text="Upload your company logo"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+                <Button
+                    android:id="@+id/upload"
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_baseline_upload_file" />
+            </TableRow>
+
             <Button
                 android:id="@+id/signup"
                 android:layout_width="157dp"

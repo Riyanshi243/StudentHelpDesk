@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminSignUp">
+    tools:context=".RegisterCollege7_SuperAdminSignup">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,34 +18,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:orientation="vertical"
-            android:background="@drawable/head_img">
-
-            <TextView
-                android:id="@+id/head"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="50dp"
-                android:fontFamily="casual"
-                android:gravity="center"
-                android:paddingLeft="5dp"
+                android:layout_height="160dp"
+                android:orientation="vertical"
+                android:background="@drawable/head_img">
 
-                android:text="SIGNUP"
-                android:textColor="@color/white"
-                android:textSize="32dp" />
+                <TextView
+                    android:id="@+id/head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="SUPER ADMIN SIGNUP"
+                    android:textColor="@color/white"
+                    android:textSize="32dp" />
 
-            <ProgressBar
-                android:id="@+id/progressBar5"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="invisible" />
-        </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progressBar5"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,10 +61,8 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="casual"
-                    android:gravity="center"
                     android:paddingLeft="5dp"
-
-                    android:text="Hey Admin, Please fill up your required details here!"
+                    android:text="Hey Super Admin, Please fill up your required details here!"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -143,6 +141,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_baseline_upload_file" />
                 </TableRow>
+
 
                 <Button
                     android:id="@+id/signup"

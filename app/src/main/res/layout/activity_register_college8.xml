@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:layout_gravity="center_horizontal|top"
-    tools:context=".RegisterCollege7">
+    tools:context=".RegisterCollege8">
 
     <ScrollView
         android:layout_width="match_parent"
