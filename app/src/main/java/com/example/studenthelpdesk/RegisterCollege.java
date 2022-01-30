@@ -47,7 +47,7 @@ public class RegisterCollege extends AppCompatActivity {
                     //if username exist... a document will already be present in its name
                     if(documentSnapshot.exists())
                     {
-                        uname.setError("This username already Exist");
+                        uname.setError("THIS USERNAME ALREADY EXIST");
                     }
                     else
                     {
@@ -81,7 +81,7 @@ public class RegisterCollege extends AppCompatActivity {
         //everything not empty
         if(uname.getText().toString().length()==0)
         {
-            uname.setError("Enter Username");
+            uname.setError("ENTER USERNAME");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
@@ -89,35 +89,35 @@ public class RegisterCollege extends AppCompatActivity {
 
         if(cname.getText().toString().length()==0)
         {
-            cname.setError("Enter College Name");
+            cname.setError("ENTER COLLEGE NAME");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
         }
         if(password.getText().toString().length()==0)
         {
-            password.setError("Enter Password");
+            password.setError("ENTER PASSWORD");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
         }
         if(password2.getText().toString().length()==0)
         {
-            password2.setError("Enter Confirm Password");
+            password2.setError("ENTER CONFIRM PASSWORD");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
         }
         if(adminmail.getText().toString().length()==0)
         {
-            adminmail.setError("Enter Mail");
+            adminmail.setError("ENTER MAIL");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
         }
          if(location.getText().toString().length()==0)
         {
-            location.setError("Enter Location");
+            location.setError("ENTER LOCATION");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
@@ -127,7 +127,7 @@ public class RegisterCollege extends AppCompatActivity {
         String email=adminmail.getText().toString().trim();
         if(!email.matches(emailPattern))
         {
-            adminmail.setError("Enter valid mail");
+            adminmail.setError("ENTER VALID MAIL");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
@@ -136,7 +136,7 @@ public class RegisterCollege extends AppCompatActivity {
                     //check if passwords match
         if(password.getText().toString().equals(password2.getText().toString())==false)
         {
-            password2.setError("PASSWORD IS REQUIRED");
+            password2.setError("PASSWORDS DO NOT MATCH");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
@@ -144,7 +144,7 @@ public class RegisterCollege extends AppCompatActivity {
         //check if password length greater than 8
         if(password.getText().toString().length()< 8)
         {
-            password.setError("Enter atleast 8 characters");
+            password.setError("ENTER ATLEAST 8 CHARACTERS");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
