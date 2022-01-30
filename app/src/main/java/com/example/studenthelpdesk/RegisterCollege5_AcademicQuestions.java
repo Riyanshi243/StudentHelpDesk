@@ -3,7 +3,6 @@ package com.example.studenthelpdesk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -28,10 +27,10 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
         linearLayout = findViewById(R.id.linearL);
         allData=RegisterCollege.allData;
         //These fields are required by the database so they are compulsary questions from the developer
-        setCompulsaryQuestions("Course");
-        setCompulsaryQuestions("Branch");
-        setCompulsaryQuestions("Year");
-        //all academinc questions can be added by admin
+        setCompulsaryQuestions("Course",7);
+        setCompulsaryQuestions("Branch",7);
+        setCompulsaryQuestions("Year",7);
+        //all academic questions can be added by admin
         addQuestion();
     }
     public void addQuestion(View v)
@@ -46,7 +45,7 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
         for(int i=0;i<numberOfQuestions;i++)
         {
             CollegeRegisterQuestions thisQuestion=new CollegeRegisterQuestions();
-            View repeatableView=linearLayout.getChildAt(numberOfQuestions-1);
+            View repeatableView=linearLayout.getChildAt(i);
             EditText question=repeatableView.findViewById(R.id.ans);
             CheckBox cumpolsary=repeatableView.findViewById(R.id.compulsoryfield);
             CheckBox changeable=repeatableView.findViewById(R.id.changefield);
@@ -58,7 +57,6 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
             allAcademicQuestion[i]=thisQuestion;
         }
         allData.setQuestions_academic(allAcademicQuestion);
-        Log.e("Hi", Arrays.toString(allAcademicQuestion));
         startActivity(new Intent(RegisterCollege5_AcademicQuestions.this,RegisterCollege6_UploadData.class));
     }
     public boolean previusQuestionDone()
@@ -80,20 +78,24 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
         ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
         dropdown.setAdapter(spinnerList);
         linearLayout.addView(questionRepeatable);
-        //0-nuemerical
-        //1-neumeric decimal
-        //2-string 1 line
-        //3-string multiline
+        //0-string 1 line
+        //1-string multiline
+        // 2-nuemerical
+        //3-neumeric decimal
         //4-radio
         //5-date
+        //6-upload
+        //7-dropdown
     }
-    public void setCompulsaryQuestions(String value)
+    public void setCompulsaryQuestions(String value,int i)
     {
         View questionRepeatable=getLayoutInflater().inflate(R.layout.repeatable_college_register_questions,null);
         Spinner dropdown = questionRepeatable.findViewById(R.id.dropdown);
-        String[] list={"Single line String"};
+        String[] list={"SingleLine String","Multiline String","Numerical Value","Numerical Decimal Value","Gender Choices","Date Picker","Upload","Choice"};
         ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
         dropdown.setAdapter(spinnerList);
+        dropdown.setSelection(i);
+        dropdown.setClickable(false);
         linearLayout.addView(questionRepeatable);
         TextView questionhead=questionRepeatable.findViewById(R.id.Ques);
         String s=questionhead.getText()+" *";

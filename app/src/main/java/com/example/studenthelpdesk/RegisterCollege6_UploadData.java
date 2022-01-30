@@ -4,15 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-
-import java.util.Arrays;
+import android.widget.TextView;
 
 public class RegisterCollege6_UploadData extends AppCompatActivity {
     LinearLayout linearLayout;
@@ -38,7 +36,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         for(int i=0;i<numberOfQuestions;i++)
         {
             CollegeRegisterQuestions thisQuestion=new CollegeRegisterQuestions();
-            View repeatableView=linearLayout.getChildAt(numberOfQuestions-1);
+            View repeatableView=linearLayout.getChildAt(i);
             EditText question=repeatableView.findViewById(R.id.ans);
             CheckBox cumpolsary=repeatableView.findViewById(R.id.compulsoryfield);
             CheckBox changeable=repeatableView.findViewById(R.id.changefield);
@@ -49,9 +47,8 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
             allUploadQuestion[i]=thisQuestion;
         }
         allData.setQuestions_upload(allUploadQuestion);
-        Log.e("Hi", Arrays.toString(allUploadQuestion));
         //intent to registration step 7
-        startActivity(new Intent(RegisterCollege6_UploadData.this,RegisterCollege7.class));
+        startActivity(new Intent(RegisterCollege6_UploadData.this, RegisterCollege8.class));
     }
     public boolean previusQuestionDone()
     {
@@ -82,6 +79,9 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
         dropdown.setAdapter(spinnerList);
         linearLayout.addView(questionRepeatable);
+        TextView questionhead=questionRepeatable.findViewById(R.id.Ques);
+        String s=questionhead.getText()+" *";
+        questionhead.setText(s);
         EditText question=questionRepeatable.findViewById(R.id.ans);
         question.setText(value);
         question.setFocusable(false);
@@ -93,6 +93,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         cumpolsary.setFocusableInTouchMode(false);
         cumpolsary.setClickable(false);
         CheckBox changeable=questionRepeatable.findViewById(R.id.changefield);
+        changeable.setChecked(true);
         changeable.setFocusable(false);
         changeable.setFocusableInTouchMode(false);
         changeable.setClickable(false);

@@ -11,6 +11,8 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/layout_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +26,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="ENTER YOUR "
+            android:paddingLeft="5dp"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -33,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:gravity="start|top"
+            android:paddingLeft="5dp"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textSize="20dp"
@@ -45,6 +49,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="ENTER YOUR "
+            android:paddingLeft="5dp"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -68,6 +73,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/roundedbutton"
                 android:text="ADD NEW BRANCH" />
 
             <Button
@@ -76,6 +82,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
+                android:background="@drawable/roundedbutton"
                 android:text="SAVE THIS COURSE" />
 
 
