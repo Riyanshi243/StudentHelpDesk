@@ -9,10 +9,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,15 +17,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            android:background="@drawable/head_img">
 
-            <ImageView
-                android:id="@+id/upload_img"
+            <TextView
+                android:id="@+id/head"
                 android:layout_width="match_parent"
-                android:layout_height="163dp"
-                app:srcCompat="@drawable/personal_details" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="UPLOAD DOCUMENTS"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+
 
             <!-- All questions to be asked by student will be repeated here, through java code -->
-
+        </LinearLayout>
             <ProgressBar
                 android:id="@+id/progressBar_upload_data"
                 style="?android:attr/progressBarStyle"
@@ -39,6 +49,16 @@
                 android:layout_marginTop="20dp"
                 android:visibility="invisible" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+
             <Button
                 android:id="@+id/next"
                 android:layout_width="152dp"
@@ -46,8 +66,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="50dp"
-
-                android:text="NEXT" />
+                android:onClick="saveAndNext"
+                android:text="DONE" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

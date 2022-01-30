@@ -4,14 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_white"
     tools:context=".AdminViewAllRequests">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,17 +19,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            android:background="@drawable/head_img">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="REQUESTS FOR EDIT IN ENTRIES"
-                android:textSize="25dp"
-                android:textColor="@color/black"/>
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="REQUESTS FOR EDIT"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+        </LinearLayout>
 
             <TextView
                 android:id="@+id/textView2"
@@ -41,16 +48,23 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:fontFamily="casual"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:paddingLeft="5dp"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:text="Here, we have Edit Details requests from the students.You may click on the GmailId of student to view their data!" />
+                android:text="Here, we have Edit Details requests from the students. You may click on the GmailId of student to view their data!" />
 
             <ProgressBar
                 android:id="@+id/progressBar3"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></LinearLayout>
+
 
 
         </LinearLayout>
