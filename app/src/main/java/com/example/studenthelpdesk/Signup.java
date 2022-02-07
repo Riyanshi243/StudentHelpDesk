@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -116,7 +117,8 @@ public class Signup extends AppCompatActivity {
                                             companyData.setEmail(email.getText().toString());
                                             companyData.setPassword(password1.getText().toString());
                                             //intent to company signup page
-                                            //Company page abhi bana nhi hai
+                                            startActivity(new Intent(Signup.this,CompanySignUp.class));
+
 
                                         }
                                         
@@ -124,6 +126,7 @@ public class Signup extends AppCompatActivity {
                                     else
                                     {
                                         //Toast that this user has already signed up
+                                        Toast.makeText(Signup.this,"USER HAS ALREADY SIGNED UP", Toast.LENGTH_LONG).show();
 
                                         //Intent to login.class
                                         startActivity(new Intent(Signup.this,Login.class));
@@ -166,6 +169,7 @@ public class Signup extends AppCompatActivity {
             signup.setEnabled(true);
             return false;
          }
+
          if(password1.getText().toString().length()==0) {
             password1.setError("PASSWORD IS REQUIRED");
             pbar.setVisibility(View.INVISIBLE);
@@ -187,30 +191,33 @@ public class Signup extends AppCompatActivity {
         String email1=email.getText().toString().trim();
         if(!email1.matches(emailPattern))
         {
-            email.setError("Enter valid mail");
+            email.setError("ENTER VALID MAIL");
              pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
 
         }
+
 //check if password length greater than 8
         if(password1.getText().toString().length()< 8)
         {
-            password1.setError("Enter atleast 8 characters");
+            password1.setError("ENTER ATLEAST 8 CHARACTERS");
              pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
 
         }
+
         //check if both passwords match
         if(password1.getText().toString().equals(password2.getText().toString())==false)
         {
-            password2.setError("Passwords do not match");
+            password2.setError("PASSWORDS DO NOT MATCH");
              pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
 
         }
+
         return true;
     }
 }
