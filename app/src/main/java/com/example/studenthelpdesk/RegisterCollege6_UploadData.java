@@ -48,7 +48,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         }
         allData.setQuestions_upload(allUploadQuestion);
         //intent to registration step 7
-        startActivity(new Intent(RegisterCollege6_UploadData.this, RegisterCollege8.class));
+        startActivity(new Intent(RegisterCollege6_UploadData.this, RegisterCollege7_SuperAdminSignup.class));
     }
     public boolean previusQuestionDone()
     {

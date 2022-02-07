@@ -42,9 +42,8 @@ public class RegisterCollege8 extends AppCompatActivity {
         HashMap<String,Object> generaInfoAdmin=new HashMap<>();
         generaInfoAdmin.put("College",allData.getUname());
         generaInfoAdmin.put("Category","Admin");
-        generaInfoAdmin.put("Department","Main Admin");
+        generaInfoAdmin.put("Department",allData.getAdminDept());
         generaInfoAdmin.put("New",false);
-
         forGeneralInformation.set(generaInfoAdmin).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -186,9 +185,10 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                         }
                                                     });
                                                 }//Upload questions added
-                                                DocumentReference userInfo = collegeInformation.collection("UsersInfo").document("Admin").collection("Main Admin").document(allData.getSAdminemail());
+                                                DocumentReference userInfo = collegeInformation.collection("UsersInfo").document("Admin").collection(allData.getAdminDept()).document(allData.getSAdminemail());
                                                 HashMap<String , Object> user=new HashMap<>();
-                                                user.put("Name",allData.getCName()+" Main Admin");
+                                                user.put("Name",allData.getAdminName());
+                                                user.put("Phone Number",allData.getAdminNo());
                                                 userInfo.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {

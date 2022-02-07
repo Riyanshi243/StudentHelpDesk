@@ -4,10 +4,34 @@ import java.util.ArrayList;
 
 //at the time of registration all the details of the college will be stored as an object of this class
 public class CollegeRegistrationData {
-    private String Uname,SAdminemail,password,CName,Location;
+    private String Uname,SAdminemail,password,CName,Location,adminName,adminNo,adminDept;
     private ArrayList<String> deptName,courseName;
     private ArrayList<ArrayList<String>> branchForEachCourse;
     private CollegeRegisterQuestions questions_personal[],questions_academic[],questions_upload[];
+
+    public void setAdminDept(String adminDept) {
+        this.adminDept = adminDept;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public void setAdminNo(String adminNo) {
+        this.adminNo = adminNo;
+    }
+
+    public String getAdminDept() {
+        return adminDept;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public String getAdminNo() {
+        return adminNo;
+    }
 
     public void setQuestions_academic(CollegeRegisterQuestions[] questions_academic) {
         this.questions_academic = questions_academic;

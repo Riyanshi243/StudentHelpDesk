@@ -84,23 +84,25 @@
                     android:textColorLink="@color/black"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <EditText
-                    android:id="@+id/department"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="Enter your department"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
-                    android:paddingLeft="5dp"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:textColorLink="@color/black"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColorHint="@color/hint_text"
+                    android:backgroundTint="@color/box_bg">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/deptName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="none"
+                        android:text="Choose your department" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <EditText
                     android:id="@+id/contact"
@@ -139,7 +141,8 @@
                         android:layout_height="35dp"
                         android:layout_marginLeft="40dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_baseline_upload_file" />
+                        android:background="@drawable/ic_baseline_upload_file"
+                        android:onClick="uploadPic" />
                 </TableRow>
 
 
@@ -150,20 +153,9 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/roundedbutton"
+                    android:onClick="saveAndNext"
                     android:text="SIGN-UP" />
 
-                <TextView
-                    android:id="@+id/login"
-                    android:layout_width="105dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="40dp"
-
-                    android:layout_marginBottom="60dp"
-                    android:text="@string/already_a_user_nlogin_instead"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue_text"
-                    android:textStyle="italic" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
