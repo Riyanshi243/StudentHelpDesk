@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".StudentViewAllFAQ"
+            android:exported="false" />
+        <activity
+            android:name=".StudentPostFAQ"
+            android:exported="false" />
+        <activity
             android:name=".StudentViewNotifications"
             android:exported="false" />
         <activity
