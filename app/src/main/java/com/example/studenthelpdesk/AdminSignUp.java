@@ -82,6 +82,7 @@ AdminData adminData;
         {
             Toast.makeText(this,"Select Department",Toast.LENGTH_LONG).show();
         }
+        //j
     }
     public void uploadPic(View v)
     {
