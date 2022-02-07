@@ -53,7 +53,7 @@ public class AdminCreateNewAccount extends AppCompatActivity {
         if(checkEmail())
         {
             AlertDialog.Builder areYouSure=new AlertDialog.Builder(this);
-            areYouSure.setTitle("PLEASE CONFIRM THE INFOREMATION");
+            areYouSure.setTitle("PLEASE CONFIRM THE INFORMATION");
             String cat="Student";
             if(admin.isChecked())
                 cat="Admin";
@@ -75,7 +75,7 @@ public class AdminCreateNewAccount extends AppCompatActivity {
                        public void onSuccess(DocumentSnapshot documentSnapshot) {
                            if (documentSnapshot.exists())
                            {
-                               email.setError("User Exists");
+                               email.setError("USER EXISTS");
                            }
                            else
                            {

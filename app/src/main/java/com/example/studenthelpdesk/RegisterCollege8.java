@@ -77,7 +77,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     TextView t=new TextView(RegisterCollege8.this);
-                                    t.setText("Course and Branches Uploading..."+ finalI);
+                                    t.setText("COURSE AND BRANCHES UPLOADING ..."+ finalI);
                                     t.setTextSize(16);
                                     cl.addView(t);
                                 }
@@ -85,12 +85,12 @@ public class RegisterCollege8 extends AppCompatActivity {
 
                         }//all branches uploaded
                         TextView t=new TextView(RegisterCollege8.this);
-                        t.setText("Course and Branches Uploaded...");
+                        t.setText("COURSE AND BRANCHES UPLOADED...");
                         t.setTextSize(16);
                         cl.addView(t);
                         DocumentReference personalQuestion = collegeInformation.collection("Questions").document("Personal Question");
                         TextView t1=new TextView(RegisterCollege8.this);
-                        t1.setText("Personal Questions uploading");
+                        t1.setText("PERSONAL QUESTIONS UPLOADING");
                         t1.setTextSize(16);
                         cl.addView(t1);
                         CollegeRegisterQuestions[] personalQuestionArray = allData.getQuestions_personal();
@@ -118,7 +118,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Void unused) {
                                             TextView t=new TextView(RegisterCollege8.this);
-                                            t.setText("Personal Question Uploading..."+ finalI);
+                                            t.setText("PERSONAL QUESTION UPLOADING..."+ finalI);
                                             t.setTextSize(16);
                                             cl.addView(t);
                                         }
@@ -126,7 +126,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                 }//Personal questions added
                                 DocumentReference academicQuestion = collegeInformation.collection("Questions").document("Academic Question");
                                 TextView t1=new TextView(RegisterCollege8.this);
-                                t1.setText("Academic Questions uploading");
+                                t1.setText("ACADEMIC QUESTIONS UPLOADING");
                                 t1.setTextSize(16);
                                 cl.addView(t1);
                                 CollegeRegisterQuestions[] academicQuestionArray = allData.getQuestions_academic();
@@ -149,7 +149,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                 @Override
                                                 public void onSuccess(Void unused) {
                                                     TextView t=new TextView(RegisterCollege8.this);
-                                                    t.setText("Academic Question Uploading..."+ finalI);
+                                                    t.setText("ACADEMIC QUESTION UPLOADING..."+ finalI);
                                                     t.setTextSize(16);
                                                     cl.addView(t);
                                                 }
@@ -157,7 +157,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                         }//Academic questions added
                                         DocumentReference uploadQuestion = collegeInformation.collection("Questions").document("Upload Question");
                                         TextView t1=new TextView(RegisterCollege8.this);
-                                        t1.setText("Upload Questions uploading");
+                                        t1.setText("UPLOAD QUESTIONS UPLOADING");
                                         t1.setTextSize(16);
                                         cl.addView(t1);
                                         CollegeRegisterQuestions[] uploadQuestionArray = allData.getQuestions_upload();
@@ -180,7 +180,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                         @Override
                                                         public void onSuccess(Void unused) {
                                                             TextView t=new TextView(RegisterCollege8.this);
-                                                            t.setText("Academic Question Uploading..."+ finalI);
+                                                            t.setText("ACADEMIC QUESTION UPLOADING..."+ finalI);
                                                             t.setTextSize(16);
                                                             cl.addView(t);
                                                         }
@@ -194,7 +194,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                     public void onSuccess(Void unused) {
                                                         FirebaseAuth fauth = FirebaseAuth.getInstance();
                                                         TextView t=new TextView(RegisterCollege8.this);
-                                                        t.setText("Admin Information Uploading...\n Signing In");
+                                                        t.setText("ADMIN INFORMATION UPLOADING...\n SIGNING IN");
                                                         t.setTextSize(16);
                                                         cl.addView(t);
                                                         fauth.createUserWithEmailAndPassword(allData.getSAdminemail(),allData.getPassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
