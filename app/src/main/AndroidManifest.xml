@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".CompanySignUp2"
+            android:exported="false" />
+        <activity
+            android:name=".CompanySignUp"
+            android:exported="false"/>
+        <activity
+            android:name=".CompanyPage"
+            android:exported="false"/>
+
+        <activity
+            android:name=".AdminSignUp2"
+        <activity
             android:name=".StudentViewAllFAQ"
             android:exported="false" />
         <activity
@@ -35,6 +47,9 @@
             android:exported="false" />
         <activity
             android:name=".RegisterCollege8"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege7_SuperAdminSignup"
             android:exported="false" />
         <activity
             android:name=".RegisterCollege6_UploadData"

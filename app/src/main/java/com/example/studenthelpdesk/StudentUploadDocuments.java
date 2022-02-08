@@ -51,7 +51,6 @@ public class StudentUploadDocuments extends AppCompatActivity
         setContentView(R.layout.activity_student_upload_documents);
         studentData=Signup.studentData;
         ll=findViewById(R.id.ll);
-        Log.e("All p q","Hi"+Arrays.toString(studentData.getP_ans())+" "+Arrays.toString(studentData.getP_ques())+Arrays.toString(studentData.getP_id()));
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference persQuestions = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Upload Question");
         persQuestions.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

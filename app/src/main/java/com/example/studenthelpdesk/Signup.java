@@ -100,6 +100,7 @@ public class Signup extends AppCompatActivity {
                                         {
                                             adminData.setEmail(email.getText().toString());
                                             adminData.setPassword(password1.getText().toString());
+                                            adminData.setCollegeId(collegeId);
                                             //intent to admin signup page
                                             startActivity(new Intent(Signup.this,AdminSignUp.class));
                                             
@@ -116,9 +117,9 @@ public class Signup extends AppCompatActivity {
                                         {
                                             companyData.setEmail(email.getText().toString());
                                             companyData.setPassword(password1.getText().toString());
+                                            companyData.setCollegeId(collegeId);
                                             //intent to company signup page
                                             startActivity(new Intent(Signup.this,CompanySignUp.class));
-
 
                                         }
                                         

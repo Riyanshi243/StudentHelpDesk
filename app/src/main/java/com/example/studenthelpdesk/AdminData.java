@@ -1,7 +1,31 @@
 package com.example.studenthelpdesk;
 
 public class AdminData {
-    private String email,password,collegeId;
+    private String email,password,collegeId,adminName,phoneNumber,deptName;
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
     public void setCollegeId(String collegeId) {
         this.collegeId = collegeId;

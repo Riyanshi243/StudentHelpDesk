@@ -67,6 +67,23 @@
                 android:textSize="16dp" />
 
             <EditText
+                android:id="@+id/companyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Enter Name of Company"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:paddingLeft="5dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textColorLink="@color/black"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <EditText
                 android:id="@+id/repre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,7 +171,8 @@
                     android:layout_height="35dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_baseline_upload_file" />
+                    android:background="@drawable/ic_baseline_upload_file"
+                    android:onClick="uploadPic" />
             </TableRow>
 
             <Button
@@ -164,6 +182,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/roundedbutton"
+                android:onClick="saveAndNext"
                 android:text="SIGN-UP" />
 
             <TextView

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,12 +53,10 @@ public class Login extends AppCompatActivity {
                         else if(category.equalsIgnoreCase("Company"))
                         {
                             //intent to company page
-                            startActivity(new Intent(Login.this,CompanyPage.class));
-
-
-                        }
+                            startActivity(new Intent(Login.this,CompanyPage.class));                 }
                     }
                 });
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
