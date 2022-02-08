@@ -44,6 +44,7 @@
                     android:textColor="@color/white"
                     android:textSize="32dp" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/welcomemsg"
                 android:layout_width="match_parent"
@@ -55,7 +56,7 @@
                 android:layout_marginBottom="50dp"
                 android:fontFamily="casual"
                 android:paddingLeft="5dp"
-                android:text="Enter questions about Documents Details you want from your college students. Few of the questions are preset by the developer, you may not change them."
+                android:text="Enter questions about Documents Details you want from your college students. Few of the questions are present by the developer, you may not change them."
                 android:textColor="@color/black"
                 android:textSize="16dp" />
 
