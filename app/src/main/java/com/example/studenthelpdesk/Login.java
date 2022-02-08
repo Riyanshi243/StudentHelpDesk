@@ -53,9 +53,7 @@ public class Login extends AppCompatActivity {
                         else if(category.equalsIgnoreCase("Company"))
                         {
                             //intent to company page
-                            //Company page abhi bana nhi hai
-                            startActivity(new Intent(Login.this,CompanyPage.class));
-                        }
+                            startActivity(new Intent(Login.this,CompanyPage.class));                 }
                     }
                 });
 
@@ -63,7 +61,7 @@ public class Login extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Login.this,"Error:"+e.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(Login.this,"ERROR:"+e.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }

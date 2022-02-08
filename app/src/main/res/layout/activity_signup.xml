@@ -55,7 +55,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Choose your College:"
+                android:text="Choose College:"
                 android:textSize="20dp"
                 android:textColor="@color/black"
                 android:layout_marginBottom="10dp"

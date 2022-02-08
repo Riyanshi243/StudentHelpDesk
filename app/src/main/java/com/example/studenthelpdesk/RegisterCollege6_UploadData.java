@@ -21,7 +21,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         setContentView(R.layout.activity_register_college6_upload_data);
         linearLayout = findViewById(R.id.linearL);
         allData=RegisterCollege.allData;
-        setCompulsaryQuestions("Photograph");
+        setCompulsaryQuestions("PHOTOGRAPH");
         addQuestion();
     }
     public void addQuestion(View v)
@@ -56,7 +56,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         View repeatableLastView=linearLayout.getChildAt(numberOfQuestions-1);
         EditText question=repeatableLastView.findViewById(R.id.ans);
         if(question.getText().toString().length()==0){
-            question.setError("Enter this value");
+            question.setError("ENTER THIS VALUE");
             return false;
         }
         return true;

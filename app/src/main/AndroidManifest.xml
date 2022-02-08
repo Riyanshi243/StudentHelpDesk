@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
-
         <activity
             android:name=".CompanySignUp2"
             android:exported="false" />
@@ -22,6 +21,23 @@
 
         <activity
             android:name=".AdminSignUp2"
+        <activity
+            android:name=".StudentViewAllFAQ"
+            android:exported="false" />
+        <activity
+            android:name=".StudentPostFAQ"
+            android:exported="false" />
+        <activity
+            android:name=".StudentViewNotifications"
+            android:exported="false" />
+        <activity
+            android:name=".StudentUploadDetails"
+            android:exported="false" />
+        <activity
+            android:name=".StudentAcademicDetails"
+            android:exported="false" />
+        <activity
+            android:name=".StudentPersonalDetails"
             android:exported="false" />
         <activity
             android:name=".StudentSignupDone"
