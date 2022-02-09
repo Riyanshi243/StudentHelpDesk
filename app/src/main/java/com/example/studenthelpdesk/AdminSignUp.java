@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class AdminSignUp extends AppCompatActivity {
 EditText name,phone;
 AutoCompleteTextView dept;
 int deptn=-1;
-private ProgressBar progressBar5;
+private Button signup;
 ArrayList<String> deptName;
 AdminData adminData;
     @Override
@@ -151,7 +152,31 @@ AdminData adminData;
     }
     boolean checkFilled()
     {
+        signup.setEnabled(false);
+        ProgressBar pbar =findViewById(R.id.progressBar5);
+        pbar.setVisibility(View.VISIBLE);
         //check name not empty and phone number not empty
+        if(name.getText().toString().length()==0)
+        {
+            name.setError("ENTER USERNAME");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+        if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
+        {
+            phone.setError("INVALID PHONE NUMBER");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+      else  if(phone.getText().toString().length()==0)
+        {
+            phone.setError("ENTER PHONE NUMBER");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
         return true;
     }
 }
