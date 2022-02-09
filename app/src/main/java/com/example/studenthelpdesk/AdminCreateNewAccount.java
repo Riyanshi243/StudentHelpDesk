@@ -21,14 +21,24 @@ import java.util.HashMap;
 
 public class AdminCreateNewAccount extends AppCompatActivity {
     TextView email;
-    CheckBox admin,company;
+    CheckBox student,admin,company;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_create_new_account);
         email=findViewById(R.id.email);
+        student=findViewById(R.id.checkBox_student);
         admin=findViewById(R.id.checkBox_admin);
         company=findViewById(R.id.checkBox_company);
+        student.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(student.isChecked())
+                {
+                    checkStudent();
+                }
+            }
+        });
         admin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -59,9 +69,9 @@ public class AdminCreateNewAccount extends AppCompatActivity {
                 cat="Admin";
             else if(company.isChecked())
                 cat="Company";
-            else
+            else if(student.isChecked())
                 cat="Student";
-            String s="EMAIL:"+email.getText().toString()+"\nCATEGORY:"+cat;
+            String s="EMAIL: "+email.getText().toString()+"\nCATEGORY: "+cat;
             areYouSure.setMessage(s);
             String finalCat = cat;
             areYouSure.setPositiveButton("YES,Create User", new DialogInterface.OnClickListener() {
@@ -82,11 +92,12 @@ public class AdminCreateNewAccount extends AppCompatActivity {
                                HashMap<String,Object> userInfo=new HashMap<>();
                                userInfo.put("Category", finalCat);
                                userInfo.put("New",true);
-                               userInfo.put("College",AdminPage.adminData.getCollegeId());
+                               userInfo.put("College ",AdminPage.adminData.getCollegeId());
                                docuserInfo.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                    @Override
                                    public void onSuccess(Void unused) {
                                        email.setText("");
+                                       student.setChecked(true);
                                        admin.setChecked(false);
                                        company.setChecked(false);
                                        Toast.makeText(AdminCreateNewAccount.this,"User Created",Toast.LENGTH_LONG).show();
@@ -110,11 +121,22 @@ public class AdminCreateNewAccount extends AppCompatActivity {
     {
         if(company.isChecked())
             company.setChecked(false);
+        if(student.isChecked())
+            student.setChecked(false);
     }
     public void checkCompany()
     {
         if(admin.isChecked())
             admin.setChecked(false);
+        if(student.isChecked())
+            student.setChecked(false);
+    }
+    public void checkStudent()
+    {
+        if(admin.isChecked())
+            admin.setChecked(false);
+        if(company.isChecked())
+            company.setChecked(false);
     }
     public boolean checkEmail()
     {
