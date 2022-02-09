@@ -62,7 +62,7 @@
                     android:layout_marginBottom="20dp"
                     android:fontFamily="casual"
                     android:paddingLeft="5dp"
-                    android:text="Hey Super Admin, Please fill up your required details here!"
+                    android:text="Please fill up your required details here!"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 

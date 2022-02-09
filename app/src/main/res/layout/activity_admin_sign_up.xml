@@ -63,7 +63,7 @@
                     android:fontFamily="casual"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-                    android:text="Hey Admin, Please fill up your required details here!"
+                    android:text="Please fill up your required details here!"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -144,6 +144,15 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_baseline_upload_file"
                         android:onClick="uploadPic" />
+
+                    <ImageView
+                        android:id="@+id/uplodingdone"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/ic_baseline_done" />
                 </TableRow>
 
                 <Button
