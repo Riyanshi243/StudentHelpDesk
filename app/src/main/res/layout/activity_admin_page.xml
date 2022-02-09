@@ -69,6 +69,7 @@
                     android:textSize="28dp" />
 
                 <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/profilePic"
                     android:layout_width="190dp"
                     android:layout_height="157dp"
                     android:layout_gravity="center"

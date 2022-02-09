@@ -179,7 +179,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                         @Override
                                                         public void onSuccess(Void unused) {
                                                             TextView t=new TextView(RegisterCollege8.this);
-                                                            t.setText("ACADEMIC QUESTION UPLOADING..."+ finalI);
+                                                            t.setText("UPLOAD QUESTION UPLOADING..."+ finalI);
                                                             t.setTextSize(16);
                                                             cl.addView(t);
                                                         }
