@@ -92,6 +92,10 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/help.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/logout.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/logout_notif.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_admin_page.xml" value="0.1" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_company_page.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_student_page.xml" value="0.10144927536231885" />
       </map>
     </option>
   </component>

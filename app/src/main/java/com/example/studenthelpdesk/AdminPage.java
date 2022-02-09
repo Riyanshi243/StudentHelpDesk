@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,14 +17,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AdminPage extends AppCompatActivity {
     static AdminData adminData;
-     ImageView create_new_user,search_user,view_all_data,see_req,send_notif,faq,lockdatabase;
-
+     FirebaseAuth f;
+     TextView greetings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
         adminData=new AdminData();
-        FirebaseAuth f=FirebaseAuth.getInstance();
+        greetings=findViewById(R.id.head);
+        f=FirebaseAuth.getInstance();
         adminData.setEmail(f.getCurrentUser().getEmail());
         FirebaseFirestore fs=FirebaseFirestore.getInstance();
         DocumentReference docUserInfo = fs.collection("All Users On App").document(adminData.getEmail());
@@ -30,7 +33,21 @@ public class AdminPage extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String cId= (String) documentSnapshot.get("College");
+                String dept=(String) documentSnapshot.get("Department");
                 adminData.setCollegeId(cId);
+                adminData.setDeptName(dept);
+                DocumentReference docUserInfoAll = fs.collection("All Colleges").document(cId).collection("AllUsers").document("Admin").collection(dept).document(adminData.getEmail());
+                docUserInfoAll.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String name= (String) documentSnapshot.get("Name");
+                        String phone=(String) documentSnapshot.get("Phone Number");
+                        adminData.setPhoneNumber(phone);
+                        adminData.setAdminName(name);
+                        greetings.setText(greetings.getText()+name);
+
+                    }
+                });
             }
         });
 
@@ -38,5 +55,12 @@ public class AdminPage extends AppCompatActivity {
     }
     public void createNewUser(View v){
         startActivity(new Intent(AdminPage.this, AdminCreateNewAccount.class));
+    }
+    public void logout(View v)
+    {
+        f.signOut();
+        Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
+        startActivity(new Intent(AdminPage.this,Login.class));
+        finish();
     }
 }
