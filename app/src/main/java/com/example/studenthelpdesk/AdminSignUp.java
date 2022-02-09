@@ -98,11 +98,11 @@ AdminData adminData;
         {
             if(resultCode==RESULT_OK) {
                 dialog = new ProgressDialog(this);
-                dialog.setMessage("Uploading");
+                dialog.setMessage("UPLOADING");
                 dialog.show();
                 Uri imageuri = data.getData();
                 uploadPic(imageuri);
-                Toast.makeText(this,getNameFromURI(data.getData())+"Uploaded",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,getNameFromURI(data.getData())+"UPLOADED",Toast.LENGTH_LONG).show();
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {
