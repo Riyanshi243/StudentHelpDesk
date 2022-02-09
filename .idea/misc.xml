@@ -40,6 +40,7 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_all_student.xml" value="0.1875" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.1875" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_delete.xml" value="0.19166666666666668" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_edit_pencil.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1875" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_lock_open.xml" value="0.1875" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/ic_baseline_message_faq.xml" value="0.19166666666666668" />
@@ -56,11 +57,13 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/drawable/roundedbutton.xml" value="0.19166666666666668" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_answer_faq.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_create_new_account.xml" value="0.16666666666666666" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_edit_profile_page.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_or_company_send_notification.xml" value="0.3333333333333333" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_page.xml" value="0.16666666666666666" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_page.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_search_user.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_sign_up.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_view_all_requests.xml" value="0.17552083333333332" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_edit_profile_page.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_page.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_sign_up.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_sign_up2.xml" value="0.17552083333333332" />
@@ -112,7 +115,7 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_number_decimal_layout.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_numeric_text_layout.xml" value="0.1358695652173913" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_radio_button_layout.xml" value="0.1358695652173913" />
-        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_student_details.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_student_details.xml" value="0.4466666666666667" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_student_request_status_box.xml" value="0.14666666666666667" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_student_uploaded_documents.xml" value="0.3333333333333333" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_text_view_layout.xml" value="0.17552083333333332" />
