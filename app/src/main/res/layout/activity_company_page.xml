@@ -21,7 +21,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="260dp"
+                android:layout_height="320dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/head_img2"
                 android:orientation="vertical">
 
@@ -31,13 +32,25 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="casual"
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:text="WELCOME"
                     android:textColor="@color/white"
                     android:textSize="32dp" />
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="name"
+                    android:textColor="@color/white"
+                    android:textSize="28dp" />
 
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:layout_width="190dp"
