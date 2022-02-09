@@ -81,7 +81,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/black"
-                android:background="@color/background_gray"
+                android:background="@drawable/layout_bg"
                 android:textSize="24dp" />
 
             <EditText

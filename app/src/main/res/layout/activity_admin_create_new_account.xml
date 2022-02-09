@@ -54,6 +54,19 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <CheckBox
+                android:id="@+id/checkBox_student"
+                android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Is user a STUDENT?"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:checked="true"/>
+
+            <CheckBox
                 android:id="@+id/checkBox_admin"
                 android:layout_width="match_parent"
                 android:paddingLeft="10dp"
@@ -72,7 +85,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:text="Is user a Company?"
+                android:text="Is user a COMPANY?"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
 
