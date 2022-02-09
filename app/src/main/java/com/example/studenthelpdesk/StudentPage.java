@@ -16,8 +16,8 @@ public class StudentPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_page);
-
         f=FirebaseAuth.getInstance();
+
     }
 
     public void personalDetails(View v){
