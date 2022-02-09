@@ -138,6 +138,16 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
     boolean checkFilled()
     {
         //check name not empty and phone number not empty
+        if(name.getText().toString().length()==0)
+        {
+            name.setError("ENTER USERNAME");
+            return false;
+        }
+        if(phone.getText().toString().length()==0)
+        {
+            phone.setError("ENTER USERNAME");
+            return false;
+        }
         return true;
     }
 }

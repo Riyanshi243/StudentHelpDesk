@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,8 +25,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class CompanySignUp extends AppCompatActivity {
-    private ProgressBar progressBar5;
     EditText name,email,phone,location,companyName;
+    private Button signup;
 
     CompanyData companyData;
     @Override
@@ -119,7 +120,62 @@ public class CompanySignUp extends AppCompatActivity {
     }
     boolean checkFilled()
     {
+
+        signup.setEnabled(false);
+        ProgressBar pbar =findViewById(R.id.progressBar_college);
+        pbar.setVisibility(View.VISIBLE);
         //check name not empty and phone number not empty
+        if(name.getText().toString().length()==0)
+        {
+            name.setError("ENTER USERNAME");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+        if(email.getText().toString().length()==0)
+        {
+            email.setError("ENTER EMAIL");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+        if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
+        {
+            phone.setError("INVALID PHONE NUMBER");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+       else if(phone.getText().toString().length()==0)
+        {
+            phone.setError("ENTER PHONE NUMBER");
+            pbar.setVisibility(View.INVISIBLE);
+           signup.setEnabled(true);
+            return false;
+        }
+        if(location.getText().toString().length()==0)
+        {
+            location.setError("ENTER LOCATION");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+        if(companyName.getText().toString().length()==0)
+        {
+            companyName.setError("ENTER COMPANY NAME");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String email1=email.getText().toString().trim();
+        if(!email1.matches(emailPattern))
+        {
+            email.setError("ENTER VALID MAIL");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
         return true;
     }
 }
