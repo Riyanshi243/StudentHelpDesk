@@ -44,8 +44,8 @@ public class RegisterCollege3 extends AppCompatActivity {
     public void saveAndNext(View v)
     {
         AlertDialog.Builder savePrompt=new AlertDialog.Builder(this);
-        savePrompt.setTitle("Are you sure?");
-        savePrompt.setMessage("All the unsaved courses will not be saved");
+        savePrompt.setTitle("ARE YOU SURE?");
+        savePrompt.setMessage("ALL THE UNSAVED COURSES WILL NOT BE SAVED");
         savePrompt.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -93,7 +93,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                 }
                 else
                 {
-                    lastBranch.setError("Enter Here");
+                    lastBranch.setError("ENTER HERE");
                 }
             }
         });
@@ -104,7 +104,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                 //save information
                 if(currentCourseName.getText().toString().length()==0)
                 {
-                    currentCourseName.setError("Enter Course Name");
+                    currentCourseName.setError("ENTER COURSE NAME");
                     return;
                 }
                 ArrayList<String> allbranch=new ArrayList<>();

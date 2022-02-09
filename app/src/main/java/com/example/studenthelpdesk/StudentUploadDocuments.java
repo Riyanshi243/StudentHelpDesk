@@ -122,7 +122,7 @@ public class StudentUploadDocuments extends AppCompatActivity
             TextView ans=nView.findViewById(R.id.document_name);
             if(ans.length()==0)
             {
-                ans.setError("This is compulsory");
+                ans.setError("THIS IS COMPULSORY");
                 return true;
             }
 
@@ -182,7 +182,7 @@ public class StudentUploadDocuments extends AppCompatActivity
         {
            if(resultCode==RESULT_OK) {
                dialog = new ProgressDialog(this);
-               dialog.setMessage("Uploading");
+               dialog.setMessage("UPLOADING");
                dialog.show();
                Uri imageuri = data.getData();
                TextView q = currentQView.findViewById(R.id.Ques);
@@ -197,7 +197,7 @@ public class StudentUploadDocuments extends AppCompatActivity
         if (requestCode == 2) {
             if(resultCode == Activity.RESULT_OK){
                 dialog = new ProgressDialog(this);
-                dialog.setMessage("Uploading");
+                dialog.setMessage("UPLOADING");
                 dialog.show();
                // String q= data.getExtras().getBundle("Question").toString();
                 TextView q=currentQView.findViewById(R.id.Ques);
@@ -230,7 +230,7 @@ public class StudentUploadDocuments extends AppCompatActivity
                     String uploadid=databaseReference.push().getKey();
                     //SignIn.data.setResume(uploadid);
                     if(dialog.isShowing()) {
-                        dialog.setMessage("Uploaded");
+                        dialog.setMessage("UPLOADED");
                         Toast.makeText(StudentUploadDocuments.this, filepath.getName()+".pdf SAVED", Toast.LENGTH_SHORT).show();
                         try {
                             Thread.sleep(1000);
@@ -244,7 +244,7 @@ public class StudentUploadDocuments extends AppCompatActivity
         }
         else
         {
-            Toast.makeText(this,"No PDF selected",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"NO pdf SELECTED",Toast.LENGTH_LONG).show();
         }
     }
     public void uploadPic(Uri imageuri,String q) {
@@ -276,7 +276,7 @@ public class StudentUploadDocuments extends AppCompatActivity
         }
         else
         {
-            Toast.makeText(this,"No Image selected",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"NO IMAGE SELECTED",Toast.LENGTH_LONG).show();
         }
 
     }
