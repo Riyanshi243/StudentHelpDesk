@@ -59,6 +59,12 @@ public class AdminPage extends AppCompatActivity {
     public void sendNotification(View v){
         startActivity(new Intent(AdminPage.this, AdminOrCompanySendNotification.class));
     }
+    public void searchUser(View v){
+        startActivity(new Intent(AdminPage.this, AdminSearchUser.class));
+    }
+    public void viewAllEditRequests(View v){
+        startActivity(new Intent(AdminPage.this, AdminViewAllRequests.class));
+    }
     public void logout(View v)
     {
         f.signOut();

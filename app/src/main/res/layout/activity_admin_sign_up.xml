@@ -63,7 +63,6 @@
                     android:fontFamily="casual"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-
                     android:text="Hey Admin, Please fill up your required details here!"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
