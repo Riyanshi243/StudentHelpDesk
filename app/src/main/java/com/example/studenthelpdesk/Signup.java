@@ -216,9 +216,4 @@ public class Signup extends AppCompatActivity {
              pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
-
-        }
-
-        return true;
-    }
 }
