@@ -21,6 +21,7 @@
 
         <activity
             android:name=".AdminSignUp2"
+            android:exported="false"/>
         <activity
             android:name=".StudentViewAllFAQ"
             android:exported="false" />
