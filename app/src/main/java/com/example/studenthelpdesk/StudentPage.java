@@ -20,6 +20,24 @@ public class StudentPage extends AppCompatActivity {
         f=FirebaseAuth.getInstance();
     }
 
+    public void personalDetails(View v){
+        startActivity(new Intent(StudentPage.this, StudentPersonalDetails.class));
+    }
+    public void academicDetails(View v){
+        startActivity(new Intent(StudentPage.this, StudentAcademicDetails.class));
+    }
+    public void uploadedDetails(View v){
+        startActivity(new Intent(StudentPage.this, StudentUploadDetails.class));
+    }
+    public void requestStatus(View v){
+        startActivity(new Intent(StudentPage.this, StudentCheckRequestStatus.class));
+    }
+    public void viewNotifications(View v){
+        startActivity(new Intent(StudentPage.this, StudentViewNotifications.class));
+    }
+    public void viewFaq(View v){
+        startActivity(new Intent(StudentPage.this, StudentViewAllFAQ.class));
+    }
     public void logout(View v)
     {
         f.signOut();

@@ -56,6 +56,9 @@ public class AdminPage extends AppCompatActivity {
     public void createNewUser(View v){
         startActivity(new Intent(AdminPage.this, AdminCreateNewAccount.class));
     }
+    public void sendNotification(View v){
+        startActivity(new Intent(AdminPage.this, AdminOrCompanySendNotification.class));
+    }
     public void logout(View v)
     {
         f.signOut();
