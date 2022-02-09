@@ -32,12 +32,10 @@ public class RegisterCollege2 extends AppCompatActivity {
         departmentName=new ArrayList<>();
         ll.addView(questionRepeatable);
         numberOfDept=1;
-
     }
     //when click on floating plus button... this adds a question
     public void addQuestion(View v)
     {
-
         Log.d("hi","hi");
         if(lastQuestionFilled()) {
             View questionRepeatable = getLayoutInflater().inflate(R.layout.repeatable_edit_text_layout, null);
@@ -76,6 +74,5 @@ public class RegisterCollege2 extends AppCompatActivity {
         }
         else
             return true;
-
     }
 }

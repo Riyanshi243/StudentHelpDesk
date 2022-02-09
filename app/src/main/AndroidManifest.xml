@@ -10,18 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".AdminAnswerFAQ"
+            android:exported="false" />
+        <activity
+            android:name=".AdminSearchUser"
+            android:exported="false" />
+        <activity
+            android:name=".AdminOrCompanySendNotification"
+            android:exported="false" />
+        <activity
             android:name=".CompanySignUp2"
             android:exported="false" />
         <activity
             android:name=".CompanySignUp"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".CompanyPage"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".AdminSignUp2"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".StudentViewAllFAQ"
             android:exported="false" />

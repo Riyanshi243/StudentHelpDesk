@@ -53,7 +53,7 @@
                 android:paddingLeft="5dp"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:text="Here, we have Edit Details requests from the students. You may click on the GmailId of student to view their data!" />
+                android:text="Here are all the Edit Details requests from the students of your college. You may click on the EmailId of student to view their data!" />
 
             <ProgressBar
                 android:id="@+id/progressBar3"

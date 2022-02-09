@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentPostFAQ">
+    tools:context=".AdminOrCompanySendNotification">
 
     <ScrollView
         android:id="@+id/scrollView4"
@@ -39,7 +39,7 @@
                     android:fontFamily="casual"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-                    android:text="POST FAQ"
+                    android:text="SEND NOTIFICATIONS"
                     android:textColor="@color/white"
                     android:textSize="32dp" />
 
@@ -49,18 +49,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="invisible" />
-
             </LinearLayout>
-
             <LinearLayout
+                android:id="@+id/LinearL"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp">
+                <TextView
+                    android:id="@+id/college_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="casual"
+                    android:paddingLeft="5dp"
+                    android:text="These notifications will directly be sent to all the students of college "
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
 
                 <EditText
-                    android:id="@+id/FAQ_content"
+                    android:id="@+id/notification_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -70,88 +81,54 @@
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
-                    android:hint="Type your Question"
+                    android:hint="Type the text of notification..."
                     android:inputType="textMultiLine"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Tag concerned Admin"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:layout_marginBottom="10dp"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:textColorHint="@color/hint_text"
-                    android:backgroundTint="@color/box_bg">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/collegeName"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:inputType="none"
-                        android:text="Choose concerned ADMIN" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Add related Hashtags (max 3)"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="20dp"/>
-
-
-                <EditText
-                    android:id="@+id/editTextTextPersonName2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:hint="Add Hashtag"
-                    android:layout_marginBottom="10dp"/>
-
-                <LinearLayout
-                    android:id="@+id/hashtagLinearL"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_bg"
-                    android:orientation="horizontal">
-                    <!--add hashtags here-->
-                </LinearLayout>
+                    android:textSize="20dp"/>
 
                 <CheckBox
                     android:id="@+id/anonymous"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ask as Anonymous"
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"/>
+                    android:text="Want to add any attachment?"
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/upload_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="5dp"
+                        android:text="Upload your attachment"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <Button
+                        android:id="@+id/upload"
+                        android:layout_width="40dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ic_baseline_upload_file" />
+                </TableRow>
 
                 <Button
-                    android:id="@+id/post"
+                    android:id="@+id/send_notif"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="20dp"
+                    android:text="SEND NOTIFICATION"
                     android:layout_gravity="center"
-                    android:text="POST FAQ"
+                    android:layout_marginTop="30dp"
                     android:layout_marginBottom="50dp"/>
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

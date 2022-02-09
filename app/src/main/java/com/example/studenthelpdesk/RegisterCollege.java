@@ -18,7 +18,7 @@ public class RegisterCollege extends AppCompatActivity {
     //this instance will be referred to untill registration is completed
     static CollegeRegistrationData allData;
     EditText uname,cname,password,password2,adminmail,location;
- private Button register;
+    private Button register;
     FirebaseFirestore firebaseFirestores;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

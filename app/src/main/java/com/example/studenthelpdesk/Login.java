@@ -30,11 +30,12 @@ public class Login extends AppCompatActivity {
     }
     public void Login(View view)
     {
+
+        FirebaseFirestore f=FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                FirebaseFirestore f=FirebaseFirestore.getInstance();
                 DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString());
                 userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -44,16 +45,20 @@ public class Login extends AppCompatActivity {
                         {
                             //intent to admin page
                             startActivity(new Intent(Login.this,AdminPage.class));
+                            finish();
                         }
                         else if(category.equalsIgnoreCase("Student"))
                         {
                             //intent to student page
                             startActivity(new Intent(Login.this,StudentPage.class));
+                            finish();
                         }
                         else if(category.equalsIgnoreCase("Company"))
                         {
                             //intent to company page
-                            startActivity(new Intent(Login.this,CompanyPage.class));                 }
+                            startActivity(new Intent(Login.this,CompanyPage.class));
+                            finish();
+                        }
                     }
                 });
 
@@ -61,16 +66,39 @@ public class Login extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Login.this,"ERROR:"+e.getMessage(),Toast.LENGTH_LONG).show();
+
+                DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString());
+                userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists())
+                        {
+                            boolean sign= (boolean) documentSnapshot.get("New");
+                            if(sign==true)
+                            {
+                                Toast.makeText(Login.this,"You must Signin First",Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(Login.this,Signup.class));
+                                finish();
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(Login.this,"Error:"+e.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
             }
         });
     }
     public void signUp(View v)
     {
         startActivity(new Intent(Login.this,Signup.class));
+        finish();
     }
     public void register(View v)
     {
         startActivity(new Intent(Login.this,RegisterCollege.class));
+        finish();
     }
 }

@@ -22,7 +22,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="260dp"
+            android:layout_height="320dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/head_img2"
             android:orientation="vertical">
 
@@ -32,14 +33,25 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:text="WELCOME"
                 android:textColor="@color/white"
                 android:textSize="32dp" />
-
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="name"
+                android:textColor="@color/white"
+                android:textSize="28dp" />
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:layout_width="190dp"
                 android:layout_height="157dp"
@@ -73,6 +85,7 @@
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
+                android:onClick="personalDetails"
                 app:srcCompat="@drawable/personal_details" />
 
             <ImageView
@@ -81,6 +94,7 @@
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
+                android:onClick="academicDetails"
                 app:srcCompat="@drawable/academic_details" />
 
             <ImageView
@@ -89,6 +103,7 @@
                 android:layout_height="150dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
+                android:onClick="uploadedDetails"
                 android:layout_marginRight="10dp"
                 app:srcCompat="@drawable/upload_documents" />
         </LinearLayout>
@@ -105,7 +120,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.029">
+            app:layout_constraintVertical_bias="0.029"
+            android:onClick="requestStatus">
 
             <TextView
                 android:id="@+id/requests_status"
@@ -147,7 +163,8 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:onClick="viewNotifications">
 
                 <ImageView
                     android:id="@+id/imageView5"
@@ -186,7 +203,8 @@
             app:layout_constraintVertical_bias="0.029">
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:onClick="viewFaq">
 
                 <ImageView
                     android:id="@+id/imageView7"
@@ -262,9 +280,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.029">
+
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:onClick="logout">
+
                 <ImageView
                     android:id="@+id/imageView9"
                     android:layout_width="30dp"
@@ -279,8 +300,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="LOGOUT"
                     android:paddingLeft="15dp"
+                    android:text="LOGOUT"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
             </TableRow>
