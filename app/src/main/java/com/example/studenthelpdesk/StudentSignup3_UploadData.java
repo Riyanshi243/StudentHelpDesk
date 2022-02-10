@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -13,14 +12,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-
-public class StudentUploadDocuments extends AppCompatActivity
+public class StudentSignup3_UploadData extends AppCompatActivity
 {
     StudentData studentData;
     LinearLayout ll;
@@ -109,7 +98,7 @@ public class StudentUploadDocuments extends AppCompatActivity
                 }
             }
             if(i==quesNumber-1)
-                startActivity(new Intent(StudentUploadDocuments.this,StudentSignupDone.class));
+                startActivity(new Intent(StudentSignup3_UploadData.this,StudentSignupDone.class));
 
         }
 
@@ -192,7 +181,7 @@ public class StudentUploadDocuments extends AppCompatActivity
                ans.setText(getNameFromURI(data.getData()));
            }
             if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(StudentUploadDocuments.this, "ACTIVITY CANCELLED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(StudentSignup3_UploadData.this, "ACTIVITY CANCELLED", Toast.LENGTH_SHORT).show();
             }
         }
         if (requestCode == 2) {
@@ -207,7 +196,7 @@ public class StudentUploadDocuments extends AppCompatActivity
                 ans.setText(getNameFromURI(data.getData()));
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(StudentUploadDocuments.this,"ACTIVITY CANCELLED",Toast.LENGTH_SHORT).show();
+                Toast.makeText(StudentSignup3_UploadData.this,"ACTIVITY CANCELLED",Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -233,7 +222,7 @@ public class StudentUploadDocuments extends AppCompatActivity
                     if(dialog.isShowing()) {
                         dialog.setMessage("UPLOADED");
 
-                        Toast.makeText(StudentUploadDocuments.this, filepath.getName()+".pdf SAVED", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StudentSignup3_UploadData.this, filepath.getName()+".pdf SAVED", Toast.LENGTH_SHORT).show();
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -277,7 +266,7 @@ public class StudentUploadDocuments extends AppCompatActivity
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(StudentUploadDocuments.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(StudentSignup3_UploadData.this,e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
         }

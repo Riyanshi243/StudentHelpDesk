@@ -24,7 +24,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
 public class StudentSignup2_AcademicData extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -115,7 +114,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
                 studentData.setA_ans(allans);
                 studentData.setA_ques(allq);
                 studentData.setA_id(allqid);
-                startActivity(new Intent(StudentSignup2_AcademicData.this, StudentUploadDocuments.class));
+                startActivity(new Intent(StudentSignup2_AcademicData.this, StudentSignup3_UploadData.class));
             }
         }
     }
