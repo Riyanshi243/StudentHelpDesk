@@ -146,7 +146,19 @@ public class AdminCreateNewAccount extends AppCompatActivity {
     public boolean checkEmail()
     {
         //check if not empty
+        if(email.getText().toString().length()==0)
+        {
+            email.setError("ENTER MAIL");
+            return false;
+        }
         //check if valid
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String email1=email.getText().toString().trim();
+        if(!email1.matches(emailPattern))
+        {
+            email.setError("ENTER VALID MAIL");
+            return false;
+        }
         return  true;
     }
 
