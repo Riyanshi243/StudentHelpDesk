@@ -64,7 +64,7 @@
                 android:textSize="16dp" />
 
             <LinearLayout
-                android:id="@+id/LinearL"
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"></LinearLayout>

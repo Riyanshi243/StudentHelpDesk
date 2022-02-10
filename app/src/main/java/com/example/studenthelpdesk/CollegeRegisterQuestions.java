@@ -5,7 +5,15 @@ import androidx.annotation.NonNull;
 public class CollegeRegisterQuestions {
     private String question,answer;
     private boolean changeable,compulsory;
-    private int type;
+    private int type,id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public void setAnswer(String answer) {
         this.answer = answer;

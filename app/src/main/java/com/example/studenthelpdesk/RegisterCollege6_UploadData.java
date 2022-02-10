@@ -99,50 +99,5 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         changeable.setClickable(false);
     }
 
-    /*public void download(View v) {
-        AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
-        ab.setTitle("Select 1");
-        ab.setPositiveButton("View", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageRef = storage.getReference("Resume").child(Student_page.data.getUname());
-                Task<Uri> message = storageRef.getDownloadUrl();
-                message.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // Toast.makeText(getActivity(),uri.toString(),Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(v.getContext(), ViewPDFActivity.class);
-                        intent.putExtra("url", uri.toString());
-                        startActivity(intent);
-                    }
-                });
 
-
-            }
-        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        }).setNeutralButton("Download", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageRef = storage.getReference("Resume").child(Student_page.data.getUname());
-                Task<Uri> message = storageRef.getDownloadUrl();
-                message.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // Toast.makeText(getActivity(),uri.toString(),Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intent);
-                    }
-                });
-
-            }
-        });
-        ab.create().show();
-
-    }*/
 }
