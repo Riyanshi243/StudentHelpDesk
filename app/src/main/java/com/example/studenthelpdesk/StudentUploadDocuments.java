@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -231,6 +232,7 @@ public class StudentUploadDocuments extends AppCompatActivity
                     //SignIn.data.setResume(uploadid);
                     if(dialog.isShowing()) {
                         dialog.setMessage("UPLOADED");
+
                         Toast.makeText(StudentUploadDocuments.this, filepath.getName()+".pdf SAVED", Toast.LENGTH_SHORT).show();
                         try {
                             Thread.sleep(1000);
@@ -238,6 +240,8 @@ public class StudentUploadDocuments extends AppCompatActivity
                             e.printStackTrace();
                         }
                         dialog.dismiss();
+                        Button pdf= findViewById(R.id.preview);
+                        pdf.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -265,6 +269,9 @@ public class StudentUploadDocuments extends AppCompatActivity
                     String uploadid=databaseReference.push().getKey();
                     if(dialog.isShowing())
                         dialog.dismiss();
+                    Button img= findViewById(R.id.preview);
+                    img.setVisibility(View.VISIBLE);
+
                     //showPic();
                 }
             }).addOnFailureListener(new OnFailureListener() {
