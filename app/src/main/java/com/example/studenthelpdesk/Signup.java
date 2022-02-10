@@ -31,7 +31,7 @@ public class Signup extends AppCompatActivity {
     static StudentData studentData;
     static CompanyData companyData;
     int cnumber;
-         private Button signup;
+    private Button signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,59 +88,59 @@ public class Signup extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists())
                         {
-                                String collgeid=(String)documentSnapshot.get("College");
-                                //Log.e("Hi",documentSnapshot.get("College")+" "+(String)documentSnapshot.get("Category")+" "+documentSnapshot.get("New"));
-                                if(collgeid.equalsIgnoreCase(collegeId))
+                            String collgeid=(String)documentSnapshot.get("College");
+                            //Log.e("Hi",documentSnapshot.get("College")+" "+(String)documentSnapshot.get("Category")+" "+documentSnapshot.get("New"));
+                            if(collgeid.equalsIgnoreCase(collegeId))
+                            {
+                                boolean newUser= (boolean) documentSnapshot.get("New");
+                                if(newUser==true)
                                 {
-                                    boolean newUser= (boolean) documentSnapshot.get("New");
-                                    if(newUser==true)
+                                    //This is a new user
+                                    String category=(String) documentSnapshot.get("Category");
+                                    if(category.equalsIgnoreCase("Admin"))
                                     {
-                                        //This is a new user
-                                        String category=(String) documentSnapshot.get("Category");
-                                        if(category.equalsIgnoreCase("Admin"))
-                                        {
-                                            adminData.setEmail(email.getText().toString());
-                                            adminData.setPassword(password1.getText().toString());
-                                            adminData.setCollegeId(collegeId);
-                                            //intent to admin signup page
-                                            startActivity(new Intent(Signup.this,AdminSignUp.class));
-                                            
-                                        }
-                                        else if(category.equalsIgnoreCase("Student"))
-                                        {
-                                            studentData.setEmail(email.getText().toString());
-                                            studentData.setPassword(password1.getText().toString());
-                                            studentData.setCollegeid(collegeId);
-                                            //intent to student signup step 1 page
-                                            startActivity(new Intent(Signup.this,StudentSignup1_PersonalData.class));
-                                        }
-                                        else if(category.equalsIgnoreCase("Company"))
-                                        {
-                                            companyData.setEmail(email.getText().toString());
-                                            companyData.setPassword(password1.getText().toString());
-                                            companyData.setCollegeId(collegeId);
-                                            //intent to company signup page
-                                            startActivity(new Intent(Signup.this,CompanySignUp.class));
+                                        adminData.setEmail(email.getText().toString());
+                                        adminData.setPassword(password1.getText().toString());
+                                        adminData.setCollegeId(collegeId);
+                                        //intent to admin signup page
+                                        startActivity(new Intent(Signup.this,AdminSignUp.class));
 
-                                        }
-                                        
                                     }
-                                    else
+                                    else if(category.equalsIgnoreCase("Student"))
                                     {
-                                        //Toast that this user has already signed up
-                                        Toast.makeText(Signup.this,"USER HAS ALREADY SIGNED UP", Toast.LENGTH_LONG).show();
-
-                                        //Intent to login.class
-                                        startActivity(new Intent(Signup.this,Login.class));
+                                        studentData.setEmail(email.getText().toString());
+                                        studentData.setPassword(password1.getText().toString());
+                                        studentData.setCollegeid(collegeId);
+                                        //intent to student signup step 1 page
+                                        startActivity(new Intent(Signup.this,StudentSignup1_PersonalData.class));
                                     }
+                                    else if(category.equalsIgnoreCase("Company"))
+                                    {
+                                        companyData.setEmail(email.getText().toString());
+                                        companyData.setPassword(password1.getText().toString());
+                                        companyData.setCollegeId(collegeId);
+                                        //intent to company signup page
+                                        startActivity(new Intent(Signup.this,CompanySignUp.class));
+
+                                    }
+
                                 }
                                 else
                                 {
-                                    email.setError("This user does not belong to selected college");
-                                 //    pbar.setVisibility(View.INVISIBLE);
-                              //  signup.setEnabled(true);
-                                    return;
+                                    //Toast that this user has already signed up
+                                    Toast.makeText(Signup.this,"USER HAS ALREADY SIGNED UP", Toast.LENGTH_LONG).show();
+
+                                    //Intent to login.class
+                                    startActivity(new Intent(Signup.this,Login.class));
                                 }
+                            }
+                            else
+                            {
+                                email.setError("This user does not belong to selected college");
+                                //    pbar.setVisibility(View.INVISIBLE);
+                                //  signup.setEnabled(true);
+                                return;
+                            }
 
                         }
                         else
@@ -165,19 +165,19 @@ public class Signup extends AppCompatActivity {
         pbar.setVisibility(View.VISIBLE);
         adminData=new AdminData();
         //check all constraints here
-         if (email.getText().toString().length()==0||!email.getText().toString().contains("@")){
+        if (email.getText().toString().length()==0||!email.getText().toString().contains("@")){
             email.setError("EMAIL IS REQUIRED");
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
-         }
+        }
 
-         if(password1.getText().toString().length()==0) {
+        if(password1.getText().toString().length()==0) {
             password1.setError("PASSWORD IS REQUIRED");
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
- }
+        }
 
         if(!password2.getText().toString().equals(password1.getText().toString()))
         {
@@ -194,7 +194,7 @@ public class Signup extends AppCompatActivity {
         if(!email1.matches(emailPattern))
         {
             email.setError("ENTER VALID MAIL");
-             pbar.setVisibility(View.INVISIBLE);
+            pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
 
@@ -204,7 +204,7 @@ public class Signup extends AppCompatActivity {
         if(password1.getText().toString().length()< 8)
         {
             password1.setError("ENTER ATLEAST 8 CHARACTERS");
-             pbar.setVisibility(View.INVISIBLE);
+            pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
 
@@ -214,7 +214,7 @@ public class Signup extends AppCompatActivity {
         if(password1.getText().toString().equals(password2.getText().toString())==false)
         {
             password2.setError("PASSWORDS DO NOT MATCH");
-             pbar.setVisibility(View.INVISIBLE);
+            pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
 

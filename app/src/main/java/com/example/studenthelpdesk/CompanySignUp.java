@@ -125,7 +125,7 @@ public class CompanySignUp extends AppCompatActivity {
     {
 
         signup.setEnabled(false);
-        ProgressBar pbar =findViewById(R.id.progressBar_college);
+        ProgressBar pbar =findViewById(R.id.progressBar5);
         pbar.setVisibility(View.VISIBLE);
         //check name not empty and phone number not empty
         if(name.getText().toString().length()==0)

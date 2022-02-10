@@ -147,7 +147,12 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
             name.setError("ENTER USERNAME");
             return false;
         }
-        if(phone.getText().toString().length()==0)
+        if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
+        {
+            phone.setError("INVALID PHONE NUMBER");
+            return false;
+        }
+       else if(phone.getText().toString().length()==0)
         {
             phone.setError("ENTER PHONE NUMBER");
             return false;
