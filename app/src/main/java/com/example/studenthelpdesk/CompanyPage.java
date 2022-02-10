@@ -19,6 +19,11 @@ public class CompanyPage extends AppCompatActivity {
         f=FirebaseAuth.getInstance();
 
     }
+
+
+    public void sendNotification(View v){
+        startActivity(new Intent(CompanyPage.this, AdminOrCompanySendNotification.class));
+    }
     public void logout(View v)
     {
         f.signOut();
