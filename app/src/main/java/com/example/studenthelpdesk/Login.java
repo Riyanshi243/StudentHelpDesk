@@ -28,6 +28,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
+        login= (Button) findViewById(R.id.login);
 
     }
     public void Login(View view)
