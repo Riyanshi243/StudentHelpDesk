@@ -85,7 +85,7 @@
             android:name=".StudentReviewAllData"
             android:exported="false" />
         <activity
-            android:name=".StudentUploadDocuments"
+            android:name=".StudentSignup3_UploadData"
             android:exported="false" />
         <activity
             android:name=".StudentSignup2_AcademicData"

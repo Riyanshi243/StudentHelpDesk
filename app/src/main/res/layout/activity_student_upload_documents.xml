@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentUploadDocuments">
+    tools:context=".StudentSignup3_UploadData">
 
     <ScrollView
         android:layout_width="match_parent"
