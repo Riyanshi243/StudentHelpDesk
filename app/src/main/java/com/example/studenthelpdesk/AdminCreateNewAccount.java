@@ -74,7 +74,7 @@ public class AdminCreateNewAccount extends AppCompatActivity {
                 cat="Company";
             else
                 cat="Student";
-            String s="EMAIL:"+email.getText().toString()+"\nCATEGORY:"+cat;
+            String s="EMAIL: "+email.getText().toString()+"\nCATEGORY: "+cat;
             areYouSure.setMessage(s);
             String finalCat = cat;
             areYouSure.setPositiveButton("YES,Create User", new DialogInterface.OnClickListener() {

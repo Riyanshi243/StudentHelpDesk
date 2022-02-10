@@ -32,7 +32,6 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
     }
 
     public void saveAndNext(View v) {
-
         int numberOfQuestions = linearLayout.getChildCount();
         CollegeRegisterQuestions allUploadQuestion[] = new CollegeRegisterQuestions[numberOfQuestions];
         for (int i = 0; i < numberOfQuestions; i++) {
