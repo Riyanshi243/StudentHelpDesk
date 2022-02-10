@@ -6,10 +6,10 @@ public class StudentData {
     private String email,password,collegeid,course=" ",branch=" ",name;
     private String yr=" ";
     private String p_ques[],p_id[],p_ans[],a_ques[],a_id[],a_ans[];
-    private CollegeRegisterQuestions personal_ques[],academic_ques[],upload_ques[];
+    private ArrayList<CollegeRegisterQuestions> personal_ques,academic_ques,upload_ques;
     private long noOfReq,noPersonalQ,noAcademicQ,noUploadQ;
 
-    public void setAcademic_ques(CollegeRegisterQuestions[] academic_ques) {
+    public void setAcademic_ques(ArrayList<CollegeRegisterQuestions> academic_ques) {
         this.academic_ques = academic_ques;
     }
 
@@ -25,23 +25,23 @@ public class StudentData {
         this.noUploadQ = noUploadQ;
     }
 
-    public void setPersonal_ques(CollegeRegisterQuestions[] personal_ques) {
+    public void setPersonal_ques(ArrayList<CollegeRegisterQuestions> personal_ques) {
         this.personal_ques = personal_ques;
     }
 
-    public void setUpload_ques(CollegeRegisterQuestions[] upload_ques) {
+    public void setUpload_ques(ArrayList<CollegeRegisterQuestions> upload_ques) {
         this.upload_ques = upload_ques;
     }
 
-    public CollegeRegisterQuestions[] getAcademic_ques() {
+    public ArrayList<CollegeRegisterQuestions> getAcademic_ques() {
         return academic_ques;
     }
 
-    public CollegeRegisterQuestions[] getPersonal_ques() {
+    public ArrayList<CollegeRegisterQuestions> getPersonal_ques() {
         return personal_ques;
     }
 
-    public CollegeRegisterQuestions[] getUpload_ques() {
+    public ArrayList<CollegeRegisterQuestions> getUpload_ques() {
         return upload_ques;
     }
 

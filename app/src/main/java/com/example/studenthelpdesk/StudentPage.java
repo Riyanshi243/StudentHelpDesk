@@ -21,6 +21,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class StudentPage extends AppCompatActivity {
     FirebaseAuth f;
@@ -76,8 +79,8 @@ public class StudentPage extends AppCompatActivity {
                                     }
                                 });
                                 final ArrayList<CollegeRegisterQuestions> personalQ = new ArrayList<>();
-                                CollegeRegisterQuestions academicQ[];
-                                CollegeRegisterQuestions uploadQ[];
+                                final ArrayList<CollegeRegisterQuestions> academicQ = new ArrayList<>();
+                                final ArrayList<CollegeRegisterQuestions> uploadQ = new ArrayList<>();
                                 DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Personal Question");
                                 docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
@@ -88,6 +91,8 @@ public class StudentPage extends AppCompatActivity {
                                         {
                                             DocumentReference docCurrQues = docPersQues.collection(i + "").document(i + "");
                                             int finalI = i;
+                                            int finalI1 = i;
+                                            int finalI2 = i;
                                             docCurrQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                 @Override
                                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -100,6 +105,7 @@ public class StudentPage extends AppCompatActivity {
                                                     currQ.setCompulsory(compulsory);
                                                     currQ.setType((int) type);
                                                     currQ.setQuestion(ques);
+                                                    currQ.setId(finalI2);
                                                     DocumentReference ans= docUserInfo2.collection("Personal Question").document(finalI+"");
                                                     ans.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                         @Override
@@ -107,6 +113,69 @@ public class StudentPage extends AppCompatActivity {
                                                             String ans= (String) documentSnapshot.get("Answer");
                                                             currQ.setAnswer(ans);
                                                             personalQ.add(currQ);
+                                                            if(finalI1 ==total-1)
+                                                            {
+                                                                Collections.sort(personalQ,new Comparator<CollegeRegisterQuestions>() {
+                                                                    @Override
+                                                                    public int compare(CollegeRegisterQuestions o1,CollegeRegisterQuestions o2) {
+                                                                        int i1 = (o1.getId() - (o2.getId()));
+                                                                        return i1;
+                                                                    }
+                                                                });
+                                                                studentData.setPersonal_ques(personalQ);
+                                                                DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Academic Question");
+                                                                docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                    @Override
+                                                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                        long total= (long) documentSnapshot.get("Total");
+                                                                        studentData.setNoPersonalQ(total);
+                                                                        for (int i=0;i<(int)total;i++)
+                                                                        {
+                                                                            DocumentReference docCurrQues = docPersQues.collection(i + "").document(i + "");
+                                                                            int finalI = i;
+                                                                            int finalI1 = i;
+                                                                            int finalI2 = i;
+                                                                            docCurrQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                                @Override
+                                                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                                    CollegeRegisterQuestions currQ=new CollegeRegisterQuestions();
+                                                                                    boolean editable= (boolean) documentSnapshot.get("Editable");
+                                                                                    boolean compulsory = (boolean) documentSnapshot.get("Compulsory");
+                                                                                    String ques= (String) documentSnapshot.get("Question");
+                                                                                    long type=(long) documentSnapshot.get("Type");
+                                                                                    currQ.setChangeable(editable);
+                                                                                    currQ.setCompulsory(compulsory);
+                                                                                    currQ.setType((int) type);
+                                                                                    currQ.setQuestion(ques);
+                                                                                    currQ.setId(finalI2);
+                                                                                    DocumentReference ans= docUserInfo2.collection("Academic Question").document(finalI+"");
+                                                                                    ans.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                                        @Override
+                                                                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                                            String ans= (String) documentSnapshot.get("Answer");
+                                                                                            currQ.setAnswer(ans);
+                                                                                            academicQ.add(currQ);
+                                                                                            if(finalI1 ==total-1)
+                                                                                            {
+                                                                                                Collections.sort(academicQ,new Comparator<CollegeRegisterQuestions>() {
+                                                                                                    @Override
+                                                                                                    public int compare(CollegeRegisterQuestions o1,CollegeRegisterQuestions o2) {
+                                                                                                        int i1 = (o1.getId() - (o2.getId()));
+                                                                                                        return i1;
+                                                                                                    }
+                                                                                                });
+                                                                                                studentData.setAcademic_ques(academicQ);
+                                                                                            }
+                                                                                        }
+                                                                                    });
+
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    }
+                                                                });
+
+                                                            }
                                                         }
                                                     });
 
