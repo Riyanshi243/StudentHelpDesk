@@ -89,6 +89,7 @@ public class Signup extends AppCompatActivity {
                         if (documentSnapshot.exists())
                         {
                                 String collgeid=(String)documentSnapshot.get("College");
+                                //Log.e("Hi",documentSnapshot.get("College")+" "+(String)documentSnapshot.get("Category")+" "+documentSnapshot.get("New"));
                                 if(collgeid.equalsIgnoreCase(collegeId))
                                 {
                                     boolean newUser= (boolean) documentSnapshot.get("New");
