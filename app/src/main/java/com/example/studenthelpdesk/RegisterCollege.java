@@ -47,7 +47,7 @@ public class RegisterCollege extends AppCompatActivity {
                     //if username exist... a document will already be present in its name
                     if(documentSnapshot.exists())
                     {
-                        uname.setError("THIS USERNAME ALREADY EXIST");
+                        uname.setError("THIS USERNAME ALREADY EXISTS");
                     }
                     else
                     {
@@ -79,13 +79,7 @@ public class RegisterCollege extends AppCompatActivity {
         pbar.setVisibility(View.VISIBLE);
         final Boolean[] flag = {true};
         //everything not empty
-        if(uname.getText().toString().length()==0)
-        {
-            uname.setError("ENTER USERNAME");
-            pbar.setVisibility(View.INVISIBLE);
-            register.setEnabled(true);
-             return false;
-        }
+
 
         if(cname.getText().toString().length()==0)
         {
@@ -94,6 +88,15 @@ public class RegisterCollege extends AppCompatActivity {
             register.setEnabled(true);
              return false;
         }
+
+        if(uname.getText().toString().length()==0)
+        {
+            uname.setError("ENTER USERNAME");
+            pbar.setVisibility(View.INVISIBLE);
+            register.setEnabled(true);
+            return false;
+        }
+
         if(password.getText().toString().length()==0)
         {
             password.setError("ENTER PASSWORD");
@@ -110,7 +113,7 @@ public class RegisterCollege extends AppCompatActivity {
         }
         if(adminmail.getText().toString().length()==0)
         {
-            adminmail.setError("ENTER MAIL");
+            adminmail.setError("ENTER EMAIL");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
@@ -149,8 +152,6 @@ public class RegisterCollege extends AppCompatActivity {
             register.setEnabled(true);
              return false;
         }
-
-
         return flag[0];
     }
 }

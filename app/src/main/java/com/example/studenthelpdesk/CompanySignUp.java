@@ -14,6 +14,7 @@ import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -103,6 +104,8 @@ public class CompanySignUp extends AppCompatActivity {
 
                     if(dialog.isShowing())
                         dialog.dismiss();
+                    ImageView profileimg=(ImageView) findViewById(R.id.uplodingdone);
+                    profileimg.setVisibility(View.VISIBLE);
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
