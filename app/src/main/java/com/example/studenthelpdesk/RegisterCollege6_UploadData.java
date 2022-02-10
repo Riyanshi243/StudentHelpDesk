@@ -22,7 +22,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         setContentView(R.layout.activity_register_college6_upload_data);
         linearLayout = findViewById(R.id.linearL);
         allData = RegisterCollege.allData;
-        setCompulsaryQuestions("PHOTOGRAPH");
+        setCompulsaryQuestions("Photograph");
         addQuestion();
     }
 

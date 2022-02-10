@@ -3,9 +3,17 @@ package com.example.studenthelpdesk;
 import androidx.annotation.NonNull;
 
 public class CollegeRegisterQuestions {
-    private String question;
+    private String question,answer;
     private boolean changeable,compulsory;
     private int type;
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
 
     @NonNull
     @Override

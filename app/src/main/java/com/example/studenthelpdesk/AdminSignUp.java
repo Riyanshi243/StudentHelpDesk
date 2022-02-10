@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -135,6 +136,8 @@ AdminData adminData;
 
                     if(dialog.isShowing())
                         dialog.dismiss();
+                    ImageView profileimg=(ImageView) findViewById(R.id.uplodingdone);
+                    profileimg.setVisibility(View.VISIBLE);
 
                 }
             }).addOnFailureListener(new OnFailureListener() {

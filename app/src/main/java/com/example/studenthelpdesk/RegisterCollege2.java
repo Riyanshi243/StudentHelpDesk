@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 //In this activity we ask all the department names of the college
 public class RegisterCollege2 extends AppCompatActivity {
-    final String deptQ="ENTER DEPARTMENT NAME",ansHint="DEPARTMENT NAME HERE";
+    final String deptQ="Enter Department Name",ansHint="Department name here";
     LinearLayout ll;
     int numberOfDept;
     ArrayList<String> departmentName;
