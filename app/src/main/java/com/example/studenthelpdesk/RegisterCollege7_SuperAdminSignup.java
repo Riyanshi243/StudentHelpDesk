@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,7 +88,8 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
                 Uri imageuri = data.getData();
                 uploadPic(imageuri);
                 Toast.makeText(this,getNameFromURI(data.getData())+"Uploaded",Toast.LENGTH_LONG).show();
-
+                //ImageView profileimg=(ImageView) findViewById(R.id.uplodingdone);
+                //profileimg.setVisibility(View.VISIBLE);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 Toast.makeText(RegisterCollege7_SuperAdminSignup.this, "ACTIVITY CANCELLED", Toast.LENGTH_SHORT).show();
@@ -120,6 +122,8 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Profile");
                     if(dialog.isShowing())
                         dialog.dismiss();
+                    ImageView profileimg=(ImageView) findViewById(R.id.uplodingdone);
+                    profileimg.setVisibility(View.VISIBLE);
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -150,7 +154,7 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
         }
        else if(phone.getText().toString().length()==0)
         {
-            phone.setError("ENTER USERNAME");
+            phone.setError("ENTER PHONE NUMBER");
             return false;
         }
         return true;

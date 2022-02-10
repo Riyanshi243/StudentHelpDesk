@@ -13,7 +13,8 @@ import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-        import android.view.View;
+import android.util.Log;
+import android.view.View;
         import android.os.Handler;
 import android.os.Looper;
 import android.widget.TextView;
@@ -64,7 +65,13 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     String category= (String) documentSnapshot.get("Category");
-                                    if(category.equalsIgnoreCase("Admin"))
+                                    //Log.e("Hi","Hi");
+                                    if(category==null)
+                                    {
+                                        startActivity(new Intent(MainActivity.this,Login.class));
+                                        finish();
+                                    }
+                                    else if(category.equalsIgnoreCase("Admin"))
                                     {
                                         startActivity(new Intent(MainActivity.this,AdminPage.class));
                                         finish();
@@ -103,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-            }, 4000, 8000);
+            }, 2000, 2000);
             done = false;
             text.setOnClickListener(new View.OnClickListener() {
                 @Override
