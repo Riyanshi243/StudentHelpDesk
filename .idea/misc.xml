@@ -125,7 +125,9 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/help.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/logout.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/logout_notif.xml" value="0.17552083333333332" />
-
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_view_pdfactivity.xml" value="0.1" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/repeatable_student_uploaded_documents.xml" value="0.1" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/repeatable_upload_document.xml" value="0.1" />
       </map>
     </option>
   </component>
