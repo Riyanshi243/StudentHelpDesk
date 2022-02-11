@@ -497,6 +497,7 @@ int noOfq=0;
                         drop.setText(coursesList.get(0));
                         drop.setAdapter(spinnerList);
                         studentData.setCourse(coursesList.get(0));
+                        Collections.sort(coursesList);
                         drop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
@@ -551,6 +552,7 @@ int noOfq=0;
                         drop.setText(branchList.get(0));
                         drop.setAdapter(spinnerList);
                         studentData.setBranch(branchList.get(0));
+                        Collections.sort(branchList);
                         drop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {

@@ -18,6 +18,8 @@ public class DatePicker extends DialogFragment {
         DatePickerDialog dpd = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)
                 getActivity(), year, month, dayOfMonth);
         dpd.getDatePicker().setMaxDate(System.currentTimeMillis());
-        return dpd;
+     //  return dpd;
+      dpd.show();
+    return dpd;
     }
 }
