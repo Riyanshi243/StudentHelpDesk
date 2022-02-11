@@ -126,6 +126,13 @@ public class Login extends AppCompatActivity {
             login.setEnabled(true);
             return false;
         }
+        if (password.getText().toString().length() < 8) {
+            password.setError("ENTER ATLEAST 8 CHARACTERS");
+            pbar.setVisibility(View.INVISIBLE);
+            login.setEnabled(true);
+            return false;
+
+        }
 
      return true;
 
