@@ -47,6 +47,7 @@ AdminData adminData;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_sign_up);
+        signup=findViewById(R.id.signup);
         adminData=Signup.adminData;
         name=findViewById(R.id.adminname);
         phone=findViewById(R.id.contact);
@@ -166,21 +167,21 @@ AdminData adminData;
             signup.setEnabled(true);
             return false;
         }
-         if(phone.getText().toString().length()==0)
+
+        if(phone.getText().toString().length()==0)
         {
             phone.setError("ENTER PHONE NUMBER");
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
         }
-       else if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
+        if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
         {
             phone.setError("INVALID PHONE NUMBER");
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
         }
-
         return true;
     }
 }

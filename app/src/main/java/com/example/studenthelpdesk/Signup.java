@@ -159,22 +159,7 @@ public class Signup extends AppCompatActivity {
             return false;
         }
 
-        if (password1.getText().toString().length() == 0) {
-            password1.setError("PASSWORD IS REQUIRED");
-            pbar.setVisibility(View.INVISIBLE);
-            signup.setEnabled(true);
-            return false;
-        }
-
-        if (!password2.getText().toString().equals(password1.getText().toString())) {
-            password2.setError("PASSWORDS DO NOT MATCH");
-            pbar.setVisibility(View.INVISIBLE);
-            signup.setEnabled(true);
-            return false;
-        }
-
-
-//check if valid mail
+       //check if valid mail
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         String email1 = email.getText().toString().trim();
         if (!email1.matches(emailPattern)) {
@@ -185,13 +170,29 @@ public class Signup extends AppCompatActivity {
 
         }
 
-//check if password length greater than 8
+        if (password1.getText().toString().length() == 0) {
+            password1.setError("PASSWORD IS REQUIRED");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+
+
+
+        //check if password length greater than 8
         if (password1.getText().toString().length() < 8) {
             password1.setError("ENTER ATLEAST 8 CHARACTERS");
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
 
+        }
+
+        if (!password2.getText().toString().equals(password1.getText().toString())) {
+            password2.setError("PASSWORDS DO NOT MATCH");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
         }
 
         //check if both passwords match

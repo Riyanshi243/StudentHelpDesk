@@ -34,7 +34,10 @@ public class Login extends AppCompatActivity {
     }
     public void Login(View view)
     {
-
+        if(checkConstraints()==false)
+        {
+            return;
+        }
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -88,6 +91,7 @@ public class Login extends AppCompatActivity {
                         else
                         {
                             Toast.makeText(Login.this,"Error:"+e.getMessage(),Toast.LENGTH_LONG).show();
+                            login.setEnabled(true);
                         }
                     }
                 });
@@ -95,7 +99,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    public Boolean Checkconstraints(View v)
+    public boolean checkConstraints()
     {
         login.setEnabled(false);
         ProgressBar pbar = findViewById(R.id.progressBar4);
@@ -130,7 +134,7 @@ public class Login extends AppCompatActivity {
 
         }
 
-return true;
+     return true;
 
     }
     public void signUp(View v)

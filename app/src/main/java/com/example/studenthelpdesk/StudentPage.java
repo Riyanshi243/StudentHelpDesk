@@ -27,7 +27,7 @@ import java.util.Comparator;
 
 public class StudentPage extends AppCompatActivity {
     FirebaseAuth f;
-    TextView heading,reqStatus;
+    TextView heading,reqStatus,email;
     ImageView profilepic;
     static StudentData studentData;
     @Override
@@ -37,6 +37,7 @@ public class StudentPage extends AppCompatActivity {
         f=FirebaseAuth.getInstance();
         studentData=new StudentData();
         heading=findViewById(R.id.name);
+        email=findViewById(R.id.email);
         reqStatus=findViewById(R.id.requests_status);
         profilepic=findViewById(R.id.profile);
         studentData.setEmail(f.getCurrentUser().getEmail());
@@ -66,6 +67,7 @@ public class StudentPage extends AppCompatActivity {
                                 studentData.setName(name);
                                 studentData.setNoOfReq(noOfRequest);
                                 heading.setText(name);
+                                email.setText(studentData.getEmail());
                                 reqStatus.setText(reqStatus.getText().toString()+noOfRequest+" requests");
                                 StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(studentData.getEmail());
                                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -165,6 +167,50 @@ public class StudentPage extends AppCompatActivity {
                                                                                                     }
                                                                                                 });
                                                                                                 studentData.setAcademic_ques(academicQ);
+                                                                                                DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Upload Question");
+                                                                                                docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                                                    @Override
+                                                                                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                                                        long total= (long) documentSnapshot.get("Total");
+                                                                                                        studentData.setNoUploadQ(total);
+                                                                                                        for (int i=0;i<(int)total;i++)
+                                                                                                        {
+                                                                                                            DocumentReference docCurrQues = docPersQues.collection(i + "").document(i + "");
+
+                                                                                                            int finalI1 = i;
+                                                                                                            int finalI2 = i;
+                                                                                                            docCurrQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                                                                @Override
+                                                                                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                                                                    CollegeRegisterQuestions currQ=new CollegeRegisterQuestions();
+                                                                                                                    boolean editable= (boolean) documentSnapshot.get("Editable");
+                                                                                                                    boolean compulsory = (boolean) documentSnapshot.get("Compulsory");
+                                                                                                                    String ques= (String) documentSnapshot.get("Question");
+                                                                                                                    long type=(long) documentSnapshot.get("Type");
+                                                                                                                    currQ.setChangeable(editable);
+                                                                                                                    currQ.setCompulsory(compulsory);
+                                                                                                                    currQ.setType((int) type);
+                                                                                                                    currQ.setQuestion(ques);
+                                                                                                                    currQ.setId(finalI2);
+                                                                                                                    uploadQ.add(currQ);
+                                                                                                                    if(finalI1 ==total-1)
+                                                                                                                    {
+                                                                                                                        Collections.sort(uploadQ,new Comparator<CollegeRegisterQuestions>() {
+                                                                                                                            @Override
+                                                                                                                            public int compare(CollegeRegisterQuestions o1,CollegeRegisterQuestions o2) {
+                                                                                                                                int i1 = (o1.getId() - (o2.getId()));
+                                                                                                                                return i1;
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                                        studentData.setUpload_ques(uploadQ);
+
+                                                                                                                    }
+
+                                                                                                                }
+                                                                                                            });
+                                                                                                        }
+                                                                                                    }
+                                                                                                });
                                                                                             }
                                                                                         }
                                                                                     });

@@ -189,7 +189,6 @@ public class StudentSignup3_UploadData extends AppCompatActivity
                 dialog = new ProgressDialog(this);
                 dialog.setMessage("UPLOADING");
                 dialog.show();
-               // String q= data.getExtras().getBundle("Question").toString();
                 TextView q=currentQView.findViewById(R.id.Ques);
                 uploadResume(data.getData(),q.getText().toString());
                 TextView ans=currentQView.findViewById(R.id.document_name);

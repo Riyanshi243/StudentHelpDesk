@@ -68,22 +68,7 @@
                     android:textSize="16dp" />
 
 
-                <EditText
-                    android:id="@+id/adminname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="Enter your Name"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
-                    android:paddingLeft="5dp"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:textColorLink="@color/black"
-                    tools:ignore="SpeakableTextPresentCheck" />
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -105,6 +90,23 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+                <EditText
+                    android:id="@+id/adminname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="Enter your Name"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    tools:ignore="SpeakableTextPresentCheck" />
                 <EditText
                     android:id="@+id/contact"
                     android:layout_width="match_parent"
