@@ -34,7 +34,10 @@ public class Login extends AppCompatActivity {
     }
     public void Login(View view)
     {
-
+        if(checkconstraints()==false)
+        {
+            return;
+        }
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -95,7 +98,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    public void Checkconstraints(View v)
+    public boolean checkconstraints()
     {
         login.setEnabled(false);
         ProgressBar pbar = findViewById(R.id.progressBar4);

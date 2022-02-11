@@ -42,6 +42,7 @@ public class RegisterCollege2 extends AppCompatActivity {
             TextView question = questionRepeatable.findViewById(R.id.Ques);
             EditText answer = questionRepeatable.findViewById(R.id.editTextTextMultiLine);
             answer.setHint(ansHint);
+            answer.requestFocus();
             question.setText(deptQ);
             ll.addView(questionRepeatable);
             numberOfDept++;

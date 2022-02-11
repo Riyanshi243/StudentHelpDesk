@@ -72,6 +72,7 @@ public class RegisterCollege3 extends AppCompatActivity {
         Button addQuestion=questionRepeatable.findViewById(R.id.addsubQ);
         Button done=questionRepeatable.findViewById(R.id.complete);
         currentCourseName.setHint(ansHint);
+        currentCourseName.requestFocus();
         question.setText(courseQ);
         heading.setText(headingQ);
         EditText subq=new EditText(this);
@@ -87,8 +88,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                 if(lastBranch.getText().toString().length()!=0) {
                     EditText subq = new EditText(questionRepeatable.getContext());
                     subq.setHint(subQHint);
-
-                    //subq.setFocusable(true);
+                    subq.requestFocus();
                     subQuestions.addView(subq);
                 }
                 else
