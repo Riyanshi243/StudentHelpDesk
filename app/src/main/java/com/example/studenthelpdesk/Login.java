@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -94,9 +95,40 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+    public void Checkconstraints(View v)
+    {
+        login.setEnabled(false);
+        ProgressBar pbar = findViewById(R.id.progressBar4);
+        pbar.setVisibility(View.VISIBLE);
+
+        if (email.getText().toString().length() == 0 || !email.getText().toString().contains("@")) {
+            email.setError("EMAIL IS REQUIRED");
+            pbar.setVisibility(View.INVISIBLE);
+            login.setEnabled(true);
+            return false;
+        }
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String email1 = email.getText().toString().trim();
+        if (!email1.matches(emailPattern)) {
+            email.setError("ENTER VALID MAIL");
+            pbar.setVisibility(View.INVISIBLE);
+            login.setEnabled(true);
+            return false;
+
+        }
+        if (password.getText().toString().length() == 0) {
+            password.setError("PASSWORD IS REQUIRED");
+            pbar.setVisibility(View.INVISIBLE);
+            login.setEnabled(true);
+            return false;
+        }
+
+return true;
+
+    }
     public void signUp(View v)
     {
-        startActivity(new Intent(Login.this,Signup.class));
+      startActivity(new Intent(Login.this,Signup.class));
         finish();
     }
     public void register(View v)
@@ -104,6 +136,5 @@ public class Login extends AppCompatActivity {
         startActivity(new Intent(Login.this,RegisterCollege.class));
         finish();
     }
-
 
 }
