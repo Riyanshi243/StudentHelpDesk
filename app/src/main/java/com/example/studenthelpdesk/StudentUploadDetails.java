@@ -150,8 +150,8 @@ public class StudentUploadDetails extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         dialog.dismiss();
-                        Button pdf= findViewById(R.id.preview);
-                        pdf.setVisibility(View.VISIBLE);
+                        //Button pdf= findViewById(R.id.preview);
+                        //pdf.setVisibility(View.VISIBLE);
                     }
                 }
             });

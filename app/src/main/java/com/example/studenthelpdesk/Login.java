@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
     }
     public void Login(View view)
     {
-        if(checkconstraints()==false)
+        if(checkConstraints()==false)
         {
             return;
         }
@@ -91,6 +91,7 @@ public class Login extends AppCompatActivity {
                         else
                         {
                             Toast.makeText(Login.this,"Error:"+e.getMessage(),Toast.LENGTH_LONG).show();
+                            login.setEnabled(true);
                         }
                     }
                 });
@@ -98,7 +99,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    public boolean checkconstraints()
+    public boolean checkConstraints()
     {
         login.setEnabled(false);
         ProgressBar pbar = findViewById(R.id.progressBar4);
@@ -126,7 +127,7 @@ public class Login extends AppCompatActivity {
             return false;
         }
 
-return true;
+     return true;
 
     }
     public void signUp(View v)

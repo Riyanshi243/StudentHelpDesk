@@ -27,7 +27,7 @@ import java.util.Comparator;
 
 public class StudentPage extends AppCompatActivity {
     FirebaseAuth f;
-    TextView heading,reqStatus;
+    TextView heading,reqStatus,email;
     ImageView profilepic;
     static StudentData studentData;
     @Override
@@ -37,6 +37,7 @@ public class StudentPage extends AppCompatActivity {
         f=FirebaseAuth.getInstance();
         studentData=new StudentData();
         heading=findViewById(R.id.name);
+        email=findViewById(R.id.email);
         reqStatus=findViewById(R.id.requests_status);
         profilepic=findViewById(R.id.profile);
         studentData.setEmail(f.getCurrentUser().getEmail());
@@ -66,6 +67,7 @@ public class StudentPage extends AppCompatActivity {
                                 studentData.setName(name);
                                 studentData.setNoOfReq(noOfRequest);
                                 heading.setText(name);
+                                email.setText(studentData.getEmail());
                                 reqStatus.setText(reqStatus.getText().toString()+noOfRequest+" requests");
                                 StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(studentData.getEmail());
                                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
