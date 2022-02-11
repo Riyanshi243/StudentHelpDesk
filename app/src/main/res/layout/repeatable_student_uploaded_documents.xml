@@ -57,13 +57,6 @@
                 android:background="@drawable/ic_baseline_download_24"
                 android:text="" />
 
-            <Button
-                android:id="@+id/delete"
-                android:layout_width="51dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_baseline_delete"
-                android:text="" />
-
         </TableRow>
 
 
