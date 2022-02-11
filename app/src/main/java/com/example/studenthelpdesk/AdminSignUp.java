@@ -166,20 +166,21 @@ AdminData adminData;
             signup.setEnabled(true);
             return false;
         }
-        if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
-        {
-            phone.setError("INVALID PHONE NUMBER");
-            pbar.setVisibility(View.INVISIBLE);
-            signup.setEnabled(true);
-            return false;
-        }
-      else  if(phone.getText().toString().length()==0)
+         if(phone.getText().toString().length()==0)
         {
             phone.setError("ENTER PHONE NUMBER");
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
         }
+       else if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
+        {
+            phone.setError("INVALID PHONE NUMBER");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+
         return true;
     }
 }

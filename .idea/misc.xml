@@ -106,11 +106,16 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/help.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/logout.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/logout_notif.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_admin_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_company_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_register_college.xml" value="0.25" />
         <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_register_college2.xml" value="0.25" />
         <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_register_college3.xml" value="0.25" />
         <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_register_college4_personal_questions.xml" value="0.25" />
+        <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_signup.xml" value="0.25" />
+        <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_studentsignup1_personal_data.xml" value="0.25" />
+        <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_studentsignup2_academic_data.xml" value="0.25" />
         <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_admin_page.xml" value="0.1" />
         <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_company_page.xml" value="0.10144927536231885" />
         <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_main.xml" value="0.1" />

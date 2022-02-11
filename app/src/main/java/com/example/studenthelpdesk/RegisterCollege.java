@@ -38,6 +38,9 @@ public class RegisterCollege extends AppCompatActivity {
     //move to next step of registration
     public void next(View v)
     {
+        register.setEnabled(false);
+        ProgressBar pbar = findViewById(R.id.progressBar_college);
+        pbar.setVisibility(View.VISIBLE);
         if(checkConstraints())
         {
             DocumentReference documentReference = firebaseFirestores.collection("All Colleges").document(uname.getText().toString());
@@ -77,7 +80,7 @@ public class RegisterCollege extends AppCompatActivity {
         register.setEnabled(false);
         ProgressBar pbar =findViewById(R.id.progressBar_college);
         pbar.setVisibility(View.VISIBLE);
-        final Boolean[] flag = {true};
+       // final Boolean[] flag = {true};
         //everything not empty
 
 
@@ -153,6 +156,7 @@ public class RegisterCollege extends AppCompatActivity {
             register.setEnabled(true);
              return false;
         }
-        return flag[0];
+     //   return flag[0];
+        return true;
     }
 }
