@@ -47,5 +47,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.firebaseui:firebase-ui-storage:6.2.1'
     implementation platform('com.google.firebase:firebase-bom:28.4.2')
-
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }

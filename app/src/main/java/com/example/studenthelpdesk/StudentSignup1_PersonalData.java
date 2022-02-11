@@ -31,6 +31,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class StudentSignup1_PersonalData extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     StudentData studentData;
@@ -311,14 +312,17 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             Log.e("b",studentData.getCourse()+" "+studentData.getBranch()+" "+studentData.getYr());
             if(ques.equalsIgnoreCase("Course")&&studentData.getCourse().equalsIgnoreCase(" ")) {
                 Toast.makeText(this,"Select Course",Toast.LENGTH_LONG).show();
+               // Collections.sort();
                 return true;
             }
             else if(ques.equalsIgnoreCase("Course"))
             {
                 allans[qID]=studentData.getCourse();
+               // Collections.sort(allans[qID]);
             }
             if(ques.equalsIgnoreCase("Branch")&&studentData.getBranch().equalsIgnoreCase(" ")) {
                 Toast.makeText(this,"Select Branch",Toast.LENGTH_LONG).show();
+           //     Collections.sort();
                 return true;
             }
             else if(ques.equalsIgnoreCase("Branch"))
