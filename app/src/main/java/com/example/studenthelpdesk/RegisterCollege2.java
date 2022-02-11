@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,12 +19,14 @@ public class RegisterCollege2 extends AppCompatActivity {
     int numberOfDept;
     ArrayList<String> departmentName;
     CollegeRegistrationData allData;
+    private Button button3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_college2);
         ll=findViewById(R.id.linearL);
         allData=RegisterCollege.allData;
+        button3= (Button) findViewById(R.id.login);
         View questionRepeatable = getLayoutInflater().inflate(R.layout.repeatable_edit_text_layout, null);
         TextView question = questionRepeatable.findViewById(R.id.Ques);
         EditText answer = questionRepeatable.findViewById(R.id.editTextTextMultiLine);

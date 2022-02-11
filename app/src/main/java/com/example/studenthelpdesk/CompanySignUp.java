@@ -128,32 +128,11 @@ public class CompanySignUp extends AppCompatActivity {
         ProgressBar pbar =findViewById(R.id.progressBar5);
         pbar.setVisibility(View.VISIBLE);
         //check name not empty and phone number not empty
-        if(name.getText().toString().length()==0)
+        if(companyName.getText().toString().length()==0)
         {
-            name.setError("ENTER USERNAME");
+            companyName.setError("ENTER COMPANY NAME");
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
-            return false;
-        }
-        if(email.getText().toString().length()==0)
-        {
-            email.setError("ENTER EMAIL");
-            pbar.setVisibility(View.INVISIBLE);
-            signup.setEnabled(true);
-            return false;
-        }
-        if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
-        {
-            phone.setError("INVALID PHONE NUMBER");
-            pbar.setVisibility(View.INVISIBLE);
-            signup.setEnabled(true);
-            return false;
-        }
-       else if(phone.getText().toString().length()==0)
-        {
-            phone.setError("ENTER PHONE NUMBER");
-            pbar.setVisibility(View.INVISIBLE);
-           signup.setEnabled(true);
             return false;
         }
         if(location.getText().toString().length()==0)
@@ -163,13 +142,22 @@ public class CompanySignUp extends AppCompatActivity {
             signup.setEnabled(true);
             return false;
         }
-        if(companyName.getText().toString().length()==0)
+        if(name.getText().toString().length()==0)
         {
-            companyName.setError("ENTER COMPANY NAME");
+            name.setError("ENTER USERNAME");
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
         }
+
+        if(email.getText().toString().length()==0)
+        {
+            email.setError("ENTER EMAIL");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         String email1=email.getText().toString().trim();
         if(!email1.matches(emailPattern))
@@ -179,6 +167,23 @@ public class CompanySignUp extends AppCompatActivity {
             signup.setEnabled(true);
             return false;
         }
+        if(phone.getText().toString().length()==0)
+        {
+            phone.setError("ENTER PHONE NUMBER");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+      else  if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
+        {
+            phone.setError("INVALID PHONE NUMBER");
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
+
+
+
         return true;
     }
 }
