@@ -96,7 +96,20 @@ public class RegisterCollege extends AppCompatActivity {
             register.setEnabled(true);
             return false;
         }
-
+        if(location.getText().toString().length()==0)
+        {
+            location.setError("ENTER LOCATION");
+            pbar.setVisibility(View.INVISIBLE);
+            register.setEnabled(true);
+            return false;
+        }
+        if(adminmail.getText().toString().length()==0)
+        {
+            adminmail.setError("ENTER EMAIL");
+            pbar.setVisibility(View.INVISIBLE);
+            register.setEnabled(true);
+            return false;
+        }
         if(password.getText().toString().length()==0)
         {
             password.setError("ENTER PASSWORD");
@@ -111,20 +124,8 @@ public class RegisterCollege extends AppCompatActivity {
             register.setEnabled(true);
              return false;
         }
-        if(adminmail.getText().toString().length()==0)
-        {
-            adminmail.setError("ENTER EMAIL");
-            pbar.setVisibility(View.INVISIBLE);
-            register.setEnabled(true);
-             return false;
-        }
-         if(location.getText().toString().length()==0)
-        {
-            location.setError("ENTER LOCATION");
-            pbar.setVisibility(View.INVISIBLE);
-            register.setEnabled(true);
-             return false;
-        }
+
+
         //check if valid mail
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         String email=adminmail.getText().toString().trim();
