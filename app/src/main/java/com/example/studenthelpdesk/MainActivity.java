@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             showCustomDialog();
         }
         else {
-            int SPLASH_SCREEN = 4000;
+            int SPLASH_SCREEN = 2000;
             if (done == false)
                 new Handler().postDelayed(() -> {
                 }, SPLASH_SCREEN);
@@ -120,7 +120,43 @@ public class MainActivity extends AppCompatActivity {
                     if (firebaseAuth != null) {
                         String email = firebaseAuth.getEmail();
                         FirebaseFirestore fstore = FirebaseFirestore.getInstance();
-                        DocumentReference dref = fstore.collection("AllowedUser").document(email);
+                        DocumentReference dref = fstore.collection("All Users On App").document(email);
+                        dref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                String category= (String) documentSnapshot.get("Category");
+                                //Log.e("Hi","Hi");
+                                if(category==null)
+                                {
+                                    startActivity(new Intent(MainActivity.this,Login.class));
+                                    finish();
+                                }
+                                else if(category.equalsIgnoreCase("Admin"))
+                                {
+                                    startActivity(new Intent(MainActivity.this,AdminPage.class));
+                                    finish();
+                                }
+                                else if(category.equalsIgnoreCase("Student"))
+                                {
+                                    startActivity(new Intent(MainActivity.this,StudentPage.class));
+                                    finish();
+
+                                }
+                                else if(category.equalsIgnoreCase("Company"))
+                                {
+
+                                    startActivity(new Intent(MainActivity.this,CompanyPage.class));
+                                    finish();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Intent intent = new Intent(MainActivity.this, Login.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
 
 
                     } else {
