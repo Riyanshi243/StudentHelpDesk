@@ -30,7 +30,6 @@
         android:layout_marginBottom="10dp"
         android:text="Enter the branch"
         android:paddingLeft="5dp"
-        android:background="@color/background_gray"
         android:textColor="@color/black"
         android:textSize="20dp" />
 

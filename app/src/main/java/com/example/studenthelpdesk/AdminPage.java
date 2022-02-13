@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.ncorti.slidetoact.SlideToActView;
 
 public class AdminPage extends AppCompatActivity {
     static AdminData adminData;
@@ -70,10 +71,6 @@ public class AdminPage extends AppCompatActivity {
             }
         });
     }
-    public void lockdatabase()
-    {
-
-    }
     public void createNewUser(View v){
         startActivity(new Intent(AdminPage.this, AdminCreateNewAccount.class));
     }
@@ -88,6 +85,9 @@ public class AdminPage extends AppCompatActivity {
     }
     public void answerFAQ(View v){
         startActivity(new Intent(AdminPage.this, AdminAnswerFAQ.class));
+    }
+    public void editProfile(View v){
+        startActivity(new Intent(AdminPage.this, AdminEditProfilePage.class));
     }
     public void logout(View v)
     {

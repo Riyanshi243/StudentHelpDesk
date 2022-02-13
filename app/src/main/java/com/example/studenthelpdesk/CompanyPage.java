@@ -24,6 +24,9 @@ public class CompanyPage extends AppCompatActivity {
     public void sendNotification(View v){
         startActivity(new Intent(CompanyPage.this, AdminOrCompanySendNotification.class));
     }
+    public void editProfile(View v){
+        startActivity(new Intent(CompanyPage.this, CompanyEditProfilePage.class));
+    }
     public void logout(View v)
     {
         f.signOut();

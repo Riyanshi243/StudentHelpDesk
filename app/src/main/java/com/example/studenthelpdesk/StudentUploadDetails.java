@@ -67,8 +67,8 @@ public class StudentUploadDetails extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         Glide.with(StudentUploadDetails.this)
                                 .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .error(R.drawable.profile_pic)
-                                .placeholder(R.drawable.profile_pic)
+                                .error(R.drawable.error_profile_picture)
+                                .placeholder(R.drawable.default_loading_img)
                                 .into(profilepic);
 
                     }
@@ -88,8 +88,8 @@ public class StudentUploadDetails extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 Glide.with(StudentUploadDetails.this)
                                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .error(R.drawable.profile_pic)
-                                        .placeholder(R.drawable.profile_pic)
+                                        .error(R.drawable.error_profile_picture)
+                                        .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
 
                             }
@@ -111,8 +111,8 @@ public class StudentUploadDetails extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 Glide.with(StudentUploadDetails.this)
                                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .error(R.drawable.profile_pic)
-                                        .placeholder(R.drawable.profile_pic)
+                                        .error(R.drawable.error_profile_picture)
+                                        .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
 
                             }
@@ -239,8 +239,8 @@ public class StudentUploadDetails extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
                             Glide.with(StudentUploadDetails.this)
                                     .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                    .error(R.drawable.profile_pic)
-                                    .placeholder(R.drawable.profile_pic)
+                                    .error(R.drawable.error_profile_picture)
+                                    .placeholder(R.drawable.default_loading_img)
                                     .into(profilepic);
 
                             progressbar.setVisibility(View.INVISIBLE);

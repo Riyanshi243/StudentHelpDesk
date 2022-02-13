@@ -51,6 +51,7 @@
                         android:layout_height="36dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginLeft="60dp"
+                        android:onClick="editProfile"
                         android:background="@drawable/ic_baseline_edit_white" />
 
                 </TableRow>
@@ -250,37 +251,46 @@
 
             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/layout_bg_black"
-            android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.029">
-
-            <com.ncorti.slidetoact.SlideToActView
-                android:id="@+id/example_gray_on_green"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="6dp"
-                app:area_margin="4dp"
-                app:icon_margin="8dp"
-                app:animation_duration="250"
-                app:inner_color="@color/white"
-                app:outer_color="@color/black"
-                app:slider_height="50dp"
-                app:slider_locked="false"
-                app:text="SLIDE TO LOCK THE DATABASE>"
-                app:slider_icon="@drawable/ic_baseline_lock_24"
-                app:text_size="20sp" />
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_bg_black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.029">
 
-        </LinearLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="viewAllEditRequests">
+
+                    <ImageView
+                        android:id="@+id/lockimg"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        app:srcCompat="@drawable/ic_baseline_lock" />
+
+                    <TextView
+                        android:id="@+id/lockdatabase"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:text="LOCK THE DATABASE >"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </TableRow>
+
+            </LinearLayout>
 
 
             <LinearLayout
