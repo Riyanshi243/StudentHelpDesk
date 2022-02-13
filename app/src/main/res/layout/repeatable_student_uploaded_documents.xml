@@ -37,6 +37,7 @@
                 android:id="@+id/view"
                 android:layout_width="46dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/ic_baseline_preview_doc"
                 android:text="" />

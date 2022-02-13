@@ -21,8 +21,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="310dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/head_img2"
                 android:orientation="vertical">
 
@@ -77,14 +77,15 @@
                     app:civ_shadow="true"
                     app:civ_shadow_color="@color/black" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar4"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:visibility="invisible" />
+
 
             </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progressBar4"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:visibility="invisible" />
 
             <LinearLayout
                 android:layout_width="match_parent"

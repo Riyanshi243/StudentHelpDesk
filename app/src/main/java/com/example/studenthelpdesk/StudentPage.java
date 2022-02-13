@@ -446,7 +446,7 @@ public class StudentPage extends AppCompatActivity {
                                                                                                                             }
                                                                                                                         });
                                                                                                                         studentData.setUpload_ques(uploadQ);
-                                                                                                                        progressBar.setVisibility(View.INVISIBLE);
+                                                                                                                        progressBar.setVisibility(View.GONE);
                                                                                                                     }
 
                                                                                                                 }
