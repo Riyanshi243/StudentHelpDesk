@@ -59,11 +59,14 @@ public class RegisterCollege8 extends AppCompatActivity {
                 basicInfoOfCollege.put("Name",allData.getCName());
                 basicInfoOfCollege.put("Departments",allData.getDeptName());
                 basicInfoOfCollege.put("Courses",allData.getCourseName());
+                basicInfoOfCollege.put("Department for Data",allData.getDataDept());
                 basicInfoOfCollege.put("Main Admin",allData.getSAdminemail());
                 collegeInformation.set(basicInfoOfCollege).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         ArrayList<ArrayList<String>> allbranch = allData.getBranchForEachCourse();
+                        ArrayList<ArrayList<String>> alldept = allData.getDepForEachCourse();
+
                         ArrayList<String> allcourseName = allData.getCourseName();
                         for(int i=0;i<allbranch.size();i++)
                         {
@@ -71,6 +74,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                             ArrayList<String> itsBranch = allbranch.get(i);
                             HashMap<String,Object> branches=new HashMap<>();
                             branches.put("Branches",itsBranch);
+                            branches.put("Department",alldept.get(i));
                             int finalI = i;
                             branchInfo.set(branches).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

@@ -32,9 +32,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class StudentSignup1_PersonalData extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     StudentData studentData;
+    ArrayList<CollegeRegisterQuestions> pQuestion;
     LinearLayout ll;
     View branchView;
     String allq[],allans[];
@@ -46,6 +48,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
         setContentView(R.layout.activity_studentsignup1_personal_data);
         studentData=Signup.studentData;
         ll=findViewById(R.id.ll);
+        pQuestion=new ArrayList<>();
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference persQuestions = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Personal Question");
         persQuestions.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -67,32 +70,54 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
                     quesDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            boolean compulsory= (boolean) documentSnapshot.get("Compulsory");
-                            String question= (String) documentSnapshot.get("Question");
-                            long type=(long)documentSnapshot.get("Type");
-                            View addQues=getType(type,question, finalI1);
-
-
-                            if(compulsory==true)
+                            CollegeRegisterQuestions currQ=new CollegeRegisterQuestions();
+                            boolean compulsory1= (boolean) documentSnapshot.get("Compulsory");
+                            String question1= (String) documentSnapshot.get("Question");
+                            long type1=(long)documentSnapshot.get("Type");
+                            currQ.setCompulsory(compulsory1);
+                            currQ.setId(finalI);
+                            currQ.setQuestion(question1);
+                            currQ.setType((int) type1);
+                            pQuestion.add(currQ);
+                            if(pQuestion.size()==noOfQuestions)
                             {
-                                if(type==0)
-                                    addQues.setId((int)8);
-                                else
-                                    addQues.setId((int) type);
+                                Collections.sort(pQuestion,new Comparator<CollegeRegisterQuestions>() {
+                                    @Override
+                                    public int compare(CollegeRegisterQuestions o1,CollegeRegisterQuestions o2) {
+                                        int i1 = (o1.getId() - (o2.getId()));
+                                        return i1;
+                                    }
+                                });
+                                for (CollegeRegisterQuestions a:pQuestion)
+                                {
+                                    int type=a.getType();
+                                    String question=a.getQuestion();
+                                    int i=a.getId();
+                                    boolean compulsory=a.isCumplolsory();
+                                    View addQues=getType(type,question, i);
+                                    if(compulsory==true)
+                                    {
+                                        if(type==0)
+                                            addQues.setId((int)8);
+                                        else
+                                            addQues.setId((int) type);
+                                    }
+                                    else
+                                    {
+                                        if(type==0)
+                                            addQues.setId((int)-8);
+                                        else
+                                            addQues.setId((int) -type);
+                                    }
+                                    ll.addView(addQues);
+                                }
                             }
-                            else
-                            {
-                                if(type==0)
-                                    addQues.setId((int)-8);
-                                else
-                                    addQues.setId((int) -type);
-                            }
-                            ll.addView(addQues);
                         }
                     });
                 }
             }
         });
+
     }
     public void saveAndNext(View view)
     {

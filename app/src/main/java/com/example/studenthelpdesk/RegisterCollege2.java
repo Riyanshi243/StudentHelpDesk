@@ -68,7 +68,7 @@ public class RegisterCollege2 extends AppCompatActivity {
         Collections.sort(departmentName,(o1, o2)->o1.compareTo(o2));
         allData.setDeptName(departmentName);
         //intent to registration step 3
-        startActivity(new Intent(RegisterCollege2.this,RegisterCollege3.class));
+        startActivity(new Intent(RegisterCollege2.this,RegisterCollege2_1.class));
     }
     public boolean lastQuestionFilled()
     {

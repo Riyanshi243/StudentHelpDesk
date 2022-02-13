@@ -59,15 +59,16 @@
                 android:layout_marginTop="20dp">
             <!-- REPEATABLE FOR TICKBOXES -->
             </LinearLayout>
+
             <TextView
                 android:id="@+id/no_of_departments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:paddingLeft="5dp"
-                android:text="You have selected a total of  departments."
+                android:text="0"
                 android:textColor="@color/black"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
             <TextView
                 android:id="@+id/msgend"
                 android:layout_width="match_parent"
@@ -86,9 +87,10 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-                android:text="SAVE AND NEXT"
+                android:layout_marginBottom="60dp"
                 android:background="@drawable/roundedbutton"
-                android:layout_marginBottom="60dp"/>
+                android:onClick="saveAndNext"
+                android:text="SAVE AND NEXT" />
 
         </LinearLayout>
     </ScrollView>

@@ -358,7 +358,7 @@ public class StudentPage extends AppCompatActivity {
                                                             String ans= (String) documentSnapshot.get("Answer");
                                                             currQ.setAnswer(ans);
                                                             personalQ.add(currQ);
-                                                            if(finalI1 ==total-1)
+                                                            if(personalQ.size() ==total)
                                                             {
                                                                 Collections.sort(personalQ,new Comparator<CollegeRegisterQuestions>() {
                                                                     @Override
@@ -400,7 +400,7 @@ public class StudentPage extends AppCompatActivity {
                                                                                             String ans= (String) documentSnapshot.get("Answer");
                                                                                             currQ.setAnswer(ans);
                                                                                             academicQ.add(currQ);
-                                                                                            if(finalI1 ==total-1)
+                                                                                            if(academicQ.size() ==total)
                                                                                             {
                                                                                                 Collections.sort(academicQ,new Comparator<CollegeRegisterQuestions>() {
                                                                                                     @Override
@@ -436,7 +436,7 @@ public class StudentPage extends AppCompatActivity {
                                                                                                                     currQ.setQuestion(ques);
                                                                                                                     currQ.setId(finalI2);
                                                                                                                     uploadQ.add(currQ);
-                                                                                                                    if(finalI1 ==total-1)
+                                                                                                                    if(uploadQ.size() ==total)
                                                                                                                     {
                                                                                                                         Collections.sort(uploadQ,new Comparator<CollegeRegisterQuestions>() {
                                                                                                                             @Override
