@@ -69,7 +69,9 @@ public class AdminPage extends AppCompatActivity {
                 });
             }
         });
-
+    }
+    public void lockdatabase()
+    {
 
     }
     public void createNewUser(View v){

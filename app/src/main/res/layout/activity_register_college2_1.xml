@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterCollege2_1">
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:orientation="vertical"
+                android:background="@drawable/head_img">
+                <TextView
+                    android:id="@+id/head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="casual"
+                    android:paddingLeft="5dp"
+                    android:text="DEPARTMENT FOR DATA MANAGEMENT"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="32dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="casual"
+                android:paddingLeft="5dp"
+                android:text="Please select the departments which will be responsible for managing the data of the students."
+                android:textColor="@color/black"
+                android:textSize="16dp"/>
+
+            <LinearLayout
+                android:id="@+id/linearL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+            <!-- REPEATABLE FOR TICKBOXES -->
+            </LinearLayout>
+            <TextView
+                android:id="@+id/no_of_departments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:paddingLeft="5dp"
+                android:text="You have selected a total of  departments."
+                android:textColor="@color/black"
+                android:textSize="16dp"/>
+            <TextView
+                android:id="@+id/msgend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="casual"
+                android:paddingLeft="5dp"
+                android:text="All the admins of these departments will be receive request to edit data from the students."
+                android:textColor="@color/black"
+                android:textSize="16dp"/>
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="SAVE AND NEXT"
+                android:background="@drawable/roundedbutton"
+                android:layout_marginBottom="60dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
