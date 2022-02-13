@@ -50,6 +50,7 @@ public class ViewPDFActivity extends AppCompatActivity {
                 // url connection response code is 200 means ok the execute
                 if (urlConnection.getResponseCode() == 200) {
                     inputStream = new BufferedInputStream(urlConnection.getInputStream());
+
                 }
             }
             // if error return null

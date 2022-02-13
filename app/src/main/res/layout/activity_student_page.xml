@@ -80,7 +80,7 @@
                 android:id="@+id/progressBar4"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="37dp"
                 android:visibility="invisible" />
 
         </LinearLayout>
