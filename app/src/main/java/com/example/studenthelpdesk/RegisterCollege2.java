@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 //In this activity we ask all the department names of the college
 public class RegisterCollege2 extends AppCompatActivity {
     final String deptQ="Enter Department Name",ansHint="Department name here";
@@ -63,6 +65,7 @@ public class RegisterCollege2 extends AppCompatActivity {
                     departmentName.add(dept);
                 }
         }
+        Collections.sort(departmentName,(o1, o2)->o1.compareTo(o2));
         allData.setDeptName(departmentName);
         //intent to registration step 3
         startActivity(new Intent(RegisterCollege2.this,RegisterCollege3.class));
