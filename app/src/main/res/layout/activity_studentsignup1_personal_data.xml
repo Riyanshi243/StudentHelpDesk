@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:visibility="invisible" />
+                android:visibility="invisible"/>
             <!-- All questions to be asked by student will be repeated here, through java code -->
 
             <LinearLayout

@@ -43,7 +43,6 @@ public class CompanyData {
         return personalEmail;
     }
 
-
     public void setCollegeId(String collegeId) {
         this.collegeId = collegeId;
     }

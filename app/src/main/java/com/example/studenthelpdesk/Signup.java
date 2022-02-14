@@ -54,7 +54,7 @@ public class Signup extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 listName = (ArrayList<String>) documentSnapshot.get("Colleges");
                 listId = (ArrayList<String>) documentSnapshot.get("IDs");
-                Collections.sort(listName,(o1, o2)->o1.compareTo(o2));
+                //Collections.sort(listName,(o1, o2)->o1.compareTo(o2));
                 ArrayAdapter spinnerList = new ArrayAdapter(Signup.this, android.R.layout.simple_spinner_item, listName);
                 collge.setAdapter(spinnerList);
                 collge.setOnItemClickListener(new AdapterView.OnItemClickListener() {
