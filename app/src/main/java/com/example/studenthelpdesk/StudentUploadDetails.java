@@ -53,7 +53,6 @@ public class StudentUploadDetails extends AppCompatActivity {
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getUpload_ques();
         for(CollegeRegisterQuestions a:quesAns)
         {
-
             if(a.getQuestion().equalsIgnoreCase("Photograph"))
             {
                 View repeatAnswers=getLayoutInflater().inflate(R.layout.repeatable_photograph,null);

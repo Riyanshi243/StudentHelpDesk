@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,7 +25,7 @@ public class RegisterCollege3 extends AppCompatActivity {
     LinearLayout ll;
     int numberOfCourse;
     ArrayList<String> courseName;
-    ArrayList<ArrayList<String>> branchOfEachCourse;
+    ArrayList<ArrayList<String>> branchOfEachCourse,depOfEachBranch;
     CollegeRegistrationData allData;
 
     @Override
@@ -33,6 +37,7 @@ public class RegisterCollege3 extends AppCompatActivity {
         courseName=new ArrayList<>();
         numberOfCourse=0;
         branchOfEachCourse =new ArrayList<>(1);
+        depOfEachBranch =new ArrayList<>(1);
         getWorkingView();
         numberOfCourse=1;
     }
@@ -51,6 +56,7 @@ public class RegisterCollege3 extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 allData.setCourseName(courseName);
                 allData.setBranchForEachCourse(branchOfEachCourse);
+                allData.setDepForEachCourse(depOfEachBranch);
                 //intent to registration step 4
                 startActivity(new Intent(RegisterCollege3.this,RegisterCollege4_PersonalQuestions.class));
             }
@@ -75,21 +81,44 @@ public class RegisterCollege3 extends AppCompatActivity {
         currentCourseName.requestFocus();
         question.setText(courseQ);
         heading.setText(headingQ);
-        EditText subq=new EditText(this);
+        View branchDeptRepeatable = getLayoutInflater().inflate(R.layout.repeatable_branch_department_college_register, null);
+        EditText subq=branchDeptRepeatable.findViewById(R.id.branch);
+        AutoCompleteTextView dept=branchDeptRepeatable.findViewById(R.id.department_name);
+        ArrayList<String> listDept = allData.getDeptName();
+        ArrayAdapter spinnerList = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listDept);
+        dept.setAdapter(spinnerList);
+        dept.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                //add the dept selected
+            }
+        });
         subq.setHint(subQHint);
-        subQuestions.addView(subq);
+        subQuestions.addView(branchDeptRepeatable);
         done.setText("Save");
         //add more branches
         addQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int branchNumber=subQuestions.getChildCount();
-                EditText lastBranch= (EditText) subQuestions.getChildAt(branchNumber-1);
+                View lastBranchAndDept= (View) subQuestions.getChildAt(branchNumber-1);
+                EditText lastBranch=lastBranchAndDept.findViewById(R.id.branch);
                 if(lastBranch.getText().toString().length()!=0) {
-                    EditText subq = new EditText(questionRepeatable.getContext());
+                    View branchDeptRepeatable = getLayoutInflater().inflate(R.layout.repeatable_branch_department_college_register, null);
+                    EditText subq=branchDeptRepeatable.findViewById(R.id.branch);
+                    AutoCompleteTextView dept=branchDeptRepeatable.findViewById(R.id.department_name);
+                    ArrayList<String> listDept = allData.getDeptName();
+                    ArrayAdapter spinnerList = new ArrayAdapter(RegisterCollege3.this, android.R.layout.simple_spinner_item, listDept);
+                    dept.setAdapter(spinnerList);
+                    dept.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                            //add the dept selected
+                        }
+                    });
                     subq.setHint(subQHint);
                     subq.requestFocus();
-                    subQuestions.addView(subq);
+                    subQuestions.addView(branchDeptRepeatable);
                 }
                 else
                 {
@@ -108,16 +137,22 @@ public class RegisterCollege3 extends AppCompatActivity {
                     return;
                 }
                 ArrayList<String> allbranch=new ArrayList<>();
+                ArrayList<String> alldept=new ArrayList<>();
                 int branchNumber=subQuestions.getChildCount();
                 for(int i=0;i<branchNumber;i++)
                 {
-                    EditText lastBranch= (EditText) subQuestions.getChildAt(i);
+                    View branchDeptRepeatable =subQuestions.getChildAt(i);
+                    EditText lastBranch=branchDeptRepeatable.findViewById(R.id.branch);
+                    AutoCompleteTextView dept=branchDeptRepeatable.findViewById(R.id.department_name);
                     String branchName=lastBranch.getText().toString();
                     if(branchName.length()!=0) {
                         allbranch.add(branchName);
+                        alldept.add(dept.getText().toString());
+                        //Log.e("Get name",branchName+" : "+ dept.getText().toString());
                     }
                 }
                 branchOfEachCourse.add(allbranch);
+                depOfEachBranch.add(alldept);
                 courseName.add(currentCourseName.getText().toString());
                 ll.removeView(questionRepeatable);
                 View permanentDataView = getLayoutInflater().inflate(R.layout.repeatable_text_view_layout, null);
@@ -129,7 +164,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                     TextView thisBranch = new TextView(permanentDataView.getContext());
                     if(i<allbranch.size())
                     {
-                        thisBranch.setText(allbranch.get(i));
+                        thisBranch.setText(allbranch.get(i)+" : "+alldept.get(i));
                         subHeading.addView(thisBranch);
                     }
                 }

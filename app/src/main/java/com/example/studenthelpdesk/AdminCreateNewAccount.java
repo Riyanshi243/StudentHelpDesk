@@ -102,6 +102,7 @@ public class AdminCreateNewAccount extends AppCompatActivity {
                                         email.setText("");
                                         admin.setChecked(false);
                                         company.setChecked(false);
+                                        student.setChecked(true);
                                         Toast.makeText(AdminCreateNewAccount.this,"User Created",Toast.LENGTH_LONG).show();
                                     }
                                 });

@@ -16,11 +16,13 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,16 +32,24 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class StudentSignup3_UploadData extends AppCompatActivity
 {
+    ArrayList<CollegeRegisterQuestions> uQuestion;
     StudentData studentData;
     LinearLayout ll;
     View currentQView;
+    ProgressBar progressbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_upload_documents);
         studentData=Signup.studentData;
+        uQuestion=new ArrayList<>();
+        progressbar=findViewById(R.id.progressBar5);
         ll=findViewById(R.id.ll);
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference persQuestions = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Upload Question");
@@ -55,25 +65,49 @@ public class StudentSignup3_UploadData extends AppCompatActivity
                     quesDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            boolean compulsory= (boolean) documentSnapshot.get("Compulsory");
-                            String question= (String) documentSnapshot.get("Question");
-                            long type=(long)documentSnapshot.get("Type");
-                            View addQues=getType(type,question);
-                            if(compulsory==true)
+                            CollegeRegisterQuestions currQ=new CollegeRegisterQuestions();
+                            boolean compulsory1= (boolean) documentSnapshot.get("Compulsory");
+                            String question1= (String) documentSnapshot.get("Question");
+                            long type1=(long)documentSnapshot.get("Type");
+                            currQ.setCompulsory(compulsory1);
+                            currQ.setId(finalI);
+                            currQ.setQuestion(question1);
+                            currQ.setType((int) type1);
+                            uQuestion.add(currQ);
+                            if(uQuestion.size()==noOfQuestions)
                             {
-                                if(type==0)
-                                    addQues.setId((int)8);
-                                else
-                                    addQues.setId((int) type);
+                                Collections.sort(uQuestion,new Comparator<CollegeRegisterQuestions>() {
+                                    @Override
+                                    public int compare(CollegeRegisterQuestions o1,CollegeRegisterQuestions o2) {
+                                        int i1 = (o1.getId() - (o2.getId()));
+                                        return i1;
+                                    }
+                                });
+                                for (CollegeRegisterQuestions a:uQuestion)
+                                {
+                                    int type=a.getType();
+                                    String question=a.getQuestion();
+                                    int i=a.getId();
+                                    boolean compulsory=a.isCumplolsory();
+                                    View addQues=getType(type,question);
+                                    if(compulsory==true)
+                                    {
+                                        if(type==0)
+                                            addQues.setId((int)8);
+                                        else
+                                            addQues.setId((int) type);
+                                    }
+                                    else
+                                    {
+                                        if(type==0)
+                                            addQues.setId((int)-8);
+                                        else
+                                            addQues.setId((int) -type);
+                                    }
+                                    ll.addView(addQues);
+                                }
                             }
-                            else
-                            {
-                                if(type==0)
-                                    addQues.setId((int)-8);
-                                else
-                                    addQues.setId((int) -type);
-                            }
-                            ll.addView(addQues);
+
                         }
                     });
                 }
@@ -143,7 +177,20 @@ public class StudentSignup3_UploadData extends AppCompatActivity
             preview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                   // progressbar.setVisibility(View.VISIBLE);
+                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                    StorageReference storageRef = storage.getReference(studentData.getCollegeid()).child(q).child(studentData.getEmail());
+                    Task<Uri> message = storageRef.getDownloadUrl();
+                    message.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            // Toast.makeText(getActivity(),uri.toString(),Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(view.getContext(), ViewPDFActivity.class);
+                            intent.putExtra("url", uri.toString());
+                            startActivity(intent);
+                            //progressbar.setVisibility(View.INVISIBLE);
+                        }
+                    });
                 }
             });
             return nView;
@@ -228,7 +275,7 @@ public class StudentSignup3_UploadData extends AppCompatActivity
                             e.printStackTrace();
                         }
                         dialog.dismiss();
-                        Button pdf= findViewById(R.id.preview);
+                        Button pdf= currentQView.findViewById(R.id.preview);
                         pdf.setVisibility(View.VISIBLE);
                     }
                 }
