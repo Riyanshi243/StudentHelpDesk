@@ -179,8 +179,6 @@ public class Signup extends AppCompatActivity {
             return false;
         }
 
-
-
         //check if password length greater than 8
         if (password1.getText().toString().length() < 8) {
             password1.setError("ENTER ATLEAST 8 CHARACTERS");
