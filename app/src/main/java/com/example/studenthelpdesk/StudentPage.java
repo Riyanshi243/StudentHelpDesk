@@ -37,6 +37,11 @@ public class StudentPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_page);
         f=FirebaseAuth.getInstance();
+        if(f==null)
+        {
+            startActivity(new Intent(this,Login.class));
+            finish();
+        }
         studentData=new StudentData();
         heading=findViewById(R.id.name);
         progressBar=findViewById(R.id.progressBar4);

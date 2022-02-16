@@ -36,6 +36,7 @@ public class StudentAcademicDetails extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (a.isChangeable() == true) {
+
                         AlertDialog.Builder builder = new AlertDialog.Builder(StudentAcademicDetails.this);
                         builder.setTitle(a.getQuestion());
                         builder.setMessage("Enter new value");

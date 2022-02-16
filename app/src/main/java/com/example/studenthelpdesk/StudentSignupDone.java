@@ -14,10 +14,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 
@@ -99,10 +102,33 @@ public class StudentSignupDone extends AppCompatActivity {
                                                 docChangeState.update(changeState).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-                                                        setText("Process Complete");
-                                                        Toast.makeText(StudentSignupDone.this,"Signup Done \nYou may log in",Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(StudentSignupDone.this,Login.class));
+                                                        Task<GetTokenResult> token1 = f1.getAccessToken(true);
+                                                        token1.addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
+                                                            @Override
+                                                            public void onSuccess(GetTokenResult getTokenResult) {
+                                                                String token = getTokenResult.getToken();
+                                                                Log.e("Token here",token+"   ,");
+                                                                setText("Process Complete");
+                                                                HashMap<String,Object> tokenMap=new HashMap<>();
 
+                                                                Toast.makeText(StudentSignupDone.this,"Signup Done \nYou may log in"+ token,Toast.LENGTH_SHORT).show();
+                                                                startActivity(new Intent(StudentSignupDone.this,Login.class));
+
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Log.e("Token error r",e.toString()+ "   .");
+                                                                setText("Error Occured");
+                                                                f1.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void unused) {
+                                                                        startActivity(new Intent(StudentSignupDone.this,Signup.class));
+                                                                        finish();
+                                                                    }
+                                                                });
+                                                            }
+                                                        });
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
