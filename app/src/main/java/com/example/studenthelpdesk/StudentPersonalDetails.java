@@ -35,7 +35,7 @@ public class StudentPersonalDetails extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (a.isChangeable() == true) {
-                        public void changeVal () {
+                       /* public void changeVal () {
                             AlertDialog.Builder builder = new AlertDialog.Builder(StudentPersonalDetails.this);
                             builder.setTitle(a.getQuestion());
                             builder.setMessage("New Value");
@@ -56,7 +56,7 @@ public class StudentPersonalDetails extends AppCompatActivity {
                             AlertDialog alert = builder.create();
                             alert.show();
 
-                        }
+                        }*/
                     } else {
                         // Toast.makeText(this,"SEND REQUEST FOR CHANGE",Toast.LENGTH_LONG).show();
                     }

@@ -120,10 +120,11 @@
                     android:id="@+id/send_notif"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SEND NOTIFICATION"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
-                    android:layout_marginBottom="50dp"/>
+                    android:layout_marginBottom="50dp"
+                    android:onClick="sendNotif"
+                    android:text="SEND NOTIFICATION" />
 
             </LinearLayout>
 

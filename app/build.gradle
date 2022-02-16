@@ -49,4 +49,12 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:6.2.1'
     implementation platform('com.google.firebase:firebase-bom:28.4.2')
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.android.volley:volley:1.1.1'
+
 }

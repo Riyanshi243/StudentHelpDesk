@@ -37,28 +37,7 @@ public class StudentAcademicDetails extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (a.isChangeable() == true) {
-                        public void changeVal () {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(StudentAcademicDetails.this);
-                            builder.setTitle(a.getQuestion());
-                            builder.setMessage("New Value");
-                            EditText neww = new EditText(this);
-                            builder.setCancelable()
-                                    .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            ans = neww.getText();
-                                        }
-                                    })
-                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            //do nothing
-                                        }
-                                    });
-                            AlertDialog alert = builder.create();
-                            alert.show();
 
-                        }
                     } else {
                         // Toast.makeText(this,"SEND REQUEST FOR CHANGE",Toast.LENGTH_LONG).show();
                     }

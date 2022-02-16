@@ -23,7 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+//Token from messanging: cf7h47URQrWogQlT9q_lqY:APA91bGOGUYefMU612AvORbOc0g1CmsPDbf2P_DgzcAEowdZBVkCspTQj1qO0BvkJ1kfPyzsCqWkYDBbqvBIxk9-yrWDaYSpEhb45GMZkH1yqQx9fLdH-q8JoPQ32MUUyQT8FcIFNffq
+//tokWN here: eyJhbGciOiJSUzI1NiIsImtpZCI6ImYyNGYzMTQ4MTk3ZWNlYTUyOTE3YzNmMTgzOGFiNWQ0ODg3ZWEwNzYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc3R1ZGVudGhlbHBkZXNrLWZlYzM4IiwiYXVkIjoic3R1ZGVudGhlbHBkZXNrLWZlYzM4IiwiYXV0aF90aW1lIjoxNjQ0OTQ2ODY3LCJ1c2VyX2lkIjoiMExraGROMThGUGdya0ZWQk92QnQ2S3JiTTYwMiIsInN1YiI6IjBMa2hkTjE4RlBncmtGVkJPdkJ0NktyYk02MDIiLCJpYXQiOjE2NDQ5NDY4NjksImV4cCI6MTY0NDk1MDQ2OSwiZW1haWwiOiJzdHVkZW50MkBiYW5hc3RoYWxpLmluIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInN0dWRlbnQyQGJhbmFzdGhhbGkuaW4iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.IBES8yNB6YQ-cDBfUNppRImpgQc_soKN1_QWRyiduxmJney-0SYGxp1ZhfjuKyUgRrAHqM3k1TxMio1fesdQkj-ZH3QUSu9y0l4Z9JHy48Za8hOHcbKZdi_AWwHEYd67xlTCqKcrXxKF91lfugsiKdaU5xGHDe6GYmWgcRzyBxAXqT7JX0N4_ai9PfkEL2KBW7UQSUgKpnJ6b82_lb3j5V_PSs98CaZgLyvfkWdg12tvSorGeJ2V8ga8VHBbSpBoqrh46aSl4WIrELOyCGZ3qWPHK9PT3w1fqf0yTXi6Z6XIen20MqdkTS5HzgnC_uNss0-CuLXk2QHWnpGnFtW49A
 public class Signup extends AppCompatActivity {
     AutoCompleteTextView collge;
     EditText email, password1, password2;
@@ -85,7 +86,6 @@ public class Signup extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 listId = (ArrayList<String>) documentSnapshot.get("IDs");
                 String collegeId = listId.get(i);
-                Log.e("id", collegeId);
                 DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString());
                 userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
