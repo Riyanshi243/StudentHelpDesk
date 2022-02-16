@@ -53,13 +53,14 @@
                 android:ems="10"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:hint="Enter Email"
-                android:inputType="textPersonName"
+                android:hint="Enter Email of user to Search..."
+                android:inputType="textEmailAddress"
                 android:minHeight="48dp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/black" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/search"
+                android:onClick="searchUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

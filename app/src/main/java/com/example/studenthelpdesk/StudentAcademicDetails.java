@@ -32,38 +32,40 @@ public class StudentAcademicDetails extends AppCompatActivity {
             TextView ans = repeatAnswers.findViewById(R.id.ans);
             ques.setText(a.getQuestion());
             ans.setText(a.getAnswer());
-            ll.addView(repeatAnswers);
-            ques.setOnClickListener(new View.OnClickListener() {
+            ans.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (a.isChangeable() == true) {
-                        public void changeVal () {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(StudentAcademicDetails.this);
-                            builder.setTitle(a.getQuestion());
-                            builder.setMessage("New Value");
-                            EditText neww = new EditText(this);
-                            builder.setCancelable()
-                                    .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            ans = neww.getText();
-                                        }
-                                    })
-                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            //do nothing
-                                        }
-                                    });
-                            AlertDialog alert = builder.create();
-                            alert.show();
-
-                        }
+                        AlertDialog.Builder builder = new AlertDialog.Builder(StudentAcademicDetails.this);
+                        builder.setTitle(a.getQuestion());
+                        builder.setMessage("Enter new value");
+                        EditText neww=new EditText(repeatAnswers.getContext());
+                        builder.setView(neww);
+                        //EditText neww = new EditText(StudentPersonalDetails.this);
+                        neww.setText(a.getAnswer());
+                        builder.setCancelable(false)
+                                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        ans.setText(neww.getText().toString());
+                                        //save in database
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //do nothing
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     } else {
                         // Toast.makeText(this,"SEND REQUEST FOR CHANGE",Toast.LENGTH_LONG).show();
                     }
                 }
             });
+            ll.addView(repeatAnswers);
+        }
         }
     }
-}
+
