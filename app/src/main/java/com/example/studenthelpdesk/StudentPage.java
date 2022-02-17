@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -42,6 +44,8 @@ public class StudentPage extends AppCompatActivity {
             startActivity(new Intent(this,Login.class));
             finish();
         }
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
         studentData=new StudentData();
         heading=findViewById(R.id.name);
         progressBar=findViewById(R.id.progressBar4);
@@ -67,6 +71,12 @@ public class StudentPage extends AppCompatActivity {
                         studentData.setBranch(branch);
                         studentData.setCourse(course);
                         studentData.setYr(yr);
+                        FirebaseMessaging.getInstance().subscribeToTopic("student"+studentData.getCollegeid());
+                        FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid());
+                        FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid()+"_"+studentData.getCourse());
+                        FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch());
+                        FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
+
                         DocumentReference docUserInfo2 = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document("Student").collection(course).document(branch).collection(yr).document(studentData.getEmail());
                         docUserInfo2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
@@ -279,6 +289,12 @@ public class StudentPage extends AppCompatActivity {
     }
     public void logout(View v)
     {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("student"+studentData.getCollegeid());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getCurrentUser().getEmail());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
         startActivity(new Intent(StudentPage.this,Login.class));

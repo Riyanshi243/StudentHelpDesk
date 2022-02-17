@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.ncorti.slidetoact.SlideToActView;
@@ -45,6 +46,13 @@ public class AdminPage extends AppCompatActivity {
                 String dept=(String) documentSnapshot.get("Department");
                 adminData.setCollegeId(cId);
                 adminData.setDeptName(dept);
+                FirebaseMessaging.getInstance().subscribeToTopic("all");
+                FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
+                FirebaseMessaging.getInstance().subscribeToTopic(cId);
+                FirebaseMessaging.getInstance().subscribeToTopic("admin_"+cId);
+
+                FirebaseMessaging.getInstance().subscribeToTopic(cId+"_"+dept.replaceAll("\\s", ""));
+
                 DocumentReference docUserInfoAll = fs.collection("All Colleges").document(cId).collection("UsersInfo").document("Admin").collection(dept).document(adminData.getEmail());
                 docUserInfoAll.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -91,6 +99,10 @@ public class AdminPage extends AppCompatActivity {
     }
     public void logout(View v)
     {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(adminData.getCollegeId());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getCurrentUser().getEmail());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("admin"+adminData.getCollegeId());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(adminData.getCollegeId()+"_"+adminData.getDeptName().replaceAll("\\s", ""));
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
         startActivity(new Intent(AdminPage.this,Login.class));

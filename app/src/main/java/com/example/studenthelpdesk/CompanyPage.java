@@ -8,15 +8,21 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class CompanyPage extends AppCompatActivity {
-
+    static CompanyData companyData;
     FirebaseAuth f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_page);
         f=FirebaseAuth.getInstance();
+        companyData=new CompanyData();
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
+        //FirebaseMessaging.getInstance().subscribeToTopic(cId);
+        //FirebaseMessaging.getInstance().subscribeToTopic("company_"+cId);
 
     }
 

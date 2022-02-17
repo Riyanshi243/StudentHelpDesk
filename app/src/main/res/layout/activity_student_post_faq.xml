@@ -94,7 +94,7 @@
                     android:backgroundTint="@color/box_bg">
 
                     <AutoCompleteTextView
-                        android:id="@+id/collegeName"
+                        android:id="@+id/audience"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
