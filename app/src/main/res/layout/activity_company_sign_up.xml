@@ -156,7 +156,8 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/image"
@@ -207,8 +208,7 @@
                 android:layout_marginBottom="60dp"
                 android:text="@string/already_a_user_nlogin_instead"
                 android:textAlignment="center"
-                android:textColor="@color/blue_text"
-                android:textStyle="italic" />
+                android:textColor="@color/blue_text" />
         </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -27,6 +27,7 @@ public class RegisterCollege extends AppCompatActivity {
         allData=new CollegeRegistrationData();
         uname=findViewById(R.id.uname);
         cname=findViewById(R.id.cname);
+        cname.requestFocus();
         location=findViewById(R.id.clocation);
         adminmail=findViewById(R.id.adminemail);
         password=findViewById(R.id.password2);

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">StudentHelpDesk</string>
-    <string name="no_account_ncreate_one">No Account?<u>\nCreate One!</u></string>
+    <string name="no_account_ncreate_one">No Account?<u><i>\nCreate One!</i></u></string>
     <string name="forget_password"><u>Forget Password</u></string>
-    <string name="already_a_user_nlogin_instead">Already a user\n<u>Login instead</u></string>
-    <string name="new_here_register_your_college">New here? <u>Register your college!</u></string>
+    <string name="already_a_user_nlogin_instead">Already a user?\n<u><i>Login instead</i></u></string>
+    <string name="new_here_register_your_college">New here? <u><i>Register your college!</i></u></string>
 </resources>

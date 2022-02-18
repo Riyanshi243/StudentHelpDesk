@@ -99,8 +99,7 @@
                 android:layout_marginRight="25dp"
                 android:gravity="right"
                 android:text="Forgot Password"
-                android:textColor="@color/blue_text"
-                android:textStyle="italic" />
+                android:textColor="@color/blue_text" />
 
             <Button
                 android:id="@+id/login"
@@ -122,8 +121,7 @@
                 android:gravity="center"
                 android:onClick="signUp"
                 android:text="@string/no_account_ncreate_one"
-                android:textColor="@color/blue_text"
-                android:textStyle="italic" />
+                android:textColor="@color/blue_text" />
 
 
             <TextView
@@ -135,8 +133,7 @@
                 android:gravity="center"
                 android:onClick="register"
                 android:text="@string/new_here_register_your_college"
-                android:textColor="@color/blue_text"
-                android:textStyle="italic" />
+                android:textColor="@color/blue_text" />
         </LinearLayout>
     </ScrollView>
 

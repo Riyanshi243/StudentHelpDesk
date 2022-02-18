@@ -40,58 +40,84 @@
                     android:textSize="32dp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/msg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="casual"
-                android:paddingLeft="5dp"
-                android:text="Please select the departments which will be responsible for managing the data of the students."
-                android:textColor="@color/black"
-                android:textSize="16dp"/>
-
             <LinearLayout
-                android:id="@+id/linearL"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="20dp">
-            <!-- REPEATABLE FOR TICKBOXES -->
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="casual"
+                    android:paddingLeft="5dp"
+                    android:text="Please select the departments which will be responsible for managing the data of the students."
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:id="@+id/linearL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+                    <!-- REPEATABLE FOR TICKBOXES -->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/no_of_departments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:paddingLeft="5dp"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="22dp" />
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:paddingLeft="5dp"
+                        android:text="departments selected"
+                        android:textColor="@color/black"
+                        android:textSize="22dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/msgend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:paddingLeft="5dp"
+                    android:text="All the admins of these departments will be receive request to edit data from the students."
+                    android:textColor="@color/black"
+                    android:textSize="22dp"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="60dp"
+                    android:background="@drawable/roundedbutton"
+                    android:onClick="saveAndNext"
+                    android:text="SAVE AND NEXT" />
+
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/no_of_departments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:paddingLeft="5dp"
-                android:text="0"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
-            <TextView
-                android:id="@+id/msgend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="casual"
-                android:paddingLeft="5dp"
-                android:text="All the admins of these departments will be receive request to edit data from the students."
-                android:textColor="@color/black"
-                android:textSize="16dp"/>
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="60dp"
-                android:background="@drawable/roundedbutton"
-                android:onClick="saveAndNext"
-                android:text="SAVE AND NEXT" />
 
         </LinearLayout>
     </ScrollView>

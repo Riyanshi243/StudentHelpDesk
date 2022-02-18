@@ -17,12 +17,13 @@ import java.util.ArrayList;
 public class RegisterCollege2_1 extends AppCompatActivity {
     LinearLayout ll;
     CollegeRegistrationData allData;
-    TextView tot;
+    TextView tot,endmsg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_college2_1);
         ll=findViewById(R.id.linearL);
+        endmsg=findViewById(R.id.msgend);
         tot=findViewById(R.id.no_of_departments);
         allData=RegisterCollege.allData;
         ArrayList<String> dept = allData.getDeptName();
@@ -33,6 +34,7 @@ public class RegisterCollege2_1 extends AppCompatActivity {
             c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    endmsg.setVisibility(View.VISIBLE);
                     if(c.isChecked())
                     {
                         int ct=Integer.parseInt(tot.getText().toString());

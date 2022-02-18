@@ -10,6 +10,7 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,7 @@
             android:layout_marginLeft="10dp"
             android:text="checkbox"
             android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:textSize="24sp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

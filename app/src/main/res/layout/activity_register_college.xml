@@ -176,12 +176,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-
                 android:onClick="toLogin"
                 android:text="@string/already_a_user_nlogin_instead"
                 android:textAlignment="center"
                 android:textColor="@color/blue_text"
-                android:textStyle="italic"
                 android:layout_marginBottom="60dp" />
         </LinearLayout>
         </LinearLayout>

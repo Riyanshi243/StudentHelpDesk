@@ -11,6 +11,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="20dp"
+        android:padding="5dp"
         android:background="@drawable/layout_bg"
         android:duplicateParentState="true"
         android:orientation="vertical"

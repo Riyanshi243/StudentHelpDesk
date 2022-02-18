@@ -118,7 +118,7 @@ public class Signup extends AppCompatActivity {
 
                                 } else {
                                     //Toast that this user has already signed up
-                                    Toast.makeText(Signup.this, "USER HAS ALREADY SIGNED UP", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Signup.this, "You have already Signed Up, You may Login", Toast.LENGTH_LONG).show();
 
                                     //Intent to login.class
                                     startActivity(new Intent(Signup.this, Login.class));
