@@ -92,6 +92,8 @@ public class Login extends AppCompatActivity {
                         {
                             Toast.makeText(Login.this,"Error:"+e.getMessage(),Toast.LENGTH_LONG).show();
                             login.setEnabled(true);
+                            ProgressBar pbar = findViewById(R.id.progressBar4);
+                            pbar.setVisibility(View.INVISIBLE);
                         }
                     }
                 });

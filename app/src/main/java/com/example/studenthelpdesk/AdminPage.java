@@ -46,10 +46,10 @@ public class AdminPage extends AppCompatActivity {
                 String dept=(String) documentSnapshot.get("Department");
                 adminData.setCollegeId(cId);
                 adminData.setDeptName(dept);
-                FirebaseMessaging.getInstance().subscribeToTopic("all");
+                FirebaseMessaging.getInstance().subscribeToTopic("All");
                 FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
                 FirebaseMessaging.getInstance().subscribeToTopic(cId);
-                FirebaseMessaging.getInstance().subscribeToTopic("admin_"+cId);
+                FirebaseMessaging.getInstance().subscribeToTopic("Admin_"+cId);
 
                 FirebaseMessaging.getInstance().subscribeToTopic(cId+"_"+dept.replaceAll("\\s", ""));
 
@@ -85,6 +85,9 @@ public class AdminPage extends AppCompatActivity {
     public void sendNotification(View v){
         startActivity(new Intent(AdminPage.this, AdminOrCompanySendNotification.class));
     }
+    public void viewNotifications(View v){
+        startActivity(new Intent(AdminPage.this, ViewNotificationsByAll.class));
+    }
     public void searchUser(View v){
         startActivity(new Intent(AdminPage.this, AdminSearchUser.class));
     }
@@ -101,7 +104,7 @@ public class AdminPage extends AppCompatActivity {
     {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(adminData.getCollegeId());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getCurrentUser().getEmail());
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("admin"+adminData.getCollegeId());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("Admin"+adminData.getCollegeId());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(adminData.getCollegeId()+"_"+adminData.getDeptName().replaceAll("\\s", ""));
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();

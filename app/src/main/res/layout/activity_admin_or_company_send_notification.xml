@@ -74,8 +74,9 @@
 
                 <EditText
                     android:id="@+id/notif_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:ems="10"
                     android:hint="Enter Title for notification"
                     android:inputType="textPersonName" />
@@ -87,9 +88,11 @@
                 <EditText
                     android:id="@+id/notif_content"
                     android:layout_width="match_parent"
-                    android:layout_height="92dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:ems="10"
+                    android:padding="10dp"
+                    android:background="@drawable/layout_bg"
                     android:foregroundGravity="top"
                     android:gravity="start|top|left"
                     android:hint="Enter content of notification"
@@ -101,6 +104,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/box_bg"
                     android:textColorHint="@color/hint_text"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -111,7 +116,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:inputType="none"
-                        android:text="Choose Desired audience" />
+                        android:text="Choose desired audience of notification" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,29 +128,40 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageButton
-                        android:id="@+id/imageButton3"
-                        android:layout_width="61dp"
-                        android:layout_height="57dp"
-                        android:background="@color/black"
-                        android:backgroundTint="#FFFFFF"
-                        app:srcCompat="@drawable/attach" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:id="@+id/textView6"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Attach Documents"
-                        android:textColor="#000000" />
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:layout_marginRight="20dp"/>
+
+                    <Button
+                        android:id="@+id/attachdoc"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/attach" />
+                    <ImageView
+                        android:id="@+id/uplodingdone"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/ic_baseline_done" />
+
+
                 </TableRow>
 
                 <LinearLayout
                     android:id="@+id/ll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"></LinearLayout>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"></LinearLayout>
 
                 <Button
                     android:id="@+id/send_notif"

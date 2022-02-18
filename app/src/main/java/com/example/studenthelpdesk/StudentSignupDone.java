@@ -111,7 +111,7 @@ public class StudentSignupDone extends AppCompatActivity {
                                                                 setText("Process Complete");
                                                                 HashMap<String,Object> tokenMap=new HashMap<>();
 
-                                                                Toast.makeText(StudentSignupDone.this,"Signup Done \nYou may log in"+ token,Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(StudentSignupDone.this,"Signup Done \nYou may log in",Toast.LENGTH_SHORT).show();
                                                                 startActivity(new Intent(StudentSignupDone.this,Login.class));
 
                                                             }

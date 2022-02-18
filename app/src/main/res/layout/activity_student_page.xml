@@ -194,7 +194,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:paddingLeft="15dp"
-                    android:text="NOTIFICATIONS >"
+                    android:text="VIEW NOTIFICATIONS >"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
 

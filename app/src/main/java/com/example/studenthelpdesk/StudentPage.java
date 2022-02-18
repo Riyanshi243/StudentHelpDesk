@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -24,7 +23,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -44,7 +42,7 @@ public class StudentPage extends AppCompatActivity {
             startActivity(new Intent(this,Login.class));
             finish();
         }
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        FirebaseMessaging.getInstance().subscribeToTopic("All");
         FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
         studentData=new StudentData();
         heading=findViewById(R.id.name);
@@ -71,7 +69,7 @@ public class StudentPage extends AppCompatActivity {
                         studentData.setBranch(branch);
                         studentData.setCourse(course);
                         studentData.setYr(yr);
-                        FirebaseMessaging.getInstance().subscribeToTopic("student"+studentData.getCollegeid());
+                        FirebaseMessaging.getInstance().subscribeToTopic("Student"+studentData.getCollegeid());
                         FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid());
                         FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid()+"_"+studentData.getCourse());
                         FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch());
@@ -282,7 +280,7 @@ public class StudentPage extends AppCompatActivity {
         startActivity(new Intent(StudentPage.this, StudentCheckRequestStatus.class));
     }
     public void viewNotifications(View v){
-        startActivity(new Intent(StudentPage.this, StudentViewNotifications.class));
+        startActivity(new Intent(StudentPage.this, ViewNotificationsByAll.class));
     }
     public void viewFaq(View v){
         startActivity(new Intent(StudentPage.this, StudentViewAllFAQ.class));
@@ -290,7 +288,7 @@ public class StudentPage extends AppCompatActivity {
     public void logout(View v)
     {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid());
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("student"+studentData.getCollegeid());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("Student"+studentData.getCollegeid());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getCurrentUser().getEmail());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch());

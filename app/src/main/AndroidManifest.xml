@@ -52,7 +52,7 @@
             android:name=".StudentPostFAQ"
             android:exported="false" />
         <activity
-            android:name=".StudentViewNotifications"
+            android:name=".ViewNotificationsByAll"
             android:exported="false" />
         <activity
             android:name=".StudentUploadDetails"

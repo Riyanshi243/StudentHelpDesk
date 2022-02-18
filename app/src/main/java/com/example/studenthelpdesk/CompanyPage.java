@@ -19,16 +19,19 @@ public class CompanyPage extends AppCompatActivity {
         setContentView(R.layout.activity_company_page);
         f=FirebaseAuth.getInstance();
         companyData=new CompanyData();
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        FirebaseMessaging.getInstance().subscribeToTopic("All");
         FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
         //FirebaseMessaging.getInstance().subscribeToTopic(cId);
-        //FirebaseMessaging.getInstance().subscribeToTopic("company_"+cId);
+        //FirebaseMessaging.getInstance().subscribeToTopic("Company_"+cId);
 
     }
 
 
     public void sendNotification(View v){
         startActivity(new Intent(CompanyPage.this, AdminOrCompanySendNotification.class));
+    }
+    public void viewNotifications(View v){
+        startActivity(new Intent(CompanyPage.this, ViewNotificationsByAll.class));
     }
     public void editProfile(View v){
         startActivity(new Intent(CompanyPage.this, CompanyEditProfilePage.class));

@@ -38,17 +38,17 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
         audience=findViewById(R.id.audience);
         adminData=AdminPage.adminData;
         companyData=CompanyPage.companyData;
-        cId="all";
+        cId="All";
         if (adminData!=null)
             cId=adminData.getCollegeId();
         else
             cId=companyData.getCollegeId();
 
         ArrayList<String> audienceChoice=new ArrayList<>();
-        audienceChoice.add("all");
-        audienceChoice.add("student");
-        audienceChoice.add("admin");
-        audienceChoice.add("company");
+        audienceChoice.add("All");
+        audienceChoice.add("Student");
+        audienceChoice.add("Admin");
+        audienceChoice.add("Company");
         ArrayAdapter spinnerListAudience = new ArrayAdapter(this, android.R.layout.simple_spinner_item, audienceChoice);
         audience.setAdapter(spinnerListAudience);
         String finalCId = cId;
@@ -75,7 +75,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             ArrayList<String> courses = (ArrayList<String>) documentSnapshot.get("Courses");
-                            courses.add(0,"all");
+                            courses.add(0,"All");
                             ArrayAdapter spinnerListCourse = new ArrayAdapter(AdminOrCompanySendNotification.this, android.R.layout.simple_spinner_item, courses);
                             studentAudience.setAdapter(spinnerListCourse);
                             studentAudience.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -84,7 +84,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
 
                                     if(i==0)
                                     {
-                                        token="student"+cId;
+                                        token="Student"+cId;
                                         ll2.removeAllViews();
                                     }
                                     else {
@@ -97,7 +97,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 ArrayList<String> allbranch = (ArrayList<String>) documentSnapshot.get("Branches");
-                                                allbranch.add(0, "all");
+                                                allbranch.add(0, "All");
                                                 ArrayAdapter spinnerListBranch = new ArrayAdapter(AdminOrCompanySendNotification.this, android.R.layout.simple_spinner_item, allbranch);
                                                 Spinner branches = new Spinner(AdminOrCompanySendNotification.this);
                                                 branches.setAdapter(spinnerListBranch);
@@ -116,7 +116,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                                                             String selectedBranch=allbranch.get(i);
                                                             ll3.removeAllViews();
                                                             ArrayList<String> yr=new ArrayList<>();
-                                                            yr.add("all");
+                                                            yr.add("All");
                                                             yr.add("1");
                                                             yr.add("2");
                                                             yr.add("3");
@@ -164,7 +164,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
 
                                 @Override
                                 public void onNothingSelected(AdapterView<?> adapterView) {
-                                    token="student"+cId;
+                                    token="Student"+cId;
                                 }
                             });
                         }
@@ -183,21 +183,21 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             ArrayList<String> dept = (ArrayList<String>) documentSnapshot.get("Departments");
-                            dept.add(0,"all");
+                            dept.add(0,"All");
                             ArrayAdapter spinnerListDept=new ArrayAdapter(AdminOrCompanySendNotification.this, android.R.layout.simple_spinner_item,dept);
                             adminAudience.setAdapter(spinnerListDept);
                             adminAudience.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     if(i==0)
-                                        token="admin_"+cId;
+                                        token="Admin_"+cId;
                                     else
                                         token=cId+"_"+dept.get(i).replaceAll("\\s", "");
                                 }
 
                                 @Override
                                 public void onNothingSelected(AdapterView<?> adapterView) {
-                                    token="admin_"+cId;
+                                    token="Admin_"+cId;
                                 }
                             });
                         }
@@ -206,7 +206,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                 }
                 else if(i==3)
                 {
-                    token="company"+cId;
+                    token="Company"+cId;
                 }
 
             }
