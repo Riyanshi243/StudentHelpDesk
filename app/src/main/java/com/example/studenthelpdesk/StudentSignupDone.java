@@ -33,7 +33,7 @@ public class StudentSignupDone extends AppCompatActivity {
         setContentView(R.layout.activity_student_signup_done);
         studentData = Signup.studentData;
         ll = findViewById(R.id.ll);
-        ProgressBar progressBar=findViewById(R.id.progressBar6);
+        ProgressBar progressBar=findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.VISIBLE);
         FirebaseFirestore f = FirebaseFirestore.getInstance();
         DocumentReference docBasicInfo = f.collection("All Colleges").document(studentData.getCollegeid()).collection("All Users").document(studentData.getEmail());

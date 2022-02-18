@@ -32,7 +32,7 @@ public class RegisterCollege8 extends AppCompatActivity {
         ProgressBar progressBar=findViewById(R.id.progressBar2);
         allData=RegisterCollege.allData;
         TextView t=new TextView(this);
-        t.setText("Data Uploading... PLEASE DO NOT PRESS BACK OR EXIT");
+        t.setText("Data Uploading... \nPLEASE DO NOT PRESS BACK OR EXIT");
         t.setTextSize(22);
         LinearLayout cl=findViewById(R.id.cl);
         cl.addView(t);
@@ -81,7 +81,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                 public void onSuccess(Void unused) {
                                     TextView t=new TextView(RegisterCollege8.this);
                                     t.setText("COURSE AND BRANCHES UPLOADING ..."+ finalI);
-                                    t.setTextSize(16);
+                                    t.setTextSize(18);
                                     cl.addView(t);
                                 }
                             });

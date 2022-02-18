@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class CompanySignUp2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_sign_up2);
         companyData=Signup.companyData;
+        ProgressBar progressBar=findViewById(R.id.progressBar2);
         ll=findViewById(R.id.ll);
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference docUserBasicInfo = f.collection("All Users On App").document(companyData.getEmail());
@@ -59,6 +62,7 @@ public class CompanySignUp2 extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 setText("FAILED");
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(CompanySignUp2.this,e.toString(),Toast.LENGTH_LONG).show();
                             }
                         });
@@ -67,6 +71,7 @@ public class CompanySignUp2 extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         setText("FAILED");
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(CompanySignUp2.this,e.toString(),Toast.LENGTH_LONG).show();
                     }
                 });;
@@ -76,6 +81,7 @@ public class CompanySignUp2 extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 setText("FAILED");
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(CompanySignUp2.this,e.toString(),Toast.LENGTH_LONG).show();
             }
         });;

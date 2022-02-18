@@ -46,7 +46,7 @@ public class StudentSignup3_UploadData extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_upload_documents);
+        setContentView(R.layout.activity_studentsignup3_upload_data);
         studentData=Signup.studentData;
         uQuestion=new ArrayList<>();
         progressbar=findViewById(R.id.progressBar5);
