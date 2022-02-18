@@ -51,13 +51,14 @@
                     android:layout_height="wrap_content"
                     android:visibility="invisible" />
             </LinearLayout>
+
             <LinearLayout
-                android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/college_name"
                     android:layout_width="match_parent"
@@ -72,50 +73,79 @@
                     android:textSize="16dp" />
 
                 <EditText
-                    android:id="@+id/notification_text"
-                    android:layout_width="match_parent"
+                    android:id="@+id/notif_title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/layout_bg"
                     android:ems="10"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:hint="Type the text of notification..."
-                    android:inputType="textMultiLine"
-                    android:textSize="20dp"/>
+                    android:hint="Enter Title for notification"
+                    android:inputType="textPersonName" />
 
-                <CheckBox
-                    android:id="@+id/anonymous"
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="26dp" />
+
+                <EditText
+                    android:id="@+id/notif_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="92dp"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:foregroundGravity="top"
+                    android:gravity="start|top|left"
+                    android:hint="Enter content of notification"
+                    android:inputType="textMultiLine" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Want to add any attachment?"
-                    android:textSize="18dp"
-                    android:layout_marginTop="10dp"/>
+                    android:backgroundTint="@color/box_bg"
+                    android:textColorHint="@color/hint_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/audience"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="none"
+                        android:text="Choose Desired audience" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/add"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"></LinearLayout>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/imageButton3"
+                        android:layout_width="61dp"
+                        android:layout_height="57dp"
+                        android:background="@color/black"
+                        android:backgroundTint="#FFFFFF"
+                        app:srcCompat="@drawable/attach" />
 
                     <TextView
-                        android:id="@+id/upload_text"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/textView6"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingLeft="5dp"
-                        android:text="Upload your attachment"
-                        android:textColor="@color/black"
-                        android:textSize="18dp" />
-
-                    <Button
-                        android:id="@+id/upload"
-                        android:layout_width="40dp"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_baseline_upload_file" />
+                        android:text="Attach Documents"
+                        android:textColor="#000000" />
                 </TableRow>
+
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"></LinearLayout>
 
                 <Button
                     android:id="@+id/send_notif"
