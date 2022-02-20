@@ -145,7 +145,8 @@
                         android:layout_width="40dp"
                         android:layout_height="30dp"
                         android:layout_marginRight="20dp"
-                        android:background="@drawable/attach" />
+                        android:background="@drawable/attach"
+                        android:onClick="attachNotif" />
                     <ImageView
                         android:id="@+id/uplodingdone"
                         android:layout_width="40dp"
@@ -160,8 +161,8 @@
                     android:id="@+id/ll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"></LinearLayout>
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"></LinearLayout>
 
                 <Button
                     android:id="@+id/signup"
