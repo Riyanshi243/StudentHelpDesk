@@ -68,7 +68,7 @@
                     android:layout_marginBottom="20dp"
                     android:fontFamily="casual"
                     android:paddingLeft="5dp"
-                    android:text="These notifications will directly be sent to all the students of college "
+                    android:text="These notifications will be sent to the desired audience of college "
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 

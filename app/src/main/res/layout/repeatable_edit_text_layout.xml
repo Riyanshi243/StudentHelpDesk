@@ -39,7 +39,7 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="Your "
-            android:inputType="textPersonName"
+            android:inputType="textCapSentences"
             android:textColor="@color/black"
             android:textSize="20dp" />
 

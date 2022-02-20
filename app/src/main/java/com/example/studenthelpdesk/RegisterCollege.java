@@ -52,6 +52,9 @@ public class RegisterCollege extends AppCompatActivity {
                     if(documentSnapshot.exists())
                     {
                         uname.setError("THIS USERNAME ALREADY EXISTS");
+                        register.setEnabled(true);
+                        ProgressBar pbar =findViewById(R.id.progressBar_college);
+                        pbar.setVisibility(View.INVISIBLE);
                     }
                     else
                     {
@@ -83,7 +86,6 @@ public class RegisterCollege extends AppCompatActivity {
         pbar.setVisibility(View.VISIBLE);
        // final Boolean[] flag = {true};
         //everything not empty
-
 
         if(cname.getText().toString().length()==0)
         {
@@ -135,7 +137,7 @@ public class RegisterCollege extends AppCompatActivity {
         String email=adminmail.getText().toString().trim();
         if(!email.matches(emailPattern))
         {
-            adminmail.setError("ENTER VALID MAIL");
+            adminmail.setError("ENTER VALID EMAIL");
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;

@@ -38,7 +38,7 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
+            android:inputType="textCapSentences"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:hint="Enter your question..." />

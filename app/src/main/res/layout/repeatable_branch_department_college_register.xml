@@ -28,6 +28,7 @@
         android:layout_marginBottom="10dp"
         android:hint="Enter the branch"
         android:paddingLeft="5dp"
+        android:inputType="textCapSentences"
         android:textColor="@color/black"
         android:textSize="20dp" />
 

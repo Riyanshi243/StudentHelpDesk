@@ -7,8 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 
-
-
 public class DatePicker extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Calendar mCalendar = Calendar.getInstance();

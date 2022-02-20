@@ -38,7 +38,7 @@
             android:layout_marginBottom="10dp"
             android:gravity="start|top"
             android:paddingLeft="5dp"
-            android:inputType="textPersonName"
+            android:inputType="textCapSentences"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:hint="Your " />
