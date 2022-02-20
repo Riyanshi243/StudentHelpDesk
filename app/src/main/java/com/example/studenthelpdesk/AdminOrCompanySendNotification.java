@@ -1,34 +1,62 @@
 package com.example.studenthelpdesk;
 
+import static java.lang.System.currentTimeMillis;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class AdminOrCompanySendNotification extends AppCompatActivity {
-
+    ArrayList<Uri> allAttach;
     TextView title,content;
     AutoCompleteTextView audience;
     String token="",cId;
     AdminData adminData;
     CompanyData companyData;
+    LinearLayout attach_ll;
+    ProgressBar progressbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +64,11 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
         title=findViewById(R.id.notif_title);
         content=findViewById(R.id.notif_content);
         audience=findViewById(R.id.audience);
+        attach_ll=findViewById(R.id.ll);
         adminData=AdminPage.adminData;
         companyData=CompanyPage.companyData;
+        progressbar=findViewById(R.id.progressBar5);
+        allAttach=new ArrayList<>();
         cId="All";
         if (adminData!=null)
             cId=adminData.getCollegeId();
@@ -214,12 +245,253 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
 
 
     }
+    public void attachNotif(View v)
+    {
+        String[] mimeTypes = {"image/*", "application/pdf"};
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
+            if (mimeTypes.length > 0) {
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+            }
+        } else {
+            String mimeTypesStr = "";
+
+            for (String mimeType : mimeTypes) {
+                mimeTypesStr += mimeType + "|";
+            }
+
+            intent.setType(mimeTypesStr.substring(0, mimeTypesStr.length() - 1));
+        }
+        startActivityForResult(intent,1);
+    }
+
+    ProgressDialog dialog;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            dialog = new ProgressDialog(this);
+            dialog.setMessage("UPLOADING");
+            dialog.setCancelable(false);
+            dialog.show();
+            getAttachment(data.getData());
+        }
+        if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(this,"ACTIVITY CANCELLED",Toast.LENGTH_SHORT).show();
+            progressbar.setVisibility(View.INVISIBLE);
+        }
+    }
+
     public void sendNotif(View v)
     {
         String t1=token;
-        token="/topics/"+token;
-        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),this);
-        notificationsSender.SendNotifications();
-        token=t1;
+        String timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+        ArrayList<String> fileName=new ArrayList<>();
+        String name;
+        if (adminData!=null) {
+            name = adminData.getAdminName();
+        }
+        else
+            name=companyData.getCompanyName();
+
+        if(allAttach.size()==0)
+        {
+            FirebaseFirestore fs=FirebaseFirestore.getInstance();
+            DocumentReference docNotif = fs.collection("All Colleges").document(cId).collection("Notification").document(token).collection(FirebaseAuth.getInstance().getUid().toString() + "_" + timeStamp).document("1");
+            HashMap<String,Object> notifMap=new HashMap<>();
+            notifMap.put("Title",title.getText().toString());
+            notifMap.put("Content",content.getText().toString());
+            notifMap.put("Sender",name);
+            notifMap.put("Timestamp",timeStamp);
+            notifMap.put("Attachment",null);
+            Log.e("map",docNotif.getPath().toString());
+            docNotif.set(notifMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    title.setText("");
+                    content.setText("");
+                    attach_ll.removeAllViews();
+                    allAttach.clear();
+                    token="/topics/"+token;
+                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
+                    notificationsSender.SendNotifications();
+                    token=t1;
+                    Toast.makeText(AdminOrCompanySendNotification.this,"Notif sent",Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else
+        {
+            for(int i=0;i<allAttach.size();i++)
+            {
+                fileName.add(getNameFromURI(allAttach.get(i)));
+                StorageReference sr=FirebaseStorage.getInstance().getReference(cId).child("Notification_"+cId).child(token).child(FirebaseAuth.getInstance().getUid()+"_"+timeStamp).child(getNameFromURI(allAttach.get(i)));
+                int finalI = i;
+                sr.putFile(allAttach.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        if(finalI ==allAttach.size()-1)
+                        {
+                            FirebaseFirestore fs=FirebaseFirestore.getInstance();
+                            DocumentReference docNotif = fs.collection("All Colleges").document(cId).collection("Notification").document(token).collection(FirebaseAuth.getInstance().getUid().toString() + "_" + timeStamp).document("1");
+                            HashMap<String,Object> notifMap=new HashMap<>();
+                            notifMap.put("Title",title.getText().toString());
+                            notifMap.put("Content",content.getText().toString());
+                            notifMap.put("Sender",name);
+                            notifMap.put("Timestamp",timeStamp);
+                            notifMap.put("Attachment",fileName);
+                            notifMap.put("Notif Location",FirebaseAuth.getInstance().getUid()+"_"+timeStamp);
+                            Log.e("map",docNotif.getPath().toString());
+                            docNotif.set(notifMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    title.setText("");
+                                    content.setText("");
+                                    attach_ll.removeAllViews();
+                                    allAttach.clear();
+                                    token="/topics/"+token;
+                                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
+                                    notificationsSender.SendNotifications();
+                                    token=t1;
+                                    Toast.makeText(AdminOrCompanySendNotification.this,"Notif sent",Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        }
     }
+    public void sendNotif1(View v)
+    {
+
+        String t1=token;
+        String timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+        ArrayList<String> fileName=new ArrayList<>();
+        if(allAttach.size()!=0)
+        {
+            int i=0;
+            for(Uri a:allAttach)
+            {
+                i++;
+                fileName.add(getNameFromURI(a));
+                StorageReference storageReference=FirebaseStorage.getInstance().getReference("Notification_"+cId).child(token).
+                        child(FirebaseAuth.getInstance().getUid()+"_"+timeStamp);
+                int finalI = i;
+                storageReference.putFile(a).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        if(finalI ==allAttach.size()-1)
+                        {
+                            DocumentReference fs=FirebaseFirestore.getInstance().collection("Notification").document(token).collection(FirebaseAuth.getInstance().getUid().toString()+"_"+timeStamp).document("1");
+                            HashMap<String,Object> notifDetail=new HashMap<>();
+                            notifDetail.put("Title",title.getText());
+                            notifDetail.put("Content",title.getText());
+                            String name;
+                            if (adminData!=null) {
+                                name = adminData.getAdminName();
+                            }
+                            else
+                                name=companyData.getCompanyName();
+
+                            notifDetail.put("Sender",name);
+                            notifDetail.put("Time",timeStamp);
+                            notifDetail.put("Attachments",fileName);
+                            notifDetail.put("Notif Id",FirebaseAuth.getInstance().getUid()+"_"+timeStamp);
+                            fs.set(new HashMap<String,Object>());
+                            fs.set(notifDetail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    title.setText("");
+                                    content.setText("");
+                                    attach_ll.removeAllViews();
+                                    allAttach.clear();
+                                    token="/topics/"+token;
+                                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
+                                    notificationsSender.SendNotifications();
+                                    token=t1;
+                                    Toast.makeText(AdminOrCompanySendNotification.this,"Notification sent",Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+                        }
+                    }
+                });
+
+            }
+        }
+        else
+        {
+                FirebaseFirestore fs=FirebaseFirestore.getInstance();
+                DocumentReference docNotif = fs.collection("Notification").document(token).collection(FirebaseAuth.getInstance().getUid().toString() + "_" + timeStamp).document("1");
+                HashMap<String,Object> notifDetail=new HashMap<>();
+                notifDetail.put("Title",title.getText());
+                notifDetail.put("Content",title.getText());
+                String name="Admin";
+                if (adminData!=null) {
+                    name = adminData.getAdminName();
+                }
+                else
+                    name=companyData.getCompanyName();
+
+                notifDetail.put("Sender",name);
+                notifDetail.put("Time",timeStamp);
+                notifDetail.put("Attachments",null);
+                notifDetail.put("Notif Id",FirebaseAuth.getInstance().getUid()+"_"+timeStamp);
+                Log.e("Map",notifDetail.toString());
+                docNotif.set(new HashMap<String,Object>());
+                docNotif.set(notifDetail);
+                /*docNotif.set(notifDetail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        title.setText("");
+                        content.setText("");
+                        attach_ll.removeAllViews();
+                        allAttach.clear();
+                        token="/topics/"+token;
+                        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
+                        notificationsSender.SendNotifications();
+                        token=t1;
+                        Toast.makeText(AdminOrCompanySendNotification.this,"Notification sent",Toast.LENGTH_LONG).show();
+
+                    }
+                });*/
+
+        }
+
+    }
+    public void getAttachment(Uri imageuri2){
+        if(imageuri2!=null)
+        {
+            TextView imageName=new TextView(this);
+            imageName.setText(getNameFromURI(imageuri2));
+            attach_ll.addView(imageName);
+            allAttach.add(imageuri2);
+            dialog.dismiss();
+        }
+        else
+        {
+            Toast.makeText(this,"NO pdf SELECTED",Toast.LENGTH_LONG).show();
+            progressbar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private  String getFileExtension(Uri uri)
+    {
+        ContentResolver cR=getContentResolver();
+        MimeTypeMap mime=MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    public String getNameFromURI(Uri uri) {
+        Cursor c = getContentResolver().query(uri, null, null, null, null);
+        c.moveToFirst();
+        @SuppressLint("Range") String string = c.getString(c.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+        return string;
+    }
+
 }
