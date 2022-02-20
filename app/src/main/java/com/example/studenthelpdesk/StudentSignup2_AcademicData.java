@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -122,7 +124,6 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             int id=v.getId();
             if(id>0)
             {
-                //
                 if(empty(v,id,allq[i],i))
                 {
                     //if a compulsory field is empty cant move forward
@@ -150,8 +151,8 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             //numeric
             View nView=v;
 
-            TextView ans=nView.findViewById(R.id.editvalnumeric);
-
+            EditText ans=nView.findViewById(R.id.editvalnumeric);
+            ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             allans[qId]=ans.getText().toString();
 
 
@@ -160,7 +161,8 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         {
             //numeric decimal
             View nView=v;
-            TextView ans=nView.findViewById(R.id.editvalmulti);
+            EditText ans=nView.findViewById(R.id.editvalmulti);
+            ans.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
             allans[qId]=ans.getText().toString();
 
@@ -186,28 +188,21 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         if(i==4)
         {
             //gender
-
             allans[qId]=gender;
-
-
         }
         if(i==5)
         {
             //date
             View nView=v;
             TextView ans=nView.findViewById(R.id.tvDate);
-
             {
                 allans[qId]=ans.getText().toString();
             }
-
         }
         if(i==6)
         {
             //upload
-
         }
-
     }
     boolean empty(View v,int i,String ques,int qID)
     {
@@ -215,8 +210,8 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         {
             //numeric
             View nView=v;
-
-            TextView ans=nView.findViewById(R.id.editvalnumeric);
+            EditText ans=nView.findViewById(R.id.editvalnumeric);
+            ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
@@ -233,7 +228,8 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         {
             //numeric decimal
             View nView=v;
-            TextView ans=nView.findViewById(R.id.editvalmulti);
+            EditText ans=nView.findViewById(R.id.editvalmulti);
+            ans.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
@@ -364,6 +360,8 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             //View nView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.repeatable_numeric_text_layout, null, false);
             View nView=getLayoutInflater().inflate(R.layout.repeatable_numeric_text_layout,null);
             TextView ques=nView.findViewById(R.id.Ques);
+            EditText ans=nView.findViewById(R.id.editvalnumeric);
+            ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             ques.setText(q);
             ques.setId(qNumber);
             return nView;
@@ -375,7 +373,6 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             TextView ques=nView.findViewById(R.id.Ques);
             ques.setText(q);
             ques.setId(qNumber);
-
             return nView;
         }
         if(i==0)
@@ -583,7 +580,6 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         mCalendar.set(Calendar.YEAR, year);
         mCalendar.set(Calendar.MONTH, month);
         mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
         selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
 
     }}

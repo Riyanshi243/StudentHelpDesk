@@ -12,12 +12,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.text.InputType;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,7 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
-    TextView name,phone;
+    EditText name,phone;
     AutoCompleteTextView dept;
     CollegeRegistrationData alldata;
     int deptn=-1;
@@ -42,6 +44,7 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
         setContentView(R.layout.activity_register_college7_super_admin_signup);
         name=findViewById(R.id.adminname);
         phone=findViewById(R.id.contact);
+        phone.setInputType(InputType.TYPE_CLASS_NUMBER);
         dept=findViewById(R.id.deptName);
         alldata=RegisterCollege.allData;
         ArrayAdapter spinnerList=new ArrayAdapter(RegisterCollege7_SuperAdminSignup.this,android.R.layout.simple_spinner_item,alldata.getDeptName());

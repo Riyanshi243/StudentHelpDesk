@@ -159,17 +159,17 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             //numeric
             View nView=v;
 
-            TextView ans=nView.findViewById(R.id.editvalnumeric);
+            EditText ans=nView.findViewById(R.id.editvalnumeric);
             ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             allans[qId]=ans.getText().toString();
-
 
         }
         if(i==3)
         {
             //numeric decimal
             View nView=v;
-            TextView ans=nView.findViewById(R.id.editvalmulti);
+            EditText ans=nView.findViewById(R.id.editvalmulti);
+            ans.setInputType(InputType.TYPE_CLASS_NUMBER);
 
                 allans[qId]=ans.getText().toString();
 
@@ -227,7 +227,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             //numeric
             View nView=v;
 
-            TextView ans=nView.findViewById(R.id.editvalnumeric);
+            EditText ans=nView.findViewById(R.id.editvalnumeric);
             ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             if(ans.length()==0)
             {
@@ -245,8 +245,8 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
         {
             //numeric decimal
             View nView=v;
-            TextView ans=nView.findViewById(R.id.editvalmulti);
-            //ans.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            EditText ans=nView.findViewById(R.id.editvalmulti);
+            ans.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
@@ -382,6 +382,8 @@ int noOfq=0;
             //View nView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.repeatable_numeric_text_layout, null, false);
             View nView=getLayoutInflater().inflate(R.layout.repeatable_numeric_text_layout,null);
             TextView ques=nView.findViewById(R.id.Ques);
+            EditText ans=nView.findViewById(R.id.editvalnumeric);
+            ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             ques.setText(q);
             ques.setId(qNumber);
             return nView;

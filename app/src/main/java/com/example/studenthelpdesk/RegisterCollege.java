@@ -27,12 +27,12 @@ public class RegisterCollege extends AppCompatActivity {
         allData=new CollegeRegistrationData();
         uname=findViewById(R.id.uname);
         cname=findViewById(R.id.cname);
-        cname.requestFocus();
+        //cname.requestFocus();
         location=findViewById(R.id.clocation);
         adminmail=findViewById(R.id.adminemail);
         password=findViewById(R.id.password2);
         password2=findViewById(R.id.confirmpassword2);
-         register= (Button) findViewById(R.id.register);
+        register= (Button) findViewById(R.id.register);
         firebaseFirestores=FirebaseFirestore.getInstance();
 
     }

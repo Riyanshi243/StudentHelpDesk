@@ -76,8 +76,8 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
         linearLayout.addView(questionRepeatable);
         ///0-string 1 line
         //1-string multiline
-        // 2-nuemerical
-        //3-neumeric decimal
+        // 2-numerical
+        //3-numeric decimal
         //4-radio
         //5-date
         //6-upload
