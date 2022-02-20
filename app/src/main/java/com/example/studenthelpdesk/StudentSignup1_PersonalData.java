@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -159,8 +160,8 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             View nView=v;
 
             TextView ans=nView.findViewById(R.id.editvalnumeric);
-
-                allans[qId]=ans.getText().toString();
+            ans.setInputType(InputType.TYPE_CLASS_NUMBER);
+            allans[qId]=ans.getText().toString();
 
 
         }
@@ -227,6 +228,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             View nView=v;
 
             TextView ans=nView.findViewById(R.id.editvalnumeric);
+            ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
@@ -244,6 +246,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             //numeric decimal
             View nView=v;
             TextView ans=nView.findViewById(R.id.editvalmulti);
+            //ans.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
@@ -600,8 +603,8 @@ int noOfq=0;
         mCalendar.set(Calendar.YEAR, year);
         mCalendar.set(Calendar.MONTH, month);
         mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
+        TextView datePicked=findViewById(R.id.tvDate);
         selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
-
+        datePicked.setText(selectedDate);
     }
 }
