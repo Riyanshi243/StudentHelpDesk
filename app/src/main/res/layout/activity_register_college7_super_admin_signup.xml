@@ -103,7 +103,6 @@
                     android:minHeight="48dp"
                     android:paddingLeft="5dp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -119,14 +118,14 @@
                     android:minHeight="48dp"
                     android:paddingLeft="5dp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:id="@+id/image"

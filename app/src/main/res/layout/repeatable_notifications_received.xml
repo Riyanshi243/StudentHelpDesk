@@ -8,8 +8,8 @@
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
         android:padding="5dp"
         android:background="@drawable/layout_bg"
@@ -32,6 +32,19 @@
             android:textSize="20dp"
             android:inputType="textMultiLine"/>
 
+        <TextView
+            android:id="@+id/timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="date"
+            android:text="timestamp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="5dp"
+            android:gravity="right"
+            android:layout_gravity="right"
+            android:textColor="@color/blue_text"
+            android:textSize="18dp" />
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,73 +52,37 @@
             android:layout_marginTop="10dp">
 
 
+            <ImageView
+                android:id="@+id/profilepic"
+                android:layout_width="37dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/admin_profile_img" />
+
             <TextView
-                android:id="@+id/reasonofreq"
+                android:id="@+id/refew"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:text="SENT BY : "
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="sent by "
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:inputType="textMultiLine"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/appliedDateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
-                android:text="TIME : "
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/date1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:inputType="date"
-                android:text="timestamp"
+                android:text="name"
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
         </TableRow>
-
-
 
         <TextView
             android:id="@+id/info"
-            android:layout_width="382dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="information"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/attachments"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/ic_baseline_attachment_" />
-    </LinearLayout>
+            android:visibility="visible"
+            android:layout_marginBottom="20dp"/>
+     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

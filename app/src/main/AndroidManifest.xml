@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".ViewNotificationDataByAll"
+            android:exported="false" />
+        <activity
             android:name=".RegisterCollege2_1"
             android:exported="false" />
         <activity
@@ -135,11 +138,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".FirebaseMessagingService"
+            android:exported="false"
             android:permission="TODO"
-            tools:ignore="ExportedService"
-            android:exported="false">
+            tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

@@ -64,8 +64,6 @@
                 android:clickable="true"
                 android:onClick="onRadioButtonClicked"
                 android:text="OTHERS" />
-
-
         </RadioGroup>
 
 
