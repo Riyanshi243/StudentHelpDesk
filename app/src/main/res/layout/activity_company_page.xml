@@ -70,6 +70,7 @@
                     android:textSize="28dp" />
 
                 <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/profilepic"
                     android:layout_width="190dp"
                     android:layout_height="157dp"
                     android:layout_gravity="center"
@@ -145,7 +146,8 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:onClick="sendNotification">
 
                     <ImageView
                         android:id="@+id/imageView5"

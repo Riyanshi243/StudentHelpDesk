@@ -39,13 +39,14 @@ public class CompanySignUp2 extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 setText("Uploaded Basic Info");
-                DocumentReference docUserInfoAll=f.collection("All Colleges").document(companyData.getCollegeId()).collection("UsersInfo").document("Company").collection("Details").document(companyData.getEmail());
+                DocumentReference docUserInfoAll=f.collection("All Colleges").document(companyData.getCollegeId()).collection("UsersInfo").document(companyData.getEmail());
                 HashMap<String,Object> userInfoAll=new HashMap<>();
+                userInfoAll.put("Category","Company");
                 userInfoAll.put("Phone Number",companyData.getPhone());
                 userInfoAll.put("Name",companyData.getName());
                 userInfoAll.put("Company Name",companyData.getCompanyName());
                 userInfoAll.put("Company Location",companyData.getLocation());
-                userInfoAll.put("Company Email",companyData.getPersonalEmail());
+                userInfoAll.put("Personal Email",companyData.getPersonalEmail());
                 docUserInfoAll.set(userInfoAll).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
