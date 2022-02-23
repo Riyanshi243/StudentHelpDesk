@@ -25,6 +25,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 
 public class StudentPage extends AppCompatActivity {
     FirebaseAuth f;
@@ -44,6 +45,9 @@ public class StudentPage extends AppCompatActivity {
         }
         FirebaseMessaging.getInstance().subscribeToTopic("All");
         FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
+        HashSet<String> token=new HashSet<>();
+        token.add("All");
+        token.add(f.getCurrentUser().getEmail());
         studentData=new StudentData();
         heading=findViewById(R.id.name);
         progressBar=findViewById(R.id.progressBar4);
@@ -74,7 +78,12 @@ public class StudentPage extends AppCompatActivity {
                         FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid()+"_"+studentData.getCourse());
                         FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch());
                         FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
-
+                        token.add("Student"+studentData.getCollegeid());
+                        token.add(studentData.getCollegeid());
+                        token.add(studentData.getCollegeid()+"_"+studentData.getCourse());
+                        token.add(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch());
+                        token.add(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
+                        studentData.setToken(token);
                         DocumentReference docUserInfo2 = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document("Student").collection(course).document(branch).collection(yr).document(studentData.getEmail());
                         docUserInfo2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override

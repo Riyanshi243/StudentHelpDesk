@@ -23,6 +23,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.ncorti.slidetoact.SlideToActView;
 
+import java.util.HashSet;
+
 public class AdminPage extends AppCompatActivity {
     static AdminData adminData;
      FirebaseAuth f;
@@ -38,6 +40,9 @@ public class AdminPage extends AppCompatActivity {
         f=FirebaseAuth.getInstance();
         adminData.setEmail(f.getCurrentUser().getEmail());
         FirebaseFirestore fs=FirebaseFirestore.getInstance();
+        HashSet<String> token=new HashSet<>();
+        token.add("All");
+        token.add(f.getCurrentUser().getEmail());
         DocumentReference docUserInfo = fs.collection("All Users On App").document(adminData.getEmail());
         docUserInfo.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -52,7 +57,10 @@ public class AdminPage extends AppCompatActivity {
                 FirebaseMessaging.getInstance().subscribeToTopic("Admin_"+cId);
 
                 FirebaseMessaging.getInstance().subscribeToTopic(cId+"_"+dept.replaceAll("\\s", ""));
-
+                token.add(cId);
+                token.add("Admin_"+cId);
+                token.add(cId+"_"+dept.replaceAll("\\s", ""));
+                adminData.setToken(token);
                 DocumentReference docUserInfoAll = fs.collection("All Colleges").document(cId).collection("UsersInfo").document("Admin").collection(dept).document(adminData.getEmail());
                 docUserInfoAll.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
