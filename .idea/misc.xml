@@ -141,6 +141,13 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/menu/logout_notif.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91991/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_admin_create_new_account.xml" value="0.24547101449275363" />
         <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_admin_or_company_send_notification.xml" value="0.12817028985507245" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_view_image.xml" value="0.1" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_view_notification_data_by_all.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/activity_view_notifications_by_all.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/repeatable_notification_attachment.xml" value="0.12318840579710146" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/repeatable_notifications_received.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/repeatable_photograph.xml" value="0.1" />
+        <entry key="..\:/Users/HP/StudioProjects/StudentHelpDesk/app/src/main/res/layout/repeatable_student_request_status_box.xml" value="0.1" />
       </map>
     </option>
   </component>

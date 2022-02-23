@@ -1,6 +1,7 @@
 package com.example.studenthelpdesk;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class StudentData {
     private String email,password,collegeid,course=" ",branch=" ",name;
@@ -8,6 +9,15 @@ public class StudentData {
     private String p_ques[],p_id[],p_ans[],a_ques[],a_id[],a_ans[];
     private ArrayList<CollegeRegisterQuestions> personal_ques,academic_ques,upload_ques;
     private long noOfReq,noPersonalQ,noAcademicQ,noUploadQ;
+    HashSet<String> token=new HashSet<>();
+
+    public void setToken(HashSet<String> token) {
+        this.token = token;
+    }
+
+    public HashSet<String> getToken() {
+        return token;
+    }
 
     public void setAcademic_ques(ArrayList<CollegeRegisterQuestions> academic_ques) {
         this.academic_ques = academic_ques;

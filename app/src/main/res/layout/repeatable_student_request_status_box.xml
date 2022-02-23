@@ -48,7 +48,7 @@
                 android:textSize="18dp" />
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/sentBy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reason for request"

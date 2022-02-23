@@ -1,8 +1,16 @@
 package com.example.studenthelpdesk;
 
+import java.util.HashSet;
+
 public class CompanyData {
     private String email,password,collegeId,personalEmail,location,name,companyName,phone;
-
+    HashSet<String> token=new HashSet<>();
+    public void setToken(HashSet<String> token) {
+        this.token = token;
+    }
+    public HashSet<String> getToken() {
+        return token;
+    }
     public void setPhone(String phone) {
         this.phone = phone;
     }

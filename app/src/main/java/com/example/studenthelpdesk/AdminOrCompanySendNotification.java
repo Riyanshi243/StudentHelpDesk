@@ -36,6 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.ktx.Firebase;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -45,6 +46,8 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -289,7 +292,11 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
     public void sendNotif(View v)
     {
         String t1=token;
-        String timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+        Date t=Calendar.getInstance().getTime();
+        String dateToday=(String.valueOf(t.getDate()))+"-"+String.valueOf(t.getMonth()+1)+"-"+String.valueOf(t.getYear()).substring(1,3);
+        Log.e("Hi",dateToday);
+        String timeStamp=t.toString();
+
         ArrayList<String> fileName=new ArrayList<>();
         String name;
         if (adminData!=null) {
@@ -301,25 +308,27 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
         if(allAttach.size()==0)
         {
             FirebaseFirestore fs=FirebaseFirestore.getInstance();
-            DocumentReference docNotif = fs.collection("All Colleges").document(cId).collection("Notification").document(token).collection(FirebaseAuth.getInstance().getUid().toString() + "_" + timeStamp).document("1");
+            DocumentReference docNotif = fs.collection("All Colleges").document(cId).collection("Notification").document(FirebaseAuth.getInstance().getUid().toString() + "_" + timeStamp);
             HashMap<String,Object> notifMap=new HashMap<>();
             notifMap.put("Title",title.getText().toString());
             notifMap.put("Content",content.getText().toString());
             notifMap.put("Sender",name);
-            notifMap.put("Timestamp",timeStamp);
+            notifMap.put("Sender mail",FirebaseAuth.getInstance().getCurrentUser().getEmail());
+            notifMap.put("Token",token);
+            notifMap.put("Timestamp",t);
             notifMap.put("Attachment",null);
             Log.e("map",docNotif.getPath().toString());
             docNotif.set(notifMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    title.setText("");
-                    content.setText("");
-                    attach_ll.removeAllViews();
                     allAttach.clear();
                     token="/topics/"+token;
                     FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
                     notificationsSender.SendNotifications();
                     token=t1;
+                    title.setText("");
+                    content.setText("");
+                    attach_ll.removeAllViews();
                     Toast.makeText(AdminOrCompanySendNotification.this,"Notif sent",Toast.LENGTH_LONG).show();
                 }
             });
@@ -329,34 +338,37 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
             for(int i=0;i<allAttach.size();i++)
             {
                 fileName.add(getNameFromURI(allAttach.get(i)));
-                StorageReference sr=FirebaseStorage.getInstance().getReference(cId).child("Notification_"+cId).child(token).child(FirebaseAuth.getInstance().getUid()+"_"+timeStamp).child(getNameFromURI(allAttach.get(i)));
+                StorageReference sr=FirebaseStorage.getInstance().getReference(cId).child("Notification_"+cId).child(FirebaseAuth.getInstance().getUid()+"_"+timeStamp).child(getNameFromURI(allAttach.get(i)));
                 int finalI = i;
                 sr.putFile(allAttach.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
                         if(finalI ==allAttach.size()-1)
                         {
                             FirebaseFirestore fs=FirebaseFirestore.getInstance();
-                            DocumentReference docNotif = fs.collection("All Colleges").document(cId).collection("Notification").document(token).collection(FirebaseAuth.getInstance().getUid().toString() + "_" + timeStamp).document("1");
+                            DocumentReference docNotif = fs.collection("All Colleges").document(cId).collection("Notification").document(FirebaseAuth.getInstance().getUid().toString() + "_" + timeStamp);
                             HashMap<String,Object> notifMap=new HashMap<>();
                             notifMap.put("Title",title.getText().toString());
                             notifMap.put("Content",content.getText().toString());
                             notifMap.put("Sender",name);
-                            notifMap.put("Timestamp",timeStamp);
+                            notifMap.put("Sender mail",FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                            notifMap.put("Token",token);
+                            notifMap.put("Timestamp",t);
                             notifMap.put("Attachment",fileName);
                             notifMap.put("Notif Location",FirebaseAuth.getInstance().getUid()+"_"+timeStamp);
                             Log.e("map",docNotif.getPath().toString());
                             docNotif.set(notifMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    title.setText("");
-                                    content.setText("");
-                                    attach_ll.removeAllViews();
-                                    allAttach.clear();
                                     token="/topics/"+token;
                                     FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
                                     notificationsSender.SendNotifications();
                                     token=t1;
+                                    title.setText("");
+                                    content.setText("");
+                                    attach_ll.removeAllViews();
+                                    allAttach.clear();
                                     Toast.makeText(AdminOrCompanySendNotification.this,"Notif sent",Toast.LENGTH_LONG).show();
                                 }
                             });
@@ -365,104 +377,6 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                 });
             }
         }
-    }
-    public void sendNotif1(View v)
-    {
-
-        String t1=token;
-        String timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
-        ArrayList<String> fileName=new ArrayList<>();
-        if(allAttach.size()!=0)
-        {
-            int i=0;
-            for(Uri a:allAttach)
-            {
-                i++;
-                fileName.add(getNameFromURI(a));
-                StorageReference storageReference=FirebaseStorage.getInstance().getReference("Notification_"+cId).child(token).
-                        child(FirebaseAuth.getInstance().getUid()+"_"+timeStamp);
-                int finalI = i;
-                storageReference.putFile(a).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        if(finalI ==allAttach.size()-1)
-                        {
-                            DocumentReference fs=FirebaseFirestore.getInstance().collection("Notification").document(token).collection(FirebaseAuth.getInstance().getUid().toString()+"_"+timeStamp).document("1");
-                            HashMap<String,Object> notifDetail=new HashMap<>();
-                            notifDetail.put("Title",title.getText());
-                            notifDetail.put("Content",title.getText());
-                            String name;
-                            if (adminData!=null) {
-                                name = adminData.getAdminName();
-                            }
-                            else
-                                name=companyData.getCompanyName();
-
-                            notifDetail.put("Sender",name);
-                            notifDetail.put("Time",timeStamp);
-                            notifDetail.put("Attachments",fileName);
-                            notifDetail.put("Notif Id",FirebaseAuth.getInstance().getUid()+"_"+timeStamp);
-                            fs.set(new HashMap<String,Object>());
-                            fs.set(notifDetail).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    title.setText("");
-                                    content.setText("");
-                                    attach_ll.removeAllViews();
-                                    allAttach.clear();
-                                    token="/topics/"+token;
-                                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
-                                    notificationsSender.SendNotifications();
-                                    token=t1;
-                                    Toast.makeText(AdminOrCompanySendNotification.this,"Notification sent",Toast.LENGTH_LONG).show();
-
-                                }
-                            });
-                        }
-                    }
-                });
-
-            }
-        }
-        else
-        {
-                FirebaseFirestore fs=FirebaseFirestore.getInstance();
-                DocumentReference docNotif = fs.collection("Notification").document(token).collection(FirebaseAuth.getInstance().getUid().toString() + "_" + timeStamp).document("1");
-                HashMap<String,Object> notifDetail=new HashMap<>();
-                notifDetail.put("Title",title.getText());
-                notifDetail.put("Content",title.getText());
-                String name="Admin";
-                if (adminData!=null) {
-                    name = adminData.getAdminName();
-                }
-                else
-                    name=companyData.getCompanyName();
-
-                notifDetail.put("Sender",name);
-                notifDetail.put("Time",timeStamp);
-                notifDetail.put("Attachments",null);
-                notifDetail.put("Notif Id",FirebaseAuth.getInstance().getUid()+"_"+timeStamp);
-                Log.e("Map",notifDetail.toString());
-                docNotif.set(new HashMap<String,Object>());
-                docNotif.set(notifDetail);
-                /*docNotif.set(notifDetail).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        title.setText("");
-                        content.setText("");
-                        attach_ll.removeAllViews();
-                        allAttach.clear();
-                        token="/topics/"+token;
-                        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
-                        notificationsSender.SendNotifications();
-                        token=t1;
-                        Toast.makeText(AdminOrCompanySendNotification.this,"Notification sent",Toast.LENGTH_LONG).show();
-
-                    }
-                });*/
-
-        }
-
     }
     public void getAttachment(Uri imageuri2){
         if(imageuri2!=null)
