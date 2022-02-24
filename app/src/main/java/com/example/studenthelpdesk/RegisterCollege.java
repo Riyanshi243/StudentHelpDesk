@@ -58,7 +58,7 @@ public class RegisterCollege extends AppCompatActivity {
                     }
                     else
                     {
-                        allData.setSAdminemail(adminmail.getText().toString());
+                        allData.setSAdminemail(adminmail.getText().toString().trim());
                         allData.setPassword(password.getText().toString());
                         allData.setUname(uname.getText().toString());
                         allData.setCName(cname.getText().toString());

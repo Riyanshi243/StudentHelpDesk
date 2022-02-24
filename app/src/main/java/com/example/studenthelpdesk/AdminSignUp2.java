@@ -40,10 +40,13 @@ public class AdminSignUp2 extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 setText("Uploaded Basic Info");
-                DocumentReference docUserInfoAll=f.collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document("Admin").collection(adminData.getDeptName()).document(adminData.getEmail());
+                DocumentReference docUserInfoAll=f.collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(adminData.getEmail());
                 HashMap<String,Object> userInfoAll=new HashMap<>();
                 userInfoAll.put("Phone Number",adminData.getPhoneNumber());
                 userInfoAll.put("Name",adminData.getAdminName());
+                userInfoAll.put("Category","Admin");
+                userInfoAll.put("Department",adminData.getDeptName());
+                userInfoAll.put("Email",adminData.getEmail());
                 docUserInfoAll.set(userInfoAll).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

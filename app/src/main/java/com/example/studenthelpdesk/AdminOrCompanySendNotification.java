@@ -240,7 +240,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                 }
                 else if(i==3)
                 {
-                    token="Company"+cId;
+                    token="Company_"+cId;
                 }
 
             }

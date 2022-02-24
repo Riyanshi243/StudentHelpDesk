@@ -61,7 +61,7 @@ public class AdminPage extends AppCompatActivity {
                 token.add("Admin_"+cId);
                 token.add(cId+"_"+dept.replaceAll("\\s", ""));
                 adminData.setToken(token);
-                DocumentReference docUserInfoAll = fs.collection("All Colleges").document(cId).collection("UsersInfo").document("Admin").collection(dept).document(adminData.getEmail());
+                DocumentReference docUserInfoAll = fs.collection("All Colleges").document(cId).collection("UsersInfo").document(adminData.getEmail());
                 docUserInfoAll.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -70,6 +70,7 @@ public class AdminPage extends AppCompatActivity {
                         adminData.setPhoneNumber(phone);
                         adminData.setAdminName(name);
                         greetings.setText(name);
+                        //Log.e("Hi",name+"hi how are you");
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(adminData.getEmail());
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
@@ -112,7 +113,7 @@ public class AdminPage extends AppCompatActivity {
     {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(adminData.getCollegeId());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getCurrentUser().getEmail());
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("Admin"+adminData.getCollegeId());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("Admin_"+adminData.getCollegeId());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(adminData.getCollegeId()+"_"+adminData.getDeptName().replaceAll("\\s", ""));
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();

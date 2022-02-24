@@ -189,10 +189,12 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                         }
                                                     });
                                                 }//Upload questions added
-                                                DocumentReference userInfo = collegeInformation.collection("UsersInfo").document("Admin").collection(allData.getAdminDept()).document(allData.getSAdminemail());
+                                                DocumentReference userInfo = collegeInformation.collection("UsersInfo").document(allData.getSAdminemail());
                                                 HashMap<String , Object> user=new HashMap<>();
                                                 user.put("Name",allData.getAdminName());
                                                 user.put("Phone Number",allData.getAdminNo());
+                                                user.put("Department",allData.getAdminDept());
+                                                user.put("Category","Admin");
                                                 userInfo.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
@@ -263,6 +265,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                                 t.setText("FAILED");
                                                                 t.setTextSize(40);
                                                                 cl.addView(t);
+                                                                userInfo.delete();
                                                             }
                                                         });
                                                     }
@@ -324,6 +327,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                         t.setText("FAILED");
                         t.setTextSize(40);
                         cl.addView(t);
+                        collegeInformation.delete();
                     }
                 });;
     }
@@ -336,6 +340,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                 t.setText("FAILED");
                 t.setTextSize(40);
                 cl.addView(t);
+                forGeneralInformation.delete();
             }
         });;
     }

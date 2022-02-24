@@ -87,6 +87,7 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
             if(resultCode==RESULT_OK) {
                 dialog = new ProgressDialog(this);
                 dialog.setMessage("Uploading");
+                dialog.setCancelable(false);
                 dialog.show();
                 Uri imageuri = data.getData();
                 uploadPic(imageuri);
@@ -132,12 +133,14 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    dialog.dismiss();
                     Toast.makeText(RegisterCollege7_SuperAdminSignup.this,e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
         }
         else
         {
+            dialog.dismiss();
             Toast.makeText(this,"No Image selected",Toast.LENGTH_LONG).show();
         }
 

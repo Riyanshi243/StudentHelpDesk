@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -83,12 +84,15 @@ public class Signup extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 listId = (ArrayList<String>) documentSnapshot.get("IDs");
                 String collegeId = listId.get(i);
+                Log.e("College id",collegeId);
                 DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString());
                 userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             String collgeid = (String) documentSnapshot.get("College");
+
+                            Log.e("College id",collgeid);
                             if (collgeid.equalsIgnoreCase(collegeId)) {
                                 boolean newUser = (boolean) documentSnapshot.get("New");
                                 if (newUser == true) {

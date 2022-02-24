@@ -36,20 +36,17 @@ public class StudentSignupDone extends AppCompatActivity {
         ProgressBar progressBar=findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.VISIBLE);
         FirebaseFirestore f = FirebaseFirestore.getInstance();
-        DocumentReference docBasicInfo = f.collection("All Colleges").document(studentData.getCollegeid()).collection("All Users").document(studentData.getEmail());
-        HashMap<String, Object> userBasicInfo = new HashMap<>();
-        userBasicInfo.put("Course", studentData.getCourse());
-        userBasicInfo.put("Branch", studentData.getBranch());
-        userBasicInfo.put("Year", studentData.getYr());
         setText("Started Uploading data");
-        docBasicInfo.set(userBasicInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
+         {
 
-                DocumentReference docUserAllInfo = f.collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document("Student").collection(studentData.getCourse()).document(studentData.getBranch()).collection(studentData.getYr()).document(studentData.getEmail());
+                DocumentReference docUserAllInfo = f.collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail());
                 setText("Saving basic user Info");
                 HashMap<String,Object> basicInfo=new HashMap<>();
                 basicInfo.put("Name",studentData.getName());
+                basicInfo.put("Category","Student");
+                basicInfo.put("Course",studentData.getCourse());
+                basicInfo.put("Branch",studentData.getBranch());
+                basicInfo.put("Year",studentData.getYr());
                 basicInfo.put("Number of Requests",0);
                 docUserAllInfo.set(basicInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -102,33 +99,10 @@ public class StudentSignupDone extends AppCompatActivity {
                                                 docChangeState.update(changeState).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-                                                        Task<GetTokenResult> token1 = f1.getAccessToken(true);
-                                                        token1.addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
-                                                            @Override
-                                                            public void onSuccess(GetTokenResult getTokenResult) {
-                                                                String token = getTokenResult.getToken();
-                                                                Log.e("Token here",token+"   ,");
-                                                                setText("Process Complete");
-                                                                HashMap<String,Object> tokenMap=new HashMap<>();
+                                                        setText("Process Complete");
+                                                        Toast.makeText(StudentSignupDone.this,"Signup Done \nYou may log in",Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(StudentSignupDone.this,Login.class));
 
-                                                                Toast.makeText(StudentSignupDone.this,"Signup Done \nYou may log in",Toast.LENGTH_SHORT).show();
-                                                                startActivity(new Intent(StudentSignupDone.this,Login.class));
-
-                                                            }
-                                                        }).addOnFailureListener(new OnFailureListener() {
-                                                            @Override
-                                                            public void onFailure(@NonNull Exception e) {
-                                                                Log.e("Token error r",e.toString()+ "   .");
-                                                                setText("Error Occured");
-                                                                f1.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                    @Override
-                                                                    public void onSuccess(Void unused) {
-                                                                        startActivity(new Intent(StudentSignupDone.this,Signup.class));
-                                                                        finish();
-                                                                    }
-                                                                });
-                                                            }
-                                                        });
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
@@ -162,14 +136,7 @@ public class StudentSignupDone extends AppCompatActivity {
                     }
                 });;
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(StudentSignupDone.this,e.toString(),Toast.LENGTH_SHORT).show();
-                progressBar.setVisibility(View.GONE);
-                setText("FAILED");
-            }
-        });;
+
     }
     void setText(String s)
     {

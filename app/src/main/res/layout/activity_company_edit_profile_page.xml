@@ -69,6 +69,7 @@
                     android:background="@drawable/ic_baseline_edit_pencil" />
 
                 <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/profilepic"
                     android:layout_width="190dp"
                     android:layout_height="157dp"
                     android:layout_gravity="center"
