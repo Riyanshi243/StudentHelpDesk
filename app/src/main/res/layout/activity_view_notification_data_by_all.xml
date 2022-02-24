@@ -51,37 +51,11 @@
                 android:orientation="vertical"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp">
-                <TextView
-                    android:id="@+id/header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Header"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:inputType="textMultiLine"/>
-
-                    <TextView
-                        android:id="@+id/timestamp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:inputType="date"
-                        android:text="timestamp"
-                        android:paddingRight="10dp"
-                        android:layout_marginTop="5dp"
-                        android:gravity="right"
-                        android:layout_gravity="right"
-                        android:textColor="@color/blue_text"
-                        android:textSize="18dp" />
-
-
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp">
-
 
                     <ImageView
                         android:id="@+id/profilepic"
@@ -99,15 +73,40 @@
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:textColor="@color/black"
-                        android:textSize="18dp" />
+                        android:textSize="24dp" />
 
                 </TableRow>
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Header"
+                    android:textColor="@color/black"
+                    android:textSize="26dp"
+                    android:inputType="textMultiLine"/>
+
+                <TextView
+                    android:id="@+id/timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="5dp"
+                    android:gravity="right"
+                    android:inputType="date"
+                    android:paddingRight="10dp"
+                    android:text="timestamp"
+                    android:textColor="@color/blue_text"
+                    android:textSize="16dp" />
+
+
+
 
                 <TextView
                     android:id="@+id/info"
                     android:layout_width="382dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:text="information"
@@ -122,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:text="Below are the related attachments"
                     android:textColor="@color/black"
                     android:textSize="18dp"
@@ -132,8 +131,7 @@
                     android:id="@+id/linearL"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="13dp"
                     android:orientation="vertical">
 
                 </LinearLayout>
