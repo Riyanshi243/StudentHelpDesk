@@ -49,7 +49,6 @@ public class StudentUploadDetails extends AppCompatActivity {
         studentData=StudentPage.studentData;
         progressbar=findViewById(R.id.progressBar5);
 
-        String s="";
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getUpload_ques();
         for(CollegeRegisterQuestions a:quesAns)
         {
