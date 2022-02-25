@@ -1,22 +1,40 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
-public class AdminSearchUser extends AppCompatActivity {
-    StudentData studentData;
-    CompanyData companyData;
-    AdminData adminData;
-    EditText email;
+public class AdminSearchUser extends AppCompatActivity{
+    static StudentData studentData;
+    static CompanyData companyData;
+    static AdminData adminData,adminDataSearched;
+    static EditText email;
     Button search;
+    static String category;
     LinearLayout ll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,47 +43,21 @@ public class AdminSearchUser extends AppCompatActivity {
         email=findViewById(R.id.emailsearch);
         search=findViewById(R.id.search);
         ll=findViewById(R.id.ll);
+        adminData=AdminPage.adminData;
     }
-    public void searchUser(View v)
-    {
+    public void searchUser(View v) {
+        ll.removeAllViews();
         if(checkEmail())
         {
-            String user=checkUserType();
-            if(user.equalsIgnoreCase("admin"))
-            {
-                String name=adminData.getAdminName();
-                View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                TextView ques_name=name_.findViewById(R.id.Ques);
-                TextView ans_name=name_.findViewById(R.id.ans);
-                ques_name.setText("NAME:");
-                ans_name.setText(name);
-                ll.addView(name_);
+            checkUserType();
+            String user=AdminSearchUser.category;
 
-                String email=adminData.getEmail();
-                View email_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                TextView ques_email=email_.findViewById(R.id.Ques);
-                TextView ans_email=email_.findViewById(R.id.ans);
-                ques_email.setText("EMAIL:");
-                ans_email.setText(email);
-                ll.addView(email_);
+            if(user==null)
+                return;
+            if(user.equalsIgnoreCase("None"))
+                return;
 
-                String department=adminData.getDeptName();
-                View dept_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                TextView ques_dept=dept_.findViewById(R.id.Ques);
-                TextView ans_dept=dept_.findViewById(R.id.ans);
-                ques_dept.setText("DEPARTMENT:");
-                ans_dept.setText(department);
-                ll.addView(dept_);
-
-                String phone=adminData.getPhoneNumber();
-                View phone_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                TextView ques_phone=phone_.findViewById(R.id.Ques);
-                TextView ans_phone=phone_.findViewById(R.id.ans);
-                ques_phone.setText("PHONE NUMBER:");
-                ans_phone.setText(phone);
-                ll.addView(phone_);
-            }
-            if(user.equalsIgnoreCase("student"))
+            if(user.equalsIgnoreCase("Student"))
             {
                 ArrayList<CollegeRegisterQuestions> quesAns_personal = studentData.getPersonal_ques();
                 for(CollegeRegisterQuestions a:quesAns_personal) {
@@ -86,7 +78,7 @@ public class AdminSearchUser extends AppCompatActivity {
                     ll.addView(repeatAnswers);
                 }
             }
-            if(user.equalsIgnoreCase("company"))
+            if(user.equalsIgnoreCase("Company"))
             {
 
                 String name=companyData.getCompanyName();
@@ -113,7 +105,7 @@ public class AdminSearchUser extends AppCompatActivity {
                 ans_rname.setText(rname);
                 ll.addView(rname_);
 
-                String remail=companyData.getEmail();
+                String remail=companyData.getPersonalEmail();
                 View remail_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                 TextView ques_remail=remail_.findViewById(R.id.Ques);
                 TextView ans_remail=remail_.findViewById(R.id.ans);
@@ -133,12 +125,370 @@ public class AdminSearchUser extends AppCompatActivity {
         }
     }
 
-    public String checkUserType()
-    {
-        adminData=new AdminData();
-        adminData.setAdminName("ABC");
-        adminData.setEmail("ac@gm.com");
-        return "admin";
+    public void checkUserType()  {
+        String eMail=email.getText().toString().trim();
+        final String[] category = new String[1];
+        category[0]=null;
+
+        Log.e("What","Hi");
+        DocumentReference userDetail = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(eMail);
+
+        userDetail.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.e("Hi",documentSnapshot.exists()+" ");
+                if(documentSnapshot.exists())
+                {
+                    category[0] = (String) documentSnapshot.get("Category");
+                    AdminSearchUser.category=category[0];
+                    Log.e("What",AdminSearchUser.category);
+                    if(category[0].equalsIgnoreCase("Admin"))
+                    {
+                        adminDataSearched=new AdminData();
+                        String name= (String) documentSnapshot.get("Name");
+                        String phone=(String) documentSnapshot.get("Phone Number");
+                        adminDataSearched.setPhoneNumber(phone);
+                        adminDataSearched.setAdminName(name);
+                        adminDataSearched.setDeptName((String) documentSnapshot.get("Department"));
+                        adminDataSearched.setEmail(eMail);
+                        View photo=getLayoutInflater().inflate(R.layout.repeatable_photograph,null);
+                        TextView ques=photo.findViewById(R.id.Ques);
+                        ques.setVisibility(View.GONE);
+                        Button edit=photo.findViewById(R.id.button5);
+                        edit.setVisibility(View.GONE);
+                        ImageView profilepic=photo.findViewById(R.id.imageView6);
+                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(eMail);
+                        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(AdminSearchUser.this)
+                                        .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .error(R.drawable.default_loading_img)
+                                        .placeholder(R.drawable.default_loading_img)
+                                        .into(profilepic);
+                            }
+                        });
+                        ll.addView(photo);
+                        if(category[0].equalsIgnoreCase("Admin"))
+                        {
+                            View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_name=name_.findViewById(R.id.Ques);
+                            TextView ans_name=name_.findViewById(R.id.ans);
+                            ques_name.setText("NAME:");
+                            ans_name.setText(name);
+                            ll.addView(name_);
+
+                            String email=adminDataSearched.getEmail();
+                            View email_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_email=email_.findViewById(R.id.Ques);
+                            TextView ans_email=email_.findViewById(R.id.ans);
+                            ques_email.setText("EMAIL:");
+                            ans_email.setText(email);
+                            ll.addView(email_);
+
+                            String department=adminDataSearched.getDeptName();
+                            View dept_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_dept=dept_.findViewById(R.id.Ques);
+                            TextView ans_dept=dept_.findViewById(R.id.ans);
+                            ques_dept.setText("DEPARTMENT:");
+                            ans_dept.setText(department);
+                            ll.addView(dept_);
+
+                            View phone_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_phone=phone_.findViewById(R.id.Ques);
+                            TextView ans_phone=phone_.findViewById(R.id.ans);
+                            ques_phone.setText("PHONE NUMBER:");
+                            ans_phone.setText(phone);
+                            ll.addView(phone_);
+                        }
+
+                    }
+                    else if(category[0].equalsIgnoreCase("Student"))
+                    {
+                        studentData =new StudentData();
+                        final ArrayList<CollegeRegisterQuestions> personalQ = new ArrayList<>();
+                        final ArrayList<CollegeRegisterQuestions> academicQ = new ArrayList<>();
+                        final ArrayList<CollegeRegisterQuestions> uploadQ = new ArrayList<>();
+                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Personal Question");
+                        docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                long total= (long) documentSnapshot.get("Total");
+                                studentData.setNoPersonalQ(total);
+                                for (int i=0;i<(int)total;i++)
+                                {
+                                    DocumentReference docCurrQues = docPersQues.collection(i + "").document(i + "");
+                                    int finalI = i;
+                                    int finalI1 = i;
+                                    int finalI2 = i;
+                                    docCurrQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            CollegeRegisterQuestions currQ=new CollegeRegisterQuestions();
+                                            boolean editable= (boolean) documentSnapshot.get("Editable");
+                                            boolean compulsory = (boolean) documentSnapshot.get("Compulsory");
+                                            String ques= (String) documentSnapshot.get("Question");
+                                            long type=(long) documentSnapshot.get("Type");
+                                            currQ.setChangeable(editable);
+                                            currQ.setCompulsory(compulsory);
+                                            currQ.setType((int) type);
+                                            currQ.setQuestion(ques);
+                                            currQ.setId(finalI2);
+                                            DocumentReference ans= userDetail.collection("Personal Question").document(finalI+"");
+                                            ans.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                    String ans= (String) documentSnapshot.get("Answer");
+                                                    currQ.setAnswer(ans);
+                                                    personalQ.add(currQ);
+                                                    if(personalQ.size() ==total)
+                                                    {
+                                                        Collections.sort(personalQ,new Comparator<CollegeRegisterQuestions>() {
+                                                            @Override
+                                                            public int compare(CollegeRegisterQuestions o1,CollegeRegisterQuestions o2) {
+                                                                int i1 = (o1.getId() - (o2.getId()));
+                                                                return i1;
+                                                            }
+                                                        });
+                                                        studentData.setPersonal_ques(personalQ);
+                                                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Academic Question");
+                                                        docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                            @Override
+                                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                long total= (long) documentSnapshot.get("Total");
+                                                                studentData.setNoPersonalQ(total);
+                                                                for (int i=0;i<(int)total;i++)
+                                                                {
+                                                                    DocumentReference docCurrQues = docPersQues.collection(i + "").document(i + "");
+                                                                    int finalI = i;
+                                                                    int finalI1 = i;
+                                                                    int finalI2 = i;
+                                                                    docCurrQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                        @Override
+                                                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                            CollegeRegisterQuestions currQ=new CollegeRegisterQuestions();
+                                                                            boolean editable= (boolean) documentSnapshot.get("Editable");
+                                                                            boolean compulsory = (boolean) documentSnapshot.get("Compulsory");
+                                                                            String ques= (String) documentSnapshot.get("Question");
+                                                                            long type=(long) documentSnapshot.get("Type");
+                                                                            currQ.setChangeable(editable);
+                                                                            currQ.setCompulsory(compulsory);
+                                                                            currQ.setType((int) type);
+                                                                            currQ.setQuestion(ques);
+                                                                            currQ.setId(finalI2);
+                                                                            DocumentReference ans= userDetail.collection("Academic Question").document(finalI+"");
+                                                                            ans.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                                @Override
+                                                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                                    String ans= (String) documentSnapshot.get("Answer");
+                                                                                    currQ.setAnswer(ans);
+                                                                                    academicQ.add(currQ);
+                                                                                    if(academicQ.size() ==total)
+                                                                                    {
+                                                                                        Collections.sort(academicQ,new Comparator<CollegeRegisterQuestions>() {
+                                                                                            @Override
+                                                                                            public int compare(CollegeRegisterQuestions o1,CollegeRegisterQuestions o2) {
+                                                                                                int i1 = (o1.getId() - (o2.getId()));
+                                                                                                return i1;
+                                                                                            }
+                                                                                        });
+                                                                                        studentData.setAcademic_ques(academicQ);
+                                                                                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Upload Question");
+                                                                                        docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                                            @Override
+                                                                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                                                long total= (long) documentSnapshot.get("Total");
+                                                                                                studentData.setNoUploadQ(total);
+                                                                                                for (int i=0;i<(int)total;i++)
+                                                                                                {
+                                                                                                    DocumentReference docCurrQues = docPersQues.collection(i + "").document(i + "");
+
+                                                                                                    int finalI1 = i;
+                                                                                                    int finalI2 = i;
+                                                                                                    docCurrQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                                                        @Override
+                                                                                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                                                            CollegeRegisterQuestions currQ=new CollegeRegisterQuestions();
+                                                                                                            boolean editable= (boolean) documentSnapshot.get("Editable");
+                                                                                                            boolean compulsory = (boolean) documentSnapshot.get("Compulsory");
+                                                                                                            String ques= (String) documentSnapshot.get("Question");
+                                                                                                            long type=(long) documentSnapshot.get("Type");
+                                                                                                            currQ.setChangeable(editable);
+                                                                                                            currQ.setCompulsory(compulsory);
+                                                                                                            currQ.setType((int) type);
+                                                                                                            currQ.setQuestion(ques);
+                                                                                                            currQ.setId(finalI2);
+                                                                                                            uploadQ.add(currQ);
+                                                                                                            if(uploadQ.size() ==total)
+                                                                                                            {
+                                                                                                                Collections.sort(uploadQ,new Comparator<CollegeRegisterQuestions>() {
+                                                                                                                    @Override
+                                                                                                                    public int compare(CollegeRegisterQuestions o1,CollegeRegisterQuestions o2) {
+                                                                                                                        int i1 = (o1.getId() - (o2.getId()));
+                                                                                                                        return i1;
+                                                                                                                    }
+                                                                                                                });
+                                                                                                                studentData.setUpload_ques(uploadQ);
+                                                                                                                if(category[0].equalsIgnoreCase("Student"))
+                                                                                                                {
+                                                                                                                    View photo=getLayoutInflater().inflate(R.layout.repeatable_photograph,null);
+                                                                                                                    TextView ques1=photo.findViewById(R.id.Ques);
+                                                                                                                    ques1.setVisibility(View.GONE);
+                                                                                                                    ImageView profilepic=photo.findViewById(R.id.imageView6);
+                                                                                                                    Button edit=photo.findViewById(R.id.button5);
+                                                                                                                    edit.setVisibility(View.GONE);
+                                                                                                                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(eMail);
+                                                                                                                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                                                        @Override
+                                                                                                                        public void onSuccess(Uri uri) {
+                                                                                                                            Glide.with(AdminSearchUser.this)
+                                                                                                                                    .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                                                                                                    .error(R.drawable.error_profile_picture)
+                                                                                                                                    .placeholder(R.drawable.default_loading_img)
+                                                                                                                                    .into(profilepic);
+
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                    ArrayList<CollegeRegisterQuestions> quesAns_personal = studentData.getPersonal_ques();
+                                                                                                                    for(CollegeRegisterQuestions a:quesAns_personal) {
+                                                                                                                        View repeatAnswers = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);
+                                                                                                                        TextView ques11 = repeatAnswers.findViewById(R.id.Ques);
+                                                                                                                        TextView ans = repeatAnswers.findViewById(R.id.ans);
+                                                                                                                        ques11.setText(a.getQuestion());
+                                                                                                                        ans.setText(a.getAnswer());
+                                                                                                                        ll.addView(repeatAnswers);
+                                                                                                                    }
+                                                                                                                    ArrayList<CollegeRegisterQuestions> quesAns_academic = studentData.getAcademic_ques();
+                                                                                                                    for(CollegeRegisterQuestions a:quesAns_academic) {
+                                                                                                                        View repeatAnswers = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);
+                                                                                                                        TextView ques11 = repeatAnswers.findViewById(R.id.Ques);
+                                                                                                                        TextView ans = repeatAnswers.findViewById(R.id.ans);
+                                                                                                                        ques11.setText(a.getQuestion());
+                                                                                                                        ans.setText(a.getAnswer());
+                                                                                                                        ll.addView(repeatAnswers);
+                                                                                                                    }
+
+                                                                                                                }
+                                                                                                            }
+
+                                                                                                        }
+                                                                                                    });
+                                                                                                }
+                                                                                            }
+                                                                                        });
+                                                                                    }
+                                                                                }
+                                                                            });
+
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+                                                        });
+
+                                                    }
+                                                }
+                                            });
+
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    else if (category[0].equalsIgnoreCase("Company"))
+                    {
+                        View photo=getLayoutInflater().inflate(R.layout.repeatable_photograph,null);
+                        TextView ques=photo.findViewById(R.id.Ques);
+                        ques.setVisibility(View.GONE);
+                        Button edit=photo.findViewById(R.id.button5);
+                        edit.setVisibility(View.GONE);
+                        ImageView profilepic=photo.findViewById(R.id.imageView6);
+                        StorageReference storageRef= FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(eMail);
+                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(AdminSearchUser.this)
+                                        .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .error(R.drawable.default_loading_img)
+                                        .placeholder(R.drawable.default_loading_img)
+                                        .into(profilepic);
+                            }
+                        });
+                        ll.addView(photo);
+                        companyData=new CompanyData();
+
+                        companyData.setPersonalEmail((String) documentSnapshot.get("Personal Email"));
+                        companyData.setLocation((String) documentSnapshot.get("Company Location"));
+                        companyData.setCompanyName((String) documentSnapshot.get("Company Name"));
+                        companyData.setName((String) documentSnapshot.get("Name"));
+                        companyData.setPhone((String) documentSnapshot.get("Phone Number"));
+                        if(category[0].equalsIgnoreCase("Company"))
+                        {
+
+                            String name=companyData.getCompanyName();
+                            View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_name=name_.findViewById(R.id.Ques);
+                            TextView ans_name=name_.findViewById(R.id.ans);
+                            ques_name.setText("COMPANY NAME:");
+                            ans_name.setText(name);
+                            ll.addView(name_);
+
+                            String location=companyData.getLocation();
+                            View location_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_location=location_.findViewById(R.id.Ques);
+                            TextView ans_location=location_.findViewById(R.id.ans);
+                            ques_location.setText("COMPANY LOCATION:");
+                            ans_location.setText(location);
+                            ll.addView(location_);
+
+                            String rname=companyData.getName();
+                            View rname_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_rname=rname_.findViewById(R.id.Ques);
+                            TextView ans_rname=rname_.findViewById(R.id.ans);
+                            ques_rname.setText("REPRESENTATIVE NAME:");
+                            ans_rname.setText(rname);
+                            ll.addView(rname_);
+
+                            String remail=companyData.getPersonalEmail();
+                            View remail_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_remail=remail_.findViewById(R.id.Ques);
+                            TextView ans_remail=remail_.findViewById(R.id.ans);
+                            ques_remail.setText("REPRESENTATIVE EMAIL:");
+                            ans_remail.setText(remail);
+                            ll.addView(remail_);
+
+                            String rphone=companyData.getPhone();
+                            View rphone_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_rphone=rphone_.findViewById(R.id.Ques);
+                            TextView ans_rphone=rphone_.findViewById(R.id.ans);
+                            ques_rphone.setText("REPRESENTATIVE PHONE NUMBER");
+                            ans_rphone.setText(rphone);
+                            ll.addView(rphone_);
+
+                        }
+                    }
+                    else
+                    {
+                        category[0]="None";
+
+                    }
+                }
+                else
+                {
+                    email.setError("This user doesnot Exist");
+                    AdminSearchUser.category="None";
+                    category[0]="None";
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                AdminSearchUser.category="None";
+                Toast.makeText(AdminSearchUser.this,e.toString(),Toast.LENGTH_LONG).show();
+                category[0]="None";
+            }
+        });
     }
 
     public boolean checkEmail() {

@@ -2,7 +2,9 @@ package com.example.studenthelpdesk;
 
 import androidx.annotation.NonNull;
 
-public class CollegeRegisterQuestions {
+import java.io.Serializable;
+
+public class CollegeRegisterQuestions implements Serializable {
     private String question,answer;
     private boolean changeable,compulsory;
     private int type,id;
