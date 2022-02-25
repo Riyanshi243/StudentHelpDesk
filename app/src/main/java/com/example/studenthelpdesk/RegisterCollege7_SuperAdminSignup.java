@@ -91,7 +91,7 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
                 dialog.show();
                 Uri imageuri = data.getData();
                 uploadPic(imageuri);
-                Toast.makeText(this,getNameFromURI(data.getData())+"Uploaded",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,getNameFromURI(data.getData())+" Uploaded",Toast.LENGTH_LONG).show();
                 //ImageView profileimg=(ImageView) findViewById(R.id.uplodingdone);
                 //profileimg.setVisibility(View.VISIBLE);
             }
@@ -151,18 +151,22 @@ public class RegisterCollege7_SuperAdminSignup extends AppCompatActivity {
         if(name.getText().toString().length()==0)
         {
             name.setError("ENTER USERNAME");
+            name.requestFocus();
+            return false;
+        }
+        if(phone.getText().toString().length()==0)
+        {
+            phone.setError("ENTER PHONE NUMBER");
+            phone.requestFocus();
             return false;
         }
         if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
         {
             phone.setError("INVALID PHONE NUMBER");
+            phone.requestFocus();
             return false;
         }
-       else if(phone.getText().toString().length()==0)
-        {
-            phone.setError("ENTER PHONE NUMBER");
-            return false;
-        }
+
         return true;
     }
 }

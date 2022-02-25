@@ -78,6 +78,7 @@ public class RegisterCollege2 extends AppCompatActivity {
         String dept=ans.getText().toString();
         if(dept.length()==0) {
             ans.setError("ENTER DATA HERE");
+            ans.requestFocus();
             return false;
         }
         else

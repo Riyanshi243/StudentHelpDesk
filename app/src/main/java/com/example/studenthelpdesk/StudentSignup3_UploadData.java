@@ -147,6 +147,7 @@ public class StudentSignup3_UploadData extends AppCompatActivity
             if(ans.length()==0)
             {
                 ans.setError("THIS IS COMPULSORY");
+                ans.requestFocus();
                 return true;
             }
 

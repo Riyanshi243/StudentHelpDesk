@@ -111,7 +111,6 @@
                 android:onClick="Login"
                 android:text="LOGIN" />
 
-
             <TextView
                 android:id="@+id/signin"
                 android:layout_width="wrap_content"

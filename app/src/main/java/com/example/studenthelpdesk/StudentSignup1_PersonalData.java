@@ -232,6 +232,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
+                ans.requestFocus();
                 return true;
             }
             else
@@ -250,6 +251,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
+                ans.requestFocus();
                 return true;
             }
             else
@@ -265,6 +267,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
+                ans.requestFocus();
                 return true;
             }
             else
@@ -282,6 +285,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
+                ans.requestFocus();
                 return true;
             }
             else
@@ -309,6 +313,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
+                ans.requestFocus();
                 return true;
             }
             else
@@ -325,6 +330,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             if(ans.length()==0)
             {
                 ans.setError("This is compulsory");
+                ans.requestFocus();
                 return true;
             }
             else

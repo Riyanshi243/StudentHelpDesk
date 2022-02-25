@@ -89,6 +89,7 @@ public class AdminCreateNewAccount extends AppCompatActivity {
                             if (documentSnapshot.exists())
                             {
                                 email.setError("User Exists");
+                                email.requestFocus();
                             }
                             else
                             {
@@ -149,7 +150,8 @@ public class AdminCreateNewAccount extends AppCompatActivity {
         //check if not empty
         if(email.getText().toString().length()==0)
         {
-            email.setError("ENTER MAIL");
+            email.setError("ENTER EMAIL");
+            email.requestFocus();
             return false;
         }
         //check if valid
@@ -158,6 +160,7 @@ public class AdminCreateNewAccount extends AppCompatActivity {
         if(!email1.matches(emailPattern))
         {
             email.setError("ENTER VALID MAIL");
+            email.requestFocus();
             return false;
         }
         return  true;

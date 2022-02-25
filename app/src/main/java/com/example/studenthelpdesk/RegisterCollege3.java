@@ -123,6 +123,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                 else
                 {
                     lastBranch.setError("ENTER HERE");
+                    lastBranch.requestFocus();
                 }
             }
         });
@@ -134,6 +135,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                 if(currentCourseName.getText().toString().length()==0)
                 {
                     currentCourseName.setError("ENTER COURSE NAME");
+                    currentCourseName.requestFocus();
                     return;
                 }
                 ArrayList<String> allbranch=new ArrayList<>();

@@ -60,8 +60,10 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
         int numberOfQuestions=linearLayout.getChildCount();
         View repeatableLastView=linearLayout.getChildAt(numberOfQuestions-1);
         EditText question=repeatableLastView.findViewById(R.id.ans);
+        question.requestFocus();
         if(question.getText().toString().length()==0){
             question.setError("ENTER THIS VALUE");
+            question.requestFocus();
             return false;
         }
         return true;

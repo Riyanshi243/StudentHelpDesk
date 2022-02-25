@@ -61,10 +61,11 @@
 
             <Button
                 android:id="@+id/search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="157dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/roundedbutton"
                 android:clickable="true"
                 android:onClick="searchUser"
                 android:text="SEARCH" />
