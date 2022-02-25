@@ -3,6 +3,7 @@ package com.example.studenthelpdesk;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -50,78 +52,7 @@ public class AdminSearchUser extends AppCompatActivity{
         if(checkEmail())
         {
             checkUserType();
-            String user=AdminSearchUser.category;
 
-            if(user==null)
-                return;
-            if(user.equalsIgnoreCase("None"))
-                return;
-
-            if(user.equalsIgnoreCase("Student"))
-            {
-                ArrayList<CollegeRegisterQuestions> quesAns_personal = studentData.getPersonal_ques();
-                for(CollegeRegisterQuestions a:quesAns_personal) {
-                    View repeatAnswers = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);
-                    TextView ques = repeatAnswers.findViewById(R.id.Ques);
-                    TextView ans = repeatAnswers.findViewById(R.id.ans);
-                    ques.setText(a.getQuestion());
-                    ans.setText(a.getAnswer());
-                    ll.addView(repeatAnswers);
-                }
-                ArrayList<CollegeRegisterQuestions> quesAns_academic = studentData.getAcademic_ques();
-                for(CollegeRegisterQuestions a:quesAns_academic) {
-                    View repeatAnswers = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);
-                    TextView ques = repeatAnswers.findViewById(R.id.Ques);
-                    TextView ans = repeatAnswers.findViewById(R.id.ans);
-                    ques.setText(a.getQuestion());
-                    ans.setText(a.getAnswer());
-                    ll.addView(repeatAnswers);
-                }
-            }
-            if(user.equalsIgnoreCase("Company"))
-            {
-
-                String name=companyData.getCompanyName();
-                View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                TextView ques_name=name_.findViewById(R.id.Ques);
-                TextView ans_name=name_.findViewById(R.id.ans);
-                ques_name.setText("COMPANY NAME:");
-                ans_name.setText(name);
-                ll.addView(name_);
-
-                String location=companyData.getLocation();
-                View location_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                TextView ques_location=location_.findViewById(R.id.Ques);
-                TextView ans_location=location_.findViewById(R.id.ans);
-                ques_location.setText("COMPANY LOCATION:");
-                ans_location.setText(location);
-                ll.addView(location_);
-
-                String rname=companyData.getName();
-                View rname_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                TextView ques_rname=rname_.findViewById(R.id.Ques);
-                TextView ans_rname=rname_.findViewById(R.id.ans);
-                ques_rname.setText("REPRESENTATIVE NAME:");
-                ans_rname.setText(rname);
-                ll.addView(rname_);
-
-                String remail=companyData.getPersonalEmail();
-                View remail_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                TextView ques_remail=remail_.findViewById(R.id.Ques);
-                TextView ans_remail=remail_.findViewById(R.id.ans);
-                ques_remail.setText("REPRESENTATIVE EMAIL:");
-                ans_remail.setText(remail);
-                ll.addView(remail_);
-
-                String rphone=companyData.getPhone();
-                View rphone_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                TextView ques_rphone=rphone_.findViewById(R.id.Ques);
-                TextView ans_rphone=rphone_.findViewById(R.id.ans);
-                ques_rphone.setText("REPRESENTATIVE PHONE NUMBER");
-                ans_rphone.setText(rphone);
-                ll.addView(rphone_);
-
-            }
         }
     }
 
@@ -349,6 +280,7 @@ public class AdminSearchUser extends AppCompatActivity{
 
                                                                                                                         }
                                                                                                                     });
+                                                                                                                    ll.addView(photo);
                                                                                                                     ArrayList<CollegeRegisterQuestions> quesAns_personal = studentData.getPersonal_ques();
                                                                                                                     for(CollegeRegisterQuestions a:quesAns_personal) {
                                                                                                                         View repeatAnswers = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);
@@ -366,6 +298,61 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                         ques11.setText(a.getQuestion());
                                                                                                                         ans.setText(a.getAnswer());
                                                                                                                         ll.addView(repeatAnswers);
+                                                                                                                    }
+                                                                                                                    ArrayList<CollegeRegisterQuestions> quesAns = studentData.getUpload_ques();
+                                                                                                                    for(CollegeRegisterQuestions a:quesAns)
+                                                                                                                    {
+                                                                                                                        if(a.getQuestion().equalsIgnoreCase("Photograph"))
+                                                                                                                        {
+                                                                                                                            continue;
+                                                                                                                        }
+                                                                                                                        else
+                                                                                                                        {
+                                                                                                                            View repeatAnswers=getLayoutInflater().inflate(R.layout.repeatable_student_uploaded_documents,null);
+                                                                                                                            TextView ques11=repeatAnswers.findViewById(R.id.Ques);
+                                                                                                                            Button view =repeatAnswers.findViewById(R.id.view);
+                                                                                                                            Button update= repeatAnswers.findViewById(R.id.update);
+                                                                                                                            Button download=repeatAnswers.findViewById(R.id.download);
+                                                                                                                            update.setVisibility(View.GONE);
+                                                                                                                            ques11.setText(a.getQuestion());
+                                                                                                                            view.setOnClickListener(new View.OnClickListener() {
+                                                                                                                                @Override
+                                                                                                                                public void onClick(View view) {
+                                                                                                                                   FirebaseStorage storage = FirebaseStorage.getInstance();
+                                                                                                                                    StorageReference storageRef = storage.getReference(adminData.getCollegeId()).child(a.getQuestion()).child(eMail);
+                                                                                                                                    Task<Uri> message = storageRef.getDownloadUrl();
+                                                                                                                                    message.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                                                                        @Override
+                                                                                                                                        public void onSuccess(Uri uri) {
+                                                                                                                                            // Toast.makeText(getActivity(),uri.toString(),Toast.LENGTH_SHORT).show();
+                                                                                                                                            Intent intent = new Intent(view.getContext(), ViewPDFActivity.class);
+                                                                                                                                            intent.putExtra("url", uri.toString());
+                                                                                                                                            startActivity(intent);
+                                                                                                                                        }
+                                                                                                                                    });
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                           
+                                                                                                                            download.setOnClickListener(new View.OnClickListener() {
+                                                                                                                                @Override
+                                                                                                                                public void onClick(View view) {
+                                                                                                                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                                                                                                                    StorageReference storageRef = storage.getReference(studentData.getCollegeid()).child(a.getQuestion()).child(studentData.getEmail());
+                                                                                                                                    Task<Uri> message = storageRef.getDownloadUrl();
+                                                                                                                                    message.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                                                                        @Override
+                                                                                                                                        public void onSuccess(Uri uri) {
+                                                                                                                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                                                                                                            startActivity(intent);
+                                                                                                                                        }
+                                                                                                                                    });
+                                                                                                                                }
+                                                                                                                            });
+
+                                                                                                                            ll.addView(repeatAnswers);
+                                                                                                                        }
+
+
                                                                                                                     }
 
                                                                                                                 }
