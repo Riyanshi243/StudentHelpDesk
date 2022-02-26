@@ -6,12 +6,19 @@
         <entry key="..\:/Student-Help/app/src/main/res/layout/activity_register_college.xml" value="0.22" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/activity_register_college2.xml" value="0.20416666666666666" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/activity_register_college3.xml" value="0.19010416666666666" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/activity_student_check_request_status.xml" value="0.1" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/activity_student_send_request_to_change_data.xml" value="0.22" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/college_register_questions.xml" value="0.20416666666666666" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/date_input_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/edit_text_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/edit_text_layout_with_extra_layout.xml" value="0.18" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/repeatable_date_input_layout.xml" value="0.1" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/repeatable_edit_text_layout.xml" value="0.16296296296296298" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/repeatable_edit_text_white_layout.xml" value="0.1" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/repeatable_multiline_text_layout.xml" value="0.1" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/repeatable_number_decimal_layout.xml" value="0.1" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/repeatable_radio_button_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Student-Help/app/src/main/res/layout/repeatable_student_request_status_box.xml" value="0.22" />
         <entry key="..\:/Student-Help/app/src/main/res/layout/text_view_layout.xml" value="0.18" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_login.xml" value="0.10144927536231885" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_register_college.xml" value="0.10144927536231885" />

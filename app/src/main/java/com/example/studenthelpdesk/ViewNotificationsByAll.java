@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,19 +12,14 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -106,7 +100,7 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                         TextView time=repeatNotif.findViewById(R.id.date1);
                         TextView header=repeatNotif.findViewById(R.id.header);
                         TextView info=repeatNotif.findViewById(R.id.info);
-                        TextView sender=repeatNotif.findViewById(R.id.sentBy);
+                        TextView sender=repeatNotif.findViewById(R.id.reason);
                         ImageView attachment=repeatNotif.findViewById(R.id.attachments);
                         header.setText(n1.getTitle());
                         if(n1.getContent().length()<=50)
