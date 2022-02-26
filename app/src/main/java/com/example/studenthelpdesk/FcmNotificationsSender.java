@@ -88,9 +88,5 @@ public class FcmNotificationsSender  {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
 }

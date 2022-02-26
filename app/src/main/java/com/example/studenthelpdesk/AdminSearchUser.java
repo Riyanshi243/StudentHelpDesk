@@ -94,7 +94,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             public void onSuccess(Uri uri) {
                                 Glide.with(AdminSearchUser.this)
                                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .error(R.drawable.default_loading_img)
+                                        .error(R.drawable.admin_profile_img)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
                             }
@@ -274,7 +274,7 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                         public void onSuccess(Uri uri) {
                                                                                                                             Glide.with(AdminSearchUser.this)
                                                                                                                                     .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                                                                                                                    .error(R.drawable.error_profile_picture)
+                                                                                                                                    .error(R.drawable.profile_pic)
                                                                                                                                     .placeholder(R.drawable.default_loading_img)
                                                                                                                                     .into(profilepic);
 
@@ -397,7 +397,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             public void onSuccess(Uri uri) {
                                 Glide.with(AdminSearchUser.this)
                                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .error(R.drawable.default_loading_img)
+                                        .error(R.drawable.company_profile_img)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
                             }

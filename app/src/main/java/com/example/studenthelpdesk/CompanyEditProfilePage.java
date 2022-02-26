@@ -48,7 +48,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
                 Glide.with(CompanyEditProfilePage.this)
                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
                         .error(R.drawable.company_profile_img)
-                        .placeholder(R.drawable.company_profile_img)
+                        .placeholder(R.drawable.default_loading_img)
                         .into(profilepic);
             }
         });

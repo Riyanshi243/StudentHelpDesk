@@ -44,8 +44,8 @@ public class AdminEditProfilePage extends AppCompatActivity {
             public void onSuccess(Uri uri) {
                 Glide.with(AdminEditProfilePage.this)
                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .error(R.drawable.profile_pic)
-                        .placeholder(R.drawable.profile_pic)
+                        .error(R.drawable.admin_profile_img)
+                        .placeholder(R.drawable.default_loading_img)
                         .into(profilepic);
             }
     });
