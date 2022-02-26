@@ -23,9 +23,7 @@ public class CompanyData {
         this.companyName = companyName;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public String getCompanyName() {
         return companyName;
