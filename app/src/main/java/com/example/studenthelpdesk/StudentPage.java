@@ -101,8 +101,8 @@ public class StudentPage extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
                                         Glide.with(StudentPage.this)
                                                 .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                                .error(R.drawable.profile_pic)
-                                                .placeholder(R.drawable.profile_pic)
+                                                .error(R.drawable.error_profile_picture)
+                                                .placeholder(R.drawable.default_loading_img)
                                                 .into(profilepic);
 
                                     }
@@ -350,8 +350,8 @@ public class StudentPage extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
                                         Glide.with(StudentPage.this)
                                                 .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                                .error(R.drawable.profile_pic)
-                                                .placeholder(R.drawable.profile_pic)
+                                                .error(R.drawable.error_profile_picture)
+                                                .placeholder(R.drawable.default_loading_img)
                                                 .into(profilepic);
 
                                     }

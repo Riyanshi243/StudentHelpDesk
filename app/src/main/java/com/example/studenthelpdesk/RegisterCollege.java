@@ -60,11 +60,14 @@ public class RegisterCollege extends AppCompatActivity {
                     {
                         allData.setSAdminemail(adminmail.getText().toString().trim());
                         allData.setPassword(password.getText().toString());
-                        allData.setUname(uname.getText().toString());
-                        allData.setCName(cname.getText().toString());
-                        allData.setLocation(location.getText().toString());
+                        allData.setUname(uname.getText().toString().trim());
+                        allData.setCName(cname.getText().toString().trim());
+                        allData.setLocation(location.getText().toString().trim());
                         //intent to college registration step 2
                         startActivity(new Intent(RegisterCollege.this, RegisterCollege2.class));
+                        register.setEnabled(true);
+                        ProgressBar pbar =findViewById(R.id.progressBar_college);
+                        pbar.setVisibility(View.INVISIBLE);
 
                     }
                 }
@@ -90,6 +93,7 @@ public class RegisterCollege extends AppCompatActivity {
         if(cname.getText().toString().length()==0)
         {
             cname.setError("ENTER COLLEGE NAME");
+            cname.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
@@ -98,6 +102,7 @@ public class RegisterCollege extends AppCompatActivity {
         if(uname.getText().toString().length()==0)
         {
             uname.setError("ENTER USERNAME");
+            uname.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
             return false;
@@ -105,6 +110,7 @@ public class RegisterCollege extends AppCompatActivity {
         if(location.getText().toString().length()==0)
         {
             location.setError("ENTER LOCATION");
+            location.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
             return false;
@@ -112,6 +118,18 @@ public class RegisterCollege extends AppCompatActivity {
         if(adminmail.getText().toString().length()==0)
         {
             adminmail.setError("ENTER EMAIL");
+            adminmail.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            register.setEnabled(true);
+            return false;
+        }
+        //check if valid mail
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String email=adminmail.getText().toString().trim();
+        if(!email.matches(emailPattern))
+        {
+            adminmail.setError("ENTER VALID EMAIL");
+            adminmail.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
             return false;
@@ -119,34 +137,7 @@ public class RegisterCollege extends AppCompatActivity {
         if(password.getText().toString().length()==0)
         {
             password.setError("ENTER PASSWORD");
-            pbar.setVisibility(View.INVISIBLE);
-            register.setEnabled(true);
-             return false;
-        }
-        if(password2.getText().toString().length()==0)
-        {
-            password2.setError("ENTER CONFIRM PASSWORD");
-            pbar.setVisibility(View.INVISIBLE);
-            register.setEnabled(true);
-             return false;
-        }
-
-
-        //check if valid mail
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        String email=adminmail.getText().toString().trim();
-        if(!email.matches(emailPattern))
-        {
-            adminmail.setError("ENTER VALID EMAIL");
-            pbar.setVisibility(View.INVISIBLE);
-            register.setEnabled(true);
-             return false;
-        }
-       
-                    //check if passwords match
-        if(password.getText().toString().equals(password2.getText().toString())==false)
-        {
-            password2.setError("PASSWORDS DO NOT MATCH");
+            password.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
@@ -155,10 +146,30 @@ public class RegisterCollege extends AppCompatActivity {
         if(password.getText().toString().length()< 8)
         {
             password.setError("ENTER ATLEAST 8 CHARACTERS");
+            password.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            register.setEnabled(true);
+            return false;
+        }
+        if(password2.getText().toString().length()==0)
+        {
+            password2.setError("ENTER CONFIRM PASSWORD");
+            password2.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
              return false;
         }
+
+                    //check if passwords match
+        if(password.getText().toString().equals(password2.getText().toString())==false)
+        {
+            password2.setError("PASSWORDS DO NOT MATCH");
+            password2.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            register.setEnabled(true);
+             return false;
+        }
+
      //   return flag[0];
         return true;
     }

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class AdminSearchUser extends AppCompatActivity{
     static EditText email;
     Button search;
     static String category;
+    TextView msg;
     LinearLayout ll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +46,19 @@ public class AdminSearchUser extends AppCompatActivity{
         setContentView(R.layout.activity_admin_search_user);
         email=findViewById(R.id.emailsearch);
         search=findViewById(R.id.search);
+        msg=findViewById(R.id.msg);
         ll=findViewById(R.id.ll);
         adminData=AdminPage.adminData;
     }
     public void searchUser(View v) {
+
+        ProgressBar pbar =findViewById(R.id.progressBar2);
+        pbar.setVisibility(View.VISIBLE);
+        search.setEnabled(false);
         ll.removeAllViews();
         if(checkEmail())
         {
             checkUserType();
-
         }
     }
 
@@ -94,9 +100,13 @@ public class AdminSearchUser extends AppCompatActivity{
                             public void onSuccess(Uri uri) {
                                 Glide.with(AdminSearchUser.this)
                                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .error(R.drawable.default_loading_img)
+                                        .error(R.drawable.admin_profile_img)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
+                                ProgressBar pbar =findViewById(R.id.progressBar2);
+                                pbar.setVisibility(View.GONE);
+                                search.setEnabled(true);
+                                msg.setVisibility(View.VISIBLE);
                             }
                         });
                         ll.addView(photo);
@@ -105,7 +115,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_name=name_.findViewById(R.id.Ques);
                             TextView ans_name=name_.findViewById(R.id.ans);
-                            ques_name.setText("NAME:");
+                            ques_name.setText("NAME");
                             ans_name.setText(name);
                             ll.addView(name_);
 
@@ -113,7 +123,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View email_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_email=email_.findViewById(R.id.Ques);
                             TextView ans_email=email_.findViewById(R.id.ans);
-                            ques_email.setText("EMAIL:");
+                            ques_email.setText("EMAIL");
                             ans_email.setText(email);
                             ll.addView(email_);
 
@@ -121,14 +131,14 @@ public class AdminSearchUser extends AppCompatActivity{
                             View dept_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_dept=dept_.findViewById(R.id.Ques);
                             TextView ans_dept=dept_.findViewById(R.id.ans);
-                            ques_dept.setText("DEPARTMENT:");
+                            ques_dept.setText("DEPARTMENT");
                             ans_dept.setText(department);
                             ll.addView(dept_);
 
                             View phone_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_phone=phone_.findViewById(R.id.Ques);
                             TextView ans_phone=phone_.findViewById(R.id.ans);
-                            ques_phone.setText("PHONE NUMBER:");
+                            ques_phone.setText("PHONE NUMBER");
                             ans_phone.setText(phone);
                             ll.addView(phone_);
                         }
@@ -274,10 +284,13 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                         public void onSuccess(Uri uri) {
                                                                                                                             Glide.with(AdminSearchUser.this)
                                                                                                                                     .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                                                                                                                    .error(R.drawable.error_profile_picture)
+                                                                                                                                    .error(R.drawable.profile_pic)
                                                                                                                                     .placeholder(R.drawable.default_loading_img)
                                                                                                                                     .into(profilepic);
-
+                                                                                                                            ProgressBar pbar =findViewById(R.id.progressBar2);
+                                                                                                                            pbar.setVisibility(View.GONE);
+                                                                                                                            search.setEnabled(true);
+                                                                                                                            msg.setVisibility(View.VISIBLE);
                                                                                                                         }
                                                                                                                     });
                                                                                                                     ll.addView(photo);
@@ -397,9 +410,14 @@ public class AdminSearchUser extends AppCompatActivity{
                             public void onSuccess(Uri uri) {
                                 Glide.with(AdminSearchUser.this)
                                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .error(R.drawable.default_loading_img)
+                                        .error(R.drawable.company_profile_img)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
+
+                                ProgressBar pbar =findViewById(R.id.progressBar2);
+                                pbar.setVisibility(View.GONE);
+                                search.setEnabled(true);
+                                msg.setVisibility(View.VISIBLE);
                             }
                         });
                         ll.addView(photo);
@@ -412,12 +430,11 @@ public class AdminSearchUser extends AppCompatActivity{
                         companyData.setPhone((String) documentSnapshot.get("Phone Number"));
                         if(category[0].equalsIgnoreCase("Company"))
                         {
-
                             String name=companyData.getCompanyName();
                             View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_name=name_.findViewById(R.id.Ques);
                             TextView ans_name=name_.findViewById(R.id.ans);
-                            ques_name.setText("COMPANY NAME:");
+                            ques_name.setText("COMPANY NAME");
                             ans_name.setText(name);
                             ll.addView(name_);
 
@@ -425,7 +442,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View location_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_location=location_.findViewById(R.id.Ques);
                             TextView ans_location=location_.findViewById(R.id.ans);
-                            ques_location.setText("COMPANY LOCATION:");
+                            ques_location.setText("COMPANY LOCATION");
                             ans_location.setText(location);
                             ll.addView(location_);
 
@@ -433,7 +450,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View rname_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_rname=rname_.findViewById(R.id.Ques);
                             TextView ans_rname=rname_.findViewById(R.id.ans);
-                            ques_rname.setText("REPRESENTATIVE NAME:");
+                            ques_rname.setText("REPRESENTATIVE NAME");
                             ans_rname.setText(rname);
                             ll.addView(rname_);
 
@@ -441,7 +458,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View remail_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_remail=remail_.findViewById(R.id.Ques);
                             TextView ans_remail=remail_.findViewById(R.id.ans);
-                            ques_remail.setText("REPRESENTATIVE EMAIL:");
+                            ques_remail.setText("REPRESENTATIVE EMAIL");
                             ans_remail.setText(remail);
                             ll.addView(remail_);
 
@@ -463,7 +480,11 @@ public class AdminSearchUser extends AppCompatActivity{
                 }
                 else
                 {
-                    email.setError("This user doesnot Exist");
+                    email.setError("This user does not exists");
+                    email.requestFocus();
+                    ProgressBar pbar =findViewById(R.id.progressBar2);
+                    pbar.setVisibility(View.INVISIBLE);
+                    search.setEnabled(true);
                     AdminSearchUser.category="None";
                     category[0]="None";
                 }
@@ -474,6 +495,9 @@ public class AdminSearchUser extends AppCompatActivity{
                 AdminSearchUser.category="None";
                 Toast.makeText(AdminSearchUser.this,e.toString(),Toast.LENGTH_LONG).show();
                 category[0]="None";
+                ProgressBar pbar =findViewById(R.id.progressBar2);
+                pbar.setVisibility(View.INVISIBLE);
+                search.setEnabled(true);
             }
         });
     }
@@ -481,14 +505,22 @@ public class AdminSearchUser extends AppCompatActivity{
     public boolean checkEmail() {
         //check if not empty
         if (email.getText().toString().length() == 0) {
-            email.setError("ENTER MAIL");
+            email.setError("ENTER EMAIL");
+            email.requestFocus();
+            ProgressBar pbar =findViewById(R.id.progressBar2);
+            pbar.setVisibility(View.INVISIBLE);
+            search.setEnabled(true);
             return false;
         }
         //check if valid
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         String email1 = email.getText().toString().trim();
         if (!email1.matches(emailPattern)) {
-            email.setError("ENTER VALID MAIL");
+            email.setError("ENTER VALID EMAIL");
+            email.requestFocus();
+            ProgressBar pbar =findViewById(R.id.progressBar2);
+            pbar.setVisibility(View.INVISIBLE);
+            search.setEnabled(true);
             return false;
         }
         return true;

@@ -104,6 +104,9 @@ public class Signup extends AppCompatActivity {
                                         adminData.setCollegeId(collegeId);
                                         //intent to admin signup page
                                         startActivity(new Intent(Signup.this, AdminSignUp.class));
+                                        signup.setEnabled(true);
+                                        ProgressBar pbar = findViewById(R.id.progressBar5);
+                                        pbar.setVisibility(View.INVISIBLE);
 
                                     } else if (category.equalsIgnoreCase("Student")) {
                                         studentData.setEmail(email.getText().toString());
@@ -111,13 +114,18 @@ public class Signup extends AppCompatActivity {
                                         studentData.setCollegeid(collegeId);
                                         //intent to student signup step 1 page
                                         startActivity(new Intent(Signup.this, StudentSignup1_PersonalData.class));
+                                        signup.setEnabled(true);
+                                        ProgressBar pbar = findViewById(R.id.progressBar5);
+                                        pbar.setVisibility(View.INVISIBLE);
                                     } else if (category.equalsIgnoreCase("Company")) {
                                         companyData.setEmail(email.getText().toString());
                                         companyData.setPassword(password1.getText().toString());
                                         companyData.setCollegeId(collegeId);
                                         //intent to company signup page
                                         startActivity(new Intent(Signup.this, CompanySignUp.class));
-
+                                        signup.setEnabled(true);
+                                        ProgressBar pbar = findViewById(R.id.progressBar5);
+                                        pbar.setVisibility(View.INVISIBLE);
                                     }
 
                                 } else {
@@ -129,6 +137,7 @@ public class Signup extends AppCompatActivity {
                                 }
                             } else {
                                 email.setError("This user does not belong to selected college");
+                                email.requestFocus();
                                 pbar.setVisibility(View.INVISIBLE);
                                 signup.setEnabled(true);
                                 return;
@@ -136,6 +145,7 @@ public class Signup extends AppCompatActivity {
 
                         } else {
                             email.setError("This email is not allowed by admin");
+                            email.requestFocus();
                             pbar.setVisibility(View.INVISIBLE);
                             signup.setEnabled(true);
                             return;
@@ -157,6 +167,7 @@ public class Signup extends AppCompatActivity {
         //check all constraints here
         if (email.getText().toString().length() == 0 || !email.getText().toString().contains("@")) {
             email.setError("EMAIL IS REQUIRED");
+            email.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -166,7 +177,8 @@ public class Signup extends AppCompatActivity {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         String email1 = email.getText().toString().trim();
         if (!email1.matches(emailPattern)) {
-            email.setError("ENTER VALID MAIL");
+            email.setError("ENTER VALID EMAIL");
+            email.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -175,6 +187,7 @@ public class Signup extends AppCompatActivity {
 
         if (password1.getText().toString().length() == 0) {
             password1.setError("PASSWORD IS REQUIRED");
+            password1.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -183,22 +196,22 @@ public class Signup extends AppCompatActivity {
         //check if password length greater than 8
         if (password1.getText().toString().length() < 8) {
             password1.setError("ENTER ATLEAST 8 CHARACTERS");
+            password1.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
 
         }
-
+        if (password2.getText().toString().length() == 0) {
+            password2.setError("CONFIRM PASSWORD IS REQUIRED");
+            password2.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            signup.setEnabled(true);
+            return false;
+        }
         if (!password2.getText().toString().equals(password1.getText().toString())) {
             password2.setError("PASSWORDS DO NOT MATCH");
-            pbar.setVisibility(View.INVISIBLE);
-            signup.setEnabled(true);
-            return false;
-        }
-
-        //check if both passwords match
-        if (password1.getText().toString().equals(password2.getText().toString()) == false) {
-            password2.setError("PASSWORDS DO NOT MATCH");
+            password2.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;

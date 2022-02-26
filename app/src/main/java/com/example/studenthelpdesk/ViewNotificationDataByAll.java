@@ -130,7 +130,7 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
                                         Glide.with(ViewNotificationDataByAll.this)
                                                 .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                                .error(R.drawable.default_loading_img)
+                                                .error(R.drawable.error_profile_picture)
                                                 .placeholder(R.drawable.default_loading_img)
                                                 .into(imageView);
                                         imageView.setOnTouchListener(new View.OnTouchListener() {
@@ -164,8 +164,8 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
             public void onSuccess(Uri uri) {
                 Glide.with(ViewNotificationDataByAll.this)
                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .error(R.drawable.profile_pic)
-                        .placeholder(R.drawable.profile_pic)
+                        .error(R.drawable.error_profile_picture)
+                        .placeholder(R.drawable.default_loading_img)
                         .into(profilePic);
             }
         });

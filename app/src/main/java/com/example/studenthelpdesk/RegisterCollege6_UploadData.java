@@ -38,6 +38,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
             CollegeRegisterQuestions thisQuestion = new CollegeRegisterQuestions();
             View repeatableView = linearLayout.getChildAt(i);
             EditText question = repeatableView.findViewById(R.id.ans);
+            question.requestFocus();
             CheckBox cumpolsary = repeatableView.findViewById(R.id.compulsoryfield);
             CheckBox changeable = repeatableView.findViewById(R.id.changefield);
             thisQuestion.setQuestion(question.getText().toString());
@@ -57,6 +58,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         EditText question = repeatableLastView.findViewById(R.id.ans);
         if (question.getText().toString().length() == 0) {
             question.setError("ENTER THIS VALUE");
+            question.requestFocus();
             return false;
         }
         return true;

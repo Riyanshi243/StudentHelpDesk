@@ -90,7 +90,7 @@ public class Login extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(Login.this,"Error:"+e.getMessage(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.this,"Error:"+ e.getMessage(),Toast.LENGTH_LONG).show();
                             login.setEnabled(true);
                             ProgressBar pbar = findViewById(R.id.progressBar4);
                             pbar.setVisibility(View.INVISIBLE);
@@ -109,6 +109,7 @@ public class Login extends AppCompatActivity {
 
         if (email.getText().toString().length() == 0 || !email.getText().toString().contains("@")) {
             email.setError("EMAIL IS REQUIRED");
+            email.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             login.setEnabled(true);
             return false;
@@ -117,6 +118,7 @@ public class Login extends AppCompatActivity {
         String email1 = email.getText().toString().trim();
         if (!email1.matches(emailPattern)) {
             email.setError("ENTER VALID MAIL");
+            email.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             login.setEnabled(true);
             return false;
@@ -124,12 +126,14 @@ public class Login extends AppCompatActivity {
         }
         if (password.getText().toString().length() == 0) {
             password.setError("PASSWORD IS REQUIRED");
+            password.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             login.setEnabled(true);
             return false;
         }
         if (password.getText().toString().length() < 8) {
             password.setError("ENTER ATLEAST 8 CHARACTERS");
+            password.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             login.setEnabled(true);
             return false;
