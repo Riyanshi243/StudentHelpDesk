@@ -333,6 +333,12 @@ public class StudentPage extends AppCompatActivity {
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 String name = (String) documentSnapshot.get("Name");
                                 long noOfRequest= (long) documentSnapshot.get("Number of Requests");
+                                String course= (String) documentSnapshot.get("Course");
+                                String branch=(String)documentSnapshot.get("Branch");
+                                String year=(String)documentSnapshot.get("Year");
+                                studentData.setCourse(course);
+                                studentData.setBranch(branch);
+                                studentData.setYr(year);
                                 studentData.setName(name);
                                 studentData.setNoOfReq(noOfRequest);
                                 heading.setText(name);
@@ -379,6 +385,7 @@ public class StudentPage extends AppCompatActivity {
                                                     currQ.setType((int) type);
                                                     currQ.setQuestion(ques);
                                                     currQ.setId(finalI2);
+                                                    currQ.setDomain(1);
                                                     DocumentReference ans= docUserInfo2.collection("Personal Question").document(finalI+"");
                                                     ans.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                         @Override
@@ -421,6 +428,7 @@ public class StudentPage extends AppCompatActivity {
                                                                                     currQ.setType((int) type);
                                                                                     currQ.setQuestion(ques);
                                                                                     currQ.setId(finalI2);
+                                                                                    currQ.setDomain(2);
                                                                                     DocumentReference ans= docUserInfo2.collection("Academic Question").document(finalI+"");
                                                                                     ans.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                                                         @Override
@@ -463,6 +471,7 @@ public class StudentPage extends AppCompatActivity {
                                                                                                                     currQ.setType((int) type);
                                                                                                                     currQ.setQuestion(ques);
                                                                                                                     currQ.setId(finalI2);
+                                                                                                                    currQ.setDomain(3);
                                                                                                                     uploadQ.add(currQ);
                                                                                                                     if(uploadQ.size() ==total)
                                                                                                                     {

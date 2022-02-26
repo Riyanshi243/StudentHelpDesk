@@ -46,14 +46,14 @@
             <TextView
                 android:id="@+id/welcome"
                 android:layout_width="match_parent"
-                android:paddingLeft="5dp"
-                android:fontFamily="casual"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
-                android:text="Hello ID"
+                android:layout_marginRight="10dp"
+                android:fontFamily="casual"
+                android:paddingLeft="5dp"
+                android:text="Hello"
                 android:textColor="@color/black"
                 android:textSize="24dp" />
 
@@ -85,19 +85,11 @@
                 android:background="@drawable/layout_bg"
                 android:textSize="24dp" />
 
-            <EditText
-                android:id="@+id/newcurrentval"
+            <LinearLayout
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
-                android:paddingLeft="5dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="50dp"
-                android:hint="New value that needs to be placed"
-                android:inputType="textCapSentences"
-                android:textColor="@color/hint_text"
-                android:textColorHint="@android:color/darker_gray" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
 
             <EditText
                 android:id="@+id/reasontochange"
@@ -120,9 +112,10 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/roundedbutton"
-                android:text="SEND REQUEST"
-                android:layout_marginBottom="50dp"/>
+                android:onClick="sendRequest"
+                android:text="SEND REQUEST" />
 
         </LinearLayout>
     </ScrollView>

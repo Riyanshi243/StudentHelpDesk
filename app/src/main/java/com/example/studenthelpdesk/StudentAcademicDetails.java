@@ -3,19 +3,36 @@ package com.example.studenthelpdesk;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class StudentAcademicDetails extends AppCompatActivity {
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+
+public class StudentAcademicDetails extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     StudentData studentData;
     LinearLayout ll;
 
@@ -36,20 +53,97 @@ public class StudentAcademicDetails extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (a.isChangeable() == true) {
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(StudentAcademicDetails.this);
                         builder.setTitle(a.getQuestion());
                         builder.setMessage("Enter new value");
-                        EditText neww=new EditText(repeatAnswers.getContext());
-                        builder.setView(neww);
-                        //EditText neww = new EditText(StudentPersonalDetails.this);
-                        neww.setText(a.getAnswer());
+                        //change it with the desired view using getType
+                        View typeInput=getType(a.getType(),a.getAnswer(),a.getQuestion());
+                        builder.setView(typeInput);
                         builder.setCancelable(false)
                                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        ans.setText(neww.getText().toString());
+                                        DocumentReference ansDoc= FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail()).collection("Academic Question").document(a.getId()+"");
+                                        HashMap<String,Object> updatedAns=new HashMap<>();
+                                        String answer=saveData(typeInput,a);
+
+                                        updatedAns.put("Question",a.getQuestion());
+                                        updatedAns.put("Answer",answer);
                                         //save in database
+
+                                        Log.e("Id of question",updatedAns.toString());
+                                        ansDoc.set(updatedAns).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                DocumentReference mainDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail());
+                                                HashMap<String,Object> mainD=new HashMap<>();
+
+                                                if(a.getQuestion().equalsIgnoreCase("Name"))
+                                                {
+                                                    mainD.put("Name",answer);
+                                                    mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(StudentAcademicDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                            studentData.setName(answer);
+                                                            ans.setText(answer);
+                                                            a.setAnswer(answer);
+
+                                                        }
+                                                    });
+                                                }
+                                                else if(a.getQuestion().equalsIgnoreCase("Course"))
+                                                {
+                                                    mainD.put("Course",answer);
+                                                    mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(StudentAcademicDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                            studentData.setCourse(answer);
+                                                            ans.setText(answer);
+                                                            a.setAnswer(answer);
+
+                                                        }
+                                                    });
+                                                }
+                                                else if(a.getQuestion().equalsIgnoreCase("Branch"))
+                                                {
+                                                    mainD.put("Branch",answer);
+                                                    mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(StudentAcademicDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                            studentData.setBranch(answer);
+                                                            ans.setText(answer);
+                                                            a.setAnswer(answer);
+
+                                                        }
+                                                    });
+                                                }
+                                                else if(a.getQuestion().equalsIgnoreCase("Year"))
+                                                {
+                                                    mainD.put("Year",answer);
+                                                    mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(StudentAcademicDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                            studentData.setYr(answer);
+                                                            ans.setText(answer);
+                                                            a.setAnswer(answer);
+
+                                                        }
+                                                    });
+                                                }
+                                                else
+                                                {
+                                                    Toast.makeText(StudentAcademicDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                    ans.setText(answer);
+                                                    a.setAnswer(answer);
+                                                }
+
+                                            }
+                                        });
+
                                     }
                                 })
                                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -61,12 +155,256 @@ public class StudentAcademicDetails extends AppCompatActivity {
                         AlertDialog alert = builder.create();
                         alert.show();
                     } else {
-                        // Toast.makeText(this,"SEND REQUEST FOR CHANGE",Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder ab=new AlertDialog.Builder(StudentAcademicDetails.this);
+                        ab.setTitle("This field is not editable");
+                        ab.setMessage("If you want to change the data in the field, please send request to admin");
+                        ab.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent=new Intent(StudentAcademicDetails.this,StudentSendRequestToChangeData.class);
+                                intent.putExtra("Details",a);
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //do nothing
+                            }
+                        })
+                                .setCancelable(false);
+                        ab.create().show();
                     }
                 }
             });
+
             ll.addView(repeatAnswers);
         }
         }
+
+    public String saveData(View nView,CollegeRegisterQuestions a)
+    {
+        int type = a.getType();
+        if(type==2)
+        {
+            EditText ans=nView.findViewById(R.id.editvalnumeric);
+            return ans.getText().toString();
+        }
+        if(type==3)
+        {
+            EditText ans=nView.findViewById(R.id.editvalmulti);
+            return ans.getText().toString();
+        }
+        if(type==0)
+        {
+            EditText ans=nView.findViewById(R.id.editTextTextMultiLine);
+            return ans.getText().toString();
+        }
+        if(type==1)
+        {
+            EditText ans=nView.findViewById(R.id.editTextMultiLine);
+            return ans.getText().toString();
+        }
+        if (type==4)
+        {
+            RadioGroup ans=nView.findViewById(R.id.rg);
+            RadioButton m=ans.findViewById(R.id.male);
+            RadioButton f=ans.findViewById(R.id.female);
+            RadioButton o=ans.findViewById(R.id.not);
+            if(m.isChecked())
+                return "Male";
+            else if(f.isChecked())
+                return "Female";
+            else
+                return "Other";
+        }
+        if(type==5)
+        {
+            TextView datePicked=nView.findViewById(R.id.tvDate);
+            return datePicked.getText().toString();
+        }
+        if(type==7)
+        {
+            AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
+            return drop.getText().toString();
+        }
+        return "";
+
     }
+    View getType(long i,String a,String q)
+    {
+
+        if(i==2)
+        {
+            //numeric
+            //View nView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.repeatable_numeric_text_layout, null, false);
+            View nView=getLayoutInflater().inflate(R.layout.repeatable_numeric_text_layout,null);
+            TextView ques=nView.findViewById(R.id.Ques);
+            EditText ans=nView.findViewById(R.id.editvalnumeric);
+            ans.setInputType(InputType.TYPE_CLASS_NUMBER);
+            ans.setText(a);
+            ques.setVisibility(View.GONE);
+            return nView;
+        }
+        if(i==3)
+        {
+            //numeric decimal
+            View nView=getLayoutInflater().inflate(R.layout.repeatable_number_decimal_layout,null);
+            TextView ques=nView.findViewById(R.id.Ques);
+            EditText ans=nView.findViewById(R.id.editvalmulti);
+            ans.setText(a);
+            ques.setVisibility(View.GONE);
+
+            return nView;
+        }
+        if(i==0)
+        {
+            //single line string
+            View nView=getLayoutInflater().inflate(R.layout.repeatable_edit_text_white_layout,null);
+            TextView ques=nView.findViewById(R.id.Ques);
+            EditText ans=nView.findViewById(R.id.editTextTextMultiLine);
+            ans.setText(a);
+            ques.setVisibility(View.GONE);
+            return nView;
+        }
+        if(i==1)
+        {
+            //multiline string
+            View nView=getLayoutInflater().inflate(R.layout.repeatable_multiline_text_layout,null);
+            TextView ques=nView.findViewById(R.id.Ques);
+            EditText ans=nView.findViewById(R.id.editTextMultiLine);
+            ans.setText(a);
+            ques.setVisibility(View.GONE);
+            return nView;
+        }
+        if(i==4)
+        {
+            //gender
+            View nView=getLayoutInflater().inflate(R.layout.repeatable_radio_button_layout,null);
+            TextView ques=nView.findViewById(R.id.Ques);
+            ques.setVisibility(View.GONE);
+            RadioGroup ans=nView.findViewById(R.id.rg);
+            ans.setClickable(true);
+            RadioButton m=ans.findViewById(R.id.male);
+
+            RadioButton f=ans.findViewById(R.id.female);
+
+            RadioButton o=ans.findViewById(R.id.not);
+            if(a.equalsIgnoreCase("Male"))
+                m.setChecked(true);
+            else if(a.equalsIgnoreCase("Female"))
+                f.setChecked(true);
+            else
+                o.setChecked(true);
+            ans.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                }
+            });
+            f.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+            m.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+            o.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+            return nView;
+        }
+        if(i==5)
+        {
+            //date
+            View nView=getLayoutInflater().inflate(R.layout.repeatable_date_input_layout,null);
+            TextView ques=nView.findViewById(R.id.dobtext);
+            ques.setVisibility(View.GONE);
+            Button datePicker =nView.findViewById(R.id.btPickDate);
+            TextView datePicked=nView.findViewById(R.id.tvDate);
+            datePicked.setText(a);
+            selectedDate=a;
+            currentView=nView;
+            datePicker.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DatePicker mDatePickerDialogFragment;
+                    mDatePickerDialogFragment = new DatePicker();
+                    mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
+                    mDatePickerDialogFragment.setCancelable(false);
+
+                }
+            });
+            return nView;
+        }
+        if(i==7)
+        {
+            View nView=getLayoutInflater().inflate(R.layout.repeatable_dropdown,null);
+            TextView ques=nView.findViewById(R.id.Ques);
+            ques.setVisibility(View.GONE);
+            AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
+            drop.setText(a);
+            if(q.trim().equalsIgnoreCase("Year"))
+            {
+                String yr[]={"1","2","3","4","5","5+"};
+                ArrayAdapter<String> spinnerList=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,yr);
+                drop.setText(yr[0]);
+                drop.setAdapter(spinnerList);
+            }
+            if(q.equalsIgnoreCase("Course"))
+            {
+                FirebaseFirestore f=FirebaseFirestore.getInstance();
+                DocumentReference allCourse = f.collection("All Colleges").document(studentData.getCollegeid());
+                allCourse.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        ArrayList<String> coursesList= (ArrayList<String>) documentSnapshot.get("Courses");
+                        ArrayAdapter spinnerList=new ArrayAdapter(StudentAcademicDetails.this,android.R.layout.simple_spinner_item,coursesList);
+                        drop.setAdapter(spinnerList);
+
+                    }
+                });
+            }
+            if(q.equalsIgnoreCase("Branch")) {
+                FirebaseFirestore f = FirebaseFirestore.getInstance();
+                DocumentReference allCourse = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Branches").document(studentData.getCourse());
+                allCourse.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()==false) {
+                            drop.setText("Select Course First");
+                            return;
+                        }
+                        ArrayList<String> branchList = (ArrayList<String>) documentSnapshot.get("Branches");
+                        ArrayAdapter spinnerList = new ArrayAdapter(StudentAcademicDetails.this, android.R.layout.simple_spinner_item, branchList);
+                        drop.setAdapter(spinnerList);
+                    }
+                });
+
+            }
+            return nView;
+
+        }
+        return null;
+    }
+    String selectedDate;
+    View currentView;
+    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.set(Calendar.YEAR, year);
+        mCalendar.set(Calendar.MONTH, month);
+        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        TextView datePicker=currentView.findViewById(R.id.tvDate);
+        selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
+        datePicker.setText(selectedDate);
+    }
+
+}
 

@@ -7,7 +7,15 @@ import java.io.Serializable;
 public class CollegeRegisterQuestions implements Serializable {
     private String question,answer;
     private boolean changeable,compulsory;
-    private int type,id;
+    private int type,id,domain;
+
+    public void setDomain(int domain) {
+        this.domain = domain;
+    }
+
+    public int getDomain() {
+        return domain;
+    }
 
     public void setId(int id) {
         this.id = id;

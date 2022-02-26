@@ -150,12 +150,36 @@ public class StudentUploadDetails extends AppCompatActivity {
                 update.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        progressbar.setVisibility(View.VISIBLE);
-                        currentQView=repeatAnswers;
-                        Intent intent=new Intent();
-                        intent.setType("application/pdf");
-                        intent.setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(intent,2);
+                        if(a.isChangeable()==true)
+                        {
+                            progressbar.setVisibility(View.VISIBLE);
+                            currentQView=repeatAnswers;
+                            Intent intent=new Intent();
+                            intent.setType("application/pdf");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            startActivityForResult(intent,2);
+                        }
+                        else
+                        {
+                            AlertDialog.Builder ab=new AlertDialog.Builder(StudentUploadDetails.this);
+                            ab.setTitle("This field is not editable");
+                            ab.setMessage("If you want to change the data in the field, please send request to admin");
+                            ab.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent=new Intent(StudentUploadDetails.this,StudentSendRequestToChangeData.class);
+                                    intent.putExtra("Details",a);
+                                    startActivity(intent);
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //do nothing
+                                }
+                            })
+                                    .setCancelable(false);
+                            ab.create().show();
+                        }
                     }
                 });
                 download.setOnClickListener(new View.OnClickListener() {
@@ -218,9 +242,7 @@ public class StudentUploadDetails extends AppCompatActivity {
         if(imageuri!=null)
         {
             FirebaseStorage storage = FirebaseStorage.getInstance();
-
             StorageReference storageRef=storage.getReference(studentData.getCollegeid()).child(q);
-
             StorageReference fileReference =storageRef.child((studentData.getEmail()));
             fileReference.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
