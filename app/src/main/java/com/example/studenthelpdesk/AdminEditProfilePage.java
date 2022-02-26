@@ -16,8 +16,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
 
 public class AdminEditProfilePage extends AppCompatActivity {
     TextView name,email,department,phone;
@@ -68,6 +71,19 @@ public class AdminEditProfilePage extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //save in database
+                name.setText(et.getText().toString().trim());
+                adminData.setAdminName(et.getText().toString().trim());
+                HashMap <String,Object> changeDetail = new HashMap<>();
+                changeDetail.put("Name",et.getText().toString().trim());
+                FirebaseFirestore.getInstance().collection("All Colleges")
+                        .document(adminData.getCollegeId()).collection("UsersInfo")
+                        .document(adminData.getEmail()).update(changeDetail)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(AdminEditProfilePage.this,"Data saved Successfully!!",Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
         });
         change.create().show();

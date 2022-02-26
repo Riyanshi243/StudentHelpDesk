@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class AdminSearchUser extends AppCompatActivity{
     static EditText email;
     Button search;
     static String category;
+    TextView msg;
     LinearLayout ll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +46,19 @@ public class AdminSearchUser extends AppCompatActivity{
         setContentView(R.layout.activity_admin_search_user);
         email=findViewById(R.id.emailsearch);
         search=findViewById(R.id.search);
+        msg=findViewById(R.id.msg);
         ll=findViewById(R.id.ll);
         adminData=AdminPage.adminData;
     }
     public void searchUser(View v) {
+
+        ProgressBar pbar =findViewById(R.id.progressBar2);
+        pbar.setVisibility(View.VISIBLE);
+        search.setEnabled(false);
         ll.removeAllViews();
         if(checkEmail())
         {
             checkUserType();
-
         }
     }
 
@@ -97,6 +103,10 @@ public class AdminSearchUser extends AppCompatActivity{
                                         .error(R.drawable.admin_profile_img)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
+                                ProgressBar pbar =findViewById(R.id.progressBar2);
+                                pbar.setVisibility(View.GONE);
+                                search.setEnabled(true);
+                                msg.setVisibility(View.VISIBLE);
                             }
                         });
                         ll.addView(photo);
@@ -277,7 +287,10 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                                     .error(R.drawable.profile_pic)
                                                                                                                                     .placeholder(R.drawable.default_loading_img)
                                                                                                                                     .into(profilepic);
-
+                                                                                                                            ProgressBar pbar =findViewById(R.id.progressBar2);
+                                                                                                                            pbar.setVisibility(View.GONE);
+                                                                                                                            search.setEnabled(true);
+                                                                                                                            msg.setVisibility(View.VISIBLE);
                                                                                                                         }
                                                                                                                     });
                                                                                                                     ll.addView(photo);
@@ -400,6 +413,11 @@ public class AdminSearchUser extends AppCompatActivity{
                                         .error(R.drawable.company_profile_img)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
+
+                                ProgressBar pbar =findViewById(R.id.progressBar2);
+                                pbar.setVisibility(View.GONE);
+                                search.setEnabled(true);
+                                msg.setVisibility(View.VISIBLE);
                             }
                         });
                         ll.addView(photo);
@@ -412,7 +430,6 @@ public class AdminSearchUser extends AppCompatActivity{
                         companyData.setPhone((String) documentSnapshot.get("Phone Number"));
                         if(category[0].equalsIgnoreCase("Company"))
                         {
-
                             String name=companyData.getCompanyName();
                             View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_name=name_.findViewById(R.id.Ques);
@@ -465,6 +482,9 @@ public class AdminSearchUser extends AppCompatActivity{
                 {
                     email.setError("This user does not exists");
                     email.requestFocus();
+                    ProgressBar pbar =findViewById(R.id.progressBar2);
+                    pbar.setVisibility(View.INVISIBLE);
+                    search.setEnabled(true);
                     AdminSearchUser.category="None";
                     category[0]="None";
                 }
@@ -475,6 +495,9 @@ public class AdminSearchUser extends AppCompatActivity{
                 AdminSearchUser.category="None";
                 Toast.makeText(AdminSearchUser.this,e.toString(),Toast.LENGTH_LONG).show();
                 category[0]="None";
+                ProgressBar pbar =findViewById(R.id.progressBar2);
+                pbar.setVisibility(View.INVISIBLE);
+                search.setEnabled(true);
             }
         });
     }
@@ -484,6 +507,9 @@ public class AdminSearchUser extends AppCompatActivity{
         if (email.getText().toString().length() == 0) {
             email.setError("ENTER EMAIL");
             email.requestFocus();
+            ProgressBar pbar =findViewById(R.id.progressBar2);
+            pbar.setVisibility(View.INVISIBLE);
+            search.setEnabled(true);
             return false;
         }
         //check if valid
@@ -492,6 +518,9 @@ public class AdminSearchUser extends AppCompatActivity{
         if (!email1.matches(emailPattern)) {
             email.setError("ENTER VALID EMAIL");
             email.requestFocus();
+            ProgressBar pbar =findViewById(R.id.progressBar2);
+            pbar.setVisibility(View.INVISIBLE);
+            search.setEnabled(true);
             return false;
         }
         return true;

@@ -15,8 +15,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
 
 public class CompanyEditProfilePage extends AppCompatActivity {
     TextView cname,cemail,location,repre_name,repre_emailid,repre_number;
@@ -71,7 +74,19 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         }).setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //save in database
+                cname.setText(et.getText().toString().trim());
+                companyData.setCompanyName(et.getText().toString().trim());
+                HashMap<String,Object> changeDetail = new HashMap<>();
+                changeDetail.put("Company Name",et.getText().toString().trim());
+                FirebaseFirestore.getInstance().collection("All Colleges")
+                        .document(companyData.getCollegeId()).collection("UsersInfo")
+                        .document(companyData.getEmail()).update(changeDetail)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(CompanyEditProfilePage.this,"Data saved Successfully!!",Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
         });
         change.create().show();
