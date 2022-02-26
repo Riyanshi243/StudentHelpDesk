@@ -46,11 +46,11 @@ public class CompanySignUp extends AppCompatActivity {
     {
         if (checkFilled())
         {
-            companyData.setName(name.getText().toString());
+            companyData.setName(name.getText().toString().trim());
             companyData.setPhone(phone.getText().toString());
-            companyData.setCompanyName(companyName.getText().toString());
-            companyData.setLocation(location.getText().toString());
-            companyData.setPersonalEmail(email.getText().toString());
+            companyData.setCompanyName(companyName.getText().toString().trim());
+            companyData.setLocation(location.getText().toString().trim());
+            companyData.setPersonalEmail(email.getText().toString().trim());
             startActivity(new Intent(this,CompanySignUp2.class));
         }
     }
@@ -132,6 +132,7 @@ public class CompanySignUp extends AppCompatActivity {
         if(companyName.getText().toString().length()==0)
         {
             companyName.setError("ENTER COMPANY NAME");
+            companyName.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -139,6 +140,7 @@ public class CompanySignUp extends AppCompatActivity {
         if(location.getText().toString().length()==0)
         {
             location.setError("ENTER LOCATION");
+            location.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -146,6 +148,7 @@ public class CompanySignUp extends AppCompatActivity {
         if(name.getText().toString().length()==0)
         {
             name.setError("ENTER USERNAME");
+            name.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -154,6 +157,7 @@ public class CompanySignUp extends AppCompatActivity {
         if(email.getText().toString().length()==0)
         {
             email.setError("ENTER EMAIL");
+            email.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -164,6 +168,7 @@ public class CompanySignUp extends AppCompatActivity {
         if(!email1.matches(emailPattern))
         {
             email.setError("ENTER VALID MAIL");
+            email.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -171,20 +176,19 @@ public class CompanySignUp extends AppCompatActivity {
         if(phone.getText().toString().length()==0)
         {
             phone.setError("ENTER PHONE NUMBER");
+            phone.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
         }
-      else  if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
+        if(phone.getText().toString().length()<10 || phone.getText().toString().trim().length()>10)
         {
             phone.setError("INVALID PHONE NUMBER");
+            phone.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
         }
-
-
-
         return true;
     }
 }

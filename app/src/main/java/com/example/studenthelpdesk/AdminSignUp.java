@@ -75,8 +75,8 @@ AdminData adminData;
         {
             if (checkFilled())
             {
-                adminData.setAdminName(name.getText().toString());
-                adminData.setPhoneNumber(phone.getText().toString());
+                adminData.setAdminName(name.getText().toString().trim());
+                adminData.setPhoneNumber(phone.getText().toString().trim());
                 adminData.setDeptName(deptName.get(deptn));
                 startActivity(new Intent(this,AdminSignUp2.class));
             }
@@ -163,6 +163,7 @@ AdminData adminData;
         if(name.getText().toString().length()==0)
         {
             name.setError("ENTER USERNAME");
+            name.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -171,6 +172,7 @@ AdminData adminData;
         if(phone.getText().toString().length()==0)
         {
             phone.setError("ENTER PHONE NUMBER");
+            phone.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;
@@ -178,6 +180,7 @@ AdminData adminData;
         if(phone.getText().toString().length()<10|| phone.getText().toString().trim().length()>10)
         {
             phone.setError("INVALID PHONE NUMBER");
+            phone.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             signup.setEnabled(true);
             return false;

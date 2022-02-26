@@ -105,7 +105,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_name=name_.findViewById(R.id.Ques);
                             TextView ans_name=name_.findViewById(R.id.ans);
-                            ques_name.setText("NAME:");
+                            ques_name.setText("NAME");
                             ans_name.setText(name);
                             ll.addView(name_);
 
@@ -113,7 +113,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View email_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_email=email_.findViewById(R.id.Ques);
                             TextView ans_email=email_.findViewById(R.id.ans);
-                            ques_email.setText("EMAIL:");
+                            ques_email.setText("EMAIL");
                             ans_email.setText(email);
                             ll.addView(email_);
 
@@ -121,14 +121,14 @@ public class AdminSearchUser extends AppCompatActivity{
                             View dept_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_dept=dept_.findViewById(R.id.Ques);
                             TextView ans_dept=dept_.findViewById(R.id.ans);
-                            ques_dept.setText("DEPARTMENT:");
+                            ques_dept.setText("DEPARTMENT");
                             ans_dept.setText(department);
                             ll.addView(dept_);
 
                             View phone_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_phone=phone_.findViewById(R.id.Ques);
                             TextView ans_phone=phone_.findViewById(R.id.ans);
-                            ques_phone.setText("PHONE NUMBER:");
+                            ques_phone.setText("PHONE NUMBER");
                             ans_phone.setText(phone);
                             ll.addView(phone_);
                         }
@@ -417,7 +417,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_name=name_.findViewById(R.id.Ques);
                             TextView ans_name=name_.findViewById(R.id.ans);
-                            ques_name.setText("COMPANY NAME:");
+                            ques_name.setText("COMPANY NAME");
                             ans_name.setText(name);
                             ll.addView(name_);
 
@@ -425,7 +425,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View location_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_location=location_.findViewById(R.id.Ques);
                             TextView ans_location=location_.findViewById(R.id.ans);
-                            ques_location.setText("COMPANY LOCATION:");
+                            ques_location.setText("COMPANY LOCATION");
                             ans_location.setText(location);
                             ll.addView(location_);
 
@@ -433,7 +433,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View rname_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_rname=rname_.findViewById(R.id.Ques);
                             TextView ans_rname=rname_.findViewById(R.id.ans);
-                            ques_rname.setText("REPRESENTATIVE NAME:");
+                            ques_rname.setText("REPRESENTATIVE NAME");
                             ans_rname.setText(rname);
                             ll.addView(rname_);
 
@@ -441,7 +441,7 @@ public class AdminSearchUser extends AppCompatActivity{
                             View remail_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_remail=remail_.findViewById(R.id.Ques);
                             TextView ans_remail=remail_.findViewById(R.id.ans);
-                            ques_remail.setText("REPRESENTATIVE EMAIL:");
+                            ques_remail.setText("REPRESENTATIVE EMAIL");
                             ans_remail.setText(remail);
                             ll.addView(remail_);
 
@@ -463,7 +463,8 @@ public class AdminSearchUser extends AppCompatActivity{
                 }
                 else
                 {
-                    email.setError("This user doesnot Exist");
+                    email.setError("This user does not exists");
+                    email.requestFocus();
                     AdminSearchUser.category="None";
                     category[0]="None";
                 }
@@ -481,14 +482,16 @@ public class AdminSearchUser extends AppCompatActivity{
     public boolean checkEmail() {
         //check if not empty
         if (email.getText().toString().length() == 0) {
-            email.setError("ENTER MAIL");
+            email.setError("ENTER EMAIL");
+            email.requestFocus();
             return false;
         }
         //check if valid
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         String email1 = email.getText().toString().trim();
         if (!email1.matches(emailPattern)) {
-            email.setError("ENTER VALID MAIL");
+            email.setError("ENTER VALID EMAIL");
+            email.requestFocus();
             return false;
         }
         return true;

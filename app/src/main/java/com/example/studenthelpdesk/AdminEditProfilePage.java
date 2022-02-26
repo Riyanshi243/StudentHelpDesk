@@ -57,6 +57,7 @@ public class AdminEditProfilePage extends AppCompatActivity {
         change.setMessage("Enter new Name");
         EditText et=new EditText(view.getContext());
         et.setText(adminData.getAdminName());
+        et.requestFocus();
         change.setView(et);
         change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
@@ -79,6 +80,7 @@ public class AdminEditProfilePage extends AppCompatActivity {
         EditText et=new EditText(view.getContext());
         et.setInputType(InputType.TYPE_CLASS_NUMBER);
         et.setText(adminData.getPhoneNumber());
+        et.requestFocus();
         change.setView(et);
         change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override

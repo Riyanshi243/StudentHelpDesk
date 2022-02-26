@@ -47,8 +47,8 @@ public class CompanyEditProfilePage extends AppCompatActivity {
             public void onSuccess(Uri uri) {
                 Glide.with(CompanyEditProfilePage.this)
                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .error(R.drawable.profile_pic)
-                        .placeholder(R.drawable.profile_pic)
+                        .error(R.drawable.company_profile_img)
+                        .placeholder(R.drawable.company_profile_img)
                         .into(profilepic);
             }
         });
@@ -61,6 +61,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         change.setMessage("Enter new Company Name");
         EditText et=new EditText(view.getContext());
         et.setText(companyData.getCompanyName());
+        et.requestFocus();
         change.setView(et);
         change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
@@ -82,6 +83,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         change.setMessage("Enter new Company Location");
         EditText et=new EditText(view.getContext());
         et.setText(companyData.getLocation());
+        et.requestFocus();
         change.setView(et);
         change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
@@ -103,6 +105,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         change.setMessage("Enter new Representative Name");
         EditText et=new EditText(view.getContext());
         et.setText(companyData.getName());
+        et.requestFocus();
         change.setView(et);
         change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
@@ -124,6 +127,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         change.setMessage("Enter new Representative EmailId");
         EditText et=new EditText(view.getContext());
         et.setText(companyData.getPersonalEmail());
+        et.requestFocus();
         change.setView(et);
         change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
@@ -145,6 +149,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         change.setMessage("Enter new Representative Contact Number");
         EditText et=new EditText(view.getContext());
         et.setText(companyData.getPhone());
+        et.requestFocus();
         change.setView(et);
         change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
