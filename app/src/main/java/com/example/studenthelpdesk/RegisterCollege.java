@@ -27,8 +27,7 @@ public class RegisterCollege extends AppCompatActivity {
         allData=new CollegeRegistrationData();
         uname=findViewById(R.id.uname);
         cname=findViewById(R.id.cname);
-        //cname.requestFocus();
-        location=findViewById(R.id.clocation);
+            location=findViewById(R.id.clocation);
         adminmail=findViewById(R.id.adminemail);
         password=findViewById(R.id.password2);
         password2=findViewById(R.id.confirmpassword2);
@@ -87,7 +86,7 @@ public class RegisterCollege extends AppCompatActivity {
         register.setEnabled(false);
         ProgressBar pbar =findViewById(R.id.progressBar_college);
         pbar.setVisibility(View.VISIBLE);
-       // final Boolean[] flag = {true};
+
         //everything not empty
 
         if(cname.getText().toString().length()==0)
@@ -170,7 +169,7 @@ public class RegisterCollege extends AppCompatActivity {
              return false;
         }
 
-     //   return flag[0];
+
         return true;
     }
 }

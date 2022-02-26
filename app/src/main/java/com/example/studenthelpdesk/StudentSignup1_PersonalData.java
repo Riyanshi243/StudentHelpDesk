@@ -124,6 +124,8 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
     {
         int quesNumber=ll.getChildCount();
         int i;
+
+
         for(i=0;i<quesNumber;i++)
         {
             View v=ll.getChildAt(i);
@@ -179,7 +181,6 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
             //single line string
             View nView=v;
             TextView ans=nView.findViewById(R.id.editTextTextMultiLine);
-            Log.e("b",ans.getText().toString());
             allans[qId]=ans.getText().toString();
             if(ques.equalsIgnoreCase("Name"))
                 studentData.setName(ans.getText().toString());
@@ -300,8 +301,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
                 Toast.makeText(this, "Select Gender", Toast.LENGTH_LONG).show();
                 return true;
             }
-            Log.e("b gender",gender);
-            allans[qID]=gender;
+                     allans[qID]=gender;
             return false;
 
         }
@@ -343,7 +343,6 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
         {
             //dropdown
             View nView=v;
-            Log.e("b",studentData.getCourse()+" "+studentData.getBranch()+" "+studentData.getYr());
             if(ques.equalsIgnoreCase("Course")&&studentData.getCourse().equalsIgnoreCase(" ")) {
                 Toast.makeText(this,"Select Course",Toast.LENGTH_LONG).show();
                // Collections.sort();
@@ -444,7 +443,6 @@ int noOfq=0;
                         gender="Female";
                     else
                         gender="Other";
-               // Log.e("b gender",gender+i);
                 }
             });
             f.setOnClickListener(new View.OnClickListener() {
@@ -544,7 +542,6 @@ int noOfq=0;
                                 AutoCompleteTextView drop=branchView.findViewById(R.id.dropdown);
                                 DocumentReference allBranch = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Branches").document(studentData.getCourse());
 
-                                //Log.e("Value in student",studentData.getCourse());
                                 allBranch.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {

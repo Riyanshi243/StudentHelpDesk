@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     String category= (String) documentSnapshot.get("Category");
-                                    //Log.e("Hi","Hi");
                                     if(category==null)
                                     {
                                         startActivity(new Intent(MainActivity.this,Login.class));
@@ -125,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 String category= (String) documentSnapshot.get("Category");
-                                //Log.e("Hi","Hi");
                                 if(category==null)
                                 {
                                     startActivity(new Intent(MainActivity.this,Login.class));

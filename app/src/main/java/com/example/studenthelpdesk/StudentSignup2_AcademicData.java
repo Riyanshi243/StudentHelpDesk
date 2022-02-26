@@ -172,7 +172,6 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             //single line string
             View nView=v;
             TextView ans=nView.findViewById(R.id.editTextTextMultiLine);
-            Log.e("b",ans.getText().toString());
             allans[qId]=ans.getText().toString();
 
         }
@@ -282,7 +281,6 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
                 Toast.makeText(this, "Select Gender", Toast.LENGTH_LONG).show();
                 return true;
             }
-            Log.e("b gender",gender);
             allans[qID]=gender;
             return false;
 
@@ -325,7 +323,6 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         {
             //dropdown
             View nView=v;
-            Log.e("b",studentData.getCourse()+" "+studentData.getBranch()+" "+studentData.getYr());
             if(ques.equalsIgnoreCase("Course")&&studentData.getCourse().equalsIgnoreCase(" ")) {
                 Toast.makeText(this,"Select Course",Toast.LENGTH_LONG).show();
                 return true;
@@ -422,7 +419,6 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
                         gender="Female";
                     else
                         gender="Other";
-                    // Log.e("b gender",gender+i);
                 }
             });
             f.setOnClickListener(new View.OnClickListener() {
@@ -521,7 +517,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
                                 AutoCompleteTextView drop=branchView.findViewById(R.id.dropdown);
                                 DocumentReference allBranch = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Branches").document(studentData.getCourse());
 
-                                //Log.e("Value in student",studentData.getCourse());
+
                                 allBranch.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {

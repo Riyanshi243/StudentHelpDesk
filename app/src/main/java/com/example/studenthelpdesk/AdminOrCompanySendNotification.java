@@ -125,7 +125,6 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                                         ll2.removeAllViews();
                                         String selectedCourse = courses.get(i);
                                         token=cId+"_"+selectedCourse;
-                                        Log.e("Course", selectedCourse);
                                         DocumentReference branch = FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("Branches").document(selectedCourse);
                                         branch.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                             @Override
@@ -169,7 +168,6 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                                                                     }
                                                                     else
                                                                     {
-                                                                        Log.e("Year","hi:"+yr.get(i));
                                                                         token=cId+"_"+selectedCourse+"_"+selectedBranch+"_"+yr.get(i);
                                                                     }
                                                                 }
@@ -294,7 +292,6 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
         String t1=token;
         Date t=Calendar.getInstance().getTime();
         String dateToday=(String.valueOf(t.getDate()))+"-"+String.valueOf(t.getMonth()+1)+"-"+String.valueOf(t.getYear()).substring(1,3);
-        Log.e("Hi",dateToday);
         String timeStamp=t.toString();
 
         ArrayList<String> fileName=new ArrayList<>();
@@ -317,7 +314,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
             notifMap.put("Token",token);
             notifMap.put("Timestamp",t);
             notifMap.put("Attachment",null);
-            Log.e("map",docNotif.getPath().toString());
+
             docNotif.set(notifMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
@@ -357,7 +354,6 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                             notifMap.put("Timestamp",t);
                             notifMap.put("Attachment",fileName);
                             notifMap.put("Notif Location",FirebaseAuth.getInstance().getUid()+"_"+timeStamp);
-                            Log.e("map",docNotif.getPath().toString());
                             docNotif.set(notifMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {

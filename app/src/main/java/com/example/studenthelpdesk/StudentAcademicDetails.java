@@ -70,8 +70,6 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
                                         updatedAns.put("Question",a.getQuestion());
                                         updatedAns.put("Answer",answer);
                                         //save in database
-
-                                        Log.e("Id of question",updatedAns.toString());
                                         ansDoc.set(updatedAns).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
