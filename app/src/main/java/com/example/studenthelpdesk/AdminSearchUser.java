@@ -67,18 +67,15 @@ public class AdminSearchUser extends AppCompatActivity{
         final String[] category = new String[1];
         category[0]=null;
 
-        Log.e("What","Hi");
         DocumentReference userDetail = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(eMail);
 
         userDetail.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.e("Hi",documentSnapshot.exists()+" ");
                 if(documentSnapshot.exists())
                 {
                     category[0] = (String) documentSnapshot.get("Category");
                     AdminSearchUser.category=category[0];
-                    Log.e("What",AdminSearchUser.category);
                     if(category[0].equalsIgnoreCase("Admin"))
                     {
                         adminDataSearched=new AdminData();

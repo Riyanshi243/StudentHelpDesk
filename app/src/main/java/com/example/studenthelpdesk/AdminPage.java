@@ -70,7 +70,6 @@ public class AdminPage extends AppCompatActivity {
                         adminData.setPhoneNumber(phone);
                         adminData.setAdminName(name);
                         greetings.setText(name);
-                        //Log.e("Hi",name+"hi how are you");
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(adminData.getEmail());
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
