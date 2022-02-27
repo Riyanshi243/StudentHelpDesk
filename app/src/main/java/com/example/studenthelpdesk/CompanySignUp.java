@@ -69,6 +69,7 @@ public class CompanySignUp extends AppCompatActivity {
             if(resultCode==RESULT_OK) {
                 dialog = new ProgressDialog(this);
                 dialog.setMessage("Uploading");
+                dialog.setCancelable(false);
                 dialog.show();
                 Uri imageuri = data.getData();
                 uploadPic(imageuri);

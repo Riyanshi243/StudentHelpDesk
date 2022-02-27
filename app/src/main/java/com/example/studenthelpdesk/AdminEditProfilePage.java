@@ -68,6 +68,7 @@ public class AdminEditProfilePage extends AppCompatActivity {
     public void nameClick(View view)
     {
         AlertDialog.Builder change=new AlertDialog.Builder(this);
+        // Edit Name to New Name
         change.setTitle("Edit Name");
         change.setMessage("Enter new Name");
         EditText et=new EditText(view.getContext());
@@ -103,6 +104,7 @@ public class AdminEditProfilePage extends AppCompatActivity {
     public void phoneClick(View view)
     {
         AlertDialog.Builder change=new AlertDialog.Builder(this);
+        //Edit Phone Number to New Phone Number
         change.setTitle("Edit Phone Number");
         change.setMessage("Enter new Phone Number");
         EditText et=new EditText(view.getContext());
@@ -138,6 +140,7 @@ public class AdminEditProfilePage extends AppCompatActivity {
     }
     public void nonchangeable(View view)
     {
+        //Toast for non-editable field
         Toast.makeText(this,"This field in non-Editable!!",Toast.LENGTH_LONG).show();
     }
     public void changeProfile(View view) {
