@@ -239,15 +239,17 @@
                     android:paddingLeft="10dp"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/to_request_status_page"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="SEE ALL EDIT REQUESTS >"
                     android:gravity="center"
+                    android:onClick="viewAllEditRequests"
                     android:paddingLeft="5dp"
+                    android:text="SEE ALL EDIT REQUESTS >"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
 

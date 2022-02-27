@@ -283,6 +283,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             String answer=saveData(ans,a);
             HashMap<String,Object> requestData=new HashMap<>();
             requestData.put("Question",a.getQuestion());
+            requestData.put("Reason",reason.getText().toString());
             requestData.put("Answer Now",a.getAnswer());
             requestData.put("Change To",answer);
             requestData.put("Sender",studentData.getEmail());
