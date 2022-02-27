@@ -214,7 +214,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                                         {
                                                                             ArrayList<String> collegeNames= (ArrayList<String>) documentSnapshot.get("Colleges");
                                                                             ArrayList<String> collegeIds= (ArrayList<String>) documentSnapshot.get("IDs");
-                                                                            collegeNames.add(allData.getCName()+","+allData.getLocation());
+                                                                            collegeNames.add(allData.getCName()+", "+allData.getLocation());
                                                                             collegeIds.add(allData.getUname());
                                                                             HashMap<String,Object> c=new HashMap<>();
                                                                             c.put("Colleges",collegeNames);

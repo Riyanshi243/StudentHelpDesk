@@ -277,6 +277,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
             if(resultCode==RESULT_OK) {
                 dialog = new ProgressDialog(this);
                 dialog.setMessage("UPLOADING");
+                dialog.setCancelable(false);
                 dialog.show();
                 Uri imageuri = data.getData();
                 uploadPic(imageuri, "Photograph");
@@ -329,7 +330,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         else
         {
             Toast.makeText(this,"NO IMAGE SELECTED",Toast.LENGTH_LONG).show();
-            //progressbar.setVisibility(View.INVISIBLE);
+            progressbar.setVisibility(View.INVISIBLE);
         }
 
     }
