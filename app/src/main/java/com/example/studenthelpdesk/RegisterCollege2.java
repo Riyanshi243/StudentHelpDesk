@@ -54,6 +54,8 @@ public class RegisterCollege2 extends AppCompatActivity {
     }
     public void saveAndNext(View v)
     {
+        if(numberOfDept==1&&!lastQuestionFilled())
+            return;
         for (int i = 0; i < numberOfDept; i++) {
                 View question1 = ll.getChildAt(i);
                 EditText ans = question1.findViewById(R.id.editTextTextMultiLine);

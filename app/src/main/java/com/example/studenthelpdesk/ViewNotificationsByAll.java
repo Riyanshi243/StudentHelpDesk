@@ -71,6 +71,7 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                     else
                         nd.setNotifLocation(null);
                     nd.setSentBy((String) n.get("Sender"));
+
                     nd.setSenderMail((String) n.get("Sender mail"));
                     Timestamp date= (Timestamp) n.get("Timestamp");
                     String tokenHere= (String) n.get("Token");
@@ -107,9 +108,11 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                             info.setText(n1.getContent());
                         else
                             info.setText(n1.getContent().substring(0,50)+"...");
+
                         if(n1.getAttachment()==null)
                             attachment.setVisibility(View.INVISIBLE);
                         sender.setText(n1.getSentBy());
+
                         Timestamp t = n1.getSentTime();
                         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                         cal.setTimeInMillis(t.getSeconds() * 1000L);
