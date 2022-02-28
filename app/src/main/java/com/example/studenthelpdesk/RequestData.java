@@ -2,7 +2,15 @@ package com.example.studenthelpdesk;
 
 public class RequestData
 {
-    private String question,answerNow,changeTo,sender,sentTime,admin,rejectReason,adminTime,reason;
+    private String question,answerNow,changeTo,sender,sentTime,admin,rejectReason,adminTime,reason,docId;
+
+    public String getDocId() {
+        return docId;
+    }
+
+    public void setDocId(String docId) {
+        this.docId = docId;
+    }
 
     private long id,status,domain;
 

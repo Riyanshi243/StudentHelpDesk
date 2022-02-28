@@ -49,6 +49,11 @@ public class AdminSearchUser extends AppCompatActivity{
         msg=findViewById(R.id.msg);
         ll=findViewById(R.id.ll);
         adminData=AdminPage.adminData;
+        if(getIntent().hasExtra("Email"))
+        {
+            email.setText(getIntent().getStringExtra("Email"));
+            searchUser(new View(this));
+        }
     }
     public void searchUser(View v) {
 

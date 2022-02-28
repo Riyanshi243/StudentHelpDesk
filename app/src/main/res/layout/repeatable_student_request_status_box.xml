@@ -105,7 +105,8 @@
                 android:inputType="date"
                 android:text="TextView"
                 android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:visibility="gone" />
 
         </TableRow>
 
@@ -152,13 +153,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:inputType="textMultiLine"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
+            android:inputType="textMultiLine"
             android:text="reason"
             android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/DELETE"
