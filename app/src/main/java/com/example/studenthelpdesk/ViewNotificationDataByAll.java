@@ -157,7 +157,7 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                 });
             }
         }
-        String senderMail=notificationData.getSenderMail();
+       senderMail =notificationData.getSenderMail();
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(senderMail);
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -169,6 +169,13 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                         .into(profilePic);
             }
         });
+    }
+    String senderMail;
+    public void toSeeSender(View v)
+    {
+        Intent intent=new Intent(ViewNotificationDataByAll.this,AdminSearchUser.class);
+        intent.putExtra("Email",senderMail);
+        startActivity(intent);
     }
     private void viewTransformation(View view, MotionEvent event) {
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
