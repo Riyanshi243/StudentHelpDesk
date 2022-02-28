@@ -51,6 +51,8 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
             CheckBox cumpolsary=repeatableView.findViewById(R.id.compulsoryfield);
             CheckBox changeable=repeatableView.findViewById(R.id.changefield);
             Spinner dropdown=repeatableView.findViewById(R.id.dropdown);
+            if(question.getText().toString().length()==0)
+                continue;
             thisQuestion.setQuestion(question.getText().toString());
             thisQuestion.setChangeable(changeable.isChecked());
             thisQuestion.setCompulsory(cumpolsary.isChecked());
