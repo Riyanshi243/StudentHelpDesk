@@ -298,7 +298,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
                 @Override
                 public void onSuccess(Void unused) {
                     HashMap<String,Object> reqUpdate=new HashMap<>();
-                    reqUpdate.put("Number of Requests",studentData.getNoOfReq());
+                    reqUpdate.put("Number of Requests",studentData.getNoOfReq()+1);
                     FirebaseFirestore.getInstance().collection("All Colleges")
                             .document(studentData.getCollegeid()).collection("UsersInfo")
                             .document(studentData.getEmail()).update(reqUpdate).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -67,11 +67,12 @@
                         android:id="@+id/refew"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:text="name"
-                        android:paddingLeft="10dp"
-                        android:gravity="center"
                         android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:onClick="toSeeSender"
+                        android:paddingLeft="10dp"
+                        android:text="name"
                         android:textColor="@color/black"
                         android:textSize="24dp" />
 
