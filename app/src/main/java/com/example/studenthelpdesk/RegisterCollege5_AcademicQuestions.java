@@ -93,7 +93,7 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
     {
         View questionRepeatable=getLayoutInflater().inflate(R.layout.repeatable_college_register_questions,null);
         Spinner dropdown = questionRepeatable.findViewById(R.id.dropdown);
-        String[] list={"SingleLine String","Multiline String","Numerical Value","Numerical Decimal Value","Gender Choices","Date Picker","Upload","Choice"};
+        String[] list={"SingleLine String","Multiline String","Numerical Value","Numerical Decimal Value","Gender Choices","Date Picker","Upload","Dropdown Choice"};
         ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
         dropdown.setAdapter(spinnerList);
         dropdown.setSelection(i);

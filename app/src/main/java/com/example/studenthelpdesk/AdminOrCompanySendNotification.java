@@ -77,7 +77,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
             cId=adminData.getCollegeId();
         else
             cId=companyData.getCollegeId();
-
+             //dropdown menu
         ArrayList<String> audienceChoice=new ArrayList<>();
         audienceChoice.add("All");
         audienceChoice.add("Student");
@@ -246,6 +246,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
 
 
     }
+    //attach Notification
     public void attachNotif(View v)
     {
         String[] mimeTypes = {"image/*", "application/pdf"};
@@ -286,7 +287,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
             progressbar.setVisibility(View.INVISIBLE);
         }
     }
-
+     // send Notification
     public void sendNotif(View v)
     {
         String t1=token;
@@ -374,6 +375,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
             }
         }
     }
+    // function for getting the notification
     public void getAttachment(Uri imageuri2){
         if(imageuri2!=null)
         {

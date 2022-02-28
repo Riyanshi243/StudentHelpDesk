@@ -101,6 +101,7 @@ AdminData adminData;
             if(resultCode==RESULT_OK) {
                 dialog = new ProgressDialog(this);
                 dialog.setMessage("UPLOADING");
+                dialog.setCancelable(false);
                 dialog.show();
                 Uri imageuri = data.getData();
                 uploadPic(imageuri);

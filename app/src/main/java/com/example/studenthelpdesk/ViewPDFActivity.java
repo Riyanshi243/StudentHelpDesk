@@ -29,6 +29,7 @@ public class ViewPDFActivity extends AppCompatActivity {
         // dialog when we are loading the pdf
         dialog = new ProgressDialog(this);
         dialog.setMessage("Loading..");
+        dialog.setCancelable(false);
         dialog.show();
 
         // getting url of pdf using getItentExtra

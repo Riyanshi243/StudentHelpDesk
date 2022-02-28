@@ -317,6 +317,18 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
     public boolean notEmpty()
     {
         //check if reason and answer written
+
+        if(reason.getText().toString().length()==0)
+        {
+            reason.setError("ENTER REASON");
+            return false;
+        }
+     /* if(ans.getText().toString().length()==0)
+        {
+            ans.setError("ENTER ANSWER");
+            return false;
+        }
+      */
         return true;
     }
 }

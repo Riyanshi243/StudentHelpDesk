@@ -221,6 +221,7 @@ public class StudentSignup3_UploadData extends AppCompatActivity
            if(resultCode==RESULT_OK) {
                dialog = new ProgressDialog(this);
                dialog.setMessage("UPLOADING");
+               dialog.setCancelable(false);
                dialog.show();
                Uri imageuri = data.getData();
                TextView q = currentQView.findViewById(R.id.Ques);
@@ -236,6 +237,7 @@ public class StudentSignup3_UploadData extends AppCompatActivity
             if(resultCode == Activity.RESULT_OK){
                 dialog = new ProgressDialog(this);
                 dialog.setMessage("UPLOADING");
+                dialog.setCancelable(false);
                 dialog.show();
                 TextView q=currentQView.findViewById(R.id.Ques);
                 uploadResume(data.getData(),q.getText().toString());

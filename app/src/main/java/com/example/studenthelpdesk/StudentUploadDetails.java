@@ -162,6 +162,7 @@ public class StudentUploadDetails extends AppCompatActivity {
                         else
                         {
                             AlertDialog.Builder ab=new AlertDialog.Builder(StudentUploadDetails.this);
+                            //Send Request for Data Change
                             ab.setTitle("This field is not editable");
                             ab.setMessage("If you want to change the data in the field, please send request to admin");
                             ab.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
@@ -213,7 +214,9 @@ public class StudentUploadDetails extends AppCompatActivity {
         {
             if(resultCode==RESULT_OK) {
                 dialog = new ProgressDialog(this);
+
                 dialog.setMessage("UPLOADING");
+                dialog.setCancelable(false);
                 dialog.show();
                 Uri imageuri = data.getData();
                 uploadPic(imageuri, "Photograph");
@@ -226,7 +229,9 @@ public class StudentUploadDetails extends AppCompatActivity {
         if (requestCode == 2) {
             if(resultCode == Activity.RESULT_OK){
                 dialog = new ProgressDialog(this);
+
                 dialog.setMessage("UPLOADING");
+                dialog.setCancelable(false);
                 dialog.show();
                 TextView q=currentQView.findViewById(R.id.Ques);
                 uploadResume(data.getData(),q.getText().toString());
@@ -296,6 +301,7 @@ public class StudentUploadDetails extends AppCompatActivity {
                     String uploadid=databaseReference.push().getKey();
                     //SignIn.data.setResume(uploadid);
                     if(dialog.isShowing()) {
+                        dialog.setCancelable(false);
                         dialog.setMessage("UPLOADED");
 
                         Toast.makeText(StudentUploadDetails.this, filepath.getName()+".pdf SAVED", Toast.LENGTH_SHORT).show();
