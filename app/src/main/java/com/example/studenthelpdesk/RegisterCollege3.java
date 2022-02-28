@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,8 +42,9 @@ public class RegisterCollege3 extends AppCompatActivity {
         getWorkingView();
         numberOfCourse=1;
     }
-    public void addBranch(View v)
+    public void addCourse(View v)
     {
+
         getWorkingView();
         numberOfCourse++;
     }
@@ -54,6 +56,10 @@ public class RegisterCollege3 extends AppCompatActivity {
         savePrompt.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                if(numberOfCourse==1||branchOfEachCourse.size()==0) {
+                    Toast.makeText(RegisterCollege3.this, "Save at least 1 course", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 allData.setCourseName(courseName);
                 allData.setBranchForEachCourse(branchOfEachCourse);
                 allData.setDepForEachCourse(depOfEachBranch);
@@ -103,7 +109,8 @@ public class RegisterCollege3 extends AppCompatActivity {
                 int branchNumber=subQuestions.getChildCount();
                 View lastBranchAndDept= (View) subQuestions.getChildAt(branchNumber-1);
                 EditText lastBranch=lastBranchAndDept.findViewById(R.id.branch);
-                if(lastBranch.getText().toString().length()!=0) {
+                AutoCompleteTextView lastDept=lastBranchAndDept.findViewById(R.id.department_name);
+                if(lastBranch.getText().toString().length()!=0&&lastDept.getText().toString().equalsIgnoreCase("Choose the department associated...")==false) {
                     View branchDeptRepeatable = getLayoutInflater().inflate(R.layout.repeatable_branch_department_college_register, null);
                     EditText subq=branchDeptRepeatable.findViewById(R.id.branch);
                     AutoCompleteTextView dept=branchDeptRepeatable.findViewById(R.id.department_name);
@@ -122,7 +129,10 @@ public class RegisterCollege3 extends AppCompatActivity {
                 }
                 else
                 {
-                    lastBranch.setError("ENTER HERE");
+                    if (lastBranch.getText().toString().length()==0)
+                        lastBranch.setError("ENTER HERE");
+                    else
+                        lastDept.setError("Select it's department");
                     lastBranch.requestFocus();
                 }
             }
@@ -141,6 +151,24 @@ public class RegisterCollege3 extends AppCompatActivity {
                 ArrayList<String> allbranch=new ArrayList<>();
                 ArrayList<String> alldept=new ArrayList<>();
                 int branchNumber=subQuestions.getChildCount();
+
+                if(branchNumber==1)
+                {
+                    View lastBranchAndDept=subQuestions.getChildAt(0);
+                    EditText lastBranch=branchDeptRepeatable.findViewById(R.id.branch);
+                    AutoCompleteTextView dept=branchDeptRepeatable.findViewById(R.id.department_name);
+                    if(lastBranch.getText().toString().length()==0)
+                    {
+                        lastBranch.setError("Save at least 1 branch\nIf no branch enter course name here");
+                        return;
+                    }
+                    if(dept.getText().toString().equalsIgnoreCase("Choose the department associated..."))
+                    {
+                        dept.setError("Select a department");
+                        return;
+                    }
+
+                }
                 for(int i=0;i<branchNumber;i++)
                 {
                     View branchDeptRepeatable =subQuestions.getChildAt(i);
