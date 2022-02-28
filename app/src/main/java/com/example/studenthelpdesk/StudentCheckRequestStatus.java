@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +29,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
@@ -53,7 +55,7 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
         else
         {
             CollectionReference docReq = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("Requests");
-            docReq.orderBy("Sent Time", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            docReq.orderBy("Sent Time", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                     List<DocumentSnapshot> docRequest = queryDocumentSnapshots.getDocuments();
@@ -145,9 +147,21 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
                                             delDoc.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
-                                                    Toast.makeText(StudentCheckRequestStatus.this,"Request deleted",Toast.LENGTH_LONG).show();
-                                                    ll.removeView(viewReq);
-                                                }
+                                                            HashMap<String,Object> reqUpdate=new HashMap<>();
+                                                            reqUpdate.put("Number of Requests",studentData.getNoOfReq()-1);
+                                                            FirebaseFirestore.getInstance().collection("All Colleges")
+                                                                    .document(studentData.getCollegeid()).collection("UsersInfo")
+                                                                    .document(studentData.getEmail()).update(reqUpdate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void unused) {
+                                                                    studentData.setNoOfReq(studentData.getNoOfReq()-1);
+                                                                    Toast.makeText(StudentCheckRequestStatus.this,"Request deleted",Toast.LENGTH_LONG).show();
+                                                                    ll.removeView(viewReq);
+                                                                }
+                                                            });
+
+                                                        }
+
                                             });
                                         }
                                     })

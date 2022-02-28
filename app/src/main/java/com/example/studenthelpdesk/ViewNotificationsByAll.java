@@ -8,6 +8,7 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +32,7 @@ public class ViewNotificationsByAll extends AppCompatActivity {
     AdminData adminData;
     CompanyData companyData;
     LinearLayout ll;
+    ProgressBar pbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class ViewNotificationsByAll extends AppCompatActivity {
         studentData=StudentPage.studentData;
         adminData=AdminPage.adminData;
         companyData=CompanyPage.companyData;
+        pbar=findViewById(R.id.progressBar6);
         ll=findViewById(R.id.ll);
         HashSet<String> token;
         ArrayList<NotificationData> allNotif=new ArrayList<>();
@@ -59,7 +62,13 @@ public class ViewNotificationsByAll extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> notif1 = queryDocumentSnapshots.getDocuments();
-
+                if(notif1.size()==0)
+                {
+                    TextView t=new TextView(ViewNotificationsByAll.this);
+                    pbar.setVisibility(View.INVISIBLE);
+                    t.setText("You have received NO Notifications till now.");
+                    ll.addView(t);
+                }
                 for(DocumentSnapshot n:notif1)
                 {
                     NotificationData nd=new NotificationData();
@@ -94,7 +103,8 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if(allNotif.size()==0)
-                                return;
+                            return;
+
                         NotificationData n1=allNotif.get(0);
                         View repeatNotif=getLayoutInflater().inflate(R.layout.repeatable_notifications_received,null);
                         TextView time=repeatNotif.findViewById(R.id.date1);
@@ -125,11 +135,14 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                         });
                         ll.addView(repeatNotif);
                         allNotif.remove(n1);
+                        if(allNotif.size()==0)
+                            pbar.setVisibility(View.INVISIBLE);
+
                     }
                 });
             }
 
-        }, 0, 1000);
+        }, 0, 50);
 
     }
 

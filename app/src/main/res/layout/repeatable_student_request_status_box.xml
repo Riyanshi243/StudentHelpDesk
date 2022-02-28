@@ -143,7 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="REASON"
+            android:text="REASON :"
             android:textColor="@color/black"
             android:textSize="18dp"
             android:visibility="visible" />
