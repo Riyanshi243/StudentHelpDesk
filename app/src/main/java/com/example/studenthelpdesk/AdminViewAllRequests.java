@@ -37,12 +37,14 @@ public class AdminViewAllRequests extends AppCompatActivity {
     ArrayList<RequestData> requestData;
     AdminData adminData;
     LinearLayout ll;
+    ProgressBar pbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_all_requests);
         ll=findViewById(R.id.ll);
         adminData=AdminPage.adminData;
+        pbar=findViewById(R.id.progressBar3);
         requestData=new ArrayList<>();
         CollectionReference docReq = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Requests");
         docReq.orderBy("Sent Time", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -298,6 +300,8 @@ public class AdminViewAllRequests extends AppCompatActivity {
                         }
                     });
                     requestData.remove(currReq);
+                    if(requestData.size()==0)
+                        pbar.setVisibility(View.INVISIBLE);
                 }
 
             }

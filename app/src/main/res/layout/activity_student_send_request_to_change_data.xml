@@ -97,13 +97,14 @@
                 android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="14dp"
+                android:layout_marginLeft="14dp"
                 android:gravity="start|top"
+                android:textSize="18dp"
                 android:hint="Reason to change your field"
                 android:inputType="textMultiLine"
-                android:textColor="@color/hint_text"
+                android:textColor="@color/black"
                 android:textColorHint="@android:color/darker_gray" />
 
             <Button

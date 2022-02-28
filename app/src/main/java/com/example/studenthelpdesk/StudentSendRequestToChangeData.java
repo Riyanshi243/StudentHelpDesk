@@ -33,6 +33,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
     TextView hello,currValMsg,currVal;
     EditText reason;
     LinearLayout ll;
+    String hint="Enter your new value...";
     CollegeRegisterQuestions a;
     View ans;
     @Override
@@ -65,6 +66,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             EditText ans=nView.findViewById(R.id.editvalnumeric);
             ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             ans.setText(a);
+            ans.setHint(hint);
             ques.setVisibility(View.GONE);
             return nView;
         }
@@ -75,6 +77,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             TextView ques=nView.findViewById(R.id.Ques);
             EditText ans=nView.findViewById(R.id.editvalmulti);
             ans.setText(a);
+            ans.setHint(hint);
             ques.setVisibility(View.GONE);
 
             return nView;
@@ -86,6 +89,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             TextView ques=nView.findViewById(R.id.Ques);
             EditText ans=nView.findViewById(R.id.editTextTextMultiLine);
             ans.setText(a);
+            ans.setHint(hint);
             ques.setVisibility(View.GONE);
             return nView;
         }
@@ -96,6 +100,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             TextView ques=nView.findViewById(R.id.Ques);
             EditText ans=nView.findViewById(R.id.editTextMultiLine);
             ans.setText(a);
+            ans.setHint(hint);
             ques.setVisibility(View.GONE);
             return nView;
         }
@@ -323,12 +328,6 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             reason.setError("ENTER REASON");
             return false;
         }
-     /* if(ans.getText().toString().length()==0)
-        {
-            ans.setError("ENTER ANSWER");
-            return false;
-        }
-      */
         return true;
     }
 }
