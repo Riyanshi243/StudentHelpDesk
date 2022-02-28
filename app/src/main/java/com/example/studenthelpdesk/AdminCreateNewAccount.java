@@ -31,6 +31,7 @@ public class AdminCreateNewAccount extends AppCompatActivity {
         company=findViewById(R.id.checkBox_company);
         student=findViewById(R.id.checkBox_student);
         student.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            //check if student
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(student.isChecked())
@@ -41,6 +42,7 @@ public class AdminCreateNewAccount extends AppCompatActivity {
             }
         });
         admin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            //check if admin
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(admin.isChecked())
@@ -51,6 +53,7 @@ public class AdminCreateNewAccount extends AppCompatActivity {
             }
         });
         company.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            //check if company
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(company.isChecked())
@@ -147,14 +150,14 @@ public class AdminCreateNewAccount extends AppCompatActivity {
     }
     public boolean checkEmail()
     {
-        //check if not empty
+        //check if email is not empty
         if(email.getText().toString().length()==0)
         {
             email.setError("ENTER EMAIL");
             email.requestFocus();
             return false;
         }
-        //check if valid
+        //check if email is valid
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         String email1=email.getText().toString().trim();
         if(!email1.matches(emailPattern))
