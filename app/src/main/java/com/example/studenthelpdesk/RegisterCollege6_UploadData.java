@@ -41,6 +41,8 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
             question.requestFocus();
             CheckBox cumpolsary = repeatableView.findViewById(R.id.compulsoryfield);
             CheckBox changeable = repeatableView.findViewById(R.id.changefield);
+            if(question.getText().toString().length()==0)
+                continue;
             thisQuestion.setQuestion(question.getText().toString());
             thisQuestion.setChangeable(changeable.isChecked());
             thisQuestion.setCompulsory(cumpolsary.isChecked());
