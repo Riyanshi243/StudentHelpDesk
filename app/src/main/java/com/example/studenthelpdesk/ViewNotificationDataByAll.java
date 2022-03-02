@@ -33,6 +33,7 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
     StudentData studentData;
     AdminData adminData;
     CompanyData companyData;
+    TextView attachedmsg;
     float[] lastEvent = null;
     float d = 0f;
     float newRot = 0f;
@@ -59,6 +60,8 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
         studentData=StudentPage.studentData;
         adminData=AdminPage.adminData;
         companyData=CompanyPage.companyData;
+        attachedmsg=findViewById(R.id.attachedmsg);
+        attachedmsg.setVisibility(View.GONE);
         String cId;
         if(studentData!=null) {
             cId=studentData.getCollegeid();
@@ -78,6 +81,7 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
         ArrayList<String> attachments= notificationData.getAttachment();
         if(attachments!=null)
         {
+            attachedmsg.setVisibility(View.VISIBLE);
             for (String a:attachments)
             {
                 View repeatAttachment=getLayoutInflater().inflate(R.layout.repeatable_notification_attachment,null);
