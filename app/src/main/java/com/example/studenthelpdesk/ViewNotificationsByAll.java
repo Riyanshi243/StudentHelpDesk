@@ -120,7 +120,7 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                             info.setText(n1.getContent().substring(0,50)+"...");
 
                         if(n1.getAttachment()==null)
-                            attachment.setVisibility(View.INVISIBLE);
+                            attachment.setVisibility(View.GONE);
                         sender.setText(n1.getSentBy());
 
                         Timestamp t = n1.getSentTime();

@@ -74,7 +74,7 @@
             <TextView
                 android:id="@+id/currentVal"
                 android:layout_width="match_parent"
-                android:paddingLeft="5dp"
+                android:paddingLeft="8dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -101,7 +101,7 @@
                 android:layout_marginRight="14dp"
                 android:layout_marginLeft="14dp"
                 android:gravity="start|top"
-                android:textSize="18dp"
+                android:textSize="20dp"
                 android:hint="Reason to change your field"
                 android:inputType="textMultiLine"
                 android:textColor="@color/black"
