@@ -8,7 +8,31 @@ public class CollegeRegistrationData {
     private ArrayList<String> deptName,courseName,dataDept;
     private ArrayList<ArrayList<String>> branchForEachCourse,depForEachCourse;
 
+    int totalPersonal,totalAcademic,totalUpload;
 
+    public int getTotalPersonal() {
+        return totalPersonal;
+    }
+
+    public void setTotalPersonal(int totalPersonal) {
+        this.totalPersonal = totalPersonal;
+    }
+
+    public int getTotalAcademic() {
+        return totalAcademic;
+    }
+
+    public void setTotalAcademic(int totalAcademic) {
+        this.totalAcademic = totalAcademic;
+    }
+
+    public int getTotalUpload() {
+        return totalUpload;
+    }
+
+    public void setTotalUpload(int totalUpload) {
+        this.totalUpload = totalUpload;
+    }
 
     private CollegeRegisterQuestions questions_personal[],questions_academic[],questions_upload[];
     public void setDepForEachCourse(ArrayList<ArrayList<String>> depForEachCourse) {
