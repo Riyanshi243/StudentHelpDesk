@@ -37,6 +37,7 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
 
         int numberOfQuestions=linearLayout.getChildCount();
         CollegeRegisterQuestions allPersonalQuestion[]=new CollegeRegisterQuestions[numberOfQuestions];
+        int c=0;
         for(int i=0;i<numberOfQuestions;i++)
         {
             CollegeRegisterQuestions thisQuestion=new CollegeRegisterQuestions();
@@ -51,8 +52,9 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
             thisQuestion.setChangeable(changeable.isChecked());
             thisQuestion.setCompulsory(cumpolsary.isChecked());
             thisQuestion.setType(dropdown.getSelectedItemPosition());
-            allPersonalQuestion[i]=thisQuestion;
+            allPersonalQuestion[c++]=thisQuestion;
         }
+        allData.setTotalPersonal(c);
         allData.setQuestions_personal(allPersonalQuestion);
         //intent to registration step 5
         startActivity(new Intent(RegisterCollege4_PersonalQuestions.this,RegisterCollege5_AcademicQuestions.class));

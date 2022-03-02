@@ -28,6 +28,7 @@ public class RegisterCollege3 extends AppCompatActivity {
     ArrayList<String> courseName;
     ArrayList<ArrayList<String>> branchOfEachCourse,depOfEachBranch;
     CollegeRegistrationData allData;
+    int savedCourse=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class RegisterCollege3 extends AppCompatActivity {
         savePrompt.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(numberOfCourse==1||branchOfEachCourse.size()==0) {
+                if(savedCourse==0) {
                     Toast.makeText(RegisterCollege3.this, "Save at least 1 course", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -148,27 +149,25 @@ public class RegisterCollege3 extends AppCompatActivity {
                     currentCourseName.requestFocus();
                     return;
                 }
+
                 ArrayList<String> allbranch=new ArrayList<>();
                 ArrayList<String> alldept=new ArrayList<>();
                 int branchNumber=subQuestions.getChildCount();
 
-                if(branchNumber==1)
-                {
-                    View lastBranchAndDept=subQuestions.getChildAt(0);
-                    EditText lastBranch=branchDeptRepeatable.findViewById(R.id.branch);
-                    AutoCompleteTextView dept=branchDeptRepeatable.findViewById(R.id.department_name);
-                    if(lastBranch.getText().toString().length()==0)
+                 View lastBranchAndDept=subQuestions.getChildAt(branchNumber-1);
+                    EditText lastBranch1=lastBranchAndDept.findViewById(R.id.branch);
+                    AutoCompleteTextView dept1=lastBranchAndDept.findViewById(R.id.department_name);
+                    if(lastBranch1.getText().toString().length()==0)
                     {
-                        lastBranch.setError("Save at least 1 branch\nIf no branch enter course name here");
+                        lastBranch1.setError("Save at least 1 branch\nIf no branch enter course name here");
                         return;
                     }
-                    if(dept.getText().toString().equalsIgnoreCase("Choose the department associated..."))
+                    if(dept1.getText().toString().equalsIgnoreCase("Choose the department associated..."))
                     {
-                        dept.setError("Select a department");
+                        dept1.setError("Select a department");
                         return;
                     }
 
-                }
                 for(int i=0;i<branchNumber;i++)
                 {
                     View branchDeptRepeatable =subQuestions.getChildAt(i);
@@ -198,6 +197,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                         subHeading.addView(thisBranch);
                     }
                 }
+                savedCourse++;
                 ll.addView(permanentDataView);
             }
         });

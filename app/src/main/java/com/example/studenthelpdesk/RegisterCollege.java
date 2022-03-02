@@ -14,6 +14,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class RegisterCollege extends AppCompatActivity {
     //this instance will be referred to untill registration is completed
     static CollegeRegistrationData allData;
@@ -43,34 +45,66 @@ public class RegisterCollege extends AppCompatActivity {
         pbar.setVisibility(View.VISIBLE);
         if(checkConstraints())
         {
-            DocumentReference documentReference = firebaseFirestores.collection("All Colleges").document(uname.getText().toString());
-            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+            DocumentReference documentReference1 = firebaseFirestores.collection("All Users On App").document(adminmail.getText().toString());
+            documentReference1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    //if username exist... a document will already be present in its name
                     if(documentSnapshot.exists())
                     {
-                        uname.setError("THIS USERNAME ALREADY EXISTS");
-                        register.setEnabled(true);
-                        ProgressBar pbar =findViewById(R.id.progressBar_college);
-                        pbar.setVisibility(View.INVISIBLE);
+                        adminmail.setError("This mail is already registered");
                     }
                     else
                     {
-                        allData.setSAdminemail(adminmail.getText().toString().trim());
-                        allData.setPassword(password.getText().toString());
-                        allData.setUname(uname.getText().toString().trim());
-                        allData.setCName(cname.getText().toString().trim());
-                        allData.setLocation(location.getText().toString().trim());
-                        //intent to college registration step 2
-                        startActivity(new Intent(RegisterCollege.this, RegisterCollege2.class));
-                        register.setEnabled(true);
-                        ProgressBar pbar =findViewById(R.id.progressBar_college);
-                        pbar.setVisibility(View.INVISIBLE);
+                        DocumentReference documentReference = firebaseFirestores.collection("All Users On App").document("All Colleges");
+                        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                //if username exist... a document will already be present in its name
+                                if(documentSnapshot.exists()){
+                                    ArrayList<String> id= (ArrayList<String>) documentSnapshot.get("IDs");
+                                    if(id.size()==0||id.contains(uname.getText().toString()))
+                                    {
+                                        uname.setError("THIS USERNAME ALREADY EXISTS");
+                                        register.setEnabled(true);
+                                        ProgressBar pbar =findViewById(R.id.progressBar_college);
+                                        pbar.setVisibility(View.INVISIBLE);
+                                    }
+                                    else
+                                    {
+                                        allData.setSAdminemail(adminmail.getText().toString().trim());
+                                        allData.setPassword(password.getText().toString());
+                                        allData.setUname(uname.getText().toString().trim());
+                                        allData.setCName(cname.getText().toString().trim());
+                                        allData.setLocation(location.getText().toString().trim());
+                                        //intent to college registration step 2
+                                        startActivity(new Intent(RegisterCollege.this, RegisterCollege2.class));
+                                        register.setEnabled(true);
+                                        ProgressBar pbar =findViewById(R.id.progressBar_college);
+                                        pbar.setVisibility(View.INVISIBLE);
+                                    }
 
+                                }
+                                else
+                                {
+                                    allData.setSAdminemail(adminmail.getText().toString().trim());
+                                    allData.setPassword(password.getText().toString());
+                                    allData.setUname(uname.getText().toString().trim());
+                                    allData.setCName(cname.getText().toString().trim());
+                                    allData.setLocation(location.getText().toString().trim());
+                                    //intent to college registration step 2
+                                    startActivity(new Intent(RegisterCollege.this, RegisterCollege2.class));
+                                    register.setEnabled(true);
+                                    ProgressBar pbar =findViewById(R.id.progressBar_college);
+                                    pbar.setVisibility(View.INVISIBLE);
+
+                                }
+                            }
+                        });
                     }
                 }
             });
+
 
         }
     }

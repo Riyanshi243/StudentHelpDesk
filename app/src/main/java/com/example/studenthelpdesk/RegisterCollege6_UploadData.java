@@ -33,6 +33,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
 
     public void saveAndNext(View v) {
         int numberOfQuestions = linearLayout.getChildCount();
+        int c1=0;
         CollegeRegisterQuestions allUploadQuestion[] = new CollegeRegisterQuestions[numberOfQuestions];
         for (int i = 0; i < numberOfQuestions; i++) {
             CollegeRegisterQuestions thisQuestion = new CollegeRegisterQuestions();
@@ -47,8 +48,9 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
             thisQuestion.setChangeable(changeable.isChecked());
             thisQuestion.setCompulsory(cumpolsary.isChecked());
             thisQuestion.setType(6);
-            allUploadQuestion[i] = thisQuestion;
+            allUploadQuestion[c1++] = thisQuestion;
         }
+        allData.setTotalUpload(c1);
         allData.setQuestions_upload(allUploadQuestion);
         //intent to registration step 7
         startActivity(new Intent(RegisterCollege6_UploadData.this, RegisterCollege7_SuperAdminSignup.class));

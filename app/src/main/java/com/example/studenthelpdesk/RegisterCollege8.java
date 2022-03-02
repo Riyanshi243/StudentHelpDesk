@@ -84,6 +84,16 @@ public class RegisterCollege8 extends AppCompatActivity {
                                     t.setTextSize(18);
                                     cl.addView(t);
                                 }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    branchInfo.delete();
+                                    TextView t=new TextView(RegisterCollege8.this);
+                                    t.setText("Failure...");
+                                    t.setTextSize(16);
+                                    cl.addView(t);
+                                    return;
+                                }
                             });
 
                         }//all branches uploaded
@@ -97,27 +107,29 @@ public class RegisterCollege8 extends AppCompatActivity {
                         t1.setTextSize(16);
                         cl.addView(t1);
                         CollegeRegisterQuestions[] personalQuestionArray = allData.getQuestions_personal();
+                        int personalTotal=allData.getTotalPersonal();
                         HashMap<String,Object> tot=new HashMap<>();
-                        tot.put("Total",personalQuestionArray.length);
+                        tot.put("Total",personalTotal+"");
                         personalQuestion.set(tot).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                HashMap<String, Object> questionDetails[] = new HashMap[personalQuestionArray.length];
-
+                                ArrayList<HashMap<String, Object>> questionDetails = new ArrayList<>();
+                                int c1=0;
                                 for (int i=0;i<personalQuestionArray.length;i++) {
                                     CollegeRegisterQuestions currentQuestion = personalQuestionArray[i];
-                                    Log.e("Personal question" + i, currentQuestion.getQuestion());
+                                    if(currentQuestion==null)
+                                        continue;
                                     HashMap<String,Object> questionDetailsp=new HashMap<>();
                                     questionDetailsp.put("Question", currentQuestion.getQuestion());
                                     questionDetailsp.put("Type", currentQuestion.getType());
                                     questionDetailsp.put("Compulsory", currentQuestion.isCumplolsory());
                                     questionDetailsp.put("Editable", currentQuestion.isChangeable());
-                                    questionDetails[i]=questionDetailsp;
+                                    questionDetails.add(questionDetailsp);
                                 }
-                                for (int i=0;i<personalQuestionArray.length;i++) {
+                                for (int i=0;i<questionDetails.size();i++) {
                                     DocumentReference currentQuestionDoc = personalQuestion.collection(i + "").document(i + "");
                                     int finalI = i;
-                                    currentQuestionDoc.set(questionDetails[i]).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    currentQuestionDoc.set(questionDetails.get(i)).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
                                             TextView t=new TextView(RegisterCollege8.this);
@@ -134,7 +146,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                 cl.addView(t1);
                                 CollegeRegisterQuestions[] academicQuestionArray = allData.getQuestions_academic();
                                 HashMap<String,Object> tot=new HashMap<>();
-                                tot.put("Total",academicQuestionArray.length);
+                                tot.put("Total",allData.getTotalAcademic());
                                 academicQuestion.set(tot).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
@@ -143,6 +155,8 @@ public class RegisterCollege8 extends AppCompatActivity {
                                             DocumentReference currentQuestionDoc = academicQuestion.collection(i + "").document(i + "");
                                             HashMap<String,Object> questionDetails=new HashMap<>();
                                             CollegeRegisterQuestions currentQuestion=academicQuestionArray[i];
+                                            if(currentQuestion==null)
+                                                continue;
                                             questionDetails.put("Question",currentQuestion.getQuestion());
                                             questionDetails.put("Type",currentQuestion.getType());
                                             questionDetails.put("Compulsory",currentQuestion.isCumplolsory());
@@ -156,6 +170,16 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                     t.setTextSize(16);
                                                     cl.addView(t);
                                                 }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    academicQuestion.delete();
+                                                    TextView t=new TextView(RegisterCollege8.this);
+                                                    t.setText("Failure occurred");
+                                                    t.setTextSize(16);
+                                                    cl.addView(t);
+                                                    return;
+                                                }
                                             });
                                         }//Academic questions added
                                         DocumentReference uploadQuestion = collegeInformation.collection("Questions").document("Upload Question");
@@ -165,7 +189,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                         cl.addView(t1);
                                         CollegeRegisterQuestions[] uploadQuestionArray = allData.getQuestions_upload();
                                         HashMap<String,Object> tot=new HashMap<>();
-                                        tot.put("Total",uploadQuestionArray.length);
+                                        tot.put("Total",allData.getTotalUpload());
                                         uploadQuestion.set(tot).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
@@ -174,6 +198,8 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                     DocumentReference currentQuestionDoc = uploadQuestion.collection(i + "").document(i + "");
                                                     HashMap<String,Object> questionDetails=new HashMap<>();
                                                     CollegeRegisterQuestions currentQuestion=uploadQuestionArray[i];
+                                                    if(currentQuestion==null)
+                                                        continue;
                                                     questionDetails.put("Question",currentQuestion.getQuestion());
                                                     questionDetails.put("Type",currentQuestion.getType());
                                                     questionDetails.put("Compulsory",currentQuestion.isCumplolsory());
@@ -186,6 +212,16 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                             t.setText("UPLOAD QUESTION UPLOADING..."+ finalI);
                                                             t.setTextSize(16);
                                                             cl.addView(t);
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            uploadQuestion.delete();
+                                                            TextView t=new TextView(RegisterCollege8.this);
+                                                            t.setText("Uploading Failed");
+                                                            t.setTextSize(16);
+                                                            cl.addView(t);
+                                                            return;
                                                         }
                                                     });
                                                 }//Upload questions added
@@ -265,7 +301,8 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                                 t.setText("FAILED");
                                                                 t.setTextSize(40);
                                                                 cl.addView(t);
-                                                                userInfo.delete();
+                                                                DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
+                                                                collegeInformation.delete();
                                                             }
                                                         });
                                                     }
@@ -278,6 +315,9 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                         t.setText("FAILED");
                                                         t.setTextSize(40);
                                                         cl.addView(t);
+
+                                                        DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
+                                                        collegeInformation.delete();
                                                     }
                                                 });
                                             }
@@ -290,6 +330,10 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                 t.setText("FAILED");
                                                 t.setTextSize(40);
                                                 cl.addView(t);
+
+                                                DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
+                                                collegeInformation.delete();
+
                                             }
                                         });;
 
@@ -303,6 +347,9 @@ public class RegisterCollege8 extends AppCompatActivity {
                                         t.setText("FAILED");
                                         t.setTextSize(40);
                                         cl.addView(t);
+
+                                        DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
+                                        collegeInformation.delete();
                                     }
                                 });;
                     }
@@ -315,6 +362,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                 t.setText("FAILED");
                                 t.setTextSize(40);
                                 cl.addView(t);
+                                personalQuestion.delete();
                             }
                         });;
             }//basic admin info uploaded
@@ -327,6 +375,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                         t.setText("FAILED");
                         t.setTextSize(40);
                         cl.addView(t);
+                        DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
                         collegeInformation.delete();
                     }
                 });;
@@ -340,6 +389,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                 t.setText("FAILED");
                 t.setTextSize(40);
                 cl.addView(t);
+                DocumentReference forGeneralInformation = f1.collection("All Users On App").document(allData.getSAdminemail());
                 forGeneralInformation.delete();
             }
         });;
