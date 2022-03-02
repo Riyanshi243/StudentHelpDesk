@@ -109,7 +109,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                         CollegeRegisterQuestions[] personalQuestionArray = allData.getQuestions_personal();
                         int personalTotal=allData.getTotalPersonal();
                         HashMap<String,Object> tot=new HashMap<>();
-                        tot.put("Total",personalTotal+"");
+                        tot.put("Total",personalTotal);
                         personalQuestion.set(tot).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {

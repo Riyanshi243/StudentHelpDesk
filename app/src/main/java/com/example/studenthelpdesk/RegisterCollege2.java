@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +35,7 @@ public class RegisterCollege2 extends AppCompatActivity {
         EditText answer = questionRepeatable.findViewById(R.id.editTextTextMultiLine);
         answer.setHint(ansHint);
         question.setText(deptQ);
-        departmentName=new ArrayList<>();
+
         ll.addView(questionRepeatable);
         numberOfDept=1;
     }
@@ -54,12 +55,14 @@ public class RegisterCollege2 extends AppCompatActivity {
     }
     public void saveAndNext(View v)
     {
+        departmentName=new ArrayList<>();
         if(numberOfDept==1&&!lastQuestionFilled())
             return;
         for (int i = 0; i < numberOfDept; i++) {
                 View question1 = ll.getChildAt(i);
                 EditText ans = question1.findViewById(R.id.editTextTextMultiLine);
                 String dept = ans.getText().toString().trim();
+                Log.e ("Riyanshi",dept+i);
                 if(dept==null || dept.length()==0)
                     continue;
                 if (i < departmentName.size()) {
@@ -68,6 +71,11 @@ public class RegisterCollege2 extends AppCompatActivity {
                     departmentName.add(dept);
                 }
         }
+        if(departmentName.size()==0) {
+            Toast.makeText(RegisterCollege2.this, "Enter atleast 1 department", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Log.e("Riyanshi",departmentName.toString());
         Collections.sort(departmentName,(o1, o2)->o1.compareTo(o2));
         allData.setDeptName(departmentName);
         //intent to registration step 3
