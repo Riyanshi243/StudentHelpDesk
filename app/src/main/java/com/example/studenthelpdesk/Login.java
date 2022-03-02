@@ -88,6 +88,13 @@ public class Login extends AppCompatActivity {
                                 startActivity(new Intent(Login.this,Signup.class));
                                 finish();
                             }
+                            else
+                            {
+                                Toast.makeText(Login.this,"Error:"+ e.getMessage(),Toast.LENGTH_LONG).show();
+                                login.setEnabled(true);
+                                ProgressBar pbar = findViewById(R.id.progressBar4);
+                                pbar.setVisibility(View.INVISIBLE);
+                            }
                         }
                         else
                         {
@@ -96,6 +103,13 @@ public class Login extends AppCompatActivity {
                             ProgressBar pbar = findViewById(R.id.progressBar4);
                             pbar.setVisibility(View.INVISIBLE);
                         }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        login.setEnabled(true);
+                        ProgressBar pbar = findViewById(R.id.progressBar4);
+                        pbar.setVisibility(View.INVISIBLE);
                     }
                 });
 
