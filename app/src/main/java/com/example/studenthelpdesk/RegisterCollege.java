@@ -27,7 +27,7 @@ public class RegisterCollege extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_college);
-        allData = new CollegeRegistrationData();
+
         uname = findViewById(R.id.uname);
         cname = findViewById(R.id.cname);
         location = findViewById(R.id.clocation);
@@ -36,6 +36,7 @@ public class RegisterCollege extends AppCompatActivity {
         password2 = findViewById(R.id.confirmpassword2);
         register = (Button) findViewById(R.id.register);
         firebaseFirestores = FirebaseFirestore.getInstance();
+        allData = new CollegeRegistrationData();
 
     }
 
@@ -199,4 +200,5 @@ public class RegisterCollege extends AppCompatActivity {
         startActivity(new Intent(RegisterCollege.this, Login.class));
         finishAffinity();
     }
+
 }

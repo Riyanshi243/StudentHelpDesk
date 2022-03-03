@@ -102,7 +102,7 @@ public class StudentSignupDone extends AppCompatActivity {
                                                         setText("Process Complete");
                                                         Toast.makeText(StudentSignupDone.this,"Signup Done \nYou may log in",Toast.LENGTH_SHORT).show();
                                                         startActivity(new Intent(StudentSignupDone.this,Login.class));
-
+                                                        finishAffinity();
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
@@ -110,6 +110,8 @@ public class StudentSignupDone extends AppCompatActivity {
                                                         Toast.makeText(StudentSignupDone.this,e.toString(),Toast.LENGTH_SHORT).show();
                                                         progressBar.setVisibility(View.GONE);
                                                         setText("FAILED");
+                                                        startActivity(new Intent(StudentSignupDone.this,Signup.class));
+                                                        finishAffinity();
                                                     }
                                                 });
                                             }
@@ -119,6 +121,8 @@ public class StudentSignupDone extends AppCompatActivity {
                                                 Toast.makeText(StudentSignupDone.this,e.toString(),Toast.LENGTH_SHORT).show();
                                                 progressBar.setVisibility(View.GONE);
                                                 setText("FAILED");
+                                                startActivity(new Intent(StudentSignupDone.this,Signup.class));
+                                                finishAffinity();
                                             }
                                         });;
                                     }
@@ -133,6 +137,8 @@ public class StudentSignupDone extends AppCompatActivity {
                         Toast.makeText(StudentSignupDone.this,e.toString(),Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                         setText("FAILED");
+                        startActivity(new Intent(StudentSignupDone.this,Signup.class));
+                        finishAffinity();
                     }
                 });;
             }
@@ -144,5 +150,9 @@ public class StudentSignupDone extends AppCompatActivity {
         t.setText(s);
         t.setTextSize(16);
         ll.addView(t);
+    }
+    @Override
+    public void onBackPressed() {
+        //do nothing
     }
 }

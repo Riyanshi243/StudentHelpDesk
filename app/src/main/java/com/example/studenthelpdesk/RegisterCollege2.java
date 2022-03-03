@@ -28,7 +28,11 @@ public class RegisterCollege2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_college2);
         ll=findViewById(R.id.linearL);
+
         allData=RegisterCollege.allData;
+        if(allData.getDeptName()!=null)
+            showData();
+
         button3= (Button) findViewById(R.id.login);
         View questionRepeatable = getLayoutInflater().inflate(R.layout.repeatable_edit_text_layout, null);
         TextView question = questionRepeatable.findViewById(R.id.Ques);
@@ -58,11 +62,10 @@ public class RegisterCollege2 extends AppCompatActivity {
         departmentName=new ArrayList<>();
         if(numberOfDept==1&&!lastQuestionFilled())
             return;
-        for (int i = 0; i < numberOfDept; i++) {
+        for (int i = 0; i < ll.getChildCount(); i++) {
                 View question1 = ll.getChildAt(i);
                 EditText ans = question1.findViewById(R.id.editTextTextMultiLine);
                 String dept = ans.getText().toString().trim();
-                Log.e ("Riyanshi",dept+i);
                 if(dept==null || dept.length()==0)
                     continue;
                 if (i < departmentName.size()) {
@@ -75,7 +78,6 @@ public class RegisterCollege2 extends AppCompatActivity {
             Toast.makeText(RegisterCollege2.this, "Enter atleast 1 department", Toast.LENGTH_LONG).show();
             return;
         }
-        Log.e("Riyanshi",departmentName.toString());
         Collections.sort(departmentName,(o1, o2)->o1.compareTo(o2));
         allData.setDeptName(departmentName);
         //intent to registration step 3
@@ -93,5 +95,20 @@ public class RegisterCollege2 extends AppCompatActivity {
         }
         else
             return true;
+    }
+    public void showData()
+    {
+        ArrayList <String> deptTillNow=allData.getDeptName();
+        for (String currDept:deptTillNow) {
+            View questionRepeatable = getLayoutInflater().inflate(R.layout.repeatable_edit_text_layout, null);
+            TextView question = questionRepeatable.findViewById(R.id.Ques);
+            EditText answer = questionRepeatable.findViewById(R.id.editTextTextMultiLine);
+            answer.setHint(ansHint);
+            question.setText(deptQ);
+            answer.setText(currDept);
+            numberOfDept++;
+            ll.addView(questionRepeatable);
+        }
+
     }
 }

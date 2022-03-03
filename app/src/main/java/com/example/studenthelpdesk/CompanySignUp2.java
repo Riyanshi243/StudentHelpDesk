@@ -58,6 +58,7 @@ public class CompanySignUp2 extends AppCompatActivity {
                                 setText("SignUp done");
                                 Toast.makeText(CompanySignUp2.this,"Signup done \nNow you may LOGIN",Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(CompanySignUp2.this,Login.class));
+                                finishAffinity();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -65,6 +66,8 @@ public class CompanySignUp2 extends AppCompatActivity {
                                 setText("FAILED");
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(CompanySignUp2.this,e.toString(),Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(CompanySignUp2.this,Signup.class));
+                                finishAffinity();
                             }
                         });
                     }
@@ -74,6 +77,8 @@ public class CompanySignUp2 extends AppCompatActivity {
                         setText("FAILED");
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(CompanySignUp2.this,e.toString(),Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(CompanySignUp2.this,Signup.class));
+                        finishAffinity();
                     }
                 });;
 
@@ -84,6 +89,8 @@ public class CompanySignUp2 extends AppCompatActivity {
                 setText("FAILED");
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(CompanySignUp2.this,e.toString(),Toast.LENGTH_LONG).show();
+                startActivity(new Intent(CompanySignUp2.this,Signup.class));
+                finishAffinity();
             }
         });;
     }
@@ -93,5 +100,9 @@ public class CompanySignUp2 extends AppCompatActivity {
         t.setText(s);
         t.setTextSize(16);
         ll.addView(t);
+    }
+    @Override
+    public void onBackPressed() {
+        //do nothing
     }
 }
