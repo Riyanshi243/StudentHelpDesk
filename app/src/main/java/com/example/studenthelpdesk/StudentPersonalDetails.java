@@ -55,103 +55,119 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                 @Override
                 public void onClick(View view) {
                     if (a.isChangeable() == true) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(StudentPersonalDetails.this);
-                            builder.setTitle(a.getQuestion());
-                            builder.setMessage("Enter new value");
-                            //change it with the desired view using getType
                             View typeInput=getType(a.getType(),a.getAnswer());
-                            builder.setView(typeInput);
-
-                            builder.setCancelable(false)
-                                    .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                           String answer=saveData(typeInput,a);
-                                            DocumentReference ansDoc= FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail()).collection("Personal Question").document(a.getId()+"");
-                                            HashMap<String,Object> updatedAns=new HashMap<>();
-                                            updatedAns.put("Question",a.getQuestion());
-                                            updatedAns.put("Answer",answer);
-                                            //save in database
-                                            ansDoc.set(updatedAns).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    DocumentReference mainDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail());
-                                                    HashMap<String,Object> mainD=new HashMap<>();
-                                                    if(a.getQuestion().equalsIgnoreCase("Name"))
-                                                    {
-                                                        mainD.put("Name",answer);
-                                                        mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void unused) {
-                                                                Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
-                                                                studentData.setName(answer);
-                                                                ans.setText(answer);
-                                                                a.setAnswer(answer);
-
-                                                            }
-                                                        });
-                                                    }
-                                                    else if(a.getQuestion().equalsIgnoreCase("Course"))
-                                                    {
-                                                        mainD.put("Course",answer);
-                                                        mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void unused) {
-                                                                Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
-                                                                studentData.setCourse(answer);
-                                                                ans.setText(answer);
-                                                                a.setAnswer(answer);
-
-                                                            }
-                                                        });
-                                                    }
-                                                    else if(a.getQuestion().equalsIgnoreCase("Branch"))
-                                                    {
-                                                        mainD.put("Branch",answer);
-                                                        mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void unused) {
-                                                                Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
-                                                                studentData.setBranch(answer);
-                                                                ans.setText(answer);
-                                                                a.setAnswer(answer);
-
-                                                            }
-                                                        });
-                                                    }
-                                                    else if(a.getQuestion().equalsIgnoreCase("Year"))
-                                                    {
-                                                        mainD.put("Year",answer);
-                                                        mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void unused) {
-                                                                Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
-                                                                studentData.setYr(answer);
-                                                                ans.setText(answer);
-                                                                a.setAnswer(answer);
-
-                                                            }
-                                                        });
-                                                    }
-                                                    else
-                                                    {
-                                                        Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
-                                                        ans.setText(answer);
-                                                        a.setAnswer(answer);
-                                                    }
-                                                }
-                                            });
-
-                                        }
-                                    })
+                            AlertDialog builder = new AlertDialog.Builder(StudentPersonalDetails.this)
+                                    .setTitle(a.getQuestion())
+                                    .setMessage("Enter new value")
+                                    .setView(typeInput)
+                                    .setCancelable(false)
+                                    .setPositiveButton("SAVE",null)
                                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             //do nothing
                                         }
-                                    });
-                            AlertDialog alert = builder.create();
-                            alert.show();
+
+                                    }).show();
+                            Button posButton=builder.getButton(AlertDialog.BUTTON_POSITIVE);
+                            posButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    {
+
+                                        String answer=saveData(typeInput,a);
+                                        if(answer.length()==0 && a.isCumplolsory())
+                                        {
+                                            //Toast.makeText(StudentPersonalDetails.this, "ERROORR", Toast.LENGTH_SHORT).show();
+                                            EditText answer1= (EditText) setError(a.getType(),typeInput);
+                                            if(answer1!=null) {
+                                                answer1.setError("This is Compulsory");
+                                                return;
+                                            }
+
+                                        }
+                                        DocumentReference ansDoc= FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail()).collection("Personal Question").document(a.getId()+"");
+                                        HashMap<String,Object> updatedAns=new HashMap<>();
+                                        updatedAns.put("Question",a.getQuestion());
+                                        updatedAns.put("Answer",answer);
+                                        //save in database
+                                        ansDoc.set(updatedAns).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                DocumentReference mainDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail());
+                                                HashMap<String,Object> mainD=new HashMap<>();
+                                                if(a.getQuestion().equalsIgnoreCase("Name"))
+                                                {
+                                                    mainD.put("Name",answer);
+                                                    mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                            studentData.setName(answer);
+                                                            ans.setText(answer);
+                                                            a.setAnswer(answer);
+                                                            builder.dismiss();
+                                                        }
+                                                    });
+                                                }
+                                                else if(a.getQuestion().equalsIgnoreCase("Course"))
+                                                {
+                                                    mainD.put("Course",answer);
+                                                    mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                            studentData.setCourse(answer);
+                                                            ans.setText(answer);
+                                                            a.setAnswer(answer);
+                                                            builder.dismiss();
+                                                        }
+                                                    });
+                                                }
+                                                else if(a.getQuestion().equalsIgnoreCase("Branch"))
+                                                {
+                                                    mainD.put("Branch",answer);
+                                                    mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                            studentData.setBranch(answer);
+                                                            ans.setText(answer);
+                                                            a.setAnswer(answer);
+                                                            builder.dismiss();
+                                                        }
+                                                    });
+                                                }
+                                                else if(a.getQuestion().equalsIgnoreCase("Year"))
+                                                {
+                                                    mainD.put("Year",answer);
+                                                    mainDoc.update(mainD).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                            studentData.setYr(answer);
+                                                            ans.setText(answer);
+                                                            a.setAnswer(answer);
+                                                            builder.dismiss();
+                                                        }
+                                                    });
+                                                }
+                                                else
+                                                {
+                                                    Toast.makeText(StudentPersonalDetails.this,"Change Successfull",Toast.LENGTH_LONG).show();
+                                                    ans.setText(answer);
+                                                    a.setAnswer(answer);
+                                                    builder.dismiss();
+                                                }
+                                            }
+                                        });
+
+                                    }
+                                }
+                            });
+
+
+
                     } else {
                             AlertDialog.Builder ab=new AlertDialog.Builder(StudentPersonalDetails.this);
                             ab.setTitle("This field is not editable");
@@ -182,6 +198,7 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
         int type = a.getType();
         if(type==2)
         {
+            //numeric
             EditText ans=nView.findViewById(R.id.editvalnumeric);
             return ans.getText().toString();
         }
@@ -335,7 +352,6 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                     mDatePickerDialogFragment = new DatePicker();
                     mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
                     mDatePickerDialogFragment.setCancelable(false);
-
                 }
             });
             return nView;
@@ -343,6 +359,7 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
 
         return null;
     }
+
     String selectedDate;
     View currentView;
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
@@ -353,5 +370,41 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
         TextView datePicker=currentView.findViewById(R.id.tvDate);
         selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
         datePicker.setText(selectedDate);
+    }
+    public View setError(int type, View nView)
+    {
+
+            if(type==2)
+            {
+                //numeric
+                EditText ans=nView.findViewById(R.id.editvalnumeric);
+                return ans;
+            }
+            if(type==3)
+            {
+                EditText ans=nView.findViewById(R.id.editvalmulti);
+                return ans;
+            }
+            if(type==0)
+            {
+                EditText ans=nView.findViewById(R.id.editTextTextMultiLine);
+                return ans;
+            }
+            if(type==1)
+            {
+                EditText ans=nView.findViewById(R.id.editTextMultiLine);
+                return ans;
+            }
+            if (type==4)
+            {
+                return null;
+            }
+            if(type==5)
+            {
+                return null;
+            }
+            return null;
+
+
     }
 }
