@@ -92,13 +92,13 @@
 
             <TextView
                 android:id="@+id/forgetPassword"
-                android:layout_width="136dp"
+                android:layout_width="146dp"
                 android:layout_height="30dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="25dp"
                 android:gravity="right"
-                android:text="Forgot Password"
+                android:text="Forgot your Password?"
                 android:textColor="@color/blue_text" />
 
             <Button

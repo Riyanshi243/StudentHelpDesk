@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class RegisterCollege2_1 extends AppCompatActivity {
         endmsg=findViewById(R.id.msgend);
         tot=findViewById(R.id.no_of_departments);
         allData=RegisterCollege.allData;
+
         ArrayList<String> dept = allData.getDeptName();
         for(String a:dept)
         {
@@ -49,6 +51,8 @@ public class RegisterCollege2_1 extends AppCompatActivity {
             });
             ll.addView(c);
         }
+        if(allData.getDataDept()!=null)
+            showData();
     }
     public void saveAndNext(View v)
     {
@@ -70,4 +74,15 @@ public class RegisterCollege2_1 extends AppCompatActivity {
         allData.setDataDept(dept);
         startActivity(new Intent(RegisterCollege2_1.this,RegisterCollege3.class));
     }
+    public void showData()
+    {
+        ArrayList <String> dataDept=allData.getDataDept();
+        for (int i=0; i<ll.getChildCount();i++) {
+            CheckBox c= (CheckBox) ll.getChildAt(i);
+            if(dataDept.contains(c.getText().toString()))
+                c.setChecked(true);
+        }
+    }
+
+
 }

@@ -92,6 +92,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                     t.setText("Failure...");
                                     t.setTextSize(16);
                                     cl.addView(t);
+                                    startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
                                     return;
                                 }
                             });
@@ -109,7 +110,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                         CollegeRegisterQuestions[] personalQuestionArray = allData.getQuestions_personal();
                         int personalTotal=allData.getTotalPersonal();
                         HashMap<String,Object> tot=new HashMap<>();
-                        tot.put("Total",personalTotal+"");
+                        tot.put("Total",personalTotal);
                         personalQuestion.set(tot).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -178,6 +179,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                     t.setText("Failure occurred");
                                                     t.setTextSize(16);
                                                     cl.addView(t);
+                                                    startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
                                                     return;
                                                 }
                                             });
@@ -221,6 +223,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                             t.setText("Uploading Failed");
                                                             t.setTextSize(16);
                                                             cl.addView(t);
+                                                            startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
                                                             return;
                                                         }
                                                     });
@@ -264,6 +267,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                                                     cl.addView(t);
                                                                                     Toast.makeText(RegisterCollege8.this,"College Registered",Toast.LENGTH_SHORT).show();
                                                                                     startActivity(new Intent(RegisterCollege8.this,Login.class));
+                                                                                    finishAffinity();
                                                                                 }
                                                                             });
                                                                         }
@@ -303,6 +307,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                                 cl.addView(t);
                                                                 DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
                                                                 collegeInformation.delete();
+                                                                startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
                                                             }
                                                         });
                                                     }
@@ -318,6 +323,7 @@ public class RegisterCollege8 extends AppCompatActivity {
 
                                                         DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
                                                         collegeInformation.delete();
+                                                        startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
                                                     }
                                                 });
                                             }
@@ -333,6 +339,7 @@ public class RegisterCollege8 extends AppCompatActivity {
 
                                                 DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
                                                 collegeInformation.delete();
+                                                startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
 
                                             }
                                         });;
@@ -350,6 +357,7 @@ public class RegisterCollege8 extends AppCompatActivity {
 
                                         DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
                                         collegeInformation.delete();
+                                        startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
                                     }
                                 });;
                     }
@@ -363,6 +371,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                 t.setTextSize(40);
                                 cl.addView(t);
                                 personalQuestion.delete();
+                                startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
                             }
                         });;
             }//basic admin info uploaded
@@ -377,6 +386,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                         cl.addView(t);
                         DocumentReference collegeInformation = f1.collection("All Colleges").document(allData.getUname());
                         collegeInformation.delete();
+                        startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
                     }
                 });;
     }
@@ -391,7 +401,12 @@ public class RegisterCollege8 extends AppCompatActivity {
                 cl.addView(t);
                 DocumentReference forGeneralInformation = f1.collection("All Users On App").document(allData.getSAdminemail());
                 forGeneralInformation.delete();
+                startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
             }
         });;
+    }
+    @Override
+    public void onBackPressed() {
+        //do nothing
     }
 }

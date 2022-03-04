@@ -33,7 +33,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN_TIME_OUT=2000;
     static boolean done=true;
 
     @Override
@@ -160,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Intent intent = new Intent(MainActivity.this, Login.class);
                         startActivity(intent);
-                        SPLASH_SCREEN_TIME_OUT = -1;
                         finish();
                     }
                 }
