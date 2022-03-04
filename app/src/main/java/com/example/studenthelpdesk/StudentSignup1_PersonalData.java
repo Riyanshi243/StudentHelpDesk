@@ -48,6 +48,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentsignup1_personal_data);
         studentData=Signup.studentData;
+
         ll=findViewById(R.id.ll);
         pQuestion=new ArrayList<>();
         FirebaseFirestore f=FirebaseFirestore.getInstance();
@@ -118,7 +119,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
                 }
             }
         });
-
+        showData();
     }
     public void saveAndNext(View view)
     {
@@ -611,5 +612,81 @@ int noOfq=0;
         TextView datePicked=findViewById(R.id.tvDate);
         selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
         datePicked.setText(selectedDate);
+    }
+    public void showData()
+    {
+        ArrayList<CollegeRegisterQuestions> persQuestions = studentData.getPersonal_ques();
+        for (int i=0;i<persQuestions.size();i++)
+        {
+            CollegeRegisterQuestions currQues=persQuestions.get(i);
+            if(currQues.getAnswer()!=null)
+            {
+                View currView=ll.getChildAt(i);
+                putType(currQues.getType(),currQues.getAnswer(),currView);
+            }
+        }
+    }
+    void putType(long i, String a,View nView)
+    {
+
+        if(i==2)
+        {
+            //numeric
+            //View nView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.repeatable_numeric_text_layout, null, false);
+            EditText ans=nView.findViewById(R.id.editvalnumeric);
+            ans.setInputType(InputType.TYPE_CLASS_NUMBER);
+            ans.setText(a);
+        }
+        if(i==3)
+        {
+            //numeric decimal
+            EditText ans=nView.findViewById(R.id.editvalmulti);
+
+            ans.setText(a);
+        }
+        if(i==0)
+        {
+            //single line string
+            TextView ans=nView.findViewById(R.id.editTextTextMultiLine);
+            ans.setText(a);
+        }
+        if(i==1)
+        {
+            //multiline string
+            TextView ans=nView.findViewById(R.id.editTextMultiLine);
+            ans.setText(a);
+        }
+        if(i==4)
+        {
+            //gender
+            RadioGroup ans=nView.findViewById(R.id.rg);
+            ans.setClickable(true);
+            RadioButton m=ans.findViewById(R.id.male);
+
+            RadioButton f=ans.findViewById(R.id.female);
+
+            RadioButton o=ans.findViewById(R.id.not);
+           if(a.equalsIgnoreCase("Male"))
+               m.setChecked(true);
+           else if(a.equalsIgnoreCase("Female"))
+               f.setChecked(true);
+           else
+               o.setChecked(true);
+        }
+        if(i==5)
+        {
+            //date
+            TextView datePicked=nView.findViewById(R.id.tvDate);
+            datePicked.setText(a);
+        }
+
+        if(i==7)
+        {
+            //dropdown
+            TextView ques=nView.findViewById(R.id.Ques);
+            AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
+            drop.setText(a);
+
+        }
     }
 }
