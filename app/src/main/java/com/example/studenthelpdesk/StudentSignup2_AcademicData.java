@@ -2,7 +2,9 @@ package com.example.studenthelpdesk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -585,4 +587,29 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
 
-    }}
+    }
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder saveDetails=new AlertDialog.Builder(this);
+        saveDetails.setTitle("ARE YOU SURE?");
+        saveDetails.setMessage("All unsaved data will be lost.");
+        saveDetails.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StudentSignup2_AcademicData.super.onBackPressed();
+            }
+        }).setNegativeButton("Save & Next", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+                saveAndNext(new View(StudentSignup2_AcademicData.this));
+            }
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+            }
+        });
+        saveDetails.create().show();
+    }
+}

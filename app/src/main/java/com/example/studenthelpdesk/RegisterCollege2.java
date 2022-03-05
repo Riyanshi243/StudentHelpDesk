@@ -1,7 +1,9 @@
 package com.example.studenthelpdesk;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -109,6 +111,29 @@ public class RegisterCollege2 extends AppCompatActivity {
             numberOfDept++;
             ll.addView(questionRepeatable);
         }
-
     }
+    @Override
+        public void onBackPressed() {
+            AlertDialog.Builder saveDetails=new AlertDialog.Builder(this);
+            saveDetails.setTitle("ARE YOU SURE?");
+            saveDetails.setMessage("All unsaved data will be lost.");
+            saveDetails.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    RegisterCollege2.super.onBackPressed();
+                }
+            }).setNegativeButton("Save & Next", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //do nothing
+                    saveAndNext(new View(RegisterCollege2.this));
+                }
+            }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //do nothing
+                }
+            });
+            saveDetails.create().show();
+        }
 }
