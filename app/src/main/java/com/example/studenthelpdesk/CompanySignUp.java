@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -191,5 +193,23 @@ public class CompanySignUp extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder saveDetails=new AlertDialog.Builder(this);
+        saveDetails.setTitle("ARE YOU SURE?");
+        saveDetails.setMessage("All unsaved data will be lost.");
+        saveDetails.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                CompanySignUp.super.onBackPressed();
+            }
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+            }
+        });
+        saveDetails.create().show();
     }
 }

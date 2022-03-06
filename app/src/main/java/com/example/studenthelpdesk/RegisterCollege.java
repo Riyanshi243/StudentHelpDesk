@@ -1,7 +1,9 @@
 package com.example.studenthelpdesk;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -196,9 +198,28 @@ public class RegisterCollege extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(RegisterCollege.this, Login.class));
-        finishAffinity();
+        AlertDialog.Builder saveDetails=new AlertDialog.Builder(this);
+        saveDetails.setTitle("ARE YOU SURE?");
+        saveDetails.setMessage("All unsaved data will be lost.");
+        saveDetails.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(RegisterCollege.this, Login.class));
+                finishAffinity();
+            }
+        }).setNegativeButton("Save & Next", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+                next(new View(RegisterCollege.this));
+            }
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+            }
+        });
+        saveDetails.create().show();
     }
 
 }

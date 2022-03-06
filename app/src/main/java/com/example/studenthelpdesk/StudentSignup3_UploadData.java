@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PointF;
@@ -460,5 +462,23 @@ public class StudentSignup3_UploadData extends AppCompatActivity
         float x = event.getX(0) + event.getX(1);
         float y = event.getY(0) + event.getY(1);
         point.set(x / 2, y / 2);
+    }
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder saveDetails=new AlertDialog.Builder(this);
+        saveDetails.setTitle("ARE YOU SURE?");
+        saveDetails.setMessage("All unsaved data will be lost.");
+        saveDetails.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StudentSignup3_UploadData.super.onBackPressed();
+            }
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+            }
+        });
+        saveDetails.create().show();
     }
 }

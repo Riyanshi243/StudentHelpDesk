@@ -3,8 +3,10 @@ package com.example.studenthelpdesk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -119,6 +121,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
                 }
             }
         });
+        if(studentData.getName()!=null)
         showData();
     }
     public void saveAndNext(View view)
@@ -616,6 +619,8 @@ int noOfq=0;
     public void showData()
     {
         ArrayList<CollegeRegisterQuestions> persQuestions = studentData.getPersonal_ques();
+        if(persQuestions==null)
+            return;
         for (int i=0;i<persQuestions.size();i++)
         {
             CollegeRegisterQuestions currQues=persQuestions.get(i);
@@ -688,5 +693,29 @@ int noOfq=0;
             drop.setText(a);
 
         }
+    }
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder saveDetails=new AlertDialog.Builder(this);
+        saveDetails.setTitle("ARE YOU SURE?");
+        saveDetails.setMessage("All unsaved data will be lost.");
+        saveDetails.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StudentSignup1_PersonalData.super.onBackPressed();
+            }
+        }).setNegativeButton("Save & Next", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+                saveAndNext(new View(StudentSignup1_PersonalData.this));
+            }
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing
+            }
+        });
+        saveDetails.create().show();
     }
 }
