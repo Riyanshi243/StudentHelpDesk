@@ -40,6 +40,7 @@ public class AdminSearchUser extends AppCompatActivity{
     static String category;
     TextView msg;
     LinearLayout ll;
+    String cId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +50,21 @@ public class AdminSearchUser extends AppCompatActivity{
         msg=findViewById(R.id.msg);
         ll=findViewById(R.id.ll);
         adminData=AdminPage.adminData;
-        if (StudentPage.studentData!=null)
+        studentData=StudentPage.studentData;
+        companyData=CompanyPage.companyData;
+        if(adminData!=null)
+        {
+            cId=adminData.getCollegeId();
+        }
+        else if (studentData!=null)
+            cId=studentData.getCollegeid();
+        else
+            companyData.getCollegeId();
+        if (StudentPage.studentData!=null) {
             search.setVisibility(View.INVISIBLE);
+            email.setClickable(false);
+            email.setEnabled(false);
+        }
         if(getIntent().hasExtra("Email"))
         {
             email.setText(getIntent().getStringExtra("Email"));
@@ -74,7 +88,7 @@ public class AdminSearchUser extends AppCompatActivity{
         final String[] category = new String[1];
         category[0]=null;
 
-        DocumentReference userDetail = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(eMail);
+        DocumentReference userDetail = FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("UsersInfo").document(eMail);
 
         userDetail.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -98,7 +112,7 @@ public class AdminSearchUser extends AppCompatActivity{
                         Button edit=photo.findViewById(R.id.button5);
                         edit.setVisibility(View.GONE);
                         ImageView profilepic=photo.findViewById(R.id.imageView6);
-                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(eMail);
+                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(eMail);
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
@@ -154,7 +168,7 @@ public class AdminSearchUser extends AppCompatActivity{
                         final ArrayList<CollegeRegisterQuestions> personalQ = new ArrayList<>();
                         final ArrayList<CollegeRegisterQuestions> academicQ = new ArrayList<>();
                         final ArrayList<CollegeRegisterQuestions> uploadQ = new ArrayList<>();
-                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Personal Question");
+                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("Questions").document("Personal Question");
                         docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -196,7 +210,7 @@ public class AdminSearchUser extends AppCompatActivity{
                                                             }
                                                         });
                                                         studentData.setPersonal_ques(personalQ);
-                                                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Academic Question");
+                                                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("Questions").document("Academic Question");
                                                         docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                             @Override
                                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -238,7 +252,7 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                             }
                                                                                         });
                                                                                         studentData.setAcademic_ques(academicQ);
-                                                                                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Upload Question");
+                                                                                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document().collection("Questions").document("Upload Question");
                                                                                         docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                                                             @Override
                                                                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -282,7 +296,7 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                     ImageView profilepic=photo.findViewById(R.id.imageView6);
                                                                                                                     Button edit=photo.findViewById(R.id.button5);
                                                                                                                     edit.setVisibility(View.GONE);
-                                                                                                                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(eMail);
+                                                                                                                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(eMail);
                                                                                                                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                                                                                         @Override
                                                                                                                         public void onSuccess(Uri uri) {
@@ -336,7 +350,7 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                                 @Override
                                                                                                                                 public void onClick(View view) {
                                                                                                                                    FirebaseStorage storage = FirebaseStorage.getInstance();
-                                                                                                                                    StorageReference storageRef = storage.getReference(adminData.getCollegeId()).child(a.getQuestion()).child(eMail);
+                                                                                                                                    StorageReference storageRef = storage.getReference(cId).child(a.getQuestion()).child(eMail);
                                                                                                                                     Task<Uri> message = storageRef.getDownloadUrl();
                                                                                                                                     message.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                                                                                                         @Override
@@ -408,7 +422,7 @@ public class AdminSearchUser extends AppCompatActivity{
                         Button edit=photo.findViewById(R.id.button5);
                         edit.setVisibility(View.GONE);
                         ImageView profilepic=photo.findViewById(R.id.imageView6);
-                        StorageReference storageRef= FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(eMail);
+                        StorageReference storageRef= FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(eMail);
                         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
