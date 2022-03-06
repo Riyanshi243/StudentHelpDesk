@@ -118,4 +118,8 @@ public class AdminPage extends AppCompatActivity {
         startActivity(new Intent(AdminPage.this,Login.class));
         finish();
     }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AdminPage.this,EndScreen.class));
+    }
 }

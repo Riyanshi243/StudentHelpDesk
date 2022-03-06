@@ -1,5 +1,6 @@
 package com.example.studenthelpdesk;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -522,5 +523,10 @@ public class StudentPage extends AppCompatActivity {
         });
 
         super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(StudentPage.this,EndScreen.class));
     }
 }

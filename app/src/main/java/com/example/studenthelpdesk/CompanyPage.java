@@ -108,4 +108,8 @@ public class CompanyPage extends AppCompatActivity {
         startActivity(new Intent(CompanyPage.this,Login.class));
         finish();
     }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(CompanyPage.this,EndScreen.class));
+    }
 }
