@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -63,8 +64,8 @@ public class StudentPage extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String cId= (String) documentSnapshot.get("College");
                 studentData.setCollegeid(cId);
-                 {
-                        {
+
+
                             FirebaseMessaging.getInstance().subscribeToTopic("Student" + studentData.getCollegeid());
                             FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid());
                             FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse());
@@ -76,7 +77,9 @@ public class StudentPage extends AppCompatActivity {
                             token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
                             token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
                             studentData.setToken(token);
-                        }
+
+                            Log.e("List of tokens",token.toString());
+
                         DocumentReference docUserInfo2 = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail());
                         docUserInfo2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
@@ -261,7 +264,7 @@ public class StudentPage extends AppCompatActivity {
                             }
                         });
 
-                    }
+
 
             }
         });

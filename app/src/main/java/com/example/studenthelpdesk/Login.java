@@ -31,7 +31,6 @@ public class Login extends AppCompatActivity {
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         login= (Button) findViewById(R.id.login);
-
     }
     public void Login(View view)
     {
@@ -167,5 +166,4 @@ public class Login extends AppCompatActivity {
         startActivity(new Intent(Login.this,RegisterCollege.class));
         finish();
     }
-
 }
