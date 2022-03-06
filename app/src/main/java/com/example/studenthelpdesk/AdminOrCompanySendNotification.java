@@ -294,7 +294,16 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
         Date t=Calendar.getInstance().getTime();
         String dateToday=(String.valueOf(t.getDate()))+"-"+String.valueOf(t.getMonth()+1)+"-"+String.valueOf(t.getYear()).substring(1,3);
         String timeStamp=t.toString();
-
+        if(title.getText().toString().length()==0)
+        {
+            title.setError("Give a title");
+            return;
+        }
+        if(audience.getText().toString().equalsIgnoreCase("Choose desired audience of notification"))
+        {
+            audience.setError("Select the audience");
+            return;
+        }
         ArrayList<String> fileName=new ArrayList<>();
         String name;
         if (adminData!=null) {

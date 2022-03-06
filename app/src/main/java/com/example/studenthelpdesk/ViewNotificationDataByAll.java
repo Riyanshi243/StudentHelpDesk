@@ -75,7 +75,10 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
 
         profilePic=findViewById(R.id.profilepic);
         header.setText(notificationData.getTitle());
-        info.setText(notificationData.getContent());
+        if(notificationData.getContent().length()!=0)
+            info.setText(notificationData.getContent());
+        else
+            info.setVisibility(View.GONE);
         sentBy.setText(notificationData.getSentBy());
         timestamp.setText(notificationData.getTimeS());
         ArrayList<String> attachments= notificationData.getAttachment();
