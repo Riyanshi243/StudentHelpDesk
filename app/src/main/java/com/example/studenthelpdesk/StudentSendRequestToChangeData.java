@@ -385,16 +385,16 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             }
 
         }
-        if(type==6)
+        if(type==7)
         {
-            /*AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
+            AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
             if(drop.getText().toString().length()==0)
             {
                 drop.setError("This field is compulsory");
                 return false;
             }
         }
-             */
+
 
 return true;
     }
