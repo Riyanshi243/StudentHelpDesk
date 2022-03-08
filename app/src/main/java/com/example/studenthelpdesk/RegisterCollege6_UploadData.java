@@ -25,7 +25,8 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         linearLayout = findViewById(R.id.linearL);
         allData = RegisterCollege.allData;
         setCompulsaryQuestions("Photograph");
-        addQuestion();
+        showData();
+        //addQuestion();
     }
 
     public void addQuestion(View v) {
@@ -130,5 +131,33 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         });
         saveDetails.create().show();
     }
+    void showData()
+    {
+        if(allData.getQuestions_upload()==null)
+            return;
+        CollegeRegisterQuestions[] t = allData.getQuestions_upload();
+        for(int i=1;i<t.length;i++)
+        {
+            CollegeRegisterQuestions currQ=t[i];
+            if(currQ==null)
+            {
+                continue;
+            }
+            View questionRepeatable=getLayoutInflater().inflate(R.layout.repeatable_college_register_questions,null);
+            Spinner dropdown = questionRepeatable.findViewById(R.id.dropdown);
+            EditText ques=questionRepeatable.findViewById(R.id.ans);
+            CheckBox compulsory =questionRepeatable.findViewById(R.id.compulsoryfield);
+            CheckBox editable =questionRepeatable.findViewById(R.id.changefield);
+            ques.setText(currQ.getQuestion());
+            if(currQ.isChangeable())
+                editable.setChecked(true);
+            if(currQ.isCumplolsory())
+                compulsory.setChecked(true);
+            String[] list={"Upload"};
+            ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
+            dropdown.setAdapter(spinnerList);
+            linearLayout.addView(questionRepeatable);
 
+        }
+    }
 }
