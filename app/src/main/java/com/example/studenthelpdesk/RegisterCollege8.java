@@ -266,7 +266,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                                                     t.setTextSize(40);
                                                                                     cl.addView(t);
                                                                                     Toast.makeText(RegisterCollege8.this,"College Registered",Toast.LENGTH_SHORT).show();
-                                                                                    startActivity(new Intent(RegisterCollege8.this,Login.class));
+                                                                                    startActivity(new Intent(RegisterCollege8.this,AdminPage.class));
                                                                                     finishAffinity();
                                                                                 }
                                                                             });
@@ -289,7 +289,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                                                     t.setTextSize(40);
                                                                                     cl.addView(t);
                                                                                     Toast.makeText(RegisterCollege8.this,"College Registered",Toast.LENGTH_SHORT).show();
-                                                                                    startActivity(new Intent(RegisterCollege8.this,Login.class));
+                                                                                    startActivity(new Intent(RegisterCollege8.this,AdminPage.class));
                                                                                 }
                                                                             });
                                                                         }

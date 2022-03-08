@@ -112,7 +112,6 @@ public class StudentUploadDetails extends AppCompatActivity {
                                         .error(R.drawable.error_profile_picture)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
-
                             }
                         });
                     }
@@ -138,10 +137,15 @@ public class StudentUploadDetails extends AppCompatActivity {
                         message.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                // Toast.makeText(getActivity(),uri.toString(),Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(view.getContext(), ViewPDFActivity.class);
                                 intent.putExtra("url", uri.toString());
                                 startActivity(intent);
+                                progressbar.setVisibility(View.INVISIBLE);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(StudentUploadDetails.this, "No document Uploaded", Toast.LENGTH_SHORT).show();
                                 progressbar.setVisibility(View.INVISIBLE);
                             }
                         });
@@ -200,11 +204,8 @@ public class StudentUploadDetails extends AppCompatActivity {
                         });
                     }
                 });
-
                 ll.addView(repeatAnswers);
             }
-
-
         }
     }
     ProgressDialog dialog;
@@ -212,16 +213,17 @@ public class StudentUploadDetails extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1)
         {
-            if(resultCode==RESULT_OK) {
+            if(resultCode==RESULT_OK)
+            {
                 dialog = new ProgressDialog(this);
-
                 dialog.setMessage("UPLOADING");
                 dialog.setCancelable(false);
                 dialog.show();
                 Uri imageuri = data.getData();
                 uploadPic(imageuri, "Photograph");
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
+            if (resultCode == Activity.RESULT_CANCELED)
+            {
                 Toast.makeText(this, "ACTIVITY CANCELLED", Toast.LENGTH_SHORT).show();
                 progressbar.setVisibility(View.INVISIBLE);
             }
@@ -229,14 +231,14 @@ public class StudentUploadDetails extends AppCompatActivity {
         if (requestCode == 2) {
             if(resultCode == Activity.RESULT_OK){
                 dialog = new ProgressDialog(this);
-
                 dialog.setMessage("UPLOADING");
                 dialog.setCancelable(false);
                 dialog.show();
                 TextView q=currentQView.findViewById(R.id.Ques);
                 uploadResume(data.getData(),q.getText().toString());
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
+            if (resultCode == Activity.RESULT_CANCELED)
+            {
                 Toast.makeText(this,"ACTIVITY CANCELLED",Toast.LENGTH_SHORT).show();
                 progressbar.setVisibility(View.INVISIBLE);
             }
@@ -252,7 +254,6 @@ public class StudentUploadDetails extends AppCompatActivity {
             fileReference.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Profile");
                     String uploadid=databaseReference.push().getKey();
                     if(dialog.isShowing())
@@ -267,7 +268,6 @@ public class StudentUploadDetails extends AppCompatActivity {
                                     .error(R.drawable.error_profile_picture)
                                     .placeholder(R.drawable.default_loading_img)
                                     .into(profilepic);
-
                             progressbar.setVisibility(View.INVISIBLE);
                         }
                     });
@@ -277,7 +277,6 @@ public class StudentUploadDetails extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(StudentUploadDetails.this,e.getMessage(),Toast.LENGTH_LONG).show();
                     progressbar.setVisibility(View.INVISIBLE);
-
                 }
             });
         }
@@ -303,7 +302,6 @@ public class StudentUploadDetails extends AppCompatActivity {
                     if(dialog.isShowing()) {
                         dialog.setCancelable(false);
                         dialog.setMessage("UPLOADED");
-
                         Toast.makeText(StudentUploadDetails.this, filepath.getName()+".pdf SAVED", Toast.LENGTH_SHORT).show();
                         try {
                             Thread.sleep(1000);
@@ -313,7 +311,6 @@ public class StudentUploadDetails extends AppCompatActivity {
                             progressbar.setVisibility(View.INVISIBLE);
                         }
                         dialog.dismiss();
-
                     }
                 }
             });
@@ -337,5 +334,4 @@ public class StudentUploadDetails extends AppCompatActivity {
         String string = c.getString(c.getColumnIndex(OpenableColumns.DISPLAY_NAME));
         return string;
     }
-
 }

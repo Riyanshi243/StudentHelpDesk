@@ -308,6 +308,7 @@ public class StudentPage extends AppCompatActivity {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
+        studentData=null;
         startActivity(new Intent(StudentPage.this,Login.class));
         finish();
     }

@@ -56,8 +56,8 @@ public class AdminSignUp2 extends AppCompatActivity {
                             @Override
                             public void onSuccess(AuthResult authResult) {
                                 setText("SignUp done");
-                                Toast.makeText(AdminSignUp2.this,"Signup done \nNow you may LOGIN",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(AdminSignUp2.this,Login.class));
+                                Toast.makeText(AdminSignUp2.this,"Signup done",Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(AdminSignUp2.this,AdminPage.class));
                                 finishAffinity();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
