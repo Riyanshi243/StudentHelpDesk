@@ -36,6 +36,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
     CompanyData companyData;
     ImageView profilepic;
     ProgressBar progressbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         repre_name = findViewById(R.id.repre_name);
         repre_emailid = findViewById(R.id.repre_emailid);
         repre_number = findViewById(R.id.repre_number);
-        progressbar=findViewById(R.id.progressBar5);
+        progressbar = findViewById(R.id.progressBar5);
 
         cname.setText(companyData.getCompanyName());
         cemail.setText(companyData.getEmail());
@@ -78,6 +79,7 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         et.setText(companyData.getCompanyName());
         et.requestFocus();
         change.setView(et);
+
         change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -86,23 +88,32 @@ public class CompanyEditProfilePage extends AppCompatActivity {
         }).setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                cname.setText(et.getText().toString().trim());
-                companyData.setCompanyName(et.getText().toString().trim());
-                HashMap<String, Object> changeDetail = new HashMap<>();
-                changeDetail.put("Company Name", et.getText().toString().trim());
-                FirebaseFirestore.getInstance().collection("All Colleges")
-                        .document(companyData.getCollegeId()).collection("UsersInfo")
-                        .document(companyData.getEmail()).update(changeDetail)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                if (et.getText().toString().length() == 0) {
+                    et.setError("ENTER COMPANY NAME");
+                }
+                else {
+                    cname.setText(et.getText().toString().trim());
+                    companyData.setCompanyName(et.getText().toString().trim());
+                    HashMap<String, Object> changeDetail = new HashMap<>();
+                    changeDetail.put("Company Name", et.getText().toString().trim());
+                    FirebaseFirestore.getInstance().collection("All Colleges")
+                            .document(companyData.getCollegeId()).collection("UsersInfo")
+                            .document(companyData.getEmail()).update(changeDetail)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
             }
         });
+
+
         change.create().show();
-    }
+
+
+}
 
     public void locationClick(View view) {
         AlertDialog.Builder change = new AlertDialog.Builder(this);
@@ -333,6 +344,79 @@ public class CompanyEditProfilePage extends AppCompatActivity {
             progressbar.setVisibility(View.INVISIBLE);
         }
 
+    }
+    boolean checkFilled()
+    {
+        ProgressBar pbar =findViewById(R.id.progressBar5);
+        pbar.setVisibility(View.VISIBLE);
+        if(cname.getText().toString().length()==0)
+        {
+            cname.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            return false;
+        }
+        if(cemail.getText().toString().length()==0)
+        {
+            cemail.setError("ENTER COMPANY EMAIL");
+            cemail.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            return false;
+        }
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String email1=cemail.getText().toString().trim();
+        if(!email1.matches(emailPattern))
+        {
+            cemail.setError("ENTER VALID MAIL");
+            cemail.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            return false;
+        }
+        if(location.getText().toString().length()==0)
+        {
+            location.setError("ENTER LOCATION");
+            location.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            return false;
+        }
+        if(repre_name.getText().toString().length()==0)
+        {
+            repre_name.setError("ENTER REPRESENTATIVE NAME");
+            repre_name.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            return false;
+        }
+        if(repre_emailid.getText().toString().length()==0)
+        {
+            repre_emailid.setError("ENTER REPRESENTATIVE EMAIL ID");
+            repre_emailid.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            return false;
+        }
+        String emailPattern1 = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String email2=repre_emailid.getText().toString().trim();
+        if(!email2.matches(emailPattern1))
+        {
+            repre_emailid.setError("ENTER VALID MAIL");
+            repre_emailid.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            return false;
+        }
+        if(repre_number.getText().toString().length()==0)
+        {
+            repre_number.setError("ENTER PHONE NUMBER");
+            repre_number.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            return false;
+        }
+        if(repre_number.getText().toString().length()<10 || repre_number.getText().toString().trim().length()>10)
+        {
+            repre_number.setError("INVALID PHONE NUMBER");
+            repre_number.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            return false;
+        }
+
+   return true;
     }
 }
 

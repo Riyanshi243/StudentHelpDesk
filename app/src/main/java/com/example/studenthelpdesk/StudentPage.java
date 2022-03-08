@@ -1,5 +1,6 @@
 package com.example.studenthelpdesk;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -307,6 +308,7 @@ public class StudentPage extends AppCompatActivity {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
+        studentData=null;
         startActivity(new Intent(StudentPage.this,Login.class));
         finish();
     }
@@ -522,5 +524,10 @@ public class StudentPage extends AppCompatActivity {
         });
 
         super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(StudentPage.this,EndScreen.class));
     }
 }

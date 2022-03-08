@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".EndScreen"
+            android:exported="false" />
+        <activity
             android:name=".ViewNotificationDataByAll"
             android:exported="false" />
         <activity
@@ -126,8 +129,9 @@
         <activity
             android:name=".Signup"
             android:exported="false" />
-        <activity android:name=".StudentSendRequestToChangeData"
-            android:exported="false"/>
+        <activity
+            android:name=".StudentSendRequestToChangeData"
+            android:exported="false" />
         <activity
             android:name=".Login"
             android:exported="false" />
