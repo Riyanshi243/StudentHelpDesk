@@ -42,6 +42,7 @@ public class RegisterCollege3 extends AppCompatActivity {
         depOfEachBranch =new ArrayList<>(1);
         getWorkingView();
         numberOfCourse=1;
+        showData();
     }
     public void addCourse(View v)
     {
@@ -149,7 +150,6 @@ public class RegisterCollege3 extends AppCompatActivity {
                     currentCourseName.requestFocus();
                     return;
                 }
-
                 ArrayList<String> allbranch=new ArrayList<>();
                 ArrayList<String> alldept=new ArrayList<>();
                 int branchNumber=subQuestions.getChildCount();
@@ -226,5 +226,36 @@ public class RegisterCollege3 extends AppCompatActivity {
             }
         });
         saveDetails.create().show();
+    }
+    public void showData()
+    {
+        if(allData.getCourseName()==null)
+            return;
+        courseName=allData.getCourseName();
+        branchOfEachCourse=allData.getBranchForEachCourse();
+        depOfEachBranch=allData.getDepForEachCourse();
+
+        for(int j=0;j<courseName.size();j++)
+        {
+            String currentCourseName=courseName.get(j);
+            ArrayList<String> allbranch=branchOfEachCourse.get(j);
+            ArrayList<String> alldept=depOfEachBranch.get(j);
+
+            View permanentDataView = getLayoutInflater().inflate(R.layout.repeatable_text_view_layout, null);
+            TextView heading=permanentDataView.findViewById(R.id.Heading2);
+            heading.setText(currentCourseName);
+            LinearLayout subHeading=permanentDataView.findViewById(R.id.subHeadings);
+            for(int i=0;i<allbranch.size();i++)
+            {
+                TextView thisBranch = new TextView(permanentDataView.getContext());
+                if(i<allbranch.size())
+                {
+                    thisBranch.setText(allbranch.get(i)+" : "+alldept.get(i));
+                    subHeading.addView(thisBranch);
+                }
+            }
+            savedCourse++;
+            ll.addView(permanentDataView);
+        }
     }
 }

@@ -27,8 +27,9 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
         linearLayout = findViewById(R.id.linearL);
         allData=RegisterCollege.allData;
         setCompulsaryQuestions("Name",0);
+        showData();
         //all other questions can be added by admin
-        addQuestion();
+        //addQuestion();
     }
     public void addQuestion(View v)
     {
@@ -40,7 +41,7 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
         int numberOfQuestions=linearLayout.getChildCount();
         CollegeRegisterQuestions allPersonalQuestion[]=new CollegeRegisterQuestions[numberOfQuestions];
         int c=0;
-        for(int i=0;i<numberOfQuestions;i++)
+        for(int i=0;i<linearLayout.getChildCount();i++)
         {
             CollegeRegisterQuestions thisQuestion=new CollegeRegisterQuestions();
             View repeatableView=linearLayout.getChildAt(i);
@@ -54,6 +55,8 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
             thisQuestion.setChangeable(changeable.isChecked());
             thisQuestion.setCompulsory(cumpolsary.isChecked());
             thisQuestion.setType(dropdown.getSelectedItemPosition());
+            if(thisQuestion==null)
+                continue;
             allPersonalQuestion[c++]=thisQuestion;
         }
         allData.setTotalPersonal(c);
@@ -137,6 +140,35 @@ public class RegisterCollege4_PersonalQuestions extends AppCompatActivity {
             }
         });
         saveDetails.create().show();
+    }
+    void showData()
+    {
+        if(allData.getQuestions_personal()==null)
+            return;
+        CollegeRegisterQuestions[] t = allData.getQuestions_personal();
+        for(int i=1;i<t.length;i++)
+        {
+            CollegeRegisterQuestions currQ=t[i];
+            if(currQ==null)
+            {
+                continue;
+            }
+            View questionRepeatable=getLayoutInflater().inflate(R.layout.repeatable_college_register_questions,null);
+            Spinner dropdown = questionRepeatable.findViewById(R.id.dropdown);
+            EditText ques=questionRepeatable.findViewById(R.id.ans);
+            CheckBox compulsory =questionRepeatable.findViewById(R.id.compulsoryfield);
+            CheckBox editable =questionRepeatable.findViewById(R.id.changefield);
+            ques.setText(currQ.getQuestion());
+            if(currQ.isChangeable())
+                editable.setChecked(true);
+            if(currQ.isCumplolsory())
+                compulsory.setChecked(true);
+            String[] list={"SingleLine String","Multiline String","Numerical Value","Numerical Decimal Value","Gender Choices","Date Picker"};
+            ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
+            dropdown.setAdapter(spinnerList);
+            linearLayout.addView(questionRepeatable);
+
+        }
     }
 
 }

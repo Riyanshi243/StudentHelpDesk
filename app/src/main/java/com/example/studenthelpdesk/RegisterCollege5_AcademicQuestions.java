@@ -33,7 +33,8 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
         setCompulsaryQuestions("Branch",7);
         setCompulsaryQuestions("Year",7);
         //all academic questions can be added by admin
-        addQuestion();
+        showData();
+        //addQuestion();
     }
     public void addQuestion(View v)
     {
@@ -146,5 +147,34 @@ public class RegisterCollege5_AcademicQuestions extends AppCompatActivity {
             }
         });
         saveDetails.create().show();
+    }
+    void showData()
+    {
+        if(allData.getQuestions_academic()==null)
+            return;
+        CollegeRegisterQuestions[] t = allData.getQuestions_academic();
+        for(int i=3;i<t.length;i++)
+        {
+            CollegeRegisterQuestions currQ=t[i];
+            if(currQ==null)
+            {
+                continue;
+            }
+            View questionRepeatable=getLayoutInflater().inflate(R.layout.repeatable_college_register_questions,null);
+            Spinner dropdown = questionRepeatable.findViewById(R.id.dropdown);
+            EditText ques=questionRepeatable.findViewById(R.id.ans);
+            CheckBox compulsory =questionRepeatable.findViewById(R.id.compulsoryfield);
+            CheckBox editable =questionRepeatable.findViewById(R.id.changefield);
+            ques.setText(currQ.getQuestion());
+            if(currQ.isChangeable())
+                editable.setChecked(true);
+            if(currQ.isCumplolsory())
+                compulsory.setChecked(true);
+            String[] list={"SingleLine String","Multiline String","Numerical Value","Numerical Decimal Value","Gender Choices","Date Picker"};
+            ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
+            dropdown.setAdapter(spinnerList);
+            linearLayout.addView(questionRepeatable);
+
+        }
     }
 }
