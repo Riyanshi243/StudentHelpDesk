@@ -226,7 +226,7 @@ public class Signup extends AppCompatActivity {
         saveDetails.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Signup.super.onBackPressed();
+                startActivity(new Intent(Signup.this,Login.class));
             }
         }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

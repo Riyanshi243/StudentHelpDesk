@@ -98,6 +98,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="25dp"
                 android:gravity="right"
+                android:onClick="forgetPassword"
                 android:text="Forgot your Password?"
                 android:textColor="@color/blue_text" />
 

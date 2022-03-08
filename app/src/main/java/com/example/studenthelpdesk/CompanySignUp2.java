@@ -56,8 +56,8 @@ public class CompanySignUp2 extends AppCompatActivity {
                             @Override
                             public void onSuccess(AuthResult authResult) {
                                 setText("SignUp done");
-                                Toast.makeText(CompanySignUp2.this,"Signup done \nNow you may LOGIN",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(CompanySignUp2.this,Login.class));
+                                Toast.makeText(CompanySignUp2.this,"Signup done",Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(CompanySignUp2.this,CompanyPage.class));
                                 finishAffinity();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
