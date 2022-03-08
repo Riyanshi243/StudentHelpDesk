@@ -115,6 +115,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+    //function for checking constraints
     public boolean checkConstraints()
     {
         login.setEnabled(false);
