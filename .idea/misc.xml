@@ -69,6 +69,7 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_answer_faq.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_create_new_account.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_edit_profile_page.xml" value="0.13333333333333333" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_lock_database_filters.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_or_company_send_notification.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_page.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_search_user.xml" value="0.17552083333333332" />
@@ -127,6 +128,8 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_checkboxes.xml" value="0.3333333333333333" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_college_register_questions.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_course_register_layout.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_database_filters.xml" value="0.3333333333333333" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_database_filters2.xml" value="0.3333333333333333" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_date_input_layout.xml" value="0.16666666666666666" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_dropdown.xml" value="0.10914855072463768" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/repeatable_edit_text_layout.xml" value="0.22" />

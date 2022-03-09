@@ -107,6 +107,9 @@ public class AdminPage extends AppCompatActivity {
     public void editProfile(View v){
         startActivity(new Intent(AdminPage.this, AdminEditProfilePage.class));
     }
+    public void lockDatabase(View v){
+        startActivity(new Intent(AdminPage.this, AdminLockDatabaseFilters.class));
+    }
     public void logout(View v)
     {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(adminData.getCollegeId());
