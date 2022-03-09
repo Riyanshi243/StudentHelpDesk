@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -42,7 +40,7 @@ public class AdminViewAllRequests extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_all_requests);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         adminData=AdminPage.adminData;
         pbar=findViewById(R.id.progressBar3);
         requestData=new ArrayList<>();
@@ -79,7 +77,7 @@ public class AdminViewAllRequests extends AppCompatActivity {
 
                 if(requestData.size()!=0)
                 {
-                    ll=findViewById(R.id.ll);
+                    ll=findViewById(R.id.linearlay);
                     RequestData currReq=requestData.get(0);
                     View viewReq=getLayoutInflater().inflate(R.layout.repeatable_admin_view_requests,null);
                     TextView email=viewReq.findViewById(R.id.email);

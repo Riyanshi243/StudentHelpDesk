@@ -29,7 +29,7 @@ public class CompanySignUp2 extends AppCompatActivity {
         setContentView(R.layout.activity_company_sign_up2);
         companyData=Signup.companyData;
         ProgressBar progressBar=findViewById(R.id.progressBar2);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference docUserBasicInfo = f.collection("All Users On App").document(companyData.getEmail());
         HashMap<String,Object> userBasicInfo=new HashMap<>();

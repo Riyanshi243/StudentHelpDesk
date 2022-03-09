@@ -53,7 +53,7 @@
             <!-- All questions to be asked by student will be repeated here, through java code -->
 
             <LinearLayout
-                android:id="@+id/ll"
+                android:id="@+id/linearlay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

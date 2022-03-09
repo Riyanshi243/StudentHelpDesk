@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,7 +47,7 @@ public class AdminSearchUser extends AppCompatActivity{
         email=findViewById(R.id.emailsearch);
         search=findViewById(R.id.search);
         msg=findViewById(R.id.msg);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         adminData=AdminPage.adminData;
         studentData=StudentPage.studentData;
         companyData=CompanyPage.companyData;

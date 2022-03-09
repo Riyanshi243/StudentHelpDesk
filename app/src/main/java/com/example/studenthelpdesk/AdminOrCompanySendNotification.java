@@ -1,7 +1,5 @@
 package com.example.studenthelpdesk;
 
-import static java.lang.System.currentTimeMillis;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,10 +13,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -29,27 +25,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.ktx.Firebase;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 public class AdminOrCompanySendNotification extends AppCompatActivity {
     ArrayList<Uri> allAttach;
@@ -67,7 +54,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
         title=findViewById(R.id.notif_title);
         content=findViewById(R.id.notif_content);
         audience=findViewById(R.id.audience);
-        attach_ll=findViewById(R.id.ll);
+        attach_ll=findViewById(R.id.linearlay);
         adminData=AdminPage.adminData;
         companyData=CompanyPage.companyData;
         progressbar=findViewById(R.id.progressBar5);

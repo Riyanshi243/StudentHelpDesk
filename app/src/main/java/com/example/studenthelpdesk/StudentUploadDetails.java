@@ -45,7 +45,7 @@ public class StudentUploadDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_upload_details);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         studentData=StudentPage.studentData;
         progressbar=findViewById(R.id.progressBar5);
 

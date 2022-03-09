@@ -29,7 +29,7 @@ public class AdminSignUp2 extends AppCompatActivity {
         setContentView(R.layout.activity_admin_sign_up2);
         adminData=Signup.adminData;
         ProgressBar progressBar=findViewById(R.id.progressBar2);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference docUserBasicInfo = f.collection("All Users On App").document(adminData.getEmail());
         HashMap<String,Object> userBasicInfo=new HashMap<>();
