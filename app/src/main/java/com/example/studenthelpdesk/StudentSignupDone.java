@@ -100,8 +100,8 @@ public class StudentSignupDone extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Void unused) {
                                                         setText("Process Complete");
-                                                        Toast.makeText(StudentSignupDone.this,"Signup Done \nYou may log in",Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(StudentSignupDone.this,Login.class));
+                                                        Toast.makeText(StudentSignupDone.this,"Signup Done",Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(StudentSignupDone.this,StudentPage.class));
                                                         finishAffinity();
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {

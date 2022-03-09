@@ -54,7 +54,7 @@
                 android:paddingLeft="5dp"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:text="Here are all the Edit Details requests from the students of your college. You may click on the EmailId of student to view their data!" />
+                android:text="Here are all the Edit Details requests from the students of your college. You may click on the Email Id of student to view their data !!" />
 
 
 

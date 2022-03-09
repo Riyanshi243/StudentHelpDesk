@@ -73,21 +73,10 @@
                         android:onClick="toSeeSender"
                         android:paddingLeft="10dp"
                         android:text="name"
-                        android:textColor="@color/black"
+                        android:textColor="@color/blue_text"
                         android:textSize="24dp" />
 
                 </TableRow>
-                <TextView
-                    android:id="@+id/header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Header"
-                    android:textColor="@color/black"
-                    android:textSize="26dp"
-                    android:inputType="textMultiLine"/>
-
                 <TextView
                     android:id="@+id/timestamp"
                     android:layout_width="wrap_content"
@@ -100,9 +89,16 @@
                     android:text="timestamp"
                     android:textColor="@color/blue_text"
                     android:textSize="16dp" />
-
-
-
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Header"
+                    android:textColor="@color/black"
+                    android:textSize="26dp"
+                    android:inputType="textMultiLine"/>
 
                 <TextView
                     android:id="@+id/info"

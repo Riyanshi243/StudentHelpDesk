@@ -95,7 +95,7 @@
                     android:backgroundTint="@color/box_bg">
 
                     <AutoCompleteTextView
-                        android:id="@+id/audience"
+                        android:id="@+id/concerned_admin"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -120,9 +120,9 @@
                     android:id="@+id/hashtags"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapSentences"
+                    android:layout_marginBottom="10dp"
                     android:hint="Add Hashtag"
-                    android:layout_marginBottom="10dp"/>
+                    android:inputType="textCapSentences" />
 
                 <LinearLayout
                     android:id="@+id/hashtagLinearL"

@@ -115,7 +115,12 @@ public class AdminPage extends AppCompatActivity {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(adminData.getCollegeId()+"_"+adminData.getDeptName().replaceAll("\\s", ""));
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
+        adminData=null;
         startActivity(new Intent(AdminPage.this,Login.class));
         finish();
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AdminPage.this,EndScreen.class));
     }
 }

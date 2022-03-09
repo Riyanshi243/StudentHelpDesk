@@ -283,7 +283,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
     }
     public void sendRequest(View view)
     {
-        if(notEmpty())
+        if(notEmpty() && compulsory(ans,a))
         {
             String answer=saveData(ans,a);
             HashMap<String,Object> requestData=new HashMap<>();
@@ -327,6 +327,60 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
         {
             reason.setError("ENTER REASON");
             return false;
+        }
+        return true;
+    }
+    public boolean compulsory(View nView,CollegeRegisterQuestions a) {
+        TextView ques = nView.findViewById(R.id.Ques);
+        int type = a.getType();
+        if (type == 0) {
+
+            EditText ans = nView.findViewById(R.id.editTextTextMultiLine);
+            if (ans.getText().toString().length() == 0) {
+                ans.setError("This field is compulsory");
+                return false;
+            }
+        }
+        if (type == 1) {
+            EditText ans = nView.findViewById(R.id.editTextMultiLine);
+            if (ans.getText().toString().length() == 0) {
+                ans.setError("This field is compulsory");
+                return false;
+            }
+        }
+        if (type == 2) {
+            EditText ans = nView.findViewById(R.id.editvalnumeric);
+            if (ans.getText().toString().length() == 0) {
+                ans.setError("This field is compulsory");
+                return false;
+            }
+        }
+        if (type == 3) {
+            EditText ans = nView.findViewById(R.id.editvalmulti);
+            if (ans.getText().toString().length() == 0) {
+                ans.setError("This field is compulsory");
+                return false;
+            }
+        }
+        if (type == 4) {
+            return true;
+        }
+        if (type == 5) {
+            TextView datePicked = nView.findViewById(R.id.tvDate);
+            if (datePicked.getText().toString().length() == 0) {
+                datePicked.setError("This field is compulsory");
+                return false;
+            }
+
+        }
+        if (type == 6)
+        {
+            AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
+            if(drop.getText().toString().length()==0)
+            {
+                drop.setError("This field is compulsory");
+                return false;
+            }
         }
         return true;
     }
