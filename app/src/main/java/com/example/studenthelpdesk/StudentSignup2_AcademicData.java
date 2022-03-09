@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +44,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentsignup2_academic_data);
         studentData=Signup.studentData;
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         aQuestion=new ArrayList<>();
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference acadQuestions = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Academic Question");

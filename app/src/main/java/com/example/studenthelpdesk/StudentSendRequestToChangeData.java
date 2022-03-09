@@ -46,7 +46,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
         currVal=findViewById(R.id.currentVal);
         currValMsg=findViewById(R.id.currentVal_msg);
         reason=findViewById(R.id.reasontochange);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         ans=getType(a.getType(),null,a.getQuestion());
         ll.addView(ans);
         hello.setText("Hello "+studentData.getName());

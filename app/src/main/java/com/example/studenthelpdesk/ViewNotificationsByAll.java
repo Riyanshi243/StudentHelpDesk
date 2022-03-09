@@ -41,7 +41,7 @@ public class ViewNotificationsByAll extends AppCompatActivity {
         adminData=AdminPage.adminData;
         companyData=CompanyPage.companyData;
         pbar=findViewById(R.id.progressBar6);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         HashSet<String> token;
         ArrayList<NotificationData> allNotif=new ArrayList<>();
         String cId;
