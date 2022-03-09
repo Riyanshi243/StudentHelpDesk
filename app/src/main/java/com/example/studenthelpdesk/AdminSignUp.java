@@ -107,7 +107,7 @@ AdminData adminData;
                 dialog.show();
                 Uri imageuri = data.getData();
                 uploadPic(imageuri);
-                Toast.makeText(this,getNameFromURI(data.getData())+"UPLOADED",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,getNameFromURI(data.getData())+" UPLOADED",Toast.LENGTH_LONG).show();
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {

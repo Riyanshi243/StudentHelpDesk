@@ -11,7 +11,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:padding="5dp"
-        android:background="@drawable/layout_bg"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +20,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/branchName"
