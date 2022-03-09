@@ -371,7 +371,6 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
                 datePicked.setError("This field is compulsory");
                 return false;
             }
-
         }
         if (type == 6)
         {

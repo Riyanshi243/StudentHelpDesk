@@ -271,10 +271,11 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:onClick="lockDatabase">
 
                     <ImageView
-                        android:id="@+id/lockimg"
+                        android:id="@+id/locking"
                         android:layout_width="30dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="10dp"
