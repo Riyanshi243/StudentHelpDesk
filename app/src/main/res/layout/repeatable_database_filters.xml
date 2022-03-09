@@ -25,7 +25,7 @@
 
             <TextView
                 android:id="@+id/CourseName"
-                android:layout_width="257dp"
+                android:layout_width="244dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
@@ -38,11 +38,12 @@
                 android:id="@+id/lock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:gravity="right" />
 
             <Button
                 android:id="@+id/downArrow"
-                android:layout_width="45dp"
+                android:layout_width="47dp"
                 android:layout_height="37dp"
                 android:layout_gravity="right"
                 android:background="@drawable/ic_baseline_arrow_drop_down" />
@@ -54,8 +55,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:orientation="vertical"></LinearLayout>
-
+            android:background="@color/background_gray"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.studenthelpdesk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -25,4 +26,5 @@ public class StudentPostFAQ extends AppCompatActivity {
         anonymous=findViewById(R.id.anonymous);
         postFAQ=(Button) findViewById(R.id.post);
     }
+
 }
