@@ -252,7 +252,7 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                             }
                                                                                         });
                                                                                         studentData.setAcademic_ques(academicQ);
-                                                                                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document().collection("Questions").document("Upload Question");
+                                                                                        DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("Questions").document("Upload Question");
                                                                                         docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                                                             @Override
                                                                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
