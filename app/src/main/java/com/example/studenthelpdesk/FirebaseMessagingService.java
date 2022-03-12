@@ -51,10 +51,21 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         } else {
             builder.setSmallIcon(resourceImage);
         }
+        Intent resultIntent;
 
+        if(remoteMessage.getData().get("activity").matches("Notification"))
+        {
+            resultIntent = new Intent(this, ViewNotificationsByAll.class);
+        }
+        else if(remoteMessage.getData().get("activity").matches("Request"))
+        {
+            resultIntent=new Intent(this,StudentCheckRequestStatus.class);
+        }
+        else
+        {
+            resultIntent=new Intent(this, ViewNotificationsByAll.class);
+        }
 
-
-        Intent resultIntent = new Intent(this, ViewNotificationsByAll.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
