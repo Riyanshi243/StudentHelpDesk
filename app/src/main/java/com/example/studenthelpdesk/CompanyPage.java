@@ -1,5 +1,6 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -108,6 +111,27 @@ public class CompanyPage extends AppCompatActivity {
         companyData=null;
         startActivity(new Intent(CompanyPage.this,Login.class));
         finish();
+    }
+    public void help(View v)
+    {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference("Developer Folder").child("Company Help.pdf");
+        Task<Uri> helpDoc = storageRef.getDownloadUrl();
+        helpDoc.addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Intent intent = new Intent(CompanyPage.this, ViewPDFActivity.class);
+                intent.putExtra("url", uri.toString());
+                startActivity(intent);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(CompanyPage.this,e.getMessage().toString(),Toast.LENGTH_LONG);
+
+            }
+        });
+
     }
     @Override
     public void onBackPressed() {
