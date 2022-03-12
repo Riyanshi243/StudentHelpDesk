@@ -40,7 +40,7 @@ import java.util.HashMap;
 
 public class AdminOrCompanySendNotification extends AppCompatActivity {
     ArrayList<Uri> allAttach;
-    TextView title,content;
+    TextView title,content,heading;
     AutoCompleteTextView audience;
     String token="",cId;
     AdminData adminData;
@@ -54,6 +54,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
         title=findViewById(R.id.notif_title);
         content=findViewById(R.id.notif_content);
         audience=findViewById(R.id.audience);
+        heading=findViewById(R.id.heading);
         attach_ll=findViewById(R.id.linearlay);
         adminData=AdminPage.adminData;
         companyData=CompanyPage.companyData;
@@ -65,6 +66,16 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
         else
             cId=companyData.getCollegeId();
              //dropdown menu
+        FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(cId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String collgName= (String) documentSnapshot.get("Name");
+                heading.setText("These notifications will be sent to the desired audience of college "+collgName);
+
+            }
+        });
+
         ArrayList<String> audienceChoice=new ArrayList<>();
         audienceChoice.add("All");
         audienceChoice.add("Student");
