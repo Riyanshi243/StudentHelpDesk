@@ -108,7 +108,7 @@ public class CompanyPage extends AppCompatActivity {
         FirebaseMessaging.getInstance().unsubscribeFromTopic("Company_"+companyData.getCollegeId());
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
-        companyData=null;
+       // companyData=null;
         startActivity(new Intent(CompanyPage.this,Login.class));
         finish();
     }

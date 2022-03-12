@@ -60,6 +60,17 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
             </LinearLayout>
+
+            <Button
+                android:id="@+id/LockButton"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/roundedbutton"
+                android:text="SAVE CHANGES" />
         </LinearLayout>
     </ScrollView>
 

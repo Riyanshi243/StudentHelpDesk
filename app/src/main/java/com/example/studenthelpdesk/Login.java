@@ -34,6 +34,9 @@ public class Login extends AppCompatActivity {
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         login= (Button) findViewById(R.id.login);
+        StudentPage.studentData=null;
+        CompanyPage.companyData=null;
+        AdminPage.adminData=null;
     }
     public void Login(View view)
     {

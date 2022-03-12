@@ -71,7 +71,7 @@ public class StudentPage extends AppCompatActivity {
 
 
 
-                            Log.e("List of tokens",token.toString());
+
 
                         DocumentReference docUserInfo2 = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail());
                         docUserInfo2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -99,6 +99,7 @@ public class StudentPage extends AppCompatActivity {
                                 token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
                                 token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
                                 studentData.setToken(token);
+                                Log.e("List of tokens",token.toString());
 
                                 heading.setText(name);
                                 email.setText(studentData.getEmail());
@@ -312,8 +313,8 @@ public class StudentPage extends AppCompatActivity {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
-        studentData=null;
         startActivity(new Intent(StudentPage.this,Login.class));
+        //studentData=null;
         finish();
     }
 
@@ -532,7 +533,7 @@ public class StudentPage extends AppCompatActivity {
     public void help(View v)
     {
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference("Developer Folder").child("Company Help.pdf");
+        StorageReference storageRef = storage.getReference("Developer Folder").child("Student Help.pdf");
         Task<Uri> helpDoc = storageRef.getDownloadUrl();
         helpDoc.addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
