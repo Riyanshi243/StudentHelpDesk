@@ -70,17 +70,6 @@ public class StudentPage extends AppCompatActivity {
                 studentData.setCollegeid(cId);
 
 
-                            FirebaseMessaging.getInstance().subscribeToTopic("Student" + studentData.getCollegeid());
-                            FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid());
-                            FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse());
-                            FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
-                            FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
-                            token.add("Student" + studentData.getCollegeid());
-                            token.add(studentData.getCollegeid());
-                            token.add(studentData.getCollegeid() + "_" + studentData.getCourse());
-                            token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
-                            token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
-                            studentData.setToken(token);
 
                             Log.e("List of tokens",token.toString());
 
@@ -99,6 +88,18 @@ public class StudentPage extends AppCompatActivity {
                                 studentData.setBranch(branch);
                                 studentData.setCourse(course);
                                 studentData.setYr(yr);
+                                FirebaseMessaging.getInstance().subscribeToTopic("Student" + studentData.getCollegeid());
+                                FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid());
+                                FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse());
+                                FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
+                                FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
+                                token.add("Student" + studentData.getCollegeid());
+                                token.add(studentData.getCollegeid());
+                                token.add(studentData.getCollegeid() + "_" + studentData.getCourse());
+                                token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
+                                token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
+                                studentData.setToken(token);
+
                                 heading.setText(name);
                                 email.setText(studentData.getEmail());
                                 reqStatus.setText(reqStatus.getText().toString().substring(0,25)+noOfRequest+" requests");
