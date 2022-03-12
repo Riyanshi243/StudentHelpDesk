@@ -132,6 +132,10 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                 reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
+                                                                        String token="/topics/"+currReq.getSender();
+                                                                        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
+                                                                        notificationsSender.SendNotifications();
+
                                                                         Toast.makeText(AdminViewAllRequests.this,"Request Accepted",Toast.LENGTH_LONG).show();
                                                                         ll.removeView(viewReq);
                                                                     }
@@ -156,6 +160,10 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                 reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
+                                                                        String token="/topics/"+currReq.getSender();
+                                                                        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
+                                                                        notificationsSender.SendNotifications();
+
                                                                         Toast.makeText(AdminViewAllRequests.this,"Request Accepted",Toast.LENGTH_LONG).show();
                                                                         ll.removeView(viewReq);
                                                                     }
@@ -180,6 +188,10 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                 reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
+                                                                        String token="/topics/"+currReq.getSender();
+                                                                        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
+                                                                        notificationsSender.SendNotifications();
+
                                                                         Toast.makeText(AdminViewAllRequests.this,"Request Accepted",Toast.LENGTH_LONG).show();
                                                                         ll.removeView(viewReq);
                                                                     }
@@ -204,6 +216,10 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                 reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
+                                                                        String token="/topics/"+currReq.getSender();
+                                                                        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
+                                                                        notificationsSender.SendNotifications();
+
                                                                         Toast.makeText(AdminViewAllRequests.this,"Request Accepted",Toast.LENGTH_LONG).show();
                                                                         ll.removeView(viewReq);
                                                                     }
@@ -222,6 +238,10 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                         reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
                                                             public void onSuccess(Void unused) {
+                                                                String token="/topics/"+currReq.getSender();
+                                                                FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
+                                                                notificationsSender.SendNotifications();
+
                                                                 Toast.makeText(AdminViewAllRequests.this,"Request Accepted",Toast.LENGTH_LONG).show();
                                                                 ll.removeView(viewReq);
                                                             }
@@ -267,6 +287,10 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                             reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
+                                                    String token="/topics/"+currReq.getSender();
+                                                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Rejected",currReq.getQuestion()+" remains "+currReq.getAnswerNow(),AdminViewAllRequests.this,"Request");
+                                                    notificationsSender.SendNotifications();
+
                                                     Toast.makeText(AdminViewAllRequests.this,"Request Rejected",Toast.LENGTH_LONG).show();
                                                     ll.removeView(viewReq);
                                                 }

@@ -22,20 +22,18 @@ public class FcmNotificationsSender  {
     String userFcmToken;
     String title;
     String body;
-    Context mContext;
     Activity mActivity;
-
+    String goTo;
 
     private RequestQueue requestQueue;
     private final String postUrl = "https://fcm.googleapis.com/fcm/send";
     private final String fcmServerKey ="AAAAoVvWBrA:APA91bGXmq0-_dlpHMXARrobQ5PcITPOFfeCSoCjZokSD_VVYxxMYxD3_h1oglXadDuOkqJZP2CwoWNmNJ_S4VwdtwErqE8mPBXn18DO0qrMU5ehO2gCKBKQfV3hDKTOeMrTP0evhVeQ";
-    public FcmNotificationsSender(String userFcmToken, String title, String body, Context mContext, Activity mActivity) {
+    public FcmNotificationsSender(String userFcmToken, String title, String body, Activity mActivity,String goTo) {
         this.userFcmToken = userFcmToken;
         this.title = title;
         this.body = body;
-        this.mContext = mContext;
         this.mActivity = mActivity;
-
+        this.goTo=goTo;
 
     }
 
@@ -49,12 +47,14 @@ public class FcmNotificationsSender  {
             notiObject.put("title", title);
             notiObject.put("body", body);
             notiObject.put("icon", "app_logo"); //  icon that exists in drawable only
+            JSONObject extra=new JSONObject();
+            extra.put("activity",goTo);
 
 
 
 
             mainObj.put("notification", notiObject);
-
+            mainObj.put("data",extra);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, postUrl, mainObj, new Response.Listener<JSONObject>() {
                 @Override

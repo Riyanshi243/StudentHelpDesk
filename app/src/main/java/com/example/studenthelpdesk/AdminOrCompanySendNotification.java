@@ -328,7 +328,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                 public void onSuccess(Void unused) {
                     allAttach.clear();
                     token="/topics/"+token;
-                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
+                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),AdminOrCompanySendNotification.this,"Notification");
                     notificationsSender.SendNotifications();
                     token=t1;
                     title.setText("");
@@ -366,7 +366,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     token="/topics/"+token;
-                                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),getApplicationContext(),AdminOrCompanySendNotification.this);
+                                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,title.getText().toString(),content.getText().toString(),AdminOrCompanySendNotification.this,"Notification");
                                     notificationsSender.SendNotifications();
                                     token=t1;
                                     title.setText("");
