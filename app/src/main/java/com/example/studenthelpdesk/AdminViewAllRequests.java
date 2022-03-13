@@ -31,7 +31,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class AdminViewAllRequests extends AppCompatActivity {
-    private ProgressBar progressBar3;
     ArrayList<RequestData> requestData;
     AdminData adminData;
     LinearLayout ll;
@@ -49,6 +48,14 @@ public class AdminViewAllRequests extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> docRequest = queryDocumentSnapshots.getDocuments();
+                if(docRequest.size()==0)
+                {
+                    TextView t=new TextView(AdminViewAllRequests.this);
+                    pbar.setVisibility(View.INVISIBLE);
+                    t.setText("  You have received NO Edit Requests.");
+                    t.setTextSize(20);
+                    ll.addView(t);
+                }
                 for(DocumentSnapshot a:docRequest)
                 {
                     RequestData currReq=new RequestData();
@@ -74,7 +81,10 @@ public class AdminViewAllRequests extends AppCompatActivity {
 
             @Override
             public void run() {
-
+                if(requestData.size()==0)
+                {
+                    pbar.setVisibility(View.INVISIBLE);
+                }
                 if(requestData.size()!=0)
                 {
                     ll=findViewById(R.id.linearlay);

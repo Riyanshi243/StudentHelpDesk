@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".AdminViewAllStudentData"
+            android:exported="false" />
+        <activity
             android:name=".AdminLockDatabaseFilters"
             android:exported="false" />
         <activity

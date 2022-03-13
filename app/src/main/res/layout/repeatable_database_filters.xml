@@ -43,7 +43,7 @@
 
             <Button
                 android:id="@+id/downArrow"
-                android:layout_width="47dp"
+                android:layout_width="45dp"
                 android:layout_height="37dp"
                 android:layout_gravity="right"
                 android:background="@drawable/ic_baseline_arrow_drop_down" />

@@ -66,7 +66,8 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                 {
                     TextView t=new TextView(ViewNotificationsByAll.this);
                     pbar.setVisibility(View.INVISIBLE);
-                    t.setText("You have received NO Notifications till now.");
+                    t.setText("  You have received NO Notifications till now.");
+                    t.setTextSize(20);
                     ll.addView(t);
                 }
                 for(DocumentSnapshot n:notif1)

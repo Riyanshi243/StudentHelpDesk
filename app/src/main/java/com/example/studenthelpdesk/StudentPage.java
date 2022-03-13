@@ -49,7 +49,8 @@ public class StudentPage extends AppCompatActivity {
             finish();
         }
         FirebaseMessaging.getInstance().subscribeToTopic("All");
-        FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
+        FirebaseMessaging.getInstance().subscribeToTopic(f.getUid());
+        FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail().replaceAll(".","_"));
         HashSet<String> token=new HashSet<>();
         token.add("All");
         token.add(f.getCurrentUser().getEmail());

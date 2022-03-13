@@ -58,7 +58,6 @@ public class AdminLockDatabaseFilters extends AppCompatActivity {
                                         linearLayout.addView(branchView);
 
                                     }
-
                                     ll.addView(courseView);
                                 }
                             });

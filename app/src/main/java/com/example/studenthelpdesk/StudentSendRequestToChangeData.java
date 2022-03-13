@@ -197,7 +197,6 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
                         ArrayList<String> coursesList= (ArrayList<String>) documentSnapshot.get("Courses");
                         ArrayAdapter spinnerList=new ArrayAdapter(StudentSendRequestToChangeData.this,android.R.layout.simple_spinner_item,coursesList);
                         drop.setAdapter(spinnerList);
-
                     }
                 });
             }
@@ -283,7 +282,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
     }
     public void sendRequest(View view)
     {
-        if(notEmpty() && compulsory(ans,a))
+        if( compulsory(ans,a) && notEmpty() )
         {
             String answer=saveData(ans,a);
             HashMap<String,Object> requestData=new HashMap<>();
@@ -372,7 +371,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
                 return false;
             }
         }
-        if (type == 6)
+        if (type == 7)
         {
             AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
             if(drop.getText().toString().length()==0)

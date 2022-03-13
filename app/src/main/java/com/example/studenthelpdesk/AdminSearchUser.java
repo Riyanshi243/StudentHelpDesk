@@ -75,6 +75,7 @@ public class AdminSearchUser extends AppCompatActivity{
         ProgressBar pbar =findViewById(R.id.progressBar2);
         pbar.setVisibility(View.VISIBLE);
         search.setEnabled(false);
+        msg.setVisibility(View.INVISIBLE);
         ll.removeAllViews();
         if(checkEmail())
         {
