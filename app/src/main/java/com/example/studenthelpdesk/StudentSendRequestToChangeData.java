@@ -295,6 +295,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             String dateToday=t.toString();
             requestData.put("Sent Time",dateToday);
             requestData.put("Status",-1);
+            requestData.put("UID",FirebaseAuth.getInstance().getUid());
             requestData.put("Question Id",a.getId());
             requestData.put("Question Domain",a.getDomain());
             DocumentReference reqData = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("Requests").document(FirebaseAuth.getInstance().getUid() + "_" + dateToday);
