@@ -49,12 +49,8 @@ public class FcmNotificationsSender  {
             notiObject.put("icon", "app_logo"); //  icon that exists in drawable only
             JSONObject extra=new JSONObject();
             extra.put("activity",goTo);
-
-
-
-
-            mainObj.put("notification", notiObject);
             mainObj.put("data",extra);
+            mainObj.put("notification", notiObject);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, postUrl, mainObj, new Response.Listener<JSONObject>() {
                 @Override

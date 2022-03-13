@@ -50,9 +50,12 @@ public class StudentPage extends AppCompatActivity {
         }
         FirebaseMessaging.getInstance().subscribeToTopic("All");
         FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
+        FirebaseMessaging.getInstance().subscribeToTopic(f.getUid());
+
         HashSet<String> token=new HashSet<>();
         token.add("All");
         token.add(f.getCurrentUser().getEmail());
+        token.add(f.getUid());
         studentData=new StudentData();
         heading=findViewById(R.id.name);
         progressBar=findViewById(R.id.progressBar4);
@@ -306,6 +309,7 @@ public class StudentPage extends AppCompatActivity {
     public void logout(View v)
     {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getUid());
         FirebaseMessaging.getInstance().unsubscribeFromTopic("Student"+studentData.getCollegeid());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getCurrentUser().getEmail());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse());

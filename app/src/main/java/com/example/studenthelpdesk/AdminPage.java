@@ -41,6 +41,10 @@ public class AdminPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
+        String s="/topics/student1@banasthali.in";
+        s.replaceAll(".","_");
+        FcmNotificationsSender notificationsSender=new FcmNotificationsSender(s,"Request Rejected","currReq.getQuestion()"+" remains ",AdminPage.this,"Request");
+        notificationsSender.SendNotifications();
         adminData=new AdminData();
         greetings=findViewById(R.id.name);
         profilepic=findViewById(R.id.profilePic);
