@@ -53,7 +53,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         }
         Intent resultIntent;
 
-        if(remoteMessage.getData().get("activity").matches("Notification"))
+       if(remoteMessage.getData().get("activity").matches("Notification"))
         {
             resultIntent = new Intent(this, ViewNotificationsByAll.class);
         }

@@ -6,6 +6,7 @@ public class AdminData {
     private String email,password,collegeId,adminName,phoneNumber,deptName;
     HashSet<String> token=new HashSet<>();
 
+
     public void setToken(HashSet<String> token) {
         this.token = token;
     }
