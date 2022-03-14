@@ -66,6 +66,12 @@ public class StudentPage extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         FirebaseFirestore ff=FirebaseFirestore.getInstance();
         DocumentReference docUserInfo = ff.collection("All Users On App").document(studentData.getEmail());
+        if(studentData==null)
+        {
+            startActivity(new Intent(StudentPage.this,Login.class));
+            finishAffinity();
+            return;
+        }
         docUserInfo.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -422,6 +428,13 @@ public class StudentPage extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                                         long total= (long) documentSnapshot.get("Total");
+                                                                        if(studentData==null)
+                                                                        {
+                                                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                                                            finishAffinity();
+                                                                            return;
+                                                                        }
+
                                                                         studentData.setNoPersonalQ(total);
                                                                         for (int i=0;i<(int)total;i++)
                                                                         {
@@ -471,8 +484,8 @@ public class StudentPage extends AppCompatActivity {
                                                                                                             finishAffinity();
                                                                                                             return;
                                                                                                         }
-                                                                                                        else
-                                                                                                            studentData.setNoUploadQ(total);
+
+                                                                                                        studentData.setNoUploadQ(total);
                                                                                                         for (int i=0;i<(int)total;i++)
                                                                                                         {
                                                                                                             DocumentReference docCurrQues = docPersQues.collection(i + "").document(i + "");
