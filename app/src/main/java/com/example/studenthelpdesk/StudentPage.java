@@ -465,7 +465,14 @@ public class StudentPage extends AppCompatActivity {
                                                                                                     @Override
                                                                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                                                                         long total= (long) documentSnapshot.get("Total");
-                                                                                                        studentData.setNoUploadQ(total);
+                                                                                                        if(studentData==null)
+                                                                                                        {
+                                                                                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                                                                                            finishAffinity();
+                                                                                                            return;
+                                                                                                        }
+                                                                                                        else
+                                                                                                            studentData.setNoUploadQ(total);
                                                                                                         for (int i=0;i<(int)total;i++)
                                                                                                         {
                                                                                                             DocumentReference docCurrQues = docPersQues.collection(i + "").document(i + "");
