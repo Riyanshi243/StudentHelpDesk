@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -67,76 +68,102 @@ public class AdminEditProfilePage extends AppCompatActivity {
     }
     public void nameClick(View view)
     {
-        AlertDialog.Builder change=new AlertDialog.Builder(this);
-        // Edit Name to New Name
-        change.setTitle("Edit Name");
-        change.setMessage("Enter new Name");
-        EditText et=new EditText(view.getContext());
+        EditText et = new EditText(view.getContext());
         et.setText(adminData.getAdminName());
         et.requestFocus();
-        change.setView(et);
-        change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+        AlertDialog builder=new AlertDialog.Builder(AdminEditProfilePage.this)
+            .setTitle("Edit Name")
+            .setMessage("Enter new Name")
+            .setView(et)
+            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //do nothing
             }
-        }).setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("SAVE", null)
+                .setCancelable(false)
+                .show();
+        Button posButton=builder.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
+        posButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //save in database
-                name.setText(et.getText().toString().trim());
-                adminData.setAdminName(et.getText().toString().trim());
-                HashMap <String,Object> changeDetail = new HashMap<>();
-                changeDetail.put("Name",et.getText().toString().trim());
-                FirebaseFirestore.getInstance().collection("All Colleges")
-                        .document(adminData.getCollegeId()).collection("UsersInfo")
-                        .document(adminData.getEmail()).update(changeDetail)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(AdminEditProfilePage.this,"Data saved Successfully!!",Toast.LENGTH_LONG).show();
-                            }
-                        });
+            public void onClick(View v) {
+                if(et.getText().toString().length()==0)
+                {
+                    et.setError("This is Compulsory field");
+                    return;
+                }
+                else
+                {
+                    builder.dismiss();
+                    name.setText(et.getText().toString().trim());
+                    adminData.setAdminName(et.getText().toString().trim());
+                    HashMap <String,Object> changeDetail = new HashMap<>();
+                    changeDetail.put("Name",et.getText().toString().trim());
+                    FirebaseFirestore.getInstance().collection("All Colleges")
+                            .document(adminData.getCollegeId()).collection("UsersInfo")
+                            .document(adminData.getEmail()).update(changeDetail)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(AdminEditProfilePage.this,"Data saved Successfully!!",Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
             }
         });
-        change.create().show();
     }
     public void phoneClick(View view)
     {
-        AlertDialog.Builder change=new AlertDialog.Builder(this);
-        //Edit Phone Number to New Phone Number
-        change.setTitle("Edit Phone Number");
-        change.setMessage("Enter new Phone Number");
-        EditText et=new EditText(view.getContext());
+        EditText et = new EditText(view.getContext());
         et.setInputType(InputType.TYPE_CLASS_NUMBER);
         et.setText(adminData.getPhoneNumber());
         et.requestFocus();
-        change.setView(et);
-        change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+        AlertDialog builder=new AlertDialog.Builder(AdminEditProfilePage.this)
+                .setTitle("Edit Phone Number")
+                .setMessage("Enter new Phone Number")
+                .setView(et)
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //do nothing
             }
-        }).setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("SAVE", null)
+                .setCancelable(false)
+                .show();
+        Button posButton=builder.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
+        posButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //save in database
-                phone.setText(et.getText().toString().trim());
-                adminData.setPhoneNumber(et.getText().toString().trim());
-                HashMap <String,Object> changeDetail = new HashMap<>();
-                changeDetail.put("Phone Number",et.getText().toString().trim());
-                FirebaseFirestore.getInstance().collection("All Colleges")
-                        .document(adminData.getCollegeId()).collection("UsersInfo")
-                        .document(adminData.getEmail()).update(changeDetail)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(AdminEditProfilePage.this,"Data saved Successfully!!",Toast.LENGTH_LONG).show();
-                            }
-                        });
+            public void onClick(View v) {
+                if(et.getText().toString().length()==0)
+                {
+                    et.setError("This is Compulsory field");
+                    return;
+                }
+                else if(et.getText().toString().length()<10 || et.getText().toString().trim().length()>10)
+                {
+                    et.setError("INVALID PHONE NUMBER");
+                    return;
+                }
+                 else{
+                    builder.dismiss();
+                    phone.setText(et.getText().toString().trim());
+                    adminData.setPhoneNumber(et.getText().toString().trim());
+                    HashMap <String,Object> changeDetail = new HashMap<>();
+                    changeDetail.put("Phone Number",et.getText().toString().trim());
+                    FirebaseFirestore.getInstance().collection("All Colleges")
+                            .document(adminData.getCollegeId()).collection("UsersInfo")
+                            .document(adminData.getEmail()).update(changeDetail)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(AdminEditProfilePage.this,"Data saved Successfully!!",Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
             }
         });
-        change.create().show();
     }
     public void nonchangeable(View view)
     {
