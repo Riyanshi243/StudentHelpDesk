@@ -92,7 +92,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
                                     String ans="";
                                     if(studentData.getP_ans()!=null)
                                     {
-                                        ans=studentData.getP_ans()[c];
+                                        ans=studentData.getP_ans()[c++];
                                     }
                                     int type=a.getType();
                                     String question=a.getQuestion();
