@@ -191,7 +191,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:onClick="viewAllEditRequests">
+                    android:onClick="viewAllStudentData">
 
                     <ImageView
                         android:id="@+id/imageView3"
@@ -229,7 +229,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.029">
+                app:layout_constraintVertical_bias="0.029"
+                android:onClick="viewAllEditRequests">
 
                 <TextView
                     android:id="@+id/requests_status"
@@ -249,7 +250,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
-                    android:onClick="viewAllEditRequests"
                     android:paddingLeft="5dp"
                     android:text="SEE ALL EDIT REQUESTS >"
                     android:textColor="@color/white"

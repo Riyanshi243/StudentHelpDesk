@@ -15,5 +15,6 @@
     <color name="red_bg">#AA0D01</color>
     <color name="green_bg">#2E8E02</color>
     <color name="blue_text">#034ABC</color>
+    <color name="gray_blue_vlight">#E5E7EA</color>
 
 </resources>
