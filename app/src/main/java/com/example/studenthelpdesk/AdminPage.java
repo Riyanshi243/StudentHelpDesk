@@ -131,6 +131,9 @@ public class AdminPage extends AppCompatActivity {
     public void viewAllEditRequests(View v){
         startActivity(new Intent(AdminPage.this, AdminViewAllRequests.class));
     }
+    public void viewAllStudentData(View v){
+        startActivity(new Intent(AdminPage.this, AdminViewAllStudentData.class));
+    }
     public void answerFAQ(View v){
         startActivity(new Intent(AdminPage.this, AdminAnswerFAQ.class));
     }

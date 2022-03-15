@@ -50,11 +50,9 @@
                     android:visibility="invisible" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
                 <TextView
                     android:id="@+id/filter"
@@ -64,15 +62,40 @@
                     android:layout_marginRight="10dp"
                     android:paddingLeft="10dp"
                     android:text="Apply Filters:"
-                    android:textSize="22dp" />
+                    android:textSize="22dp"
+                    android:onClick="filters"/>
 
                 <Button
                     android:id="@+id/filter_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:onClick="filters"
                     android:background="@drawable/ic_baseline_filter_list" />
-            </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/box_bg"
+                    android:textColorHint="@color/hint_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginRight="10dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/sortin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="none"
+                        android:text="SORT IN" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </TableRow>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,8 +106,6 @@
                 android:layout_marginTop="10dp">
 
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 
