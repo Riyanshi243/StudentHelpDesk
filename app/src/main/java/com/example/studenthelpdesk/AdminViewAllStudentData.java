@@ -9,7 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 public class AdminViewAllStudentData extends AppCompatActivity {
+
+    CollegeRegisterQuestions allpeople;
+
     AutoCompleteTextView sortin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,4 +27,5 @@ public class AdminViewAllStudentData extends AppCompatActivity {
     public void filters(View v){
         startActivity(new Intent(AdminViewAllStudentData.this, AdminViewAllStudentDataFilters.class));
     }
+
 }

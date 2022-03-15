@@ -51,6 +51,11 @@ public class AdminPage extends AppCompatActivity {
         editReq=findViewById(R.id.editReq);
         lockDatabase=findViewById(R.id.lockDatabase);
         f=FirebaseAuth.getInstance();
+        if(f==null)
+        {
+            startActivity(new Intent(AdminPage.this,Login.class));
+            finishAffinity();
+        }
         adminData.setEmail(f.getCurrentUser().getEmail());
         FirebaseFirestore fs=FirebaseFirestore.getInstance();
         HashSet<String> token=new HashSet<>();
