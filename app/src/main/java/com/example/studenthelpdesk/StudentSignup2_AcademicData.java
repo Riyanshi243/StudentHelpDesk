@@ -94,7 +94,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
                                     int i=a.getId();
                                     boolean compulsory=a.isCumplolsory();
                                     String ans="";
-                                    if(studentData.getP_ans()!=null)
+                                    if(studentData.getA_ans()!=null)
                                     {
                                         ans=studentData.getA_ans()[c++];
                                     }

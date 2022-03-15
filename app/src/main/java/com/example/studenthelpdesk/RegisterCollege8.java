@@ -98,6 +98,37 @@ public class RegisterCollege8 extends AppCompatActivity {
                             });
 
                         }//all branches uploaded
+
+                        for(int i=0;i<allbranch.size();i++)
+                        {
+                            DocumentReference branchInfoLock = collegeInformation.collection("Lock").document(allcourseName.get(i));
+                            ArrayList<String> itsBranch = allbranch.get(i);
+                            HashMap<String,Object> brancheslock=new HashMap<>();
+                            for(int j=0;j<itsBranch.size();j++)
+                                brancheslock.put(itsBranch.get(j),false);
+                            int finalI = i;
+                            branchInfoLock.set(brancheslock).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    TextView t=new TextView(RegisterCollege8.this);
+                                    t.setText("COURSE AND BRANCHES LOCKS UPLOADING ..."+ finalI);
+                                    t.setTextSize(18);
+                                    cl.addView(t);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    branchInfoLock.delete();
+                                    TextView t=new TextView(RegisterCollege8.this);
+                                    t.setText("Failure...");
+                                    t.setTextSize(16);
+                                    cl.addView(t);
+                                    startActivity(new Intent(RegisterCollege8.this,RegisterCollege7_SuperAdminSignup.class));
+                                    return;
+                                }
+                            });
+
+                        }
                         TextView t=new TextView(RegisterCollege8.this);
                         t.setText("COURSE AND BRANCHES UPLOADED...");
                         t.setTextSize(16);

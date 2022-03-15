@@ -61,10 +61,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         {
             resultIntent=new Intent(this,StudentCheckRequestStatus.class);
         }
-        else
+        else if(remoteMessage.getData().get("activity").matches("DatabaseLock"))
         {
-            resultIntent=new Intent(this, ViewNotificationsByAll.class);
+            resultIntent=new Intent(this, StudentPage.class);
         }
+        else
+       {
+           resultIntent=new Intent(this,ViewNotificationsByAll.class);
+       }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentTitle(remoteMessage.getNotification().getTitle());
