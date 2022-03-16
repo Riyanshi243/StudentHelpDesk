@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +57,17 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                 lock= (boolean) documentSnapshot.get(studentData.getBranch());
             }});
         t=new Timer();
+        FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(studentData.getCollegeid()).collection("Lock")
+                .document(studentData.getCourse())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                lock= (boolean) documentSnapshot.get(studentData.getBranch());
+            }
+        });
+        t=new Timer();
+
         t.scheduleAtFixedRate(new TimerTask() {
 
             @Override
@@ -64,17 +76,20 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                 {
                     return;
                 }
+                Log.e("Hi hello ",studentData.getBranch()+" "+studentData.getCourse());
                 FirebaseFirestore.getInstance().collection("All Colleges")
                         .document(studentData.getCollegeid()).collection("Lock")
                         .document(studentData.getCourse())
                         .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(studentData.getBranch()==null)
+                            return;
                         lock= (boolean) documentSnapshot.get(studentData.getBranch());
                     }
                 });
             }
-        },1000,1000);
+        },1000,1);
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getPersonal_ques();
         for(CollegeRegisterQuestions a:quesAns)
         {
@@ -447,5 +462,6 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
     public void onBackPressed() {
         super.onBackPressed();
         t.cancel();
+        t.purge();
     }
 }

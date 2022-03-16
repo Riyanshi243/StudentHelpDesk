@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,17 +29,47 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class StudentAcademicDetails extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     StudentData studentData;
     LinearLayout ll;
-
+    Boolean lock;
+    Timer t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_academic_details);
         ll = findViewById(R.id.linearlay);
         studentData = StudentPage.studentData;
+        FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(studentData.getCollegeid()).collection("Lock")
+                .document(studentData.getCourse())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                lock= (boolean) documentSnapshot.get(studentData.getBranch());
+            }
+        });
+        t=new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                if(studentData==null)
+                    return;
+                FirebaseFirestore.getInstance().collection("All Colleges")
+                        .document(studentData.getCollegeid()).collection("Lock")
+                        .document(studentData.getCourse())
+                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        lock= (boolean) documentSnapshot.get(studentData.getBranch());
+                    }
+                });
+            }
+        },1000,1000);
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getAcademic_ques();
         for (CollegeRegisterQuestions a : quesAns) {
             View repeatAnswers = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);
@@ -46,9 +77,15 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
             TextView ans = repeatAnswers.findViewById(R.id.ans);
             ques.setText(a.getQuestion());
             ans.setText(a.getAnswer());
+
             ans.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(lock==true)
+                    {
+                        Snackbar.make(view, "Database is Locked!!", Snackbar.LENGTH_LONG).show();
+                        return;
+                    }
                     if (a.isChangeable() == true) {
                         View typeInput=getType(a.getType(),a.getAnswer(),a.getQuestion());
                         AlertDialog builder = new AlertDialog.Builder(StudentAcademicDetails.this)
@@ -449,6 +486,10 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
         return null;
 
     }
-
+    public void onBackPressed() {
+        super.onBackPressed();
+        t.cancel();
+        t.purge();
+    }
 }
 
