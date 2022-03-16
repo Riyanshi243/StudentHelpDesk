@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class StudentSignup1_PersonalData extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     StudentData studentData;
@@ -39,6 +41,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
     String allq[],allans[];
     String allqid[];
     String gender="Male";
+    boolean lock;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
