@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -22,6 +23,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
 
 public class AdminLockDatabaseFilters extends AppCompatActivity {
     LinearLayout ll;
@@ -139,36 +141,44 @@ public class AdminLockDatabaseFilters extends AppCompatActivity {
                 HashMap<String,Object> branchInfo=new HashMap<>();
                 branchInfo.put(branch,lock);
                 DocumentReference thisBranch=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Lock").document(course);
-                thisBranch.update(branchInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                thisBranch.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onSuccess(Void unused) {
-                        //Toast.makeText(AdminLockDatabaseFilters.this,course+" "+branch+" "+lock,Toast.LENGTH_LONG).show();
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                       boolean thislock= (boolean) documentSnapshot.get(branch);
+                       if(lock==thislock)
+                           return;
+                        thisBranch.update(branchInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                //Toast.makeText(AdminLockDatabaseFilters.this,course+" "+branch+" "+lock,Toast.LENGTH_LONG).show();
 
 
-                        if(lock==true)
-                        {
-                           Toast.makeText(AdminLockDatabaseFilters.this,course+" "+branch+" Locked",Toast.LENGTH_LONG).show();
+                                if(lock==true)
+                                {
+                                    Toast.makeText(AdminLockDatabaseFilters.this,course+" "+branch+" Locked",Toast.LENGTH_LONG).show();
+                                    Log.e("hi",course+" "+branch);
+                                    String token="/topics/"+adminData.getCollegeId()+"_"+course+"_"+branch;
+                                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Your database has been locked","You cannot edit now",AdminLockDatabaseFilters.this,"DatabaseLock");
+                                    notificationsSender.SendNotifications();
 
-                            String token="/topics/"+adminData.getCollegeId()+"_"+course+"_"+branch;
-                            FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Your database has been locked","You cannot edit now",AdminLockDatabaseFilters.this,"DatabaseLock");
-                            notificationsSender.SendNotifications();
+                                }
+                                else
+                                {
+                                    Toast.makeText(AdminLockDatabaseFilters.this,course+" "+branch+" Unlocked",Toast.LENGTH_LONG).show();
 
-                        }
-                        else
-                        {
-                            //Toast.makeText(AdminLockDatabaseFilters.this,course+" "+branch+" Unlocked",Toast.LENGTH_LONG).show();
+                                    String token="/topics/"+adminData.getCollegeId()+"_"+course+"_"+branch;
+                                    FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Your database has been unlocked","You can edit now",AdminLockDatabaseFilters.this,"DatabaseLock");
+                                    notificationsSender.SendNotifications();
 
-                            String token="/topics/"+adminData.getCollegeId()+"_"+course+"_"+branch;
-                            FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Your database has been unlocked","You cannot edit now",AdminLockDatabaseFilters.this,"DatabaseLock");
-                            notificationsSender.SendNotifications();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AdminLockDatabaseFilters.this,"ERROR:"+e.getMessage(),Toast.LENGTH_LONG).show();
 
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AdminLockDatabaseFilters.this,"ERROR:"+e.getMessage(),Toast.LENGTH_LONG).show();
-
+                            }
+                        });
                     }
                 });
 

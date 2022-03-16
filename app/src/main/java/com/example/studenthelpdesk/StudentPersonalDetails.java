@@ -76,7 +76,6 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                 {
                     return;
                 }
-                Log.e("Hi hello ",studentData.getBranch()+" "+studentData.getCourse());
                 FirebaseFirestore.getInstance().collection("All Colleges")
                         .document(studentData.getCollegeid()).collection("Lock")
                         .document(studentData.getCourse())
