@@ -47,7 +47,22 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentsignup1_personal_data);
         studentData=Signup.studentData;
+        Timer t=new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
 
+            @Override
+            public void run() {
+                FirebaseFirestore.getInstance().collection("All Colleges")
+                        .document(studentData.getCollegeid()).collection("Lock")
+                        .document(studentData.getCourse())
+                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        lock= (boolean) documentSnapshot.get(studentData.getBranch());
+                    }
+                });
+            }
+        },1000,1000);
         ll=findViewById(R.id.linearlay);
         pQuestion=new ArrayList<>();
         FirebaseFirestore f=FirebaseFirestore.getInstance();
