@@ -102,12 +102,16 @@ public class StudentUploadDetails extends AppCompatActivity {
                                 .error(R.drawable.error_profile_picture)
                                 .placeholder(R.drawable.default_loading_img)
                                 .into(profilepic);
-
                     }
                 });
                 profilepic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(lock==true)
+                        {
+                            Snackbar.make(view, "Database is Locked!!", Snackbar.LENGTH_LONG).show();
+                            return;
+                        }
                         progressbar.setVisibility(View.VISIBLE);
                         currentQView=repeatAnswers;
                         Intent intent=new Intent();
@@ -123,7 +127,6 @@ public class StudentUploadDetails extends AppCompatActivity {
                                         .error(R.drawable.error_profile_picture)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
-
                             }
                         });
                     }
