@@ -35,6 +35,7 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
     StudentData studentData;
     LinearLayout ll;
     boolean lock;
+    Timer t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +43,27 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
         ll=findViewById(R.id.linearlay);
         studentData=StudentPage.studentData;
         String s="";
-        Timer t=new Timer();
+        if(studentData==null || studentData.getCourse()==null || studentData.getBranch()==null)
+        {
+            return;
+        }
+        FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(studentData.getCollegeid()).collection("Lock")
+                .document(studentData.getCourse())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                lock= (boolean) documentSnapshot.get(studentData.getBranch());
+            }});
+        t=new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
 
             @Override
             public void run() {
+                if(studentData==null || studentData.getCourse()==null || studentData.getBranch()==null)
+                {
+                    return;
+                }
                 FirebaseFirestore.getInstance().collection("All Colleges")
                         .document(studentData.getCollegeid()).collection("Lock")
                         .document(studentData.getCourse())
@@ -71,7 +88,7 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                 public void onClick(View view) {
                     if(lock==true)
                     {
-                        Snackbar .make(view, "An Error Occurred!", Snackbar.LENGTH_LONG).show();
+                        Snackbar .make(view, "Database is Locked!!", Snackbar.LENGTH_LONG).show();
                         return;
                     }
                     if (a.isChangeable() == true) {
@@ -424,7 +441,11 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                 return null;
             }
             return null;
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        t.cancel();
     }
 }

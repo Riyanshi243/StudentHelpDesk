@@ -472,6 +472,12 @@ public class StudentPage extends AppCompatActivity {
                                                                                                         return i1;
                                                                                                     }
                                                                                                 });
+                                                                                                if(studentData==null)
+                                                                                                {
+                                                                                                    startActivity(new Intent(StudentPage.this,Login.class));
+                                                                                                    finishAffinity();
+                                                                                                    return;
+                                                                                                }
                                                                                                 studentData.setAcademic_ques(academicQ);
                                                                                                 DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Upload Question");
                                                                                                 docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
