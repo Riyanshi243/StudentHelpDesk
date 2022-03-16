@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -72,26 +73,34 @@ public class CompanyEditProfilePage extends AppCompatActivity {
     }
 
     public void cnameClick(View view) {
-        AlertDialog.Builder change = new AlertDialog.Builder(this);
-        change.setTitle("Edit Company Name");
-        change.setMessage("Enter new Company Name");
         EditText et = new EditText(view.getContext());
         et.setText(companyData.getCompanyName());
         et.requestFocus();
-        change.setView(et);
 
-        change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        AlertDialog builder = new AlertDialog.Builder(CompanyEditProfilePage.this)
+                .setTitle("Edit Company Name")
+                .setMessage("Enter new Company Name")
+                .setView(et)
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing
+                    }
+                }).setPositiveButton("SAVE", null)
+                .setCancelable(false)
+                .show();
+        Button posButton=builder.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
+        posButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //do nothing
-            }
-        }).setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (et.getText().toString().length() == 0) {
-                    et.setError("ENTER COMPANY NAME");
+            public void onClick(View v) {
+                if(et.getText().toString().length()==0)
+                {
+                    et.setError("This is Compulsory field");
+                    return;
                 }
-                else {
+                else
+                {
+                    builder.dismiss();
                     cname.setText(et.getText().toString().trim());
                     companyData.setCompanyName(et.getText().toString().trim());
                     HashMap<String, Object> changeDetail = new HashMap<>();
@@ -108,155 +117,208 @@ public class CompanyEditProfilePage extends AppCompatActivity {
                 }
             }
         });
-
-
-        change.create().show();
-
-
-}
+    }
 
     public void locationClick(View view) {
-        AlertDialog.Builder change = new AlertDialog.Builder(this);
-        change.setTitle("Edit Company Location");
-        change.setMessage("Enter new Company Location");
         EditText et = new EditText(view.getContext());
         et.setText(companyData.getLocation());
         et.requestFocus();
-        change.setView(et);
-        change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+        AlertDialog builder = new AlertDialog.Builder(CompanyEditProfilePage.this)
+                .setTitle("Edit Company Location")
+                .setMessage("Enter new Company Location")
+                .setView(et)
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //do nothing
             }
-        }).setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("SAVE", null)
+                .setCancelable(false)
+                .show();
+        Button posButton=builder.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
+        posButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //save in database
-                location.setText(et.getText().toString().trim());
-                companyData.setLocation(et.getText().toString().trim());
-                HashMap<String, Object> changeDetail = new HashMap<>();
-                changeDetail.put("Company Location", et.getText().toString().trim());
-                FirebaseFirestore.getInstance().collection("All Colleges")
-                        .document(companyData.getCollegeId()).collection("UsersInfo")
-                        .document(companyData.getEmail()).update(changeDetail)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
-                            }
-                        });
+            public void onClick(View v) {
+                if(et.getText().toString().length()==0)
+                {
+                    et.setError("This is Compulsory field");
+                    return;
+                }
+                else
+                {
+                    builder.dismiss();
+                    location.setText(et.getText().toString().trim());
+                    companyData.setLocation(et.getText().toString().trim());
+                    HashMap<String, Object> changeDetail = new HashMap<>();
+                    changeDetail.put("Company Location", et.getText().toString().trim());
+                    FirebaseFirestore.getInstance().collection("All Colleges")
+                            .document(companyData.getCollegeId()).collection("UsersInfo")
+                            .document(companyData.getEmail()).update(changeDetail)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
             }
         });
-        change.create().show();
     }
 
     public void repre_nameClick(View view) {
-        AlertDialog.Builder change = new AlertDialog.Builder(this);
-        change.setTitle("Edit Representative Name");
-        change.setMessage("Enter new Representative Name");
         EditText et = new EditText(view.getContext());
         et.setText(companyData.getName());
         et.requestFocus();
-        change.setView(et);
-        change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+        AlertDialog builder = new AlertDialog.Builder(CompanyEditProfilePage.this)
+            .setTitle("Edit Representative Name")
+            .setMessage("Enter new Representative Name")
+            .setView(et)
+            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //do nothing
             }
-        }).setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("SAVE", null)
+                .setCancelable(false)
+                .show();
+        Button posButton=builder.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
+        posButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //save in database
-                repre_name.setText(et.getText().toString().trim());
-                companyData.setName(et.getText().toString().trim());
-                HashMap<String, Object> changeDetail = new HashMap<>();
-                changeDetail.put("Name", et.getText().toString().trim());
-                FirebaseFirestore.getInstance().collection("All Colleges")
-                        .document(companyData.getCollegeId()).collection("UsersInfo")
-                        .document(companyData.getEmail()).update(changeDetail)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
-                            }
-                        });
+            public void onClick(View v) {
+                if (et.getText().toString().length() == 0) {
+                    et.setError("This is Compulsory field");
+                    return;
+                }
+                else {
+                    builder.dismiss();
+                    repre_name.setText(et.getText().toString().trim());
+                    companyData.setName(et.getText().toString().trim());
+                    HashMap<String, Object> changeDetail = new HashMap<>();
+                    changeDetail.put("Name", et.getText().toString().trim());
+                    FirebaseFirestore.getInstance().collection("All Colleges")
+                            .document(companyData.getCollegeId()).collection("UsersInfo")
+                            .document(companyData.getEmail()).update(changeDetail)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
             }
         });
-        change.create().show();
     }
 
     public void repre_emailClick(View view) {
-        AlertDialog.Builder change = new AlertDialog.Builder(this);
-        change.setTitle("Edit Representative EmailId");
-        change.setMessage("Enter new Representative EmailId");
         EditText et = new EditText(view.getContext());
         et.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         et.setText(companyData.getPersonalEmail());
         et.requestFocus();
-        change.setView(et);
-        change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+        AlertDialog builder= new AlertDialog.Builder(CompanyEditProfilePage.this)
+            .setTitle("Edit Representative EmailId")
+            .setMessage("Enter new Representative EmailId")
+            .setView(et)
+            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //do nothing
             }
-        }).setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("SAVE", null)
+                .setCancelable(false)
+                .show();
+        Button posButton=builder.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
+        posButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //save in database
-                repre_emailid.setText(et.getText().toString().trim());
-                companyData.setPersonalEmail(et.getText().toString().trim());
-                HashMap<String, Object> changeDetail = new HashMap<>();
-                changeDetail.put("Personal Email", et.getText().toString().trim());
-                FirebaseFirestore.getInstance().collection("All Colleges")
-                        .document(companyData.getCollegeId()).collection("UsersInfo")
-                        .document(companyData.getEmail()).update(changeDetail)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
-                            }
-                        });
+            public void onClick(View v) {
+                String emailPattern1 = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                String email2=et.getText().toString().trim();
+                if(et.getText().toString().length()==0)
+                {
+                    et.setError("This is Compulsory field");
+                    return;
+                }
+
+                else if(!email2.matches(emailPattern1))
+                {
+                    et.setError("ENTER VALID MAIL");
+                    return;
+                }
+                else
+                {
+                    builder.dismiss();
+                    repre_emailid.setText(et.getText().toString().trim());
+                    companyData.setPersonalEmail(et.getText().toString().trim());
+                    HashMap<String, Object> changeDetail = new HashMap<>();
+                    changeDetail.put("Personal Email", et.getText().toString().trim());
+                    FirebaseFirestore.getInstance().collection("All Colleges")
+                            .document(companyData.getCollegeId()).collection("UsersInfo")
+                            .document(companyData.getEmail()).update(changeDetail)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
             }
         });
-        change.create().show();
     }
 
     public void repre_numberClick(View view) {
-        AlertDialog.Builder change = new AlertDialog.Builder(this);
-        change.setTitle("Edit Representative Contact Number");
-        change.setMessage("Enter new Representative Contact Number");
         EditText et = new EditText(view.getContext());
         et.setInputType(InputType.TYPE_CLASS_NUMBER);
         et.setText(companyData.getPhone());
         et.requestFocus();
-        change.setView(et);
-        change.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+        AlertDialog builder = new AlertDialog.Builder(CompanyEditProfilePage.this)
+            .setTitle("Edit Representative Contact Number")
+            .setMessage("Enter new Representative Contact Number")
+            .setView(et)
+            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //do nothing
             }
-        }).setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("SAVE", null)
+                .setCancelable(false)
+                .show();
+        Button posButton=builder.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
+        posButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //save in database
-                repre_number.setText(et.getText().toString().trim());
-                companyData.setPhone(et.getText().toString().trim());
-                HashMap<String, Object> changeDetail = new HashMap<>();
-                changeDetail.put("Phone Number", et.getText().toString().trim());
-                FirebaseFirestore.getInstance().collection("All Colleges")
-                        .document(companyData.getCollegeId()).collection("UsersInfo")
-                        .document(companyData.getEmail()).update(changeDetail)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
-                            }
-                        });
+            public void onClick(View v) {
+                if(et.getText().toString().length()==0)
+                {
+                    et.setError("This is Compulsory field");
+                    return;
+                }
+                else if(et.getText().toString().length()<10 || et.getText().toString().trim().length()>10)
+                {
+                    et.setError("INVALID PHONE NUMBER");
+                    return;
+                }
+                else
+                {
+                    builder.dismiss();
+                    repre_number.setText(et.getText().toString().trim());
+                    companyData.setPhone(et.getText().toString().trim());
+                    HashMap<String, Object> changeDetail = new HashMap<>();
+                    changeDetail.put("Phone Number", et.getText().toString().trim());
+                    FirebaseFirestore.getInstance().collection("All Colleges")
+                            .document(companyData.getCollegeId()).collection("UsersInfo")
+                            .document(companyData.getEmail()).update(changeDetail)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(CompanyEditProfilePage.this, "Data saved Successfully!!", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
             }
         });
-        change.create().show();
     }
-
     public void nonchangeable(View view) {
         Toast.makeText(this, "This field in non-Editable!!", Toast.LENGTH_LONG).show();
     }
@@ -343,80 +405,6 @@ public class CompanyEditProfilePage extends AppCompatActivity {
             Toast.makeText(this,"NO IMAGE SELECTED",Toast.LENGTH_LONG).show();
             progressbar.setVisibility(View.INVISIBLE);
         }
-
-    }
-    boolean checkFilled()
-    {
-        ProgressBar pbar =findViewById(R.id.progressBar5);
-        pbar.setVisibility(View.VISIBLE);
-        if(cname.getText().toString().length()==0)
-        {
-            cname.requestFocus();
-            pbar.setVisibility(View.INVISIBLE);
-            return false;
-        }
-        if(cemail.getText().toString().length()==0)
-        {
-            cemail.setError("ENTER COMPANY EMAIL");
-            cemail.requestFocus();
-            pbar.setVisibility(View.INVISIBLE);
-            return false;
-        }
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        String email1=cemail.getText().toString().trim();
-        if(!email1.matches(emailPattern))
-        {
-            cemail.setError("ENTER VALID MAIL");
-            cemail.requestFocus();
-            pbar.setVisibility(View.INVISIBLE);
-            return false;
-        }
-        if(location.getText().toString().length()==0)
-        {
-            location.setError("ENTER LOCATION");
-            location.requestFocus();
-            pbar.setVisibility(View.INVISIBLE);
-            return false;
-        }
-        if(repre_name.getText().toString().length()==0)
-        {
-            repre_name.setError("ENTER REPRESENTATIVE NAME");
-            repre_name.requestFocus();
-            pbar.setVisibility(View.INVISIBLE);
-            return false;
-        }
-        if(repre_emailid.getText().toString().length()==0)
-        {
-            repre_emailid.setError("ENTER REPRESENTATIVE EMAIL ID");
-            repre_emailid.requestFocus();
-            pbar.setVisibility(View.INVISIBLE);
-            return false;
-        }
-        String emailPattern1 = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        String email2=repre_emailid.getText().toString().trim();
-        if(!email2.matches(emailPattern1))
-        {
-            repre_emailid.setError("ENTER VALID MAIL");
-            repre_emailid.requestFocus();
-            pbar.setVisibility(View.INVISIBLE);
-            return false;
-        }
-        if(repre_number.getText().toString().length()==0)
-        {
-            repre_number.setError("ENTER PHONE NUMBER");
-            repre_number.requestFocus();
-            pbar.setVisibility(View.INVISIBLE);
-            return false;
-        }
-        if(repre_number.getText().toString().length()<10 || repre_number.getText().toString().trim().length()>10)
-        {
-            repre_number.setError("INVALID PHONE NUMBER");
-            repre_number.requestFocus();
-            pbar.setVisibility(View.INVISIBLE);
-            return false;
-        }
-
-   return true;
     }
 }
 

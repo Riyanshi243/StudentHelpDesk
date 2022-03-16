@@ -46,7 +46,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
         currVal=findViewById(R.id.currentVal);
         currValMsg=findViewById(R.id.currentVal_msg);
         reason=findViewById(R.id.reasontochange);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         ans=getType(a.getType(),null,a.getQuestion());
         ll.addView(ans);
         hello.setText("Hello "+studentData.getName());
@@ -197,7 +197,6 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
                         ArrayList<String> coursesList= (ArrayList<String>) documentSnapshot.get("Courses");
                         ArrayAdapter spinnerList=new ArrayAdapter(StudentSendRequestToChangeData.this,android.R.layout.simple_spinner_item,coursesList);
                         drop.setAdapter(spinnerList);
-
                     }
                 });
             }
@@ -283,7 +282,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
     }
     public void sendRequest(View view)
     {
-        if(notEmpty() && compulsory(ans,a))
+        if( compulsory(ans,a) && notEmpty() )
         {
             String answer=saveData(ans,a);
             HashMap<String,Object> requestData=new HashMap<>();
@@ -296,6 +295,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             String dateToday=t.toString();
             requestData.put("Sent Time",dateToday);
             requestData.put("Status",-1);
+            requestData.put("UID",FirebaseAuth.getInstance().getUid());
             requestData.put("Question Id",a.getId());
             requestData.put("Question Domain",a.getDomain());
             DocumentReference reqData = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("Requests").document(FirebaseAuth.getInstance().getUid() + "_" + dateToday);
@@ -371,9 +371,8 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
                 datePicked.setError("This field is compulsory");
                 return false;
             }
-
         }
-        if (type == 6)
+        if (type == 7)
         {
             AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
             if(drop.getText().toString().length()==0)

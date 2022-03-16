@@ -7,11 +7,8 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -40,7 +37,7 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_academic_details);
-        ll = findViewById(R.id.ll);
+        ll = findViewById(R.id.linearlay);
         studentData = StudentPage.studentData;
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getAcademic_ques();
         for (CollegeRegisterQuestions a : quesAns) {

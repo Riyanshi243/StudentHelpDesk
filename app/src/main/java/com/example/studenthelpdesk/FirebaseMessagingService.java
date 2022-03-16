@@ -51,13 +51,26 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         } else {
             builder.setSmallIcon(resourceImage);
         }
+        Intent resultIntent;
 
+       if(remoteMessage.getData().get("activity").matches("Notification"))
+        {
+            resultIntent = new Intent(this, ViewNotificationsByAll.class);
+        }
+        else if(remoteMessage.getData().get("activity").matches("Request"))
+        {
+            resultIntent=new Intent(this,StudentCheckRequestStatus.class);
+        }
+        else if(remoteMessage.getData().get("activity").matches("DatabaseLock"))
+        {
+            resultIntent=new Intent(this, StudentPage.class);
+        }
+        else
+       {
+           resultIntent=new Intent(this,ViewNotificationsByAll.class);
+       }
 
-
-        Intent resultIntent = new Intent(this, ViewNotificationsByAll.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-
         builder.setContentTitle(remoteMessage.getNotification().getTitle());
         builder.setContentText(remoteMessage.getNotification().getBody());
         builder.setContentIntent(pendingIntent);
@@ -67,9 +80,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         mNotificationManager =
                 (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
-
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
@@ -81,9 +91,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             mNotificationManager.createNotificationChannel(channel);
             builder.setChannelId(channelId);
         }
-
-
-
 // notificationId is a unique int for each notification that you must define
         mNotificationManager.notify(100, builder.build());
 

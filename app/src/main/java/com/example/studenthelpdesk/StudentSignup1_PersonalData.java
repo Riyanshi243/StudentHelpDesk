@@ -2,16 +2,12 @@ package com.example.studenthelpdesk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,10 +25,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,7 +45,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
         setContentView(R.layout.activity_studentsignup1_personal_data);
         studentData=Signup.studentData;
 
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         pQuestion=new ArrayList<>();
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference persQuestions = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Personal Question");
@@ -92,13 +86,19 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
                                         return i1;
                                     }
                                 });
+                                int c=0;
                                 for (CollegeRegisterQuestions a:pQuestion)
                                 {
+                                    String ans="";
+                                    if(studentData.getP_ans()!=null)
+                                    {
+                                        ans=studentData.getP_ans()[c++];
+                                    }
                                     int type=a.getType();
                                     String question=a.getQuestion();
                                     int i=a.getId();
                                     boolean compulsory=a.isCumplolsory();
-                                    View addQues=getType(type,question, i);
+                                    View addQues=getType(type,question, i,ans);
                                     if(compulsory==true)
                                     {
                                         if(type==0)
@@ -380,7 +380,7 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
     }
 int noOfq=0;
 
-    View getType(long i, String q,int qNumber)
+    View getType(long i, String q,int qNumber,String ans1)
     {
 
         allq[noOfq]=q;
@@ -392,6 +392,7 @@ int noOfq=0;
             View nView=getLayoutInflater().inflate(R.layout.repeatable_numeric_text_layout,null);
             TextView ques=nView.findViewById(R.id.Ques);
             EditText ans=nView.findViewById(R.id.editvalnumeric);
+            ans.setText(ans1);
             ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             ques.setText(q);
             ques.setId(qNumber);
@@ -402,6 +403,9 @@ int noOfq=0;
             //numeric decimal
             View nView=getLayoutInflater().inflate(R.layout.repeatable_number_decimal_layout,null);
             TextView ques=nView.findViewById(R.id.Ques);
+            EditText ans=nView.findViewById(R.id.editvalmulti);
+
+            ans.setText(ans1);
             ques.setText(q);
             ques.setId(qNumber);
 
@@ -414,6 +418,8 @@ int noOfq=0;
             TextView ques=nView.findViewById(R.id.Ques);
             ques.setText(q);
             ques.setId(qNumber);
+            TextView ans=nView.findViewById(R.id.editTextTextMultiLine);
+            ans.setText(ans1);
             return nView;
         }
         if(i==1)
@@ -423,6 +429,8 @@ int noOfq=0;
             TextView ques=nView.findViewById(R.id.Ques);
             ques.setText(q);
             ques.setId(qNumber);
+            TextView ans=nView.findViewById(R.id.editTextMultiLine);
+            ans.setText(ans1);
             return nView;
         }
         if(i==4)
@@ -438,6 +446,12 @@ int noOfq=0;
             RadioButton f=ans.findViewById(R.id.female);
 
             RadioButton o=ans.findViewById(R.id.not);
+            if(ans1.equalsIgnoreCase("Male"))
+                m.setChecked(true);
+            else if(ans1.equalsIgnoreCase("Female"))
+                f.setChecked(true);
+            else
+                o.setChecked(true);
             ans.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -479,6 +493,7 @@ int noOfq=0;
             ques.setId(qNumber);
             Button datePicker =nView.findViewById(R.id.btPickDate);
             TextView datePicked=nView.findViewById(R.id.tvDate);
+            datePicked.setText(ans1);
             datePicker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -501,13 +516,13 @@ int noOfq=0;
         }
         if(i==7)
         {
-
             //dropdown
             View nView=getLayoutInflater().inflate(R.layout.repeatable_dropdown,null);
             TextView ques=nView.findViewById(R.id.Ques);
             ques.setText(q);
             ques.setId(qNumber);
             AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
+            drop.setText(ans1);
             if(q.trim().equalsIgnoreCase("Year"))
             {
                 String yr[]={"1","2","3","4","5","5+"};
@@ -544,6 +559,7 @@ int noOfq=0;
                                 studentData.setCourse(coursesList.get(pos));
                                 FirebaseFirestore f = FirebaseFirestore.getInstance();
                                 AutoCompleteTextView drop=branchView.findViewById(R.id.dropdown);
+                                drop.setText(ans1);
                                 DocumentReference allBranch = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Branches").document(studentData.getCourse());
 
                                 allBranch.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -584,6 +600,7 @@ int noOfq=0;
                             drop.setText("Select Course First");
                             return;
                         }
+                        drop.setText(ans1);
                         ArrayList<String> branchList = (ArrayList<String>) documentSnapshot.get("Branches");
                         ArrayAdapter spinnerList = new ArrayAdapter(StudentSignup1_PersonalData.this, android.R.layout.simple_spinner_item, branchList);
                         drop.setText(branchList.get(0));
@@ -718,4 +735,5 @@ int noOfq=0;
         });
         saveDetails.create().show();
     }
+
 }

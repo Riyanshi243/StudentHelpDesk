@@ -8,11 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -23,15 +19,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class StudentPersonalDetails extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener  {
     StudentData studentData;
@@ -40,7 +33,7 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_personal_details);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         studentData=StudentPage.studentData;
         String s="";
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getPersonal_ques();

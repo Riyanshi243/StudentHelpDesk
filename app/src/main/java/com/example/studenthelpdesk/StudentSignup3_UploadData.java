@@ -71,7 +71,7 @@ public class StudentSignup3_UploadData extends AppCompatActivity
         studentData=Signup.studentData;
         uQuestion=new ArrayList<>();
         progressbar=findViewById(R.id.progressBar5);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference persQuestions = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Upload Question");
         persQuestions.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -207,7 +207,7 @@ public class StudentSignup3_UploadData extends AppCompatActivity
                         @Override
                         public void onSuccess(Uri uri) {
                             if (q.equalsIgnoreCase("Photograph")) {
-                                LinearLayout ll=nView.findViewById(R.id.ll);
+                                LinearLayout ll=nView.findViewById(R.id.linearlay);
                                 if(ll.getChildCount()==0)
                                 {
                                     ImageView imageView=new ImageView(nView.getContext());

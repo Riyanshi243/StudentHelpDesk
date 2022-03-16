@@ -12,8 +12,9 @@
     <color name="hint_text">#858383</color>
     <color name="box_bg">#e8e6e6</color>
     <color name="yellow_bg">#F3F0CD6C</color>
-    <color name="red_bg">#D81001</color>
-    <color name="green_bg">#3FC303</color>
-    <color name="blue_text">#0A64F3</color>
+    <color name="red_bg">#AA0D01</color>
+    <color name="green_bg">#2E8E02</color>
+    <color name="blue_text">#034ABC</color>
+    <color name="gray_blue_vlight">#E5E7EA</color>
 
 </resources>

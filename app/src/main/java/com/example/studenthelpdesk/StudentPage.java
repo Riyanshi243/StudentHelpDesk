@@ -1,6 +1,7 @@
 package com.example.studenthelpdesk;
 
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,7 +16,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,9 +50,12 @@ public class StudentPage extends AppCompatActivity {
         }
         FirebaseMessaging.getInstance().subscribeToTopic("All");
         FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
+        FirebaseMessaging.getInstance().subscribeToTopic(f.getUid());
+
         HashSet<String> token=new HashSet<>();
         token.add("All");
         token.add(f.getCurrentUser().getEmail());
+        token.add(f.getUid());
         studentData=new StudentData();
         heading=findViewById(R.id.name);
         progressBar=findViewById(R.id.progressBar4);
@@ -60,6 +66,12 @@ public class StudentPage extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         FirebaseFirestore ff=FirebaseFirestore.getInstance();
         DocumentReference docUserInfo = ff.collection("All Users On App").document(studentData.getEmail());
+        if(studentData==null)
+        {
+            startActivity(new Intent(StudentPage.this,Login.class));
+            finishAffinity();
+            return;
+        }
         docUserInfo.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -67,19 +79,8 @@ public class StudentPage extends AppCompatActivity {
                 studentData.setCollegeid(cId);
 
 
-                            FirebaseMessaging.getInstance().subscribeToTopic("Student" + studentData.getCollegeid());
-                            FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid());
-                            FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse());
-                            FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
-                            FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
-                            token.add("Student" + studentData.getCollegeid());
-                            token.add(studentData.getCollegeid());
-                            token.add(studentData.getCollegeid() + "_" + studentData.getCourse());
-                            token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
-                            token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
-                            studentData.setToken(token);
 
-                            Log.e("List of tokens",token.toString());
+
 
                         DocumentReference docUserInfo2 = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail());
                         docUserInfo2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -96,6 +97,19 @@ public class StudentPage extends AppCompatActivity {
                                 studentData.setBranch(branch);
                                 studentData.setCourse(course);
                                 studentData.setYr(yr);
+                                FirebaseMessaging.getInstance().subscribeToTopic("Student" + studentData.getCollegeid());
+                                FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid());
+                                FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse());
+                                FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
+                                FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
+                                token.add("Student" + studentData.getCollegeid());
+                                token.add(studentData.getCollegeid());
+                                token.add(studentData.getCollegeid() + "_" + studentData.getCourse());
+                                token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
+                                token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
+                                studentData.setToken(token);
+                                Log.e("List of tokens",token.toString());
+
                                 heading.setText(name);
                                 email.setText(studentData.getEmail());
                                 reqStatus.setText(reqStatus.getText().toString().substring(0,25)+noOfRequest+" requests");
@@ -301,6 +315,7 @@ public class StudentPage extends AppCompatActivity {
     public void logout(View v)
     {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getUid());
         FirebaseMessaging.getInstance().unsubscribeFromTopic("Student"+studentData.getCollegeid());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getCurrentUser().getEmail());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse());
@@ -308,8 +323,8 @@ public class StudentPage extends AppCompatActivity {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
-        studentData=null;
         startActivity(new Intent(StudentPage.this,Login.class));
+        //studentData=null;
         finish();
     }
 
@@ -413,6 +428,13 @@ public class StudentPage extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                                         long total= (long) documentSnapshot.get("Total");
+                                                                        if(studentData==null)
+                                                                        {
+                                                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                                                            finishAffinity();
+                                                                            return;
+                                                                        }
+
                                                                         studentData.setNoPersonalQ(total);
                                                                         for (int i=0;i<(int)total;i++)
                                                                         {
@@ -456,6 +478,13 @@ public class StudentPage extends AppCompatActivity {
                                                                                                     @Override
                                                                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                                                                         long total= (long) documentSnapshot.get("Total");
+                                                                                                        if(studentData==null)
+                                                                                                        {
+                                                                                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                                                                                            finishAffinity();
+                                                                                                            return;
+                                                                                                        }
+
                                                                                                         studentData.setNoUploadQ(total);
                                                                                                         for (int i=0;i<(int)total;i++)
                                                                                                         {
@@ -525,7 +554,27 @@ public class StudentPage extends AppCompatActivity {
 
         super.onResume();
     }
+    public void help(View v)
+    {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference("Developer Folder").child("Student Help.pdf");
+        Task<Uri> helpDoc = storageRef.getDownloadUrl();
+        helpDoc.addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Intent intent = new Intent(StudentPage.this, ViewPDFActivity.class);
+                intent.putExtra("url", uri.toString());
+                startActivity(intent);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(StudentPage.this,e.getMessage().toString(),Toast.LENGTH_LONG);
 
+            }
+        });
+
+    }
     @Override
     public void onBackPressed() {
         startActivity(new Intent(StudentPage.this,EndScreen.class));

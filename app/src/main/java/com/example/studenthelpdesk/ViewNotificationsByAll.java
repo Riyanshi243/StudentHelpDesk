@@ -41,7 +41,7 @@ public class ViewNotificationsByAll extends AppCompatActivity {
         adminData=AdminPage.adminData;
         companyData=CompanyPage.companyData;
         pbar=findViewById(R.id.progressBar6);
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         HashSet<String> token;
         ArrayList<NotificationData> allNotif=new ArrayList<>();
         String cId;
@@ -66,7 +66,8 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                 {
                     TextView t=new TextView(ViewNotificationsByAll.this);
                     pbar.setVisibility(View.INVISIBLE);
-                    t.setText("You have received NO Notifications till now.");
+                    t.setText("  You have received NO Notifications till now.");
+                    t.setTextSize(20);
                     ll.addView(t);
                 }
                 for(DocumentSnapshot n:notif1)

@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +44,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentsignup2_academic_data);
         studentData=Signup.studentData;
-        ll=findViewById(R.id.ll);
+        ll=findViewById(R.id.linearlay);
         aQuestion=new ArrayList<>();
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         DocumentReference acadQuestions = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Academic Question");
@@ -86,13 +85,20 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
                                         return i1;
                                     }
                                 });
+                                int c=0;
+
                                 for (CollegeRegisterQuestions a:aQuestion)
                                 {
                                     int type=a.getType();
                                     String question=a.getQuestion();
                                     int i=a.getId();
                                     boolean compulsory=a.isCumplolsory();
-                                    View addQues=getType(type,question, i);
+                                    String ans="";
+                                    if(studentData.getA_ans()!=null)
+                                    {
+                                        ans=studentData.getA_ans()[c++];
+                                    }
+                                    View addQues=getType(type,question, i,ans);
                                     if(compulsory==true)
                                     {
                                         if(type==0)
@@ -355,7 +361,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
     }
     int noOfq=0;
 
-    View getType(long i, String q,int qNumber)
+    View getType(long i, String q,int qNumber,String ans1)
     {
 
         allq[noOfq]=q;
@@ -367,6 +373,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             View nView=getLayoutInflater().inflate(R.layout.repeatable_numeric_text_layout,null);
             TextView ques=nView.findViewById(R.id.Ques);
             EditText ans=nView.findViewById(R.id.editvalnumeric);
+            ans.setText(ans1);
             ans.setInputType(InputType.TYPE_CLASS_NUMBER);
             ques.setText(q);
             ques.setId(qNumber);
@@ -377,8 +384,12 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             //numeric decimal
             View nView=getLayoutInflater().inflate(R.layout.repeatable_number_decimal_layout,null);
             TextView ques=nView.findViewById(R.id.Ques);
+            EditText ans=nView.findViewById(R.id.editvalmulti);
+
+            ans.setText(ans1);
             ques.setText(q);
             ques.setId(qNumber);
+
             return nView;
         }
         if(i==0)
@@ -388,6 +399,8 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             TextView ques=nView.findViewById(R.id.Ques);
             ques.setText(q);
             ques.setId(qNumber);
+            TextView ans=nView.findViewById(R.id.editTextTextMultiLine);
+            ans.setText(ans1);
             return nView;
         }
         if(i==1)
@@ -397,6 +410,8 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             TextView ques=nView.findViewById(R.id.Ques);
             ques.setText(q);
             ques.setId(qNumber);
+            TextView ans=nView.findViewById(R.id.editTextMultiLine);
+            ans.setText(ans1);
             return nView;
         }
         if(i==4)
@@ -412,6 +427,12 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             RadioButton f=ans.findViewById(R.id.female);
 
             RadioButton o=ans.findViewById(R.id.not);
+            if(ans1.equalsIgnoreCase("Male"))
+                m.setChecked(true);
+            else if(ans1.equalsIgnoreCase("Female"))
+                f.setChecked(true);
+            else
+                o.setChecked(true);
             ans.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -453,6 +474,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
             ques.setId(qNumber);
             Button datePicker =nView.findViewById(R.id.btPickDate);
             TextView datePicked=nView.findViewById(R.id.tvDate);
+            datePicked.setText(ans1);
             datePicker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -475,13 +497,13 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
         }
         if(i==7)
         {
-
             //dropdown
             View nView=getLayoutInflater().inflate(R.layout.repeatable_dropdown,null);
             TextView ques=nView.findViewById(R.id.Ques);
             ques.setText(q);
             ques.setId(qNumber);
             AutoCompleteTextView drop=nView.findViewById(R.id.dropdown);
+            drop.setText(ans1);
             if(q.trim().equalsIgnoreCase("Year"))
             {
                 String yr[]={"1","2","3","4","5","5+"};
@@ -509,6 +531,7 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
                         drop.setText(coursesList.get(0));
                         drop.setAdapter(spinnerList);
                         studentData.setCourse(coursesList.get(0));
+                        Collections.sort(coursesList);
                         drop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
@@ -517,8 +540,8 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
                                 studentData.setCourse(coursesList.get(pos));
                                 FirebaseFirestore f = FirebaseFirestore.getInstance();
                                 AutoCompleteTextView drop=branchView.findViewById(R.id.dropdown);
+                                drop.setText(ans1);
                                 DocumentReference allBranch = f.collection("All Colleges").document(studentData.getCollegeid()).collection("Branches").document(studentData.getCourse());
-
 
                                 allBranch.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
@@ -558,11 +581,13 @@ public class StudentSignup2_AcademicData extends AppCompatActivity implements Da
                             drop.setText("Select Course First");
                             return;
                         }
+                        drop.setText(ans1);
                         ArrayList<String> branchList = (ArrayList<String>) documentSnapshot.get("Branches");
                         ArrayAdapter spinnerList = new ArrayAdapter(StudentSignup2_AcademicData.this, android.R.layout.simple_spinner_item, branchList);
                         drop.setText(branchList.get(0));
                         drop.setAdapter(spinnerList);
                         studentData.setBranch(branchList.get(0));
+                        Collections.sort(branchList);
                         drop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
