@@ -3,9 +3,11 @@ package com.example.studenthelpdesk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -73,7 +75,12 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
         profilePic=findViewById(R.id.profilepic);
         header.setText(notificationData.getTitle());
         if(notificationData.getContent().length()!=0)
+        {
             info.setText(notificationData.getContent());
+            Linkify.addLinks(info, Linkify.ALL);
+            info.setLinkTextColor(Color.parseColor("#034ABC"));
+        }
+
         else
             info.setVisibility(View.GONE);
         sentBy.setText(notificationData.getSentBy());
