@@ -4,4 +4,5 @@
     <string name="forget_password"><u>Forget Password</u></string>
     <string name="already_a_user_nlogin_instead">Already a user?\n<u><i>Login instead</i></u></string>
     <string name="new_here_register_your_college">New here? <u><i>Register your college!</i></u></string>
+    <string name="sent_by"><u>SENT BY :</u></string>
 </resources>

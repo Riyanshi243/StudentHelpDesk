@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -93,13 +97,17 @@ public class AdminViewAllRequests extends AppCompatActivity {
                     RequestData currReq=requestData.get(0);
                     View viewReq=getLayoutInflater().inflate(R.layout.repeatable_admin_view_requests,null);
                     TextView email=viewReq.findViewById(R.id.email);
+                    email.setPaintFlags(email.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                     TextView header=viewReq.findViewById(R.id.header);
+                    header.setTypeface(null, Typeface. BOLD);
                     TextView reason=viewReq.findViewById(R.id.reason_value);
                     TextView appliedDate=viewReq.findViewById(R.id.request_Date);
                     Button accept=viewReq.findViewById(R.id.acc);
                     Button reject=viewReq.findViewById(R.id.rej);
                     header.setText("Change "+currReq.getQuestion()+" From "+currReq.getAnswerNow()+" To "+currReq.getChangeTo());
                     reason.setText(currReq.getReason());
+                    Linkify.addLinks(reason, Linkify.ALL);
+                    reason.setLinkTextColor(Color.parseColor("#034ABC"));
                     email.setText(currReq.getSender());
                     appliedDate.setText(currReq.getSentTime().substring(0,20));
                     accept.setOnClickListener(new View.OnClickListener() {

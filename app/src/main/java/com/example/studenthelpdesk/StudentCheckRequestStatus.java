@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -91,6 +93,7 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
                     RequestData currReq=requestData.get(0);
                     View viewReq=getLayoutInflater().inflate(R.layout.repeatable_student_request_status_box,null);
                     TextView header=viewReq.findViewById(R.id.header);
+                    header.setTypeface(null, Typeface. BOLD);
                     TextView reason=viewReq.findViewById(R.id.reason);
                     TextView appliedDate=viewReq.findViewById(R.id.date1);
                     TextView status=viewReq.findViewById(R.id.status);
@@ -123,6 +126,8 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
                         date2.setText(currReq.getAdminTime().substring(0,20));
                         date2.setVisibility(View.VISIBLE);
                         reasonReject.setText(currReq.getRejectReason());
+                        Linkify.addLinks(reasonReject, Linkify.ALL);
+                        reasonReject.setLinkTextColor(Color.parseColor("#034ABC"));
                         reasonReject.setVisibility(View.VISIBLE);
                     }
                     del.setOnClickListener(new View.OnClickListener() {
