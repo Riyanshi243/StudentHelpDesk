@@ -102,7 +102,8 @@
             <HorizontalScrollView
                 android:id="@+id/HscrollView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
 
                 <LinearLayout
                     android:id="@+id/TableLinearLayout"

@@ -43,13 +43,6 @@
                     android:text="NOTIFICATIONS"
                     android:textColor="@color/white"
                     android:textSize="32dp" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar5"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="invisible" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/linearlay"

@@ -42,7 +42,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
         personalDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                int total=(int)documentSnapshot.get("Total");
+                long total=(long)documentSnapshot.get("Total");
                 for (int i=0;i<total;i++)
                 {
                     int finalI = i;
@@ -53,7 +53,8 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
                             crq.setQuestion((String) documentSnapshot.get("Question"));
-                            crq.setType((int) documentSnapshot.get("Type"));
+                            long x= (long) documentSnapshot.get("Type");
+                            crq.setType((int) x);
                             crq.setId(finalI);
                             personalQ.add(crq);
                             if(finalI1 ==total-1)
@@ -62,7 +63,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                                academicDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                    @Override
                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                     int total= (int) documentSnapshot.get("Total");
+                                     long total= (long) documentSnapshot.get("Total");
                                      for (int i=0;i<total;i++)
                                      {
                                          int finalI2 = i;
@@ -72,7 +73,8 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                                              public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                  CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
                                                  crq.setQuestion((String) documentSnapshot.get("Question"));
-                                                 crq.setType((int) documentSnapshot.get("Type"));
+                                                 long x= (long) documentSnapshot.get("Type");
+                                                 crq.setType((int) x);
                                                  crq.setId(finalI2);
                                                  academicQ.add(crq);
                                                  if(finalI2 ==total-1)
@@ -81,20 +83,23 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                                                     uploadDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                         @Override
                                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                            int total=(int)documentSnapshot.get("Total");
+                                                            long total=(long)documentSnapshot.get("Total");
                                                             for(int i=0;i<total;i++)
                                                             {
                                                                 int finalI3 = i;
+                                                                int finalI4 = i;
                                                                 uploadDetails.collection(i+"").document(i+"")
                                                                         .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                                     @Override
                                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                                         CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
                                                                         crq.setQuestion((String) documentSnapshot.get("Question"));
-                                                                        crq.setType((int) documentSnapshot.get("Type"));
+                                                                        long x= (long) documentSnapshot.get("Type");
+                                                                        crq.setType((int) x);
                                                                         crq.setId(finalI3);
                                                                         uploadQ.add(crq);
-                                                                        show();
+                                                                        if(finalI4 ==total-1)
+                                                                            show();
                                                                     }
                                                                 });
 
@@ -133,21 +138,21 @@ public class AdminViewAllStudentData extends AppCompatActivity {
         {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
-            name.setText((CharSequence) personalQ.get(i));
+            name.setText( personalQ.get(i).getQuestion());
             heading.addView(headingname);
         }
         for(int i=0;i<academicQ.size();i++)
         {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
-            name.setText((CharSequence) academicQ.get(i));
+            name.setText(academicQ.get(i).getQuestion());
             heading.addView(headingname);
         }
         for(int i=0;i<uploadQ.size();i++)
         {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
-            name.setText((CharSequence) uploadQ.get(i));
+            name.setText(uploadQ.get(i).getQuestion());
             heading.addView(headingname);
         }
         tl.addView(heading);

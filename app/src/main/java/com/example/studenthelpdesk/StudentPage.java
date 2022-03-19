@@ -429,6 +429,8 @@ public class StudentPage extends AppCompatActivity {
                                                                         return i1;
                                                                     }
                                                                 });
+                                                                if(studentData==null)
+                                                                    return;
                                                                 studentData.setPersonal_ques(personalQ);
                                                                 DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Academic Question");
                                                                 docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

@@ -65,16 +65,18 @@ public class ViewNotificationsByAll extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> notif1 = queryDocumentSnapshots.getDocuments();
-                if(notif1.size()==0)
-                {
-                    TextView t=new TextView(ViewNotificationsByAll.this);
-                    pbar.setVisibility(View.INVISIBLE);
-                    t.setText("  You have received NO Notifications till now.");
-                    t.setTextSize(20);
-                    ll.addView(t);
-                }
+                int c=0;
                 for(DocumentSnapshot n:notif1)
                 {
+                    c++;
+                    if(notif1.size()==c && allNotif.size()==0)
+                    {
+                        TextView t=new TextView(ViewNotificationsByAll.this);
+                        pbar.setVisibility(View.INVISIBLE);
+                        t.setText("  You have received NO Notifications till now.");
+                        t.setTextSize(20);
+                        ll.addView(t);
+                    }
                     NotificationData nd=new NotificationData();
                     nd.setContent((String) n.get("Content"));
                     nd.setTitle((String) n.get("Title"));
