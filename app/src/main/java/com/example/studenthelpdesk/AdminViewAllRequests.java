@@ -97,7 +97,8 @@ public class AdminViewAllRequests extends AppCompatActivity {
                     RequestData currReq=requestData.get(0);
                     View viewReq=getLayoutInflater().inflate(R.layout.repeatable_admin_view_requests,null);
                     TextView email=viewReq.findViewById(R.id.email);
-                    email.setPaintFlags(email.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+                    Linkify.addLinks(email, Linkify.ALL);
+                    email.setLinkTextColor(Color.parseColor("#034ABC"));
                     TextView header=viewReq.findViewById(R.id.header);
                     header.setTypeface(null, Typeface. BOLD);
                     TextView reason=viewReq.findViewById(R.id.reason_value);

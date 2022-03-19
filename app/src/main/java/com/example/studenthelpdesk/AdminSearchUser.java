@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -143,6 +145,8 @@ public class AdminSearchUser extends AppCompatActivity{
                             TextView ans_email=email_.findViewById(R.id.ans);
                             ques_email.setText("EMAIL");
                             ans_email.setText(email);
+                            Linkify.addLinks(ans_email, Linkify.ALL);
+                            ans_email.setLinkTextColor(Color.parseColor("#034ABC"));
                             ll.addView(email_);
 
                             String department=adminDataSearched.getDeptName();
@@ -158,6 +162,8 @@ public class AdminSearchUser extends AppCompatActivity{
                             TextView ans_phone=phone_.findViewById(R.id.ans);
                             ques_phone.setText("PHONE NUMBER");
                             ans_phone.setText(phone);
+                            Linkify.addLinks(ans_phone, Linkify.ALL);
+                            ans_phone.setLinkTextColor(Color.parseColor("#034ABC"));
                             ll.addView(phone_);
                         }
 
@@ -440,7 +446,6 @@ public class AdminSearchUser extends AppCompatActivity{
                         });
                         ll.addView(photo);
                         companyData=new CompanyData();
-
                         companyData.setPersonalEmail((String) documentSnapshot.get("Personal Email"));
                         companyData.setLocation((String) documentSnapshot.get("Company Location"));
                         companyData.setCompanyName((String) documentSnapshot.get("Company Name"));
@@ -478,6 +483,8 @@ public class AdminSearchUser extends AppCompatActivity{
                             TextView ans_remail=remail_.findViewById(R.id.ans);
                             ques_remail.setText("REPRESENTATIVE EMAIL");
                             ans_remail.setText(remail);
+                            Linkify.addLinks(ans_remail, Linkify.ALL);
+                            ans_remail.setLinkTextColor(Color.parseColor("#034ABC"));
                             ll.addView(remail_);
 
                             String rphone=companyData.getPhone();
@@ -486,6 +493,8 @@ public class AdminSearchUser extends AppCompatActivity{
                             TextView ans_rphone=rphone_.findViewById(R.id.ans);
                             ques_rphone.setText("REPRESENTATIVE PHONE NUMBER");
                             ans_rphone.setText(rphone);
+                            Linkify.addLinks(ans_rphone, Linkify.ALL);
+                            ans_rphone.setLinkTextColor(Color.parseColor("#034ABC"));
                             ll.addView(rphone_);
 
                         }
