@@ -213,7 +213,10 @@ public class StudentPage extends AppCompatActivity {
                                                                                                     }
                                                                                                 });
                                                                                                 if(studentData==null)
+                                                                                                {
                                                                                                     return;
+                                                                                                }
+
                                                                                                 studentData.setAcademic_ques(academicQ);
                                                                                                 DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Upload Question");
                                                                                                 docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
