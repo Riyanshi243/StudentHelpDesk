@@ -17,7 +17,7 @@
             android:layout_width="160dp"
             android:layout_height="60dp"
             android:background="@drawable/customborder"
-            android:inputType="textCapCharacters"
+            android:inputType="textMultiLine"
             android:text="table_header"
             android:textColor="@color/black"
             android:textSize="24dp"

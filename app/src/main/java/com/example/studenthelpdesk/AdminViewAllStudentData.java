@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -139,6 +140,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
             name.setText( personalQ.get(i).getQuestion());
+            name.setMovementMethod(new ScrollingMovementMethod());
             heading.addView(headingname);
         }
         for(int i=0;i<academicQ.size();i++)
@@ -146,6 +148,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
             name.setText(academicQ.get(i).getQuestion());
+            name.setMovementMethod(new ScrollingMovementMethod());
             heading.addView(headingname);
         }
         for(int i=0;i<uploadQ.size();i++)
@@ -153,6 +156,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
             name.setText(uploadQ.get(i).getQuestion());
+            name.setMovementMethod(new ScrollingMovementMethod());
             heading.addView(headingname);
         }
         tl.addView(heading);
