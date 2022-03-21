@@ -1,5 +1,7 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -17,6 +19,12 @@ public class StudentData {
 
     public HashSet<String> getToken() {
         return token;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
     }
 
     public void setAcademic_ques(ArrayList<CollegeRegisterQuestions> academic_ques) {
@@ -53,18 +61,6 @@ public class StudentData {
 
     public ArrayList<CollegeRegisterQuestions> getUpload_ques() {
         return upload_ques;
-    }
-
-    public long getNoAcademicQ() {
-        return noAcademicQ;
-    }
-
-    public long getNoPersonalQ() {
-        return noPersonalQ;
-    }
-
-    public long getNoUploadQ() {
-        return noUploadQ;
     }
 
     public void setNoOfReq(long noOfReq) {
