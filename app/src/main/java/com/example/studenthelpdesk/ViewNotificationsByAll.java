@@ -3,8 +3,11 @@ package com.example.studenthelpdesk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -62,16 +65,18 @@ public class ViewNotificationsByAll extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> notif1 = queryDocumentSnapshots.getDocuments();
-                if(notif1.size()==0)
-                {
-                    TextView t=new TextView(ViewNotificationsByAll.this);
-                    pbar.setVisibility(View.INVISIBLE);
-                    t.setText("  You have received NO Notifications till now.");
-                    t.setTextSize(20);
-                    ll.addView(t);
-                }
+                int c=0;
                 for(DocumentSnapshot n:notif1)
                 {
+                    c++;
+                    if(notif1.size()==c && allNotif.size()==0)
+                    {
+                        TextView t=new TextView(ViewNotificationsByAll.this);
+                        pbar.setVisibility(View.INVISIBLE);
+                        t.setText("  You have received NO Notifications till now.");
+                        t.setTextSize(20);
+                        ll.addView(t);
+                    }
                     NotificationData nd=new NotificationData();
                     nd.setContent((String) n.get("Content"));
                     nd.setTitle((String) n.get("Title"));
@@ -90,8 +95,6 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                         allNotif.add(nd);
 
                 }
-
-
             }
         });
         Timer t = new Timer();
@@ -111,14 +114,22 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                         View repeatNotif=getLayoutInflater().inflate(R.layout.repeatable_notifications_received,null);
                         TextView time=repeatNotif.findViewById(R.id.date1);
                         TextView header=repeatNotif.findViewById(R.id.header);
+                        header.setTypeface(null, Typeface. BOLD);
                         TextView info=repeatNotif.findViewById(R.id.info);
                         TextView sender=repeatNotif.findViewById(R.id.reason);
                         ImageView attachment=repeatNotif.findViewById(R.id.attachments);
                         header.setText(n1.getTitle());
-                        if(n1.getContent().length()<=50)
+                        if(n1.getContent().length()<=50) {
                             info.setText(n1.getContent());
+                            Linkify.addLinks(info, Linkify.ALL);
+                            info.setLinkTextColor(Color.parseColor("#034ABC"));
+                        }
                         else
+                        {
                             info.setText(n1.getContent().substring(0,50)+"...");
+                            Linkify.addLinks(info, Linkify.ALL);
+                            info.setLinkTextColor(Color.parseColor("#034ABC"));
+                        }
 
                         if(n1.getAttachment()==null)
                             attachment.setVisibility(View.GONE);

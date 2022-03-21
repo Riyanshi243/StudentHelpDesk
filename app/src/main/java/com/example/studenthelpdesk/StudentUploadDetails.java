@@ -28,19 +28,27 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class StudentUploadDetails extends AppCompatActivity {
     StudentData studentData;
     LinearLayout ll;
     View currentQView;
     ProgressBar progressbar;
+    Boolean lock;
+    Timer t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +56,33 @@ public class StudentUploadDetails extends AppCompatActivity {
         ll=findViewById(R.id.linearlay);
         studentData=StudentPage.studentData;
         progressbar=findViewById(R.id.progressBar5);
+        FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(studentData.getCollegeid()).collection("Lock")
+                .document(studentData.getCourse())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                lock= (boolean) documentSnapshot.get(studentData.getBranch());
+            }
+        });
+        t=new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
 
+            @Override
+            public void run() {
+                if(studentData==null)
+                    return;
+                FirebaseFirestore.getInstance().collection("All Colleges")
+                        .document(studentData.getCollegeid()).collection("Lock")
+                        .document(studentData.getCourse())
+                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        lock= (boolean) documentSnapshot.get(studentData.getBranch());
+                    }
+                });
+            }
+        },1000,1000);
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getUpload_ques();
         for(CollegeRegisterQuestions a:quesAns)
         {
@@ -68,12 +102,16 @@ public class StudentUploadDetails extends AppCompatActivity {
                                 .error(R.drawable.error_profile_picture)
                                 .placeholder(R.drawable.default_loading_img)
                                 .into(profilepic);
-
                     }
                 });
                 profilepic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(lock==true)
+                        {
+                            Snackbar.make(view, "Database is Locked!!", Snackbar.LENGTH_LONG).show();
+                            return;
+                        }
                         progressbar.setVisibility(View.VISIBLE);
                         currentQView=repeatAnswers;
                         Intent intent=new Intent();
@@ -89,7 +127,6 @@ public class StudentUploadDetails extends AppCompatActivity {
                                         .error(R.drawable.error_profile_picture)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilepic);
-
                             }
                         });
                     }
@@ -97,6 +134,11 @@ public class StudentUploadDetails extends AppCompatActivity {
                 edit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(lock==true)
+                        {
+                            Snackbar.make(view, "Database is Locked!!", Snackbar.LENGTH_LONG).show();
+                            return;
+                        }
                         progressbar.setVisibility(View.VISIBLE);
                         currentQView=repeatAnswers;
                         Intent intent=new Intent();
@@ -154,6 +196,11 @@ public class StudentUploadDetails extends AppCompatActivity {
                 update.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(lock==true)
+                        {
+                            Snackbar.make(view, "Database is Locked!!", Snackbar.LENGTH_LONG).show();
+                            return;
+                        }
                         if(a.isChangeable()==true)
                         {
                             progressbar.setVisibility(View.VISIBLE);
@@ -333,5 +380,10 @@ public class StudentUploadDetails extends AppCompatActivity {
         c.moveToFirst();
         String string = c.getString(c.getColumnIndex(OpenableColumns.DISPLAY_NAME));
         return string;
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        t.cancel();
+        t.purge();
     }
 }

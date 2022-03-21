@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,17 +20,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class StudentPersonalDetails extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener  {
     StudentData studentData;
     LinearLayout ll;
+    boolean lock;
+    Timer t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +44,51 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
         ll=findViewById(R.id.linearlay);
         studentData=StudentPage.studentData;
         String s="";
+        if(studentData==null || studentData.getCourse()==null || studentData.getBranch()==null)
+        {
+            return;
+        }
+        FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(studentData.getCollegeid()).collection("Lock")
+                .document(studentData.getCourse())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                lock= (boolean) documentSnapshot.get(studentData.getBranch());
+            }});
+        t=new Timer();
+        FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(studentData.getCollegeid()).collection("Lock")
+                .document(studentData.getCourse())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                lock= (boolean) documentSnapshot.get(studentData.getBranch());
+            }
+        });
+        t=new Timer();
+
+        t.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                if(studentData==null || studentData.getCourse()==null || studentData.getBranch()==null)
+                {
+                    return;
+                }
+                FirebaseFirestore.getInstance().collection("All Colleges")
+                        .document(studentData.getCollegeid()).collection("Lock")
+                        .document(studentData.getCourse())
+                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(studentData.getBranch()==null)
+                            return;
+                        lock= (boolean) documentSnapshot.get(studentData.getBranch());
+                    }
+                });
+            }
+        },1000,1);
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getPersonal_ques();
         for(CollegeRegisterQuestions a:quesAns)
         {
@@ -47,6 +100,11 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
             ans.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(lock==true)
+                    {
+                        Snackbar .make(view, "Database is Locked!!", Snackbar.LENGTH_LONG).show();
+                        return;
+                    }
                     if (a.isChangeable() == true) {
                             View typeInput=getType(a.getType(),a.getAnswer());
                             AlertDialog builder = new AlertDialog.Builder(StudentPersonalDetails.this)
@@ -397,7 +455,12 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                 return null;
             }
             return null;
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        t.cancel();
+        t.purge();
     }
 }

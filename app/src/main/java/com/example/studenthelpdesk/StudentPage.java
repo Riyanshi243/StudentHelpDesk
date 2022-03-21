@@ -212,6 +212,11 @@ public class StudentPage extends AppCompatActivity {
                                                                                                         return i1;
                                                                                                     }
                                                                                                 });
+                                                                                                if(studentData==null)
+                                                                                                {
+                                                                                                    return;
+                                                                                                }
+
                                                                                                 studentData.setAcademic_ques(academicQ);
                                                                                                 DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Upload Question");
                                                                                                 docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -319,8 +324,10 @@ public class StudentPage extends AppCompatActivity {
         FirebaseMessaging.getInstance().unsubscribeFromTopic("Student"+studentData.getCollegeid());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(f.getCurrentUser().getEmail());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse());
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
+       // Log.e("Hi",studentData.getToken().toString());
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
         startActivity(new Intent(StudentPage.this,Login.class));
@@ -422,6 +429,8 @@ public class StudentPage extends AppCompatActivity {
                                                                         return i1;
                                                                     }
                                                                 });
+                                                                if(studentData==null)
+                                                                    return;
                                                                 studentData.setPersonal_ques(personalQ);
                                                                 DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Academic Question");
                                                                 docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -472,6 +481,12 @@ public class StudentPage extends AppCompatActivity {
                                                                                                         return i1;
                                                                                                     }
                                                                                                 });
+                                                                                                if(studentData==null)
+                                                                                                {
+                                                                                                    startActivity(new Intent(StudentPage.this,Login.class));
+                                                                                                    finishAffinity();
+                                                                                                    return;
+                                                                                                }
                                                                                                 studentData.setAcademic_ques(academicQ);
                                                                                                 DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Upload Question");
                                                                                                 docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -516,6 +531,8 @@ public class StudentPage extends AppCompatActivity {
                                                                                                                                 return i1;
                                                                                                                             }
                                                                                                                         });
+                                                                                                                        if(studentData==null)
+                                                                                                                            return;
                                                                                                                         studentData.setUpload_ques(uploadQ);
                                                                                                                         progressBar.setVisibility(View.GONE);
                                                                                                                     }

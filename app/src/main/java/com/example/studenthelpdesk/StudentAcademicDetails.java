@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,17 +29,47 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class StudentAcademicDetails extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     StudentData studentData;
     LinearLayout ll;
-
+    Boolean lock;
+    Timer t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_academic_details);
         ll = findViewById(R.id.linearlay);
         studentData = StudentPage.studentData;
+        FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(studentData.getCollegeid()).collection("Lock")
+                .document(studentData.getCourse())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                lock= (boolean) documentSnapshot.get(studentData.getBranch());
+            }
+        });
+        t=new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                if(studentData==null)
+                    return;
+                FirebaseFirestore.getInstance().collection("All Colleges")
+                        .document(studentData.getCollegeid()).collection("Lock")
+                        .document(studentData.getCourse())
+                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        lock= (boolean) documentSnapshot.get(studentData.getBranch());
+                    }
+                });
+            }
+        },1000,1000);
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getAcademic_ques();
         for (CollegeRegisterQuestions a : quesAns) {
             View repeatAnswers = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);
@@ -46,10 +77,42 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
             TextView ans = repeatAnswers.findViewById(R.id.ans);
             ques.setText(a.getQuestion());
             ans.setText(a.getAnswer());
+
             ans.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(lock==true)
+                    {
+                        Snackbar.make(view, "Database is Locked!!", Snackbar.LENGTH_LONG).show();
+                        return;
+                    }
                     if (a.isChangeable() == true) {
+                        if(a.getQuestion().equalsIgnoreCase("Course"))
+                        {
+                            AlertDialog builder = new AlertDialog.Builder(StudentAcademicDetails.this)
+                                    .setTitle("Course cannot be changed!")
+                                    .setMessage("You will have to ask admin to provide you with new email id if you want to change your course and branch!!")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //do nothing
+                                        }
+                                    }).show();
+                            return;
+                        }
+                        if(a.getQuestion().equalsIgnoreCase("Branch"))
+                        {
+                            AlertDialog builder = new AlertDialog.Builder(StudentAcademicDetails.this)
+                                    .setTitle("Branch cannot be changed!")
+                                    .setMessage("You will have to ask admin to provide you with new email id if you want to change your course and branch!!")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //do nothing
+                                        }
+                                    }).show();
+                            return;
+                        }
                         View typeInput=getType(a.getType(),a.getAnswer(),a.getQuestion());
                         AlertDialog builder = new AlertDialog.Builder(StudentAcademicDetails.this)
                                 .setTitle(a.getQuestion())
@@ -73,13 +136,11 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
                                     String answer=saveData(typeInput,a);
                                     if(answer.length()==0 && a.isCumplolsory())
                                     {
-                                        //Toast.makeText(StudentPersonalDetails.this, "ERROORR", Toast.LENGTH_SHORT).show();
                                         EditText answer1= (EditText) setError(a.getType(),typeInput);
                                         if(answer1!=null) {
                                             answer1.setError("This is Compulsory");
                                             return;
                                         }
-
                                     }
                                     DocumentReference ansDoc= FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail()).collection("Personal Question").document(a.getId()+"");
                                     HashMap<String,Object> updatedAns=new HashMap<>();
@@ -161,9 +222,33 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
                             }
                         });
 
-
-
                     } else {
+                        if(a.getQuestion().equalsIgnoreCase("Course"))
+                        {
+                            AlertDialog builder = new AlertDialog.Builder(StudentAcademicDetails.this)
+                                    .setTitle("Course cannot be changed!")
+                                    .setMessage("You will have to ask admin to provide you with new email id if you want to change your course and branch!!")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //do nothing
+                                        }
+                                    }).show();
+                            return;
+                        }
+                        if(a.getQuestion().equalsIgnoreCase("Branch"))
+                        {
+                            AlertDialog builder = new AlertDialog.Builder(StudentAcademicDetails.this)
+                                    .setTitle("Branch cannot be changed!")
+                                    .setMessage("You will have to ask admin to provide you with new email id if you want to change your course and branch!!")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //do nothing
+                                        }
+                                    }).show();
+                            return;
+                        }
                         AlertDialog.Builder ab=new AlertDialog.Builder(StudentAcademicDetails.this);
                         ab.setTitle("This field is not editable");
                         ab.setMessage("If you want to change the data in the field, please send request to admin");
@@ -185,7 +270,6 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
                     }
                 }
             });
-
             ll.addView(repeatAnswers);
         }
         }
@@ -262,7 +346,6 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
             EditText ans=nView.findViewById(R.id.editvalmulti);
             ans.setText(a);
             ques.setVisibility(View.GONE);
-
             return nView;
         }
         if(i==0)
@@ -377,7 +460,6 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
                         ArrayList<String> coursesList= (ArrayList<String>) documentSnapshot.get("Courses");
                         ArrayAdapter spinnerList=new ArrayAdapter(StudentAcademicDetails.this,android.R.layout.simple_spinner_item,coursesList);
                         drop.setAdapter(spinnerList);
-
                     }
                 });
             }
@@ -449,6 +531,10 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
         return null;
 
     }
-
+    public void onBackPressed() {
+        super.onBackPressed();
+        t.cancel();
+        t.purge();
+    }
 }
 

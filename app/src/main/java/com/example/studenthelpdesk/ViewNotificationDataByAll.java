@@ -3,9 +3,13 @@ package com.example.studenthelpdesk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -72,11 +76,18 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
 
         profilePic=findViewById(R.id.profilepic);
         header.setText(notificationData.getTitle());
+        header.setTypeface(null, Typeface. BOLD);
         if(notificationData.getContent().length()!=0)
+        {
             info.setText(notificationData.getContent());
+            Linkify.addLinks(info, Linkify.ALL);
+            info.setLinkTextColor(Color.parseColor("#034ABC"));
+        }
+
         else
             info.setVisibility(View.GONE);
         sentBy.setText(notificationData.getSentBy());
+        sentBy.setPaintFlags(sentBy.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         timestamp.setText(notificationData.getTimeS());
         ArrayList<String> attachments= notificationData.getAttachment();
         if(attachments!=null)
@@ -89,6 +100,7 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                 Button download=repeatAttachment.findViewById(R.id.download);
                 TextView attach=repeatAttachment.findViewById(R.id.attachment_name);
                 attach.setText(a);
+                attach.setPaintFlags(attach.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                 ll.addView(repeatAttachment);
                 download.setOnClickListener(new View.OnClickListener() {
                     @Override
