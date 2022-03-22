@@ -1,19 +1,30 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -22,6 +33,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +50,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
     AutoCompleteTextView sortin;
     AdminData adminData;
     TableLayout tl;
-    int i=0;
+    int domain=0;
     int s=0;
     static ArrayList<StudentData> allStudentData=new ArrayList<>();
     static ArrayList<StudentData> allStudentDatatemp=new ArrayList<>();
@@ -58,10 +71,22 @@ public class AdminViewAllStudentData extends AppCompatActivity {
         sortin.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==0)
-                    s=1;
+                String what="";
+                if(domain==0)
+                {
+                    what=personalQ.get(k).getQuestion();
+                }
                 else
-                    s=2;
+                    what=academicQ.get(k).getQuestion();
+                if(i==0) {
+                    s = 0;
+                    Toast.makeText(AdminViewAllStudentData.this, "Sorting in ascending order of "+what, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    s = 2;
+                    Toast.makeText(AdminViewAllStudentData.this, "Sorting in descending  order of "+what, Toast.LENGTH_SHORT).show();
+                }
+
                 tl.removeAllViews();
                 show();
                 sort();
@@ -162,6 +187,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                     StudentData thisStudent=allStudentDatatemp.get(0);
                     allStudentDatatemp.remove(thisStudent);
                     ArrayList<CollegeRegisterQuestions> personalAnswers = thisStudent.getPersonal_ques();
+                    ArrayList<CollegeRegisterQuestions> academicAnswers = thisStudent.getAcademic_ques();
                     TableRow tr=new TableRow(AdminViewAllStudentData.this);
                     for (CollegeRegisterQuestions p:personalAnswers)
                     {
@@ -171,6 +197,73 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                         ansT.setText(ans);
                         tr.addView(v);
 
+                    }
+                    for (CollegeRegisterQuestions a:academicAnswers)
+                    {
+                        View v=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
+                        String ans=a.getAnswer();
+                        TextView ansT=v.findViewById(R.id.table_content);
+                        ansT.setText(ans);
+                        tr.addView(v);
+                    }
+                    for (int i=0;i<uploadQ.size();i++)
+                    {
+                        View v=getLayoutInflater().inflate(R.layout.repeatable_table_upload_view,null);
+
+                        Button preview=v.findViewById(R.id.view);
+                        int finalI = i;
+                        int finalI1 = i;
+                        preview.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if(uploadQ.get(finalI).getQuestion().equalsIgnoreCase("Photograph"))
+                                {
+                                    AlertDialog.Builder ab=new AlertDialog.Builder(AdminViewAllStudentData.this);
+                                    ImageView profilepic=new ImageView(AdminViewAllStudentData.this);
+                                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(thisStudent.getEmail());
+                                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            Glide.with(AdminViewAllStudentData.this)
+                                                    .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                    .error(R.drawable.error_profile_picture)
+                                                    .placeholder(R.drawable.default_loading_img)
+                                                    .into(profilepic);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(AdminViewAllStudentData.this,"Loading Failed",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    ab.setView(profilepic);
+                                    ab.create().show();
+                                }
+                                else
+                                {
+                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                    StorageReference storageRef = storage.getReference(adminData.getCollegeId()).child(uploadQ.get(finalI1).getQuestion()).child(thisStudent.getEmail());
+                                    Task<Uri> message = storageRef.getDownloadUrl();
+                                    message.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            Intent intent = new Intent(view.getContext(), ViewPDFActivity.class);
+                                            intent.putExtra("url", uri.toString());
+                                            startActivity(intent);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(AdminViewAllStudentData.this, "No document Uploaded", Toast.LENGTH_SHORT).show();
+                                           // progressbar.setVisibility(View.INVISIBLE);
+                                        }
+                                    });
+                                }
+
+
+                            }
+                        });
+                        tr.addView(v);
                     }
                     tl.post(new Runnable() {
                         @Override
@@ -205,6 +298,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
 
                     StudentData thisStudent=new StudentData();
                     String email=d.getId();
+                    thisStudent.setEmail(email);
                     thisStudent.setName((String) d.get("Name"));
                     ArrayList<CollegeRegisterQuestions> studentPersonalDetails=new ArrayList<>();
                     CollectionReference personalQuesDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(email).collection("Personal Question");
@@ -228,15 +322,40 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                                         }
                                     });
                                     thisStudent.setPersonal_ques(studentPersonalDetails);
+
+                                    ArrayList<CollegeRegisterQuestions> studentAcademicDetails=new ArrayList<>();
+
                                     //once done
-                                    Log.e("Final i",finalI+" "+students.size());
+                                    CollectionReference academicQuesDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(email).collection("Academic Question");
+                                    academicQuesDoc.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                            List<DocumentSnapshot> academicDetails = queryDocumentSnapshots.getDocuments();
+                                            for (DocumentSnapshot a:academicDetails) {
+                                                CollegeRegisterQuestions q=new CollegeRegisterQuestions();
+                                                q.setId(Integer.parseInt(a.getId()));
+                                                q.setAnswer((String) a.get("Answer"));
+                                                studentAcademicDetails.add(q);
+                                                if(studentAcademicDetails.size()==academicDetails.size()) {
+                                                    Collections.sort(studentAcademicDetails, new Comparator<CollegeRegisterQuestions>() {
+                                                        @Override
+                                                        public int compare(CollegeRegisterQuestions collegeRegisterQuestions, CollegeRegisterQuestions t1) {
+                                                            return collegeRegisterQuestions.getId() - t1.getId();
+                                                        }
+                                                    });
+                                                    thisStudent.setAcademic_ques(studentAcademicDetails);
+                                                    {
+                                                        allStudentData.add(thisStudent);
+                                                        Log.e("Adding",allStudentData.toString());
+                                                        allStudentDatatemp=new ArrayList<>(allStudentData);
 
-                                    {
-                                        allStudentData.add(thisStudent);
-                                        Log.e("Adding",allStudentData.toString());
-                                        allStudentDatatemp=new ArrayList<>(allStudentData);
+                                                    }
+                                                }
+                                            }
 
-                                    }
+                                        }
+                                    });
+
                                 }
 
                             }
