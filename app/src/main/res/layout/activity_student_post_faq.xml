@@ -132,15 +132,17 @@
                         android:id="@+id/add_hashtag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ADD" />
+                        android:text="ADD"
+                        android:onClick="addHashtags"
+                        android:background="@drawable/roundedbutton" />
                 </TableRow>
 
                 <LinearLayout
                     android:id="@+id/hashtagLinearL"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/layout_bg"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:scrollbars="vertical">
                     <!--add hashtags here-->
                 </LinearLayout>
 
