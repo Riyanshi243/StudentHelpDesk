@@ -54,6 +54,8 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(studentData==null)
+                    return;
                 lock= (boolean) documentSnapshot.get(studentData.getBranch());
             }});
         t=new Timer();
