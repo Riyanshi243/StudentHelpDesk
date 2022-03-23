@@ -4,9 +4,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
         android:orientation="vertical"
+        android:background="@drawable/customborder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <Button

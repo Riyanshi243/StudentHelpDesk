@@ -16,6 +16,7 @@
             android:id="@+id/table_head"
             android:layout_width="160dp"
             android:layout_height="60dp"
+            android:gravity="center"
             android:background="@drawable/customborder"
             android:inputType="textMultiLine"
             android:text="table_header"

@@ -13,8 +13,9 @@
 
         <TextView
             android:id="@+id/table_content"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:gravity="center"
             android:background="@drawable/customborder"
             android:inputType="textMultiLine"
             android:text="table_content"

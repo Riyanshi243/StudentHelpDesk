@@ -18,8 +18,8 @@ public class StudentViewAllFAQ extends AppCompatActivity {
         setContentView(R.layout.activity_student_view_all_faq);
         addCourse=(FloatingActionButton) findViewById(R.id.addCourse);
     }
-    public void onClick(View v)
+    public void postNew(View v)
     {
-    startActivity(new Intent(StudentViewAllFAQ.this, StudentPostFAQ.class));
+        startActivity(new Intent(StudentViewAllFAQ.this, StudentPostFAQ.class));
     }
 }
