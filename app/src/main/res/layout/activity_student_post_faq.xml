@@ -116,13 +116,24 @@
                     android:layout_marginTop="20dp"/>
 
 
-                <EditText
-                    android:id="@+id/hashtags"
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:hint="Add Hashtag"
-                    android:inputType="textCapSentences" />
+                    android:layout_height="match_parent" >
+
+                    <EditText
+                        android:id="@+id/hashtags"
+                        android:layout_width="293dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Add Hashtag"
+                        android:inputType="textCapSentences" />
+
+                    <Button
+                        android:id="@+id/add_hashtag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ADD" />
+                </TableRow>
 
                 <LinearLayout
                     android:id="@+id/hashtagLinearL"
@@ -150,7 +161,8 @@
                     android:layout_gravity="center"
                     android:text="POST FAQ"
                     android:background="@drawable/roundedbutton"
-                    android:layout_marginBottom="50dp"/>
+                    android:layout_marginBottom="50dp"
+                    android:onClick="postFAQ"/>
 
             </LinearLayout>
         </LinearLayout>

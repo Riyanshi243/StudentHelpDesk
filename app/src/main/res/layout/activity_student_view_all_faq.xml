@@ -81,6 +81,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="26dp"
         android:clickable="true"
+        android:onClick="postNew"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_edit_pencil"
