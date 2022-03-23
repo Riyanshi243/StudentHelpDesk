@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,6 +53,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
     TableLayout tl;
     int domain=0;
     int s=0;
+    static boolean initialSort=true;
     static ArrayList<StudentData> allStudentData=new ArrayList<>();
     static ArrayList<StudentData> allStudentDatatemp=new ArrayList<>();
 
@@ -182,7 +184,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
             @Override
             public void run() {
                 //Log.e("Student",allStudentData.size()+"");
-                if(allStudentData.size()>0&&0<allStudentDatatemp.size())
+                if(0<allStudentDatatemp.size())
                 {
                     StudentData thisStudent=allStudentDatatemp.get(0);
                     allStudentDatatemp.remove(thisStudent);
@@ -194,6 +196,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                         View v=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
                         String ans=p.getAnswer();
                         TextView ansT=v.findViewById(R.id.table_content);
+                        ansT.setMovementMethod(new ScrollingMovementMethod());
                         ansT.setText(ans);
                         tr.addView(v);
 
@@ -203,13 +206,13 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                         View v=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
                         String ans=a.getAnswer();
                         TextView ansT=v.findViewById(R.id.table_content);
+                        ansT.setMovementMethod(new ScrollingMovementMethod());
                         ansT.setText(ans);
                         tr.addView(v);
                     }
                     for (int i=0;i<uploadQ.size();i++)
                     {
                         View v=getLayoutInflater().inflate(R.layout.repeatable_table_upload_view,null);
-
                         Button preview=v.findViewById(R.id.view);
                         int finalI = i;
                         int finalI1 = i;
@@ -273,7 +276,20 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                     });
 
                 }
-
+                /*else if(initialSort==true && allStudentData.size()>0)
+                {
+                    tl.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(tl!=null)
+                                tl.removeAllViews();
+                        }
+                    });
+                    show();
+                    sort();
+                    Log.e("Riya","INITIAL SORT");
+                    initialSort=false;
+                }*/
             }
         },1000,10);
     }
@@ -414,6 +430,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
             name.setText( personalQ.get(i).getQuestion());
+            name.setMovementMethod(new ScrollingMovementMethod());
             heading.addView(headingname);
         }
         for(int i=0;i<academicQ.size();i++)
@@ -421,6 +438,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
             name.setText(academicQ.get(i).getQuestion());
+            name.setMovementMethod(new ScrollingMovementMethod());
             heading.addView(headingname);
         }
         for(int i=0;i<uploadQ.size();i++)
@@ -428,6 +446,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
             name.setText(uploadQ.get(i).getQuestion());
+            name.setMovementMethod(new ScrollingMovementMethod());
             heading.addView(headingname);
         }
         tl.addView(heading);
