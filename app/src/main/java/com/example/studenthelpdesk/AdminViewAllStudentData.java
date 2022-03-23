@@ -40,18 +40,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class AdminViewAllStudentData extends AppCompatActivity {
 
-    ArrayList<CollegeRegisterQuestions> personalQ,academicQ,uploadQ;
+    static ArrayList<CollegeRegisterQuestions> personalQ,academicQ,uploadQ;
     AutoCompleteTextView sortin;
     AdminData adminData;
     TableLayout tl;
-    int domain=0;
-    int s=0;
+    static int domain=0;
+    static int k=0;
+    static int s=0;
     static ArrayList<StudentData> allStudentData=new ArrayList<>();
     static ArrayList<StudentData> allStudentDatatemp=new ArrayList<>();
 
@@ -365,22 +367,37 @@ public class AdminViewAllStudentData extends AppCompatActivity {
             }
         });
     }
-    int k=0;
-    public void sort()
+    public static void sort()
     {
 
         Log.e("Answers before",allStudentData.toString());
+
         Collections.sort(allStudentData, new Comparator<StudentData>() {
             @Override
             public int compare(StudentData studentData, StudentData t1) {
-                ArrayList<CollegeRegisterQuestions> s1=studentData.getPersonal_ques();
-                ArrayList<CollegeRegisterQuestions> s2=t1.getPersonal_ques();
-                CollegeRegisterQuestions s11=s1.get(k);
-                CollegeRegisterQuestions s12=s2.get(k);
-                if(s==0)
-                    return s11.getAnswer().compareTo(s12.getAnswer());
+                if(domain==0)
+                {
+                    ArrayList<CollegeRegisterQuestions> s1=studentData.getPersonal_ques();
+                    ArrayList<CollegeRegisterQuestions> s2=t1.getPersonal_ques();
+                    CollegeRegisterQuestions s11=s1.get(k);
+                    CollegeRegisterQuestions s12=s2.get(k);
+                    if(s==0)
+                        return s11.getAnswer().toLowerCase(Locale.ROOT).compareTo(s12.getAnswer().toLowerCase(Locale.ROOT));
+                    else
+                        return s12.getAnswer().toLowerCase(Locale.ROOT).compareTo(s11.getAnswer().toLowerCase(Locale.ROOT));
+                }
                 else
-                    return s12.getAnswer().compareTo(s11.getAnswer());
+                {
+                    ArrayList<CollegeRegisterQuestions> s1=studentData.getAcademic_ques();
+                    ArrayList<CollegeRegisterQuestions> s2=t1.getAcademic_ques();
+                    CollegeRegisterQuestions s11=s1.get(k);
+                    CollegeRegisterQuestions s12=s2.get(k);
+                    if(s==0)
+                        return s11.getAnswer().toLowerCase(Locale.ROOT).compareTo(s12.getAnswer().toLowerCase(Locale.ROOT));
+                    else
+                        return s12.getAnswer().toLowerCase(Locale.ROOT).compareTo(s11.getAnswer().toLowerCase(Locale.ROOT));
+                }
+
             }
         });
         Log.e("Answers",allStudentData.toString());
