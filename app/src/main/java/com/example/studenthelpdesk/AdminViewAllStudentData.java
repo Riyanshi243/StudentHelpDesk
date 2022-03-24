@@ -3,10 +3,14 @@ package com.example.studenthelpdesk;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +41,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -296,6 +301,17 @@ public class AdminViewAllStudentData extends AppCompatActivity {
     }
     public void filters(View v){
         startActivity(new Intent(AdminViewAllStudentData.this, AdminViewAllStudentDataFilters.class));
+    }
+    public void downloadExcel(View v)
+    {
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                PackageManager.PERMISSION_GRANTED);
+        FileHandling getWorkbook=new FileHandling();
+        File filePath = new File(getExternalFilesDir(null), "/Demo.xls");
+        getWorkbook.createExcel("World","hi",filePath);
+
     }
     public void get()
     {

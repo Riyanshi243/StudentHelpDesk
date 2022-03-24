@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -74,6 +75,7 @@ public class StudentPostFAQ extends AppCompatActivity {
                     DocumentSnapshot d=adminDetail.get(i);
                     String category= (String) d.get("Category");
                     String name,dept;
+                    Log.e("Helooooo",category+" "+(String) d.get("Name"));
                     if(category.equalsIgnoreCase("Admin"))
                     {
                         name=(String) d.get("Name");
