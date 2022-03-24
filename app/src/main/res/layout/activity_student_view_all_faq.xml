@@ -67,6 +67,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <!-- FAQs added -->
+
             </LinearLayout>
 
 

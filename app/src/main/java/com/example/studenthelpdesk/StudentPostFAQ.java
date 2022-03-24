@@ -1,5 +1,6 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,6 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -38,7 +43,8 @@ public class StudentPostFAQ extends AppCompatActivity {
     String cId,selectedAdmin;
     LinearLayout hashtagsll;
     int hashcounter=1;
-    HashSet<String> hashtagsName;
+    ArrayList<String> hashtagsName;
+    HashMap<String, Object> faqDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +58,13 @@ public class StudentPostFAQ extends AppCompatActivity {
         postFAQ.setEnabled(true);
         hashtagsll=findViewById(R.id.hashtagLinearL);
         studentData=StudentPage.studentData;
-        hashtagsName=new HashSet<>();
+
+        hashtagsName=new ArrayList<>();
+        faqDetails=new HashMap<>();
 
         cId=studentData.getCollegeid();
         ArrayList<String> concernedAdmins=new ArrayList<>();
+        ArrayList<String> concernedAdminsEmail=new ArrayList<>();
         CollectionReference allAdmins = FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("UsersInfo");
         allAdmins.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -70,25 +79,56 @@ public class StudentPostFAQ extends AppCompatActivity {
                         name=(String) d.get("Name");
                         dept=(String) d.get("Department");
                         concernedAdmins.add(name+", "+dept);
+                        concernedAdminsEmail.add(d.getId());
+                    }
+                    if(i==adminDetail.size()-1) {
                         ArrayAdapter spinnerList = new ArrayAdapter(StudentPostFAQ.this, android.R.layout.simple_spinner_item, concernedAdmins);
-                        if(i==adminDetail.size()-1)
-                            concernedAdmin.setAdapter(spinnerList);
+                        concernedAdmin.setAdapter(spinnerList);
+                        concernedAdmin.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                selectedAdmin=concernedAdminsEmail.get(position);
+                            }
+                        });
                     }
                 }
-                concernedAdmin.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //selectedAdmin=
-                    }
-                });
             }
         });
     }
+    //data - faqcontent, tagged admin, arraylist of hashtags, boolean (Ask as Anonymous)
     public void postFAQ(View v)
     {
         if(nonEmpty())
         {
-
+            Date t=Calendar.getInstance().getTime();
+            String dateToday=t.toString();
+            faqDetails.put("Content",FAQ_content.getText().toString());
+            faqDetails.put("Tagged Admin", selectedAdmin);
+            faqDetails.put("HashTags",hashtagsName);
+            faqDetails.put("Sent Time",t.toString());
+            if(anonymous.isChecked())
+            {
+                faqDetails.put("Sender", "Anonymous");
+                faqDetails.put("SenderEmail", null);
+            }
+            else {
+                faqDetails.put("Sender", studentData.getName());
+                faqDetails.put("SenderEmail", studentData.getEmail());
+            }
+            String faqId=studentData.getEmail()+"_"+t;
+            DocumentReference faqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("FAQ").document(faqId);
+            faqDoc.set(faqDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(StudentPostFAQ.this, "Your FAQ is posted!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(StudentPostFAQ.this, "Sorry! An error occured! Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
     public void addHashtags(View v)
