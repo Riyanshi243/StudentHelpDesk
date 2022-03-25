@@ -9,6 +9,7 @@ import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,6 +31,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
     ArrayList<FAQData> faqData;
     static StudentData studentData;
     LinearLayout ll;
+    ProgressBar pbar;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,6 +39,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
         setContentView(R.layout.activity_student_view_all_faq);
         addPost=(FloatingActionButton)findViewById(R.id.addCourse);
         studentData=StudentPage.studentData;
+        pbar=findViewById(R.id.progressBar5);
         faqData=new ArrayList<>();
 
         CollectionReference docReq = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("FAQ");
@@ -44,6 +47,14 @@ public class StudentViewAllFAQ extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> faqList = queryDocumentSnapshots.getDocuments();
+                if(faqList.size()==0)
+                {
+                    TextView t=new TextView(StudentViewAllFAQ.this);
+                    pbar.setVisibility(View.GONE);
+                    t.setText("  You have no related posts yet.");
+                    t.setTextSize(20);
+                    ll.addView(t);
+                }
                 for (int i = 0; i < faqList.size(); i++) {
                     FAQData thisFaq=new FAQData();
                     DocumentSnapshot d=faqList.get(i);
@@ -51,6 +62,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     thisFaq.setSenderName((String) d.get("Sender"));
                     thisFaq.setTimeOfPost((String) d.get("Sent Time"));
                     thisFaq.setTaggedAdmin((String) d.get("Tagged Admin"));
+                    thisFaq.setHashtags((ArrayList<String>) d.get("HashTags"));
                     faqData.add(thisFaq);
                 }
             }
@@ -59,11 +71,27 @@ public class StudentViewAllFAQ extends AppCompatActivity {
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                if(faqData.size()==0)
+                {
+                    pbar.setVisibility(View.GONE);
+                }
                 if(faqData.size()>0)
                 {
                     ll=findViewById(R.id.linearlay);
                     FAQData currPost=faqData.get(0);
                     View viewPost=getLayoutInflater().inflate(R.layout.repeatable_faq,null);
+
+                    ArrayList<String> allHashtags=new ArrayList<>();
+                    allHashtags= currPost.getHashtags();
+                    LinearLayout hashtags=viewPost.findViewById(R.id.hashtagLinearL);
+                    for (int i = 0; i <allHashtags.size() ; i++) {
+                        String thisHashtag=allHashtags.get(i);
+                        View viewHashtags=getLayoutInflater().inflate(R.layout.repeatable_hashtag2,null);
+                        TextView hashvale= viewHashtags.findViewById(R.id.Hashtag);
+                        hashvale.setText("#"+thisHashtag);
+                        hashtags.addView(viewHashtags);
+                    }
+
                     TextView postContent=viewPost.findViewById(R.id.question);
                     postContent.setText(currPost.getContentPost());
                     Linkify.addLinks(postContent, Linkify.ALL);
@@ -79,6 +107,8 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                         }
                     });
                     faqData.remove(currPost);
+                    if(faqData.size()==0)
+                        pbar.setVisibility(View.GONE);
                 }
             }
         },1000,100);

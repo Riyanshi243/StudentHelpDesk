@@ -1,7 +1,10 @@
 package com.example.studenthelpdesk;
 
+import java.util.ArrayList;
+
 public class FAQData {
     private String content,sender,senderEmail, time, taggedAdmin;
+    private ArrayList<String> hashtags;
 
     public String getContentPost() {
         return content;
@@ -35,6 +38,14 @@ public class FAQData {
 
     public void setTaggedAdmin(String taggedAdmin) {
         this.taggedAdmin = taggedAdmin;
+    }
+
+    public ArrayList<String> getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(ArrayList<String> hashtags) {
+        this.hashtags = hashtags;
     }
 
 }
