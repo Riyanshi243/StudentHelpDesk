@@ -38,6 +38,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
         addPost=(FloatingActionButton)findViewById(R.id.addCourse);
         studentData=StudentPage.studentData;
         pbar=findViewById(R.id.progressBar5);
+        ll=findViewById(R.id.linearlay);
         faqData=new ArrayList<>();
         ll=findViewById(R.id.linearlay);
         CollectionReference docReq = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("FAQ");

@@ -47,7 +47,6 @@ public class StudentSignup1_PersonalData extends AppCompatActivity implements Da
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentsignup1_personal_data);
         studentData=Signup.studentData;
-
         ll=findViewById(R.id.linearlay);
         pQuestion=new ArrayList<>();
         FirebaseFirestore f=FirebaseFirestore.getInstance();
