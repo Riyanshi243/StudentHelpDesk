@@ -46,28 +46,32 @@
                     android:textColor="@color/white"
                     android:textSize="32dp" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar5"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="invisible" />
-
             </LinearLayout>
 
 
             <SearchView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Search Hashtags" />
+                android:hint="Search Hashtags"
+                android:visibility="gone" />
+
+
 
             <LinearLayout
                 android:id="@+id/linearlay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp">
+
+                <!-- FAQs added -->
 
             </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progressBar5"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
 
         </LinearLayout>

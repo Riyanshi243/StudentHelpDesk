@@ -12,9 +12,7 @@ public class RequestData
         this.uid = uid;
     }
 
-    public String getDocId() {
-        return docId;
-    }
+    public String getDocId() { return docId; }
 
     public void setDocId(String docId) {
         this.docId = docId;

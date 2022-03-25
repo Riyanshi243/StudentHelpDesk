@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <LinearLayout
         android:id="@+id/ll1"
         android:layout_width="match_parent"
@@ -13,9 +12,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
+        android:padding="5dp"
         android:background="@drawable/layout_bg"
         android:orientation="vertical"
-        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.842"
@@ -27,22 +26,11 @@
             android:id="@+id/hashtagLinearL"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp">
-            <!-- add hastags in this linear layout -->
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:inputType="textMultiLine"
-            android:text="You are tagged in this post!"
-            android:textColor="@color/blue_text"
-            android:textSize="18dp" />
+            android:background="@drawable/layout_bg"
+            android:orientation="horizontal">
+            <!--add hashtags here-->
+        </LinearLayout>
 
         <TextView
             android:id="@+id/question_time"
@@ -51,15 +39,15 @@
             android:layout_gravity="right"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:text="timeofpost" />
-
+            android:layout_marginRight="10dp"
+            android:text="Question_time" />
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:id="@+id/questionby"
@@ -70,58 +58,76 @@
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
-
             <TextView
                 android:id="@+id/question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
+                android:paddingRight="5dp"
                 android:text="Question"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                android:paddingRight="5dp"/>
+                android:textSize="18dp" />
+
         </TableRow>
 
-        <Button
-            android:id="@+id/answer_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/roundedbutton"
-            android:text="ANSWER THIS FAQ"/>
-
         <LinearLayout
-            android:id="@+id/answerFAQll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:visibility="gone">
 
-            <EditText
-                android:id="@+id/answer_to_FAQ"
+            <TextView
+                android:id="@+id/answer_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Answer_time" />
+
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Type your answer..."
-                android:inputType="textMultiLine"
-                android:visibility="visible" />
+                android:layout_marginTop="10dp">
 
-            <Button
-                android:id="@+id/post_answer_button"
-                android:layout_width="wrap_content"
+
+                <ImageView
+                    android:id="@+id/profilepic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/admin_profile_img" />
+
+                <TextView
+                    android:id="@+id/refew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Answered by: "
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+            </TableRow>
+
+            <TextView
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="POST ANSWER"
-                android:background="@drawable/roundedbutton"
-                android:visibility="visible" />
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="10dp"
+                android:text="answer "
+                android:textColor="@color/black"
+                android:textSize="18dp" />
         </LinearLayout>
 
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
