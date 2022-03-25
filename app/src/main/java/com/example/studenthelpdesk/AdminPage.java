@@ -106,6 +106,8 @@ public class AdminPage extends AppCompatActivity {
                                                         .error(R.drawable.admin_profile_img)
                                                         .placeholder(R.drawable.default_loading_img)
                                                         .into(profilepic);
+
+                                                AdminViewAllStudentData.get(adminData);
                                             }
                                         });
 

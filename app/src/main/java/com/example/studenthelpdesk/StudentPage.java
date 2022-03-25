@@ -176,6 +176,8 @@ public class StudentPage extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                                         long total= (long) documentSnapshot.get("Total");
+                                                                        if(studentData==null)
+                                                                            return;
                                                                         studentData.setNoPersonalQ(total);
                                                                         for (int i=0;i<(int)total;i++)
                                                                         {
@@ -223,6 +225,8 @@ public class StudentPage extends AppCompatActivity {
                                                                                                     @Override
                                                                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                                                                         long total= (long) documentSnapshot.get("Total");
+                                                                                                        if(studentData==null)
+                                                                                                            return;
                                                                                                         studentData.setNoUploadQ(total);
                                                                                                         for (int i=0;i<(int)total;i++)
                                                                                                         {
@@ -253,6 +257,8 @@ public class StudentPage extends AppCompatActivity {
                                                                                                                                 return i1;
                                                                                                                             }
                                                                                                                         });
+                                                                                                                        if(studentData==null)
+                                                                                                                            return;
                                                                                                                         studentData.setUpload_ques(uploadQ);
                                                                                                                         progressBar.setVisibility(View.INVISIBLE);
                                                                                                                     }

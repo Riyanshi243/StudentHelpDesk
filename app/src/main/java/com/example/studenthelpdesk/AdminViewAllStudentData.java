@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -18,8 +20,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -41,7 +45,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,10 +62,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class AdminViewAllStudentData extends AppCompatActivity {
-
+Timer t;
     static ArrayList<CollegeRegisterQuestions> personalQ,academicQ,uploadQ;
     AutoCompleteTextView sortin;
-    AdminData adminData;
+    static AdminData adminData;
     TableLayout tl;
     static int domain=0;
     static int k=0;
@@ -162,7 +172,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                                                                             uploadQ.add(crq);
                                                                             if(finalI4 ==total-1) {
                                                                                 show();
-                                                                                get();
+                                                                                //get(adminData);
                                                                             }
                                                                         }
                                                                     });
@@ -185,7 +195,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                 }
             }
         });
-        Timer t=new Timer();
+        t=new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -308,16 +318,102 @@ public class AdminViewAllStudentData extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 PackageManager.PERMISSION_GRANTED);
-        FileHandling getWorkbook=new FileHandling();
-        File filePath = new File(getExternalFilesDir(null), "/Demo.xls");
-        getWorkbook.createExcel("World","hi",filePath);
+        AlertDialog.Builder ab=new AlertDialog.Builder(this);
+        ab.setTitle("Enter the name of Excel File");
+        EditText et=new EditText(this);
+        ab.setView(et);
+        ab.setMessage("Upload Details wont be downloaded here");
+        ab.setPositiveButton("Download", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String fileName=et.getText().toString().trim()+".xls";
+                String sheetName=et.getText().toString();
+                File filePath=new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),fileName);
+                try {
+
+                    if (!filePath.exists()){
+                        filePath.getParentFile().mkdirs();
+                        filePath.createNewFile();
+                        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+                        HSSFSheet hssfSheet = hssfWorkbook.createSheet(sheetName);
+                        ProgressBar progressDialog=new ProgressBar(AdminViewAllStudentData.this);
+                       // progressDialog.(false);
+                        //progressDialog.setTitle("Downloading Data");
+                        //progressDialog.show();
+                        putData(hssfSheet,progressDialog);
+                        FileOutputStream fileOutputStream= new FileOutputStream(filePath);
+                        hssfWorkbook.write(fileOutputStream);
+
+                        if (fileOutputStream!=null){
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+                        }
+                        Toast.makeText(AdminViewAllStudentData.this,"File stored at"+filePath.getPath(),Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(AdminViewAllStudentData.this,"File Already Exists",Toast.LENGTH_SHORT).show();
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("File path",e.toString());
+                }
+
+            }
+        });
+        ab.create().show();
+       /* Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(filePath),"application/vnd.ms-excel");
+        startActivity(intent);*/
+    }
+    public void putData(HSSFSheet thisSheet,ProgressBar progressDialog)
+    {
+        HSSFRow heading=thisSheet.createRow(0);
+        int c=0;
+        int rows=allStudentData.size()+1;
+        progressDialog.setProgress(1/rows);
+        for(int i=0;i<personalQ.size();i++)
+        {
+            HSSFCell thisCell=heading.createCell(c++);
+            thisCell.setCellValue(personalQ.get(i).getQuestion());
+        }
+        for(int i=0;i<academicQ.size();i++)
+        {
+            HSSFCell thisCell=heading.createCell(c++);
+            thisCell.setCellValue(academicQ.get(i).getQuestion());
+        }
+        for(int i=0;i<allStudentData.size();i++)
+        {
+            StudentData thisStudent = allStudentData.get(i);
+
+            progressDialog.setProgress(i+2/rows);
+            HSSFRow thisRow=thisSheet.createRow(i+1);
+            int c1=0;
+            ArrayList<CollegeRegisterQuestions> personalAnswers = thisStudent.getPersonal_ques();
+            ArrayList<CollegeRegisterQuestions> academicAnswers=thisStudent.getAcademic_ques();
+            for (CollegeRegisterQuestions p:personalAnswers)
+            {
+                String ans=p.getAnswer();
+                HSSFCell thisCell=thisRow.createCell(c1++);
+                thisCell.setCellValue(ans);
+            }
+            for (CollegeRegisterQuestions p:academicAnswers)
+            {
+                String ans=p.getAnswer();
+                HSSFCell thisCell=thisRow.createCell(c1++);
+                thisCell.setCellValue(ans);
+            }
+
+        }
 
     }
-    public void get()
+    public static void get(AdminData adminData)
     {
         //sort all the questions based on id
-        Query studentsAll = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").orderBy("Name", com.google.firebase.firestore.Query.Direction.DESCENDING);
-        studentsAll.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        CollectionReference studentsAll = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo");
+        studentsAll.orderBy("Name", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> students = queryDocumentSnapshots.getDocuments();
@@ -328,11 +424,11 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                     if(cat.equalsIgnoreCase("Student")==false) {
                         continue;
                     }
-
                     StudentData thisStudent=new StudentData();
                     String email=d.getId();
                     thisStudent.setEmail(email);
                     thisStudent.setName((String) d.get("Name"));
+                    Log.e("Name in order",thisStudent.getName());
                     ArrayList<CollegeRegisterQuestions> studentPersonalDetails=new ArrayList<>();
                     CollectionReference personalQuesDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(email).collection("Personal Question");
                     int finalI = i;
@@ -380,7 +476,8 @@ public class AdminViewAllStudentData extends AppCompatActivity {
                                                     {
                                                         allStudentData.add(thisStudent);
                                                         Log.e("Adding",allStudentData.toString());
-                                                        allStudentDatatemp=new ArrayList<>(allStudentData);
+                                                        sort();
+                                                        //allStudentDatatemp=new ArrayList<>(allStudentData);
 
                                                     }
                                                 }
@@ -400,9 +497,7 @@ public class AdminViewAllStudentData extends AppCompatActivity {
     }
     public static void sort()
     {
-
         Log.e("Answers before",allStudentData.toString());
-
         Collections.sort(allStudentData, new Comparator<StudentData>() {
             @Override
             public int compare(StudentData studentData, StudentData t1) {
@@ -484,4 +579,10 @@ public class AdminViewAllStudentData extends AppCompatActivity {
         tl.addView(heading);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        t.purge();
+        t.cancel();
+    }
 }
