@@ -122,6 +122,13 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
+            <Button
+                android:id="@+id/downloadExcel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="downloadExcel"
+                android:text="Download " />
+
         </LinearLayout>
     </ScrollView>
 

@@ -47,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:id="@+id/questionby"
@@ -64,61 +65,69 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
+                android:paddingRight="5dp"
                 android:text="Question"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:paddingRight="5dp"/>
-        </TableRow>
-
-        <TextView
-            android:id="@+id/answer_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Answer_time" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp">
-
-
-            <ImageView
-                android:id="@+id/profilepic"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@drawable/admin_profile_img" />
-
-            <TextView
-                android:id="@+id/refew"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="Answered by: "
-                android:paddingLeft="10dp"
-                android:gravity="center"
-                android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
         </TableRow>
 
-        <TextView
-            android:id="@+id/answer"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp"
-            android:paddingLeft="10dp"
-            android:text="answer "
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/answer_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Answer_time" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp">
+
+
+                <ImageView
+                    android:id="@+id/profilepic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/admin_profile_img" />
+
+                <TextView
+                    android:id="@+id/refew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Answered by: "
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+            </TableRow>
+
+            <TextView
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="10dp"
+                android:text="answer "
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
 
 
     </LinearLayout>

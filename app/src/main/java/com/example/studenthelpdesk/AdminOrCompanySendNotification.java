@@ -90,7 +90,6 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                 if(i==0)
                 {
                     token=finalCId;
-
                     LinearLayout add1=findViewById(R.id.add);
                     add1.removeAllViews();
                 }
