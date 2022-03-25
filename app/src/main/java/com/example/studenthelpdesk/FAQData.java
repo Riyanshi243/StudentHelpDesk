@@ -3,7 +3,7 @@ package com.example.studenthelpdesk;
 import java.util.ArrayList;
 
 public class FAQData {
-    private String content,sender,senderEmail, time, taggedAdmin;
+    private String content,sender,senderEmail, time, taggedAdmin,FAQanswer;
     private ArrayList<String> hashtags;
 
     public String getContentPost() {
@@ -40,12 +40,15 @@ public class FAQData {
         this.taggedAdmin = taggedAdmin;
     }
 
-    public ArrayList<String> getHashtags() {
-        return hashtags;
+    public ArrayList<String> getHashtags() { return hashtags; }
+
+    public void setHashtags(ArrayList<String> hashtags) { this.hashtags = hashtags; }
+
+    public String getFAQanswer() { return FAQanswer; }
+
+    public void setFAQanswer(String FAQanswer) {
+        this.FAQanswer= FAQanswer;
     }
 
-    public void setHashtags(ArrayList<String> hashtags) {
-        this.hashtags = hashtags;
-    }
 
 }

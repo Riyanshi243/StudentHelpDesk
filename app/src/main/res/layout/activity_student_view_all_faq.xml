@@ -52,7 +52,8 @@
             <SearchView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Search Hashtags" />
+                android:hint="Search Hashtags"
+                android:visibility="gone" />
 
 
 

@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -79,7 +77,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                 {
                     ll=findViewById(R.id.linearlay);
                     FAQData currPost=faqData.get(0);
-                    View viewPost=getLayoutInflater().inflate(R.layout.repeatable_faq,null);
+                    View viewPost=getLayoutInflater().inflate(R.layout.repeatable_faq_student,null);
 
                     ArrayList<String> allHashtags=new ArrayList<>();
                     allHashtags= currPost.getHashtags();
