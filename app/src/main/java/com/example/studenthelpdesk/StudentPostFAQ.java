@@ -148,7 +148,7 @@ public class StudentPostFAQ extends AppCompatActivity {
             public void onClick(View v) {
                 hashtagsll.removeView(hashvalue);
                 hashcounter--;
-                hashtagsName.remove(hastag.getText().toString());
+                hashtagsName.remove(value.getText().toString());
             }
         });
         if (hastag.getText().toString().length() == 0) {

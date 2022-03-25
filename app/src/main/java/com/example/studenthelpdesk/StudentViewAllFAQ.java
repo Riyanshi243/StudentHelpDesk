@@ -38,6 +38,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
         addPost=(FloatingActionButton)findViewById(R.id.addCourse);
         studentData=StudentPage.studentData;
         pbar=findViewById(R.id.progressBar5);
+        ll=findViewById(R.id.linearlay);
         faqData=new ArrayList<>();
 
         CollectionReference docReq = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("FAQ");
@@ -71,7 +72,12 @@ public class StudentViewAllFAQ extends AppCompatActivity {
             public void run() {
                 if(faqData.size()==0)
                 {
-                    pbar.setVisibility(View.GONE);
+                    pbar.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            pbar.setVisibility(View.GONE);
+                        }
+                    });
                 }
                 if(faqData.size()>0)
                 {
@@ -105,8 +111,6 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                         }
                     });
                     faqData.remove(currPost);
-                    if(faqData.size()==0)
-                        pbar.setVisibility(View.GONE);
                 }
             }
         },1000,100);
