@@ -141,14 +141,17 @@ public class StudentPostFAQ extends AppCompatActivity {
             return;
         }
         View hashvalue=getLayoutInflater().inflate(R.layout.repeatable_hashtag,null);
-        TextView value=hashvalue.findViewById(R.id.Hashtag);
+        TextView value=hashvalue.findViewById(R.id.Hashtag);//value of hashtag in textview
         ImageView cancelHash=hashvalue.findViewById(R.id.delete);
+
         cancelHash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hashtagsll.removeView(hashvalue);
                 hashcounter--;
-                hashtagsName.remove(value.getText().toString());
+                int index=hashtagsName.indexOf(value.getText().toString());
+                hashtagsName.remove(value.getText().toString().substring(1));
+                faqDetails.put("HashTags",hashtagsName);
             }
         });
         if (hastag.getText().toString().length() == 0) {
