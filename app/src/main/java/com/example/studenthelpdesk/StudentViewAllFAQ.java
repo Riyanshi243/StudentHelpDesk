@@ -40,7 +40,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
         pbar=findViewById(R.id.progressBar5);
         ll=findViewById(R.id.linearlay);
         faqData=new ArrayList<>();
-
+        ll=findViewById(R.id.linearlay);
         CollectionReference docReq = FirebaseFirestore.getInstance().collection("All Colleges").document(studentData.getCollegeid()).collection("FAQ");
         docReq.orderBy("Sent Time", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -111,6 +111,15 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                         }
                     });
                     faqData.remove(currPost);
+                    if(faqData.size()==0)
+                    {
+                        pbar.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                pbar.setVisibility(View.GONE);
+                            }
+                        });
+                    }
                 }
             }
         },1000,100);
