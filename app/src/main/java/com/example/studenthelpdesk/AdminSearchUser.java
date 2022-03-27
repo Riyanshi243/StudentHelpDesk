@@ -267,7 +267,6 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                 for (int i=0;i<(int)total;i++)
                                                                                                 {
                                                                                                     DocumentReference docCurrQues = docPersQues.collection(i + "").document(i + "");
-
                                                                                                     int finalI1 = i;
                                                                                                     int finalI2 = i;
                                                                                                     docCurrQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -446,6 +445,7 @@ public class AdminSearchUser extends AppCompatActivity{
                         });
                         ll.addView(photo);
                         companyData=new CompanyData();
+                        companyData.setEmail(email.getText().toString());
                         companyData.setPersonalEmail((String) documentSnapshot.get("Personal Email"));
                         companyData.setLocation((String) documentSnapshot.get("Company Location"));
                         companyData.setCompanyName((String) documentSnapshot.get("Company Name"));
@@ -453,6 +453,16 @@ public class AdminSearchUser extends AppCompatActivity{
                         companyData.setPhone((String) documentSnapshot.get("Phone Number"));
                         if(category[0].equalsIgnoreCase("Company"))
                         {
+                            String companyEmail=companyData.getEmail();
+                            View companyEmail_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_email=companyEmail_.findViewById(R.id.Ques);
+                            TextView ans_email=companyEmail_.findViewById(R.id.ans);
+                            ques_email.setText("COMPANY EMAIL");
+                            ans_email.setText(companyEmail);
+                            Linkify.addLinks(ans_email, Linkify.ALL);
+                            ans_email.setLinkTextColor(Color.parseColor("#034ABC"));
+                            ll.addView(companyEmail_);
+
                             String name=companyData.getCompanyName();
                             View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_name=name_.findViewById(R.id.Ques);

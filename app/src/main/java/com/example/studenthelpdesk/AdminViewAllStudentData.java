@@ -83,6 +83,10 @@ Timer t;
         personalQ=new ArrayList<>();
         academicQ=new ArrayList<>();
         uploadQ=new ArrayList<>();
+        //creating new instance again on onCreate to avoid repetition of values
+        allStudentDatatemp=new ArrayList<>();
+        allStudentData=new ArrayList<>();
+        s=0;k=0;
         String[] sortinList={"Ascending Order","Descending Order"}; //Ascending = 0 and descending =1
         ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,sortinList);
         sortin.setAdapter(spinnerList);
@@ -279,8 +283,6 @@ Timer t;
                                         }
                                     });
                                 }
-
-
                             }
                         });
                         tr.addView(v);
@@ -291,9 +293,7 @@ Timer t;
                             tl.addView(tr);
                         }
                     });
-
                 }
-
             }
         },1000,10);
     }
@@ -345,7 +345,6 @@ Timer t;
                     e.printStackTrace();
                     Log.e("File path",e.toString());
                 }
-
             }
         });
         ab.create().show();
@@ -390,9 +389,7 @@ Timer t;
                 HSSFCell thisCell=thisRow.createCell(c1++);
                 thisCell.setCellValue(ans);
             }
-
         }
-
     }
     public static void get(AdminData adminData)
     {
@@ -468,12 +465,9 @@ Timer t;
                                                     }
                                                 }
                                             }
-
                                         }
                                     });
-
                                 }
-
                             }
                         }
                     });
