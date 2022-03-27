@@ -3,8 +3,12 @@ package com.example.studenthelpdesk;
 import java.util.ArrayList;
 
 public class FAQData {
-    private String content,sender,senderEmail, time, taggedAdmin,FAQanswer;
+    private String content,sender,senderEmail, time, taggedAdmin,FAQanswer,id;
     private ArrayList<String> hashtags;
+
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
 
     public String getContentPost() {
         return content;

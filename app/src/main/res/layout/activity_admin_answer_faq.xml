@@ -54,7 +54,7 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="casual"
                 android:paddingLeft="5dp"
-                android:text="All the FAQ's in which you are tagged in are displayed below. You may filter them using the checkboxes below."
+                android:text="All the FAQ's are displayed below. The FAQs in which you are tagged in will have an option to answer."
                 android:textColor="@color/black"
                 android:textSize="16dp" />
 

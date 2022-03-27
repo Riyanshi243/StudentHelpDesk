@@ -1,5 +1,6 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,15 +13,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +35,8 @@ public class AdminAnswerFAQ extends AppCompatActivity {
     LinearLayout ll;
     ProgressBar pbar;
     ArrayList<FAQData> faqData;
+    FAQData FAQData;
+    HashMap<String, Object> faqDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +44,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
         adminData=AdminPage.adminData;
         pbar=findViewById(R.id.progressBar5);
         faqData=new ArrayList<>();
+        faqDetails=new HashMap<>();
 
         CollectionReference docReq = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("FAQ");
         docReq.orderBy("Sent Time", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -59,6 +67,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     thisFaq.setTimeOfPost((String) d.get("Sent Time"));
                     thisFaq.setTaggedAdmin((String) d.get("Tagged Admin"));
                     thisFaq.setHashtags((ArrayList<String>) d.get("HashTags"));
+                    thisFaq.setId(d.getId());
                     faqData.add(thisFaq);
                 }
             }
@@ -75,35 +84,74 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             pbar.setVisibility(View.GONE);
                         }
                     });
-
                 }
                 if(faqData.size()>0)
                 {
                     ll=findViewById(R.id.linearlay);
                     FAQData currPost=faqData.get(0);
                     View viewPost=getLayoutInflater().inflate(R.layout.repeatable_admin_answer_faq,null);
-
-                    ArrayList<String> allHashtags=new ArrayList<>();
+                    ArrayList<String> allHashtags = new ArrayList<>();
                     allHashtags= currPost.getHashtags();
                     LinearLayout hashtags=viewPost.findViewById(R.id.hashtagLinearL);
-                    for (int i = 0; i <allHashtags.size() ; i++) {
+                    for (int i = 0; i <allHashtags.size() ; i++)
+                    {
                         String thisHashtag=allHashtags.get(i);
                         View viewHashtags=getLayoutInflater().inflate(R.layout.repeatable_hashtag2,null);
                         TextView hashvale= viewHashtags.findViewById(R.id.Hashtag);
                         hashvale.setText("#"+thisHashtag);
                         hashtags.addView(viewHashtags);
-                        Button answerButton=(Button) viewPost.findViewById(R.id.answer_button);
-                        Button postAnswerButton= (Button) viewPost.findViewById(R.id.post_answer_button);
-                        EditText answerToFAQ=viewPost.findViewById(R.id.answer_to_FAQ);
-                        LinearLayout answerFAQll=viewPost.findViewById(R.id.answerFAQll);
-                        answerButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                answerFAQll.setVisibility(View.VISIBLE);
-
-                            }
-                        });
                     }
+                    Button answerButton=(Button) viewPost.findViewById(R.id.answer_button);
+                    Button postAnswerButton= (Button) viewPost.findViewById(R.id.post_answer_button);
+                    Button discardButton=(Button) viewPost.findViewById(R.id.discard_button);
+                    EditText answerToFAQ=viewPost.findViewById(R.id.answer_to_FAQ);
+                    LinearLayout answerFAQll=viewPost.findViewById(R.id.answerFAQll);
+                    TextView headerMsg=viewPost.findViewById(R.id.msg);
+                    String taggedAdmin= currPost.getTaggedAdmin();
+                    if(!taggedAdmin.equalsIgnoreCase(adminData.getEmail()))
+                    {
+                        headerMsg.setVisibility(View.GONE);
+                        answerButton.setVisibility(View.GONE);
+                    }
+                    answerButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            answerFAQll.setVisibility(View.VISIBLE);
+                            answerButton.setVisibility(View.GONE);
+                        }
+                    });
+                    postAnswerButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(answerToFAQ.getText().toString().length()==0)
+                            {
+                                answerToFAQ.setError("This cannot be empty");
+                                answerToFAQ.requestFocus();
+                                return;
+                            }
+                            faqDetails.put("Answer of FAQ",answerToFAQ.getText().toString());
+                            DocumentReference faqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("FAQ").document(currPost.getId());
+                            faqDoc.update(faqDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(AdminAnswerFAQ.this, "Answer Posted!", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(AdminAnswerFAQ.this, "Error Occured! Please try again", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            });
+                        }
+                    });
+                    discardButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            answerFAQll.setVisibility(View.GONE);
+                            answerButton.setVisibility(View.VISIBLE);
+                        }
+                    });
 
                     TextView postContent=viewPost.findViewById(R.id.question);
                     postContent.setText(currPost.getContentPost());
