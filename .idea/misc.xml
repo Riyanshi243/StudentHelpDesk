@@ -37,8 +37,12 @@
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_student_view_all_faq.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_studentsignup1_personal_data.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_studentsignup2_academic_data.xml" value="0.1" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_admin_viewallstudent_filter_branch.xml" value="0.14130434782608695" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_admin_viewallstudent_filter_course.xml" value="0.14130434782608695" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_branch_department_college_register.xml" value="0.14130434782608695" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_checkboxes.xml" value="0.14130434782608695" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_college_register_questions.xml" value="0.1" />
+        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_course_register_layout.xml" value="0.14130434782608695" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_database_filters.xml" value="0.11096014492753623" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_database_filters2.xml" value="0.22" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_date_input_layout.xml" value="0.17552083333333332" />

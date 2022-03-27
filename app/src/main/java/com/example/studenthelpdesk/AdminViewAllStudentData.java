@@ -34,6 +34,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -52,6 +54,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -61,7 +64,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class AdminViewAllStudentData extends AppCompatActivity {
+public class AdminViewAllStudentData extends AppCompatActivity implements Serializable  {
 Timer t;
     static ArrayList<CollegeRegisterQuestions> personalQ,academicQ,uploadQ;
     AutoCompleteTextView sortin;
@@ -70,15 +73,18 @@ Timer t;
     static int domain=0;
     static int k=0;
     static int s=0;
+    static ArrayList<String> courseToBeVisible=new ArrayList<>();
     static ArrayList<StudentData> allStudentData=new ArrayList<>();
     static ArrayList<StudentData> allStudentDatatemp=new ArrayList<>();
-
+    ProgressBar progressBar;
+    boolean flag=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_all_student_data);
         sortin=findViewById(R.id.sortin);
         adminData=AdminPage.adminData;
+        progressBar=findViewById(R.id.progressBar5);
         tl=findViewById(R.id.TableLayout);
         personalQ=new ArrayList<>();
         academicQ=new ArrayList<>();
@@ -94,6 +100,11 @@ Timer t;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String what="";
+                if(progressBar.getVisibility()==View.VISIBLE)
+                {
+                    Toast.makeText(AdminViewAllStudentData.this,"Data is Loading.Please Wait",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(domain==0)
                 {
                     what=personalQ.get(k).getQuestion();
@@ -110,6 +121,8 @@ Timer t;
                 }
 
                 tl.removeAllViews();
+                progressBar.setVisibility(View.VISIBLE);
+                flag=false;
                 show();
                 sort();
             }
@@ -204,13 +217,20 @@ Timer t;
             @Override
             public void run() {
                 //Log.e("Student",allStudentData.size()+"");
-                if(0<allStudentDatatemp.size())
+                if(0<allStudentDatatemp.size()&&flag)
                 {
                     StudentData thisStudent=allStudentDatatemp.get(0);
+                    int index=allStudentData.indexOf(thisStudent);
                     allStudentDatatemp.remove(thisStudent);
                     ArrayList<CollegeRegisterQuestions> personalAnswers = thisStudent.getPersonal_ques();
                     ArrayList<CollegeRegisterQuestions> academicAnswers = thisStudent.getAcademic_ques();
                     TableRow tr=new TableRow(AdminViewAllStudentData.this);
+                    View v1=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
+                    String srno=index+"";
+                    TextView ansSr=v1.findViewById(R.id.table_content);
+                    ansSr.setMovementMethod(new ScrollingMovementMethod());
+                    ansSr.setText(srno);
+                    tr.addView(v1);
                     for (CollegeRegisterQuestions p:personalAnswers)
                     {
                         View v=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
@@ -285,6 +305,8 @@ Timer t;
                                 }
                             }
                         });
+                        if(allStudentDatatemp.size()==0)
+                            progressBar.setVisibility(View.INVISIBLE);
                         tr.addView(v);
                     }
                     tl.post(new Runnable() {
@@ -295,14 +317,24 @@ Timer t;
                     });
                 }
             }
-        },1000,10);
+        },10,1);
     }
-    public void filters(View v){
-        startActivity(new Intent(AdminViewAllStudentData.this, AdminViewAllStudentDataFilters.class));
+    public void filters(View v) {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            Toast.makeText(AdminViewAllStudentData.this, "Data is Loading.Please Wait", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(AdminViewAllStudentData.this, AdminViewAllStudentDataFilters.class);
+       // intent.putExtra("Object", this);
+        startActivity(intent);
     }
     public void downloadExcel(View v)
     {
-
+        if(progressBar.getVisibility()==View.VISIBLE)
+        {
+            Toast.makeText(AdminViewAllStudentData.this,"Data is Loading.Please Wait",Toast.LENGTH_SHORT).show();
+            return;
+        }
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 PackageManager.PERMISSION_GRANTED);
@@ -318,7 +350,6 @@ Timer t;
                 String sheetName=et.getText().toString();
                 File filePath=new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),fileName);
                 try {
-
                     if (!filePath.exists()){
                         filePath.getParentFile().mkdirs();
                         filePath.createNewFile();
@@ -333,7 +364,8 @@ Timer t;
                             fileOutputStream.flush();
                             fileOutputStream.close();
                         }
-                        Toast.makeText(AdminViewAllStudentData.this,"File stored at"+filePath.getPath(),Toast.LENGTH_SHORT).show();
+                       Snackbar.make(v,"File stored at"+filePath.getPath(),Snackbar.LENGTH_LONG).show();
+                        //Toast.makeText(AdminViewAllStudentData.this,"File stored at"+filePath.getPath(),Toast.LENGTH_LONG).show();
                     }
                     else
                     {
@@ -391,9 +423,10 @@ Timer t;
             }
         }
     }
-    public static void get(AdminData adminData)
+    public void get(AdminData adminData)
     {
         //sort all the questions based on id
+        show();
         CollectionReference studentsAll = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo");
         studentsAll.orderBy("Name", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -457,10 +490,9 @@ Timer t;
                                                     thisStudent.setAcademic_ques(studentAcademicDetails);
                                                     {
                                                         allStudentData.add(thisStudent);
-                                                        Log.e("Adding",allStudentData.toString());
-                                                        //sort();
+                                                        //Log.e("Adding",allStudentData.toString());
                                                         allStudentDatatemp.add(thisStudent);
-                                                        Log.e("Temp",allStudentDatatemp.toString());
+                                                        //Log.e("Temp",allStudentDatatemp.toString());
 
                                                     }
                                                 }
@@ -506,12 +538,14 @@ Timer t;
 
             }
         });
-        Log.e("Answers",allStudentData.toString());
-        allStudentDatatemp=new ArrayList<>(allStudentData);
+         allStudentDatatemp=new ArrayList<>(allStudentData);
+
     }
     public void show()
     {
         //heading
+        if(flag)
+            return;
         TableRow heading=new TableRow(this);
         Collections.sort(personalQ, new Comparator<CollegeRegisterQuestions>() {
             @Override
@@ -531,7 +565,11 @@ Timer t;
                 return collegeRegisterQuestions.getId()-t1.getId();
             }
         });
-
+        View headingname1=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
+        TextView srh=headingname1.findViewById(R.id.table_head);
+        srh.setText( "Sr No");
+        srh.setMovementMethod(new ScrollingMovementMethod());
+        heading.addView(headingname1);
         for(int i=0;i<personalQ.size();i++)
         {
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
@@ -557,6 +595,7 @@ Timer t;
             heading.addView(headingname);
         }
         tl.addView(heading);
+        flag=true;
     }
 
     @Override

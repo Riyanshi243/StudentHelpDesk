@@ -20,21 +20,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/FilterField"
-                android:layout_width="286dp"
+            <CheckBox
+                android:id="@+id/coursename"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
                 android:text="CourseName"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20dp"/>
+
+
 
             <Button
                 android:id="@+id/downArrow"
                 android:layout_width="45dp"
-                android:layout_height="37dp"
+                android:layout_height="25dp"
                 android:layout_gravity="right"
                 android:background="@drawable/ic_baseline_arrow_drop_down" />
         </TableRow>
