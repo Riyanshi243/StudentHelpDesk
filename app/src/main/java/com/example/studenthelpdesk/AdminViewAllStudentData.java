@@ -215,7 +215,6 @@ Timer t;
                         ansT.setMovementMethod(new ScrollingMovementMethod());
                         ansT.setText(ans);
                         tr.addView(v);
-                        Log.e("Data visible",ans);
                     }
 
 

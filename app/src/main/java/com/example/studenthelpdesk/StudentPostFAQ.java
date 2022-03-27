@@ -149,7 +149,6 @@ public class StudentPostFAQ extends AppCompatActivity {
             public void onClick(View v) {
                 hashtagsll.removeView(hashvalue);
                 hashcounter--;
-                int index=hashtagsName.indexOf(value.getText().toString());
                 hashtagsName.remove(value.getText().toString().substring(1));
                 faqDetails.put("HashTags",hashtagsName);
             }
