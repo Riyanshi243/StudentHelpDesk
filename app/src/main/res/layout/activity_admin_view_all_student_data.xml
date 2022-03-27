@@ -131,7 +131,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_gravity="center"
                 android:background="@drawable/roundedbutton"
-                android:text="Download " />
+                android:text="DOWNLOAD DATA" />
 
         </LinearLayout>
     </ScrollView>

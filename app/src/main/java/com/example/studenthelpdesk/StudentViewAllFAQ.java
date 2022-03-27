@@ -85,7 +85,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     FAQData currPost=faqData.get(0);
                     View viewPost=getLayoutInflater().inflate(R.layout.repeatable_faq_student,null);
 
-                    ArrayList<String> allHashtags=new ArrayList<>();
+                    ArrayList<String> allHashtags= new ArrayList<>();
                     allHashtags= currPost.getHashtags();
                     LinearLayout hashtags=viewPost.findViewById(R.id.hashtagLinearL);
                     for (int i = 0; i <allHashtags.size() ; i++) {
