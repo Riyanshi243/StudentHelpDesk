@@ -107,7 +107,6 @@ public class AdminPage extends AppCompatActivity {
                                                         .placeholder(R.drawable.default_loading_img)
                                                         .into(profilepic);
 
-                                                AdminViewAllStudentData.get(adminData);
                                             }
                                         });
 
@@ -154,6 +153,7 @@ public class AdminPage extends AppCompatActivity {
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
         //adminData=null;
+        AdminViewAllStudentData.personalQ=null;
         startActivity(new Intent(AdminPage.this,Login.class));
         finish();
     }
