@@ -172,7 +172,7 @@ Timer t;
                                                                             uploadQ.add(crq);
                                                                             if(finalI4 ==total-1) {
                                                                                 show();
-                                                                                //get(adminData);
+                                                                                get(adminData);
                                                                             }
                                                                         }
                                                                     });
@@ -215,8 +215,10 @@ Timer t;
                         ansT.setMovementMethod(new ScrollingMovementMethod());
                         ansT.setText(ans);
                         tr.addView(v);
-
+                        Log.e("Data visible",ans);
                     }
+
+
                     for (CollegeRegisterQuestions a:academicAnswers)
                     {
                         View v=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
@@ -292,20 +294,7 @@ Timer t;
                     });
 
                 }
-                /*else if(initialSort==true && allStudentData.size()>0)
-                {
-                    tl.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(tl!=null)
-                                tl.removeAllViews();
-                        }
-                    });
-                    show();
-                    sort();
-                    Log.e("Riya","INITIAL SORT");
-                    initialSort=false;
-                }*/
+
             }
         },1000,10);
     }
@@ -337,9 +326,6 @@ Timer t;
                         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
                         HSSFSheet hssfSheet = hssfWorkbook.createSheet(sheetName);
                         ProgressBar progressDialog=new ProgressBar(AdminViewAllStudentData.this);
-                       // progressDialog.(false);
-                        //progressDialog.setTitle("Downloading Data");
-                        //progressDialog.show();
                         putData(hssfSheet,progressDialog);
                         FileOutputStream fileOutputStream= new FileOutputStream(filePath);
                         hssfWorkbook.write(fileOutputStream);
@@ -476,8 +462,9 @@ Timer t;
                                                     {
                                                         allStudentData.add(thisStudent);
                                                         Log.e("Adding",allStudentData.toString());
-                                                        sort();
-                                                        //allStudentDatatemp=new ArrayList<>(allStudentData);
+                                                        //sort();
+                                                        allStudentDatatemp.add(thisStudent);
+                                                        Log.e("Temp",allStudentDatatemp.toString());
 
                                                     }
                                                 }
