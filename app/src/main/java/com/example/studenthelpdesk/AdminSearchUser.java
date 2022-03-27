@@ -215,6 +215,7 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                 return i1;
                                                             }
                                                         });
+
                                                         studentData.setPersonal_ques(personalQ);
                                                         DocumentReference docPersQues = FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("Questions").document("Academic Question");
                                                         docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -317,6 +318,17 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                         }
                                                                                                                     });
                                                                                                                     ll.addView(photo);
+
+                                                                                                                    View repeatAnswer = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);
+                                                                                                                    TextView ques00 = repeatAnswer.findViewById(R.id.Ques);
+                                                                                                                    TextView ans00= repeatAnswer.findViewById(R.id.ans);
+                                                                                                                    ques00.setText("Registered Email");
+                                                                                                                    ans00.setText(email.getText().toString());
+                                                                                                                    Linkify.addLinks(ans00, Linkify.ALL);
+                                                                                                                    ans00.setLinkTextColor(Color.parseColor("#034ABC"));
+
+                                                                                                                    ll.addView(repeatAnswer);
+
                                                                                                                     ArrayList<CollegeRegisterQuestions> quesAns_personal = studentData.getPersonal_ques();
                                                                                                                     for(CollegeRegisterQuestions a:quesAns_personal) {
                                                                                                                         View repeatAnswers = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);
