@@ -132,13 +132,6 @@ public class AdminSearchUser extends AppCompatActivity{
                         ll.addView(photo);
                         if(category[0].equalsIgnoreCase("Admin"))
                         {
-                            View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
-                            TextView ques_name=name_.findViewById(R.id.Ques);
-                            TextView ans_name=name_.findViewById(R.id.ans);
-                            ques_name.setText("NAME");
-                            ans_name.setText(name);
-                            ll.addView(name_);
-
                             String email=adminDataSearched.getEmail();
                             View email_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
                             TextView ques_email=email_.findViewById(R.id.Ques);
@@ -148,6 +141,13 @@ public class AdminSearchUser extends AppCompatActivity{
                             Linkify.addLinks(ans_email, Linkify.ALL);
                             ans_email.setLinkTextColor(Color.parseColor("#034ABC"));
                             ll.addView(email_);
+
+                            View name_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
+                            TextView ques_name=name_.findViewById(R.id.Ques);
+                            TextView ans_name=name_.findViewById(R.id.ans);
+                            ques_name.setText("NAME");
+                            ans_name.setText(name);
+                            ll.addView(name_);
 
                             String department=adminDataSearched.getDeptName();
                             View dept_=getLayoutInflater().inflate(R.layout.repeatable_student_details,null);
