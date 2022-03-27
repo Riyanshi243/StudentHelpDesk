@@ -9,6 +9,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -16,11 +17,20 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdminViewAllStudentDataFilters extends AppCompatActivity {
     TextView courses, personalDetails,academicDetails,uploadDetails,sort;
     LinearLayout filterFields;
+    AdminViewAllStudentData adminViewAllStudentData;
+    AdminData adminData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +40,8 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
         academicDetails=findViewById(R.id.Academic_Details);
         uploadDetails=findViewById(R.id.Upload_Details);
         sort=findViewById(R.id.sort);
+        adminData=AdminPage.adminData;
+        //adminViewAllStudentData= (AdminViewAllStudentData) getIntent().getExtras().get("Object");
         filterFields=findViewById(R.id.filterFields);
         sort.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
         showSortingList();
@@ -43,6 +55,50 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
         personalDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         academicDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         uploadDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
+        ArrayList<String> selectedCourse=new ArrayList<>();
+        DocumentReference allcourse = FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(adminData.getCollegeId());
+                allcourse.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                ArrayList<String>course= (ArrayList<String>) documentSnapshot.get("Courses");
+                for(String c:course)
+                {
+                    View thisCourse=getLayoutInflater().inflate(R.layout.repeatable_admin_viewallstudent_filter_course,null);
+                    CheckBox currCourseName=thisCourse.findViewById(R.id.coursename);
+                    currCourseName.setText(c);
+                    currCourseName.setChecked(true);
+                    Button downKey=thisCourse.findViewById(R.id.downArrow);
+                    downKey.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            allcourse.collection("Branches").document(c)
+                                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    ArrayList<String>branch= (ArrayList<String>) documentSnapshot.get("Branches");
+                                    for(String b:branch)
+                                    {
+                                        View thisBranch=getLayoutInflater().inflate(R.layout.repeatable_admin_viewallstudent_filter_branch,null);
+                                        CheckBox currBranchName=thisBranch.findViewById(R.id.branchname);
+                                        currBranchName.setText(b);
+                                        currBranchName.setChecked(true);
+                                        Button downKey=thisBranch.findViewById(R.id.downArrow);
+                                        downKey.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                }
+            }
+        });
     }
     public void clickPersonalDetails(View v)
     {
