@@ -19,7 +19,7 @@ public class FAQData {
     }
 
     public String getSenderEmail() {
-        return sender;
+        return senderEmail;
     }
 
     public void setSenderEmail(String senderEmail) {

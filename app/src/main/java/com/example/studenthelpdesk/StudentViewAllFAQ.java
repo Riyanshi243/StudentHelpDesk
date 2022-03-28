@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -37,6 +38,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
     static StudentData studentData;
     LinearLayout ll;
     ProgressBar pbar;
+    String senderEmail,answerEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -68,6 +70,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     thisFaq.setSenderName((String) d.get("Sender"));
                     thisFaq.setTimeOfPost((String) d.get("Sent Time"));
                     thisFaq.setTaggedAdmin((String) d.get("Tagged Admin"));
+                    thisFaq.setSenderEmail((String) d.get("SenderEmail"));
                     thisFaq.setHashtags((ArrayList<String>) d.get("HashTags"));
                     if(d.contains("Answer of FAQ"))
                     {
@@ -116,6 +119,9 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     questionTime.setText(currPost.getTimeOfPost().substring(0,20));
                     TextView sender=viewPost.findViewById(R.id.questionby);
                     sender.setText(currPost.getSenderName()+": ");
+                    sender.setPaintFlags(sender.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+                    answerEmail=currPost.getTaggedAdmin();
+                    senderEmail=currPost.getSenderEmail();
                     if(currPost.getFAQanswer()!=null)
                     {
                         LinearLayout llAns=viewPost.findViewById(R.id.llAns);
@@ -124,6 +130,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                         answerTime.setText(currPost.getTimeOfAnswer().substring(0,20));
                         String senderMail =currPost.getTaggedAdmin();
                         TextView answerby=viewPost.findViewById(R.id.refewName);
+                        answerby.setPaintFlags(answerby.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                         answerby.setText(currPost.getTaggedAdminName());
                         TextView faqAnswer=viewPost.findViewById(R.id.answer);
                         faqAnswer.setText(currPost.getFAQanswer());
@@ -166,5 +173,17 @@ public class StudentViewAllFAQ extends AppCompatActivity {
     public void postNew(View v)
     {
         startActivity(new Intent(StudentViewAllFAQ.this, StudentPostFAQ.class));
+    }
+    public void toSeeSender(View v)
+    {
+        Intent intent=new Intent(StudentViewAllFAQ.this,AdminSearchUser.class);
+        intent.putExtra("Email",senderEmail);
+        startActivity(intent);
+    }
+    public void toSeeAnswer(View v)
+    {
+        Intent intent=new Intent(StudentViewAllFAQ.this,AdminSearchUser.class);
+        intent.putExtra("Email",answerEmail);
+        startActivity(intent);
     }
 }

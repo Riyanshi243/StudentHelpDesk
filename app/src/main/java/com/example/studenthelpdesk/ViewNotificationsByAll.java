@@ -86,7 +86,6 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                     else
                         nd.setNotifLocation(null);
                     nd.setSentBy((String) n.get("Sender"));
-
                     nd.setSenderMail((String) n.get("Sender mail"));
                     Timestamp date= (Timestamp) n.get("Timestamp");
                     String tokenHere= (String) n.get("Token");
