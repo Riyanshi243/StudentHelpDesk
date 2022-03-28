@@ -100,7 +100,6 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                 Button download=repeatAttachment.findViewById(R.id.download);
                 TextView attach=repeatAttachment.findViewById(R.id.attachment_name);
                 attach.setText(a);
-                attach.setPaintFlags(attach.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                 ll.addView(repeatAttachment);
                 download.setOnClickListener(new View.OnClickListener() {
                     @Override
