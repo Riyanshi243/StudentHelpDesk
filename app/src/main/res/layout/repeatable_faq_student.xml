@@ -71,10 +71,11 @@
         </TableRow>
 
         <LinearLayout
+            android:id="@+id/llAns"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            >
 
             <TextView
                 android:id="@+id/answer_time"
@@ -104,9 +105,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="0dp"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
+                    android:text="Answered by: "
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/refewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:gravity="center"
+                    android:paddingLeft="0dp"
                     android:text="Answered by: "
                     android:textColor="@color/black"
                     android:textSize="18dp" />

@@ -4,13 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
@@ -18,6 +23,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +69,12 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     thisFaq.setTimeOfPost((String) d.get("Sent Time"));
                     thisFaq.setTaggedAdmin((String) d.get("Tagged Admin"));
                     thisFaq.setHashtags((ArrayList<String>) d.get("HashTags"));
+                    if(d.contains("Answer of FAQ"))
+                    {
+                        thisFaq.setFAQanswer((String) d.get("Answer of FAQ"));
+                        thisFaq.setTaggedAdminName((String) d.get("AnswerBy"));
+                        thisFaq.setTimeOfAnswer((String) d.get("Answer Time"));
+                    }
                     faqData.add(thisFaq);
                 }
             }
@@ -84,18 +97,17 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     ll=findViewById(R.id.linearlay);
                     FAQData currPost=faqData.get(0);
                     View viewPost=getLayoutInflater().inflate(R.layout.repeatable_faq_student,null);
-
                     ArrayList<String> allHashtags= new ArrayList<>();
                     allHashtags= currPost.getHashtags();
                     LinearLayout hashtags=viewPost.findViewById(R.id.hashtagLinearL);
-                    for (int i = 0; i <allHashtags.size() ; i++) {
+                    for (int i = 0; i <allHashtags.size() ; i++)
+                    {
                         String thisHashtag=allHashtags.get(i);
                         View viewHashtags=getLayoutInflater().inflate(R.layout.repeatable_hashtag2,null);
                         TextView hashvale= viewHashtags.findViewById(R.id.Hashtag);
                         hashvale.setText("#"+thisHashtag);
                         hashtags.addView(viewHashtags);
                     }
-
                     TextView postContent=viewPost.findViewById(R.id.question);
                     postContent.setText(currPost.getContentPost());
                     Linkify.addLinks(postContent, Linkify.ALL);
@@ -104,6 +116,33 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     questionTime.setText(currPost.getTimeOfPost().substring(0,20));
                     TextView sender=viewPost.findViewById(R.id.questionby);
                     sender.setText(currPost.getSenderName()+": ");
+                    if(currPost.getFAQanswer()!=null)
+                    {
+                        LinearLayout llAns=viewPost.findViewById(R.id.llAns);
+                        llAns.setVisibility(View.VISIBLE);
+                        TextView answerTime=viewPost.findViewById(R.id.answer_time);
+                        answerTime.setText(currPost.getTimeOfAnswer().substring(0,20));
+                        String senderMail =currPost.getTaggedAdmin();
+                        TextView answerby=viewPost.findViewById(R.id.refewName);
+                        answerby.setText(currPost.getTaggedAdminName());
+                        TextView faqAnswer=viewPost.findViewById(R.id.answer);
+                        faqAnswer.setText(currPost.getFAQanswer());
+                        Linkify.addLinks(faqAnswer, Linkify.ALL);
+                        faqAnswer.setLinkTextColor(Color.parseColor("#034ABC"));
+                        ImageView profilePic=viewPost.findViewById(R.id.profilepic);
+                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(studentData.getCollegeid()).child("Photograph").child(senderMail);
+                        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri)
+                            {
+                                Glide.with(StudentViewAllFAQ.this)
+                                        .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .error(R.drawable.error_profile_picture)
+                                        .placeholder(R.drawable.default_loading_img)
+                                        .into(profilePic);
+                            }
+                        });
+                    }
                     ll.post(new Runnable() {
                         @Override
                         public void run() {
@@ -123,9 +162,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                 }
             }
         },1000,100);
-
     }
-
     public void postNew(View v)
     {
         startActivity(new Intent(StudentViewAllFAQ.this, StudentPostFAQ.class));

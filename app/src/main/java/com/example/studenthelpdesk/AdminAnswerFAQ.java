@@ -25,6 +25,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -129,7 +131,10 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                                 answerToFAQ.requestFocus();
                                 return;
                             }
+                            Date t= Calendar.getInstance().getTime();
                             faqDetails.put("Answer of FAQ",answerToFAQ.getText().toString());
+                            faqDetails.put("Answer Time",t.toString());
+                            faqDetails.put("AnswerBy",adminData.getAdminName());
                             DocumentReference faqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("FAQ").document(currPost.getId());
                             faqDoc.update(faqDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

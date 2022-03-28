@@ -173,7 +173,7 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                 });
             }
         }
-       senderMail =notificationData.getSenderMail();
+        senderMail =notificationData.getSenderMail();
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(senderMail);
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
