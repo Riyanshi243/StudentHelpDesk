@@ -302,6 +302,10 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                     ImageView profilepic=photo.findViewById(R.id.imageView6);
                                                                                                                     Button edit=photo.findViewById(R.id.button5);
                                                                                                                     edit.setVisibility(View.GONE);
+                                                                                                                    if(eMail==null)
+                                                                                                                    {
+                                                                                                                        profilepic.setImageResource(R.drawable.profile_pic);
+                                                                                                                    }
                                                                                                                     StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(eMail);
                                                                                                                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                                                                                         @Override

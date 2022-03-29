@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -38,7 +39,6 @@ public class StudentViewAllFAQ extends AppCompatActivity {
     static StudentData studentData;
     LinearLayout ll;
     ProgressBar pbar;
-    String senderEmail,answerEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -111,6 +111,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                         hashvale.setText("#"+thisHashtag);
                         hashtags.addView(viewHashtags);
                     }
+                    String senderEmail,answerEmail;
                     TextView postContent=viewPost.findViewById(R.id.question);
                     postContent.setText(currPost.getContentPost());
                     Linkify.addLinks(postContent, Linkify.ALL);
@@ -118,20 +119,38 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     TextView questionTime=viewPost.findViewById(R.id.question_time);
                     questionTime.setText(currPost.getTimeOfPost().substring(0,20));
                     TextView sender=viewPost.findViewById(R.id.questionby);
-                    sender.setText(currPost.getSenderName()+": ");
-                    sender.setPaintFlags(sender.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-                    answerEmail=currPost.getTaggedAdmin();
+                    sender.setText(currPost.getSenderName());
                     senderEmail=currPost.getSenderEmail();
+                    if(senderEmail==null)
+                    {
+                        //toast
+                    }
+                    else {
+                        sender.setPaintFlags(sender.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+                        sender.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                toSeeSender(v, senderEmail);
+                            }
+                        });
+                    }
                     if(currPost.getFAQanswer()!=null)
                     {
                         LinearLayout llAns=viewPost.findViewById(R.id.llAns);
                         llAns.setVisibility(View.VISIBLE);
+                        answerEmail=currPost.getTaggedAdmin();
                         TextView answerTime=viewPost.findViewById(R.id.answer_time);
                         answerTime.setText(currPost.getTimeOfAnswer().substring(0,20));
                         String senderMail =currPost.getTaggedAdmin();
                         TextView answerby=viewPost.findViewById(R.id.refewName);
                         answerby.setPaintFlags(answerby.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                         answerby.setText(currPost.getTaggedAdminName());
+                        answerby.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                toSeeAnswer(v,answerEmail);
+                            }
+                        });
                         TextView faqAnswer=viewPost.findViewById(R.id.answer);
                         faqAnswer.setText(currPost.getFAQanswer());
                         Linkify.addLinks(faqAnswer, Linkify.ALL);
@@ -170,17 +189,20 @@ public class StudentViewAllFAQ extends AppCompatActivity {
             }
         },1000,100);
     }
+
     public void postNew(View v)
     {
         startActivity(new Intent(StudentViewAllFAQ.this, StudentPostFAQ.class));
     }
-    public void toSeeSender(View v)
+
+    public void toSeeSender(View v,String senderEmail)
     {
         Intent intent=new Intent(StudentViewAllFAQ.this,AdminSearchUser.class);
         intent.putExtra("Email",senderEmail);
         startActivity(intent);
     }
-    public void toSeeAnswer(View v)
+
+    public void toSeeAnswer(View v,String answerEmail)
     {
         Intent intent=new Intent(StudentViewAllFAQ.this,AdminSearchUser.class);
         intent.putExtra("Email",answerEmail);

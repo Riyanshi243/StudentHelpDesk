@@ -40,7 +40,7 @@
                     android:fontFamily="casual"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-                    android:text="ANSWER FAQ's"
+                    android:text="FAQ's"
                     android:textColor="@color/white"
                     android:textSize="32dp" />
 

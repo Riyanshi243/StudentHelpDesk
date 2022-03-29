@@ -23,15 +23,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <LinearLayout
-            android:id="@+id/hashtagLinearL"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp">
-            <!-- add hastags in this linear layout -->
-        </LinearLayout>
-
         <TextView
             android:id="@+id/msg"
             android:layout_width="wrap_content"
@@ -41,8 +32,18 @@
             android:layout_marginRight="20dp"
             android:inputType="textMultiLine"
             android:text="You are tagged in this post!"
-            android:textColor="@color/blue_text"
-            android:textSize="18dp" />
+            android:textColor="@color/red_bg"
+            android:layout_marginBottom="10dp"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:id="@+id/hashtagLinearL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <!-- add hastags in this linear layout -->
+        </LinearLayout>
 
         <TextView
             android:id="@+id/question_time"
@@ -54,35 +55,29 @@
             android:layout_marginRight="20dp"
             android:text="timeofpost" />
 
-
-        <TableRow
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/questionby"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="NAME: "
+            android:onClick="toSeeSender"
+            android:textColor="@color/black"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:textSize="18dp" />
 
-            <TextView
-                android:id="@+id/questionby"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="NAME: "
-                android:onClick="toSeeSender"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-
-
-            <TextView
-                android:id="@+id/question"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="Question"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:paddingRight="5dp"/>
-        </TableRow>
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Question"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingRight="5dp"/>
 
         <LinearLayout
             android:id="@+id/llAns"

@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_gray">#bababa</color>
+    <color name="background_gray2">#F7F7F7</color>
     <color name="box_blue">#DFDEDE</color>
     <color name="hint_text">#858383</color>
     <color name="box_bg">#e8e6e6</color>
