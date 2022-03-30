@@ -121,9 +121,17 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     TextView sender=viewPost.findViewById(R.id.questionby);
                     sender.setText(currPost.getSenderName());
                     senderEmail=currPost.getSenderEmail();
+                    ImageView profilePic2=viewPost.findViewById(R.id.profilepic_student);
+
                     if(senderEmail==null)
                     {
-                        //toast
+                        //anonymous
+                        profilePic2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                               //do nothing
+                            }
+                        });
                     }
                     else {
                         sender.setPaintFlags(sender.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
@@ -131,6 +139,24 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 toSeeSender(v, senderEmail);
+                            }
+                        });
+                        StorageReference storageReference2 = FirebaseStorage.getInstance().getReference(studentData.getCollegeid()).child("Photograph").child(senderEmail);
+                        storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri)
+                            {
+                                Glide.with(StudentViewAllFAQ.this)
+                                        .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .error(R.drawable.error_profile_picture)
+                                        .placeholder(R.drawable.default_loading_img)
+                                        .into(profilePic2);
+                            }
+                        });
+                        profilePic2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                toSeeAnswer(v,senderEmail);
                             }
                         });
                     }
@@ -141,7 +167,6 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                         answerEmail=currPost.getTaggedAdmin();
                         TextView answerTime=viewPost.findViewById(R.id.answer_time);
                         answerTime.setText(currPost.getTimeOfAnswer().substring(0,20));
-                        String senderMail =currPost.getTaggedAdmin();
                         TextView answerby=viewPost.findViewById(R.id.refewName);
                         answerby.setPaintFlags(answerby.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                         answerby.setText(currPost.getTaggedAdminName());
@@ -156,7 +181,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                         Linkify.addLinks(faqAnswer, Linkify.ALL);
                         faqAnswer.setLinkTextColor(Color.parseColor("#034ABC"));
                         ImageView profilePic=viewPost.findViewById(R.id.profilepic);
-                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(studentData.getCollegeid()).child("Photograph").child(senderMail);
+                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(studentData.getCollegeid()).child("Photograph").child(answerEmail);
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri)
@@ -168,7 +193,14 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                                         .into(profilePic);
                             }
                         });
+                        profilePic.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                toSeeAnswer(v,answerEmail);
+                            }
+                        });
                     }
+
                     ll.post(new Runnable() {
                         @Override
                         public void run() {

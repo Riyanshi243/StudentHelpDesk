@@ -398,6 +398,8 @@ public class StudentPage extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         long total= (long) documentSnapshot.get("Total");
+                                        if(studentData==null)
+                                            return;
                                         studentData.setNoPersonalQ(total);
                                         for (int i=0;i<(int)total;i++)
                                         {

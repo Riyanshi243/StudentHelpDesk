@@ -50,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
+                android:gravity="center"
                 android:text="NAME: "
                 android:textColor="@color/black"
                 android:textSize="18dp" />
@@ -134,7 +135,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
                 android:text="answer "
-                android:background="@color/background_gray2"
+                android:paddingLeft="5dp"
+                android:background="@drawable/layout_bg_lightcolour"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
         </LinearLayout>
