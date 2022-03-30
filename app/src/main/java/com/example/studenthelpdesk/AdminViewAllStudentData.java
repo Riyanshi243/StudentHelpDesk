@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -58,6 +59,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -69,15 +71,19 @@ Timer t;
     static ArrayList<CollegeRegisterQuestions> personalQ,academicQ,uploadQ;
     AutoCompleteTextView sortin;
     static AdminData adminData;
-    TableLayout tl;
+    static TableLayout tl;
     static int domain=0;
     static int k=0;
     static int s=0;
-    static ArrayList<String> courseToBeVisible=new ArrayList<>();
     static ArrayList<StudentData> allStudentData=new ArrayList<>();
     static ArrayList<StudentData> allStudentDatatemp=new ArrayList<>();
+    static ArrayList<CollegeRegisterQuestions> allheadings=new ArrayList<>();
+    static HashMap<String,ArrayList<String>> allCourseAndBranch=new HashMap<>();
+    static HashMap<String,ArrayList<Boolean>> allCourseAndBranchShow=new HashMap<>();
+
     ProgressBar progressBar;
-    boolean flag=false;
+    static boolean flag=false,flag2=false;
+    static int srno=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,10 +95,17 @@ Timer t;
         personalQ=new ArrayList<>();
         academicQ=new ArrayList<>();
         uploadQ=new ArrayList<>();
+        flag=false;
+        flag2=false;
         //creating new instance again on onCreate to avoid repetition of values
         allStudentDatatemp=new ArrayList<>();
         allStudentData=new ArrayList<>();
+        allCourseAndBranch=new HashMap<>();
+        allCourseAndBranchShow=new HashMap<>();
+
+        allheadings=new ArrayList<>();
         s=0;k=0;
+        srno=1;
         String[] sortinList={"Ascending Order","Descending Order"}; //Ascending = 0 and descending =1
         ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,sortinList);
         sortin.setAdapter(spinnerList);
@@ -121,6 +134,7 @@ Timer t;
                 }
 
                 tl.removeAllViews();
+                srno=1;
                 progressBar.setVisibility(View.VISIBLE);
                 flag=false;
                 show();
@@ -146,14 +160,15 @@ Timer t;
                             crq.setType((int) x);
                             crq.setId(finalI);
                             personalQ.add(crq);
+                            allheadings.add(crq);
                             if(finalI1 ==total-1)
                             {
                                 DocumentReference academicDetails=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Academic Question");
                                 academicDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        long total= (long) documentSnapshot.get("Total");
-                                        for (int i=0;i<total;i++)
+                                        long total2= (long) documentSnapshot.get("Total");
+                                        for (int i=0;i<total2;i++)
                                         {
                                             int finalI2 = i;
                                             academicDetails.collection(i+"").document(i+"")
@@ -166,18 +181,19 @@ Timer t;
                                                     crq.setType((int) x);
                                                     crq.setId(finalI2);
                                                     academicQ.add(crq);
-                                                    if(finalI2 ==total-1)
+                                                    allheadings.add(crq);
+                                                    if(finalI2 ==total2-1)
                                                     {
                                                         DocumentReference uploadDetails=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Upload Question");
                                                         uploadDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                             @Override
                                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                                long total=(long)documentSnapshot.get("Total");
-                                                                for(int i=0;i<total;i++)
+                                                                long total3=(long)documentSnapshot.get("Total");
+                                                                for(int i3=0;i3<total3;i3++)
                                                                 {
-                                                                    int finalI3 = i;
-                                                                    int finalI4 = i;
-                                                                    uploadDetails.collection(i+"").document(i+"")
+                                                                    int finalI3 = i3;
+                                                                    int finalI4 = i3;
+                                                                    uploadDetails.collection(i3+"").document(i3+"")
                                                                             .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                                         @Override
                                                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -187,9 +203,12 @@ Timer t;
                                                                             crq.setType((int) x);
                                                                             crq.setId(finalI3);
                                                                             uploadQ.add(crq);
-                                                                            if(finalI4 ==total-1) {
+                                                                            allheadings.add(crq);
+                                                                            if(uploadQ.size() ==total3) {
+
                                                                                 show();
                                                                                 get(adminData);
+                                                                                flag2=true;
                                                                             }
                                                                         }
                                                                     });
@@ -212,27 +231,52 @@ Timer t;
                 }
             }
         });
+        getHeading();
         t=new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 //Log.e("Student",allStudentData.size()+"");
+                if(allStudentDatatemp==null)
+                    return;
+                if(flag==false&&flag2==true)
+                {
+                    tl.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            show();
+                            flag2=false;
+                        }
+                    });
+                }
                 if(0<allStudentDatatemp.size()&&flag)
                 {
                     StudentData thisStudent=allStudentDatatemp.get(0);
-                    int index=allStudentData.indexOf(thisStudent);
                     allStudentDatatemp.remove(thisStudent);
+                    if(allStudentDatatemp.size()==0)
+                        progressBar.setVisibility(View.INVISIBLE);
+
+                    if(allCourseAndBranchShow.containsKey(thisStudent.getCourse()))
+                    {
+                        int i=allCourseAndBranch.get(thisStudent.getCourse()).indexOf(thisStudent.getBranch());
+                        if(allCourseAndBranchShow.get(thisStudent.getCourse()).get(i)==false)
+                            return;
+
+                    }
+                    int srno1=srno++;
                     ArrayList<CollegeRegisterQuestions> personalAnswers = thisStudent.getPersonal_ques();
                     ArrayList<CollegeRegisterQuestions> academicAnswers = thisStudent.getAcademic_ques();
                     TableRow tr=new TableRow(AdminViewAllStudentData.this);
                     View v1=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
-                    String srno=index+"";
                     TextView ansSr=v1.findViewById(R.id.table_content);
                     ansSr.setMovementMethod(new ScrollingMovementMethod());
-                    ansSr.setText(srno);
+                    ansSr.setText(srno1+"");
                     tr.addView(v1);
-                    for (CollegeRegisterQuestions p:personalAnswers)
+                    for (int i=0;i<personalAnswers.size();i++)
                     {
+                        CollegeRegisterQuestions p = personalAnswers.get(i);
+                        if(allheadings.contains(personalQ.get(i))==false)
+                            continue;
                         View v=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
                         String ans=p.getAnswer();
                         TextView ansT=v.findViewById(R.id.table_content);
@@ -242,8 +286,11 @@ Timer t;
                     }
 
 
-                    for (CollegeRegisterQuestions a:academicAnswers)
+                    for (int i=0;i<academicAnswers.size();i++)
                     {
+                        CollegeRegisterQuestions a = academicAnswers.get(i);
+                        if(allheadings.contains(academicQ.get(i))==false)
+                            continue;
                         View v=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
                         String ans=a.getAnswer();
                         TextView ansT=v.findViewById(R.id.table_content);
@@ -253,6 +300,8 @@ Timer t;
                     }
                     for (int i=0;i<uploadQ.size();i++)
                     {
+                        if(allheadings.contains(uploadQ.get(i))==false)
+                                continue;
                         View v=getLayoutInflater().inflate(R.layout.repeatable_table_upload_view,null);
                         Button preview=v.findViewById(R.id.view);
                         int finalI = i;
@@ -305,9 +354,7 @@ Timer t;
                                 }
                             }
                         });
-                        if(allStudentDatatemp.size()==0)
-                            progressBar.setVisibility(View.INVISIBLE);
-                        tr.addView(v);
+                         tr.addView(v);
                     }
                     tl.post(new Runnable() {
                         @Override
@@ -318,6 +365,32 @@ Timer t;
                 }
             }
         },10,1);
+    }
+    public static void getHeading()
+    {
+
+        DocumentReference allcourse = FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(adminData.getCollegeId());
+        allcourse.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                ArrayList<String> course = (ArrayList<String>) documentSnapshot.get("Courses");
+                for (String c:course) {
+                    allcourse.collection("Branches").document(c)
+                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            ArrayList<String>branch= (ArrayList<String>) documentSnapshot.get("Branches");
+                            ArrayList<Boolean>branchstatus= new ArrayList<>();
+                            for(String c:branch)
+                                branchstatus.add(true);
+                            allCourseAndBranchShow.put(c,branchstatus);
+                            allCourseAndBranch.put(c,branch);
+                        }
+                    });
+                }
+            }
+        });
     }
     public void filters(View v) {
         if (progressBar.getVisibility() == View.VISIBLE) {
@@ -392,42 +465,67 @@ Timer t;
         progressDialog.setProgress(1/rows);
         for(int i=0;i<personalQ.size();i++)
         {
+            if(allheadings.contains(personalQ.get(i))==false)
+                continue;
             HSSFCell thisCell=heading.createCell(c++);
             thisCell.setCellValue(personalQ.get(i).getQuestion());
         }
         for(int i=0;i<academicQ.size();i++)
         {
+            if(allheadings.contains(academicQ.get(i))==false)
+                continue;
             HSSFCell thisCell=heading.createCell(c++);
             thisCell.setCellValue(academicQ.get(i).getQuestion());
         }
+        int count=0;
         for(int i=0;i<allStudentData.size();i++)
         {
             StudentData thisStudent = allStudentData.get(i);
+            if(allCourseAndBranchShow.containsKey(thisStudent.getCourse()))
+            {
+                int i1=allCourseAndBranch.get(thisStudent.getCourse()).indexOf(thisStudent.getBranch());
+                if(allCourseAndBranchShow.get(thisStudent.getCourse()).get(i1)==false)
+                    continue;
 
-            progressDialog.setProgress(i+2/rows);
-            HSSFRow thisRow=thisSheet.createRow(i+1);
+            }
+            progressDialog.setProgress((i+2)/rows);
+            HSSFRow thisRow=thisSheet.createRow(count+1);
+            count++;
             int c1=0;
             ArrayList<CollegeRegisterQuestions> personalAnswers = thisStudent.getPersonal_ques();
             ArrayList<CollegeRegisterQuestions> academicAnswers=thisStudent.getAcademic_ques();
-            for (CollegeRegisterQuestions p:personalAnswers)
+            for (int i1=0;i1<personalAnswers.size();i1++)
             {
+                CollegeRegisterQuestions p = personalAnswers.get(i1);;
+
+                if(allheadings.contains(personalQ.get(i1))==false)
+                    continue;
                 String ans=p.getAnswer();
                 HSSFCell thisCell=thisRow.createCell(c1++);
                 thisCell.setCellValue(ans);
             }
-            for (CollegeRegisterQuestions p:academicAnswers)
+            for (int i1=0;i1<academicAnswers.size();i1++)
             {
+                CollegeRegisterQuestions p = academicAnswers.get(i1);;
+                if(allheadings.contains(academicQ.get(i1))==false)
+                    continue;
                 String ans=p.getAnswer();
                 HSSFCell thisCell=thisRow.createCell(c1++);
                 thisCell.setCellValue(ans);
             }
         }
     }
-    public void get(AdminData adminData)
+    public static void appliedfilter()
     {
-        //sort all the questions based on id
-        show();
-        CollectionReference studentsAll = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo");
+        allStudentDatatemp=new ArrayList<>(allStudentData);
+        tl.removeAllViews();
+        flag=false;
+        flag2=true;
+        srno=1;
+    }
+    public static void get(AdminData adminData)
+    {
+         CollectionReference studentsAll = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo");
         studentsAll.orderBy("Name", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -443,6 +541,8 @@ Timer t;
                     String email=d.getId();
                     thisStudent.setEmail(email);
                     thisStudent.setName((String) d.get("Name"));
+                    thisStudent.setBranch((String) d.get("Branch"));
+                    thisStudent.setCourse((String) d.get("Course"));
                     Log.e("Name in order",thisStudent.getName());
                     ArrayList<CollegeRegisterQuestions> studentPersonalDetails=new ArrayList<>();
                     CollectionReference personalQuesDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(email).collection("Personal Question");
@@ -509,7 +609,6 @@ Timer t;
     }
     public static void sort()
     {
-        Log.e("Answers before",allStudentData.toString());
         Collections.sort(allStudentData, new Comparator<StudentData>() {
             @Override
             public int compare(StudentData studentData, StudentData t1) {
@@ -544,8 +643,11 @@ Timer t;
     public void show()
     {
         //heading
+
         if(flag)
             return;
+        tl.removeAllViews();
+        srno=1;
         TableRow heading=new TableRow(this);
         Collections.sort(personalQ, new Comparator<CollegeRegisterQuestions>() {
             @Override
@@ -572,6 +674,8 @@ Timer t;
         heading.addView(headingname1);
         for(int i=0;i<personalQ.size();i++)
         {
+            if(allheadings.contains(personalQ.get(i))==false)
+                continue;
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
             name.setText( personalQ.get(i).getQuestion());
@@ -580,6 +684,8 @@ Timer t;
         }
         for(int i=0;i<academicQ.size();i++)
         {
+            if(allheadings.contains(academicQ.get(i))==false)
+                continue;
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
             name.setText(academicQ.get(i).getQuestion());
@@ -588,6 +694,8 @@ Timer t;
         }
         for(int i=0;i<uploadQ.size();i++)
         {
+            if(allheadings.contains(uploadQ.get(i))==false)
+                continue;
             View headingname=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
             TextView name=headingname.findViewById(R.id.table_head);
             name.setText(uploadQ.get(i).getQuestion());
