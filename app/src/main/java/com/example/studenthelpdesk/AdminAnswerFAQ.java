@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,8 +45,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
     LinearLayout ll;
     ProgressBar pbar;
     ArrayList<FAQData> faqData;
-    FAQData FAQData;
-    String senderEmail,answerEmail;
     HashMap<String, Object> faqDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,16 +107,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     FAQData currPost=faqData.get(0);
                     View viewPost=getLayoutInflater().inflate(R.layout.repeatable_admin_answer_faq,null);
 
-                    TextView postContent=viewPost.findViewById(R.id.question);
-                    postContent.setText(currPost.getContentPost());
-                    Linkify.addLinks(postContent, Linkify.ALL);
-                    postContent.setLinkTextColor(Color.parseColor("#034ABC"));
-                    TextView questionTime=viewPost.findViewById(R.id.question_time);
-                    questionTime.setText(currPost.getTimeOfPost().substring(0,20));
-                    TextView sender=viewPost.findViewById(R.id.questionby);
-                    sender.setPaintFlags(sender.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-                    sender.setText(currPost.getSenderName()+": ");
-
                     ArrayList<String> allHashtags = new ArrayList<>();
                     allHashtags= currPost.getHashtags();
                     LinearLayout hashtags=viewPost.findViewById(R.id.hashtagLinearL);
@@ -129,16 +118,70 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                         hashvale.setText("#"+thisHashtag);
                         hashtags.addView(viewHashtags);
                     }
+
+                    String senderEmail,answerEmail;
+                    TextView postContent=viewPost.findViewById(R.id.question);
+                    postContent.setText(currPost.getContentPost());
+                    Linkify.addLinks(postContent, Linkify.ALL);
+                    postContent.setLinkTextColor(Color.parseColor("#034ABC"));
+                    TextView questionTime=viewPost.findViewById(R.id.question_time);
+                    questionTime.setText(currPost.getTimeOfPost().substring(0,20));
+                    TextView sender=viewPost.findViewById(R.id.questionby);
+                    sender.setText(currPost.getSenderName());
+                    senderEmail=currPost.getSenderEmail();
+                    ImageView profilePic2=viewPost.findViewById(R.id.profilepic2);
+
+                    if(senderEmail==null)
+                    {
+                        //anonymous
+                        sender.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //do nothing
+                            }
+                        });
+                        profilePic2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //do nothing
+                            }
+                        });
+                    }
+                    else {
+                        sender.setPaintFlags(sender.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                        sender.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                toSeeSender(v, senderEmail);
+                            }
+                        });
+                        StorageReference storageReference2 = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(senderEmail);
+                        storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(AdminAnswerFAQ.this)
+                                        .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .error(R.drawable.error_profile_picture)
+                                        .placeholder(R.drawable.default_loading_img)
+                                        .into(profilePic2);
+                            }
+                        });
+                        profilePic2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                toSeeAnswer(v,senderEmail);
+                            }
+                        });
+                    }
+
                     Button answerButton=(Button) viewPost.findViewById(R.id.answer_button);
                     Button postAnswerButton= (Button) viewPost.findViewById(R.id.post_answer_button);
                     Button discardButton=(Button) viewPost.findViewById(R.id.discard_button);
                     EditText answerToFAQ=viewPost.findViewById(R.id.answer_to_FAQ);
                     LinearLayout answerFAQll=viewPost.findViewById(R.id.answerFAQll);
                     TextView headerMsg=viewPost.findViewById(R.id.msg);
-                    String taggedAdmin= currPost.getTaggedAdmin();
                     answerEmail=currPost.getTaggedAdmin();
-                    senderEmail=currPost.getSenderEmail();
-                    if(!taggedAdmin.equalsIgnoreCase(adminData.getEmail()))
+                    if(!answerEmail.equalsIgnoreCase(adminData.getEmail()))
                     {
                         headerMsg.setVisibility(View.GONE);
                         answerButton.setVisibility(View.GONE);
@@ -150,16 +193,21 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                         answerButton.setText("EDIT ANSWER");
                         TextView answerTime=viewPost.findViewById(R.id.answer_time);
                         answerTime.setText(currPost.getTimeOfAnswer().substring(0,20));
-                        String senderMail =currPost.getTaggedAdmin();
                         TextView answerby=viewPost.findViewById(R.id.refewName);
                         answerby.setText(currPost.getTaggedAdminName());
+                        answerby.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                toSeeAnswer(v,answerEmail);
+                            }
+                        });
                         answerby.setPaintFlags(answerby.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                         TextView faqAnswer=viewPost.findViewById(R.id.answer);
                         faqAnswer.setText(currPost.getFAQanswer());
                         Linkify.addLinks(faqAnswer, Linkify.ALL);
                         faqAnswer.setLinkTextColor(Color.parseColor("#034ABC"));
                         ImageView profilePic=viewPost.findViewById(R.id.profilepic);
-                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(senderMail);
+                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(answerEmail);
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri)
@@ -169,6 +217,12 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                                         .error(R.drawable.error_profile_picture)
                                         .placeholder(R.drawable.default_loading_img)
                                         .into(profilePic);
+                            }
+                        });
+                        profilePic.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                toSeeAnswer(v,answerEmail);
                             }
                         });
                     }
@@ -181,7 +235,8 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     });
                     postAnswerButton.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View v) {
+                        public void onClick (View v)
+                        {
                             if(answerToFAQ.getText().toString().length()==0)
                             {
                                 answerToFAQ.setError("This cannot be empty");
@@ -225,13 +280,14 @@ public class AdminAnswerFAQ extends AppCompatActivity {
             }
         },1000,100);
     }
-    public void toSeeSender(View v)
+    public void toSeeSender(View v,String senderEmail)
     {
         Intent intent=new Intent(AdminAnswerFAQ.this,AdminSearchUser.class);
         intent.putExtra("Email",senderEmail);
         startActivity(intent);
     }
-    public void toSeeAnswer(View v)
+
+    public void toSeeAnswer(View v,String answerEmail)
     {
         Intent intent=new Intent(AdminAnswerFAQ.this,AdminSearchUser.class);
         intent.putExtra("Email",answerEmail);

@@ -310,7 +310,7 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                                                                                         @Override
                                                                                                                         public void onSuccess(Uri uri) {
-                                                                                                                            Glide.with(AdminSearchUser.this)
+                                                                                                                            Glide.with(getApplicationContext())
                                                                                                                                     .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
                                                                                                                                     .error(R.drawable.profile_pic)
                                                                                                                                     .placeholder(R.drawable.default_loading_img)
