@@ -74,7 +74,7 @@ Timer t;
     static TableLayout tl;
     static int domain=0;
     static int k=0;
-    static int s=0;
+    static int s=1;
     static ArrayList<StudentData> allStudentData=new ArrayList<>();
     static ArrayList<StudentData> allStudentDatatemp=new ArrayList<>();
     static ArrayList<CollegeRegisterQuestions> allheadings=new ArrayList<>();
@@ -272,6 +272,11 @@ Timer t;
                     ansSr.setMovementMethod(new ScrollingMovementMethod());
                     ansSr.setText(srno1+"");
                     tr.addView(v1);
+                    View v2=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
+                    TextView ansemail=v2.findViewById(R.id.table_content);
+                    ansemail.setMovementMethod(new ScrollingMovementMethod());
+                    ansemail.setText(thisStudent.getEmail());
+                    tr.addView(v2);
                     for (int i=0;i<personalAnswers.size();i++)
                     {
                         CollegeRegisterQuestions p = personalAnswers.get(i);
@@ -667,11 +672,16 @@ Timer t;
                 return collegeRegisterQuestions.getId()-t1.getId();
             }
         });
-        View headingname1=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
-        TextView srh=headingname1.findViewById(R.id.table_head);
+        View headingName1=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
+        TextView srh=headingName1.findViewById(R.id.table_head);
         srh.setText( "Sr No");
         srh.setMovementMethod(new ScrollingMovementMethod());
-        heading.addView(headingname1);
+        heading.addView(headingName1);
+        View headingName2=getLayoutInflater().inflate(R.layout.repeatable_table_header,null);
+        TextView email=headingName2.findViewById(R.id.table_head);
+        email.setText( "Registered Email");
+        email.setMovementMethod(new ScrollingMovementMethod());
+        heading.addView(headingName2);
         for(int i=0;i<personalQ.size();i++)
         {
             if(allheadings.contains(personalQ.get(i))==false)
