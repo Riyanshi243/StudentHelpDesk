@@ -10,10 +10,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -157,6 +159,7 @@ Timer t;
                             CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
                             crq.setQuestion((String) documentSnapshot.get("Question"));
                             long x= (long) documentSnapshot.get("Type");
+                            Log.e("Type original",x+" "+crq.getQuestion());
                             crq.setType((int) x);
                             crq.setId(finalI);
                             personalQ.add(crq);
@@ -179,6 +182,7 @@ Timer t;
                                                     crq.setQuestion((String) documentSnapshot.get("Question"));
                                                     long x= (long) documentSnapshot.get("Type");
                                                     crq.setType((int) x);
+                                                    Log.e("Type original",x+" "+crq.getQuestion());
                                                     crq.setId(finalI2);
                                                     academicQ.add(crq);
                                                     allheadings.add(crq);
@@ -276,6 +280,8 @@ Timer t;
                     TextView ansemail=v2.findViewById(R.id.table_content);
                     ansemail.setMovementMethod(new ScrollingMovementMethod());
                     ansemail.setText(thisStudent.getEmail());
+                    Linkify.addLinks(ansemail, Linkify.ALL);
+                    ansemail.setLinkTextColor(Color.parseColor("#034ABC"));
                     tr.addView(v2);
                     for (int i=0;i<personalAnswers.size();i++)
                     {
@@ -559,6 +565,7 @@ Timer t;
                             for (DocumentSnapshot p:personalDetails) {
                                 CollegeRegisterQuestions q=new CollegeRegisterQuestions();
                                 q.setId(Integer.parseInt(p.getId()));
+                                q.setType(personalQ.get(q.getId()).getType());
                                 q.setAnswer((String) p.get("Answer"));
                                 studentPersonalDetails.add(q);
 
@@ -583,6 +590,7 @@ Timer t;
                                             for (DocumentSnapshot a:academicDetails) {
                                                 CollegeRegisterQuestions q=new CollegeRegisterQuestions();
                                                 q.setId(Integer.parseInt(a.getId()));
+                                                q.setType(academicQ.get(q.getId()).getType());
                                                 q.setAnswer((String) a.get("Answer"));
                                                 studentAcademicDetails.add(q);
                                                 if(studentAcademicDetails.size()==academicDetails.size()) {
@@ -614,19 +622,44 @@ Timer t;
     }
     public static void sort()
     {
+
+        tl.removeAllViews();
+        flag=false;
+        flag2=true;
         Collections.sort(allStudentData, new Comparator<StudentData>() {
             @Override
             public int compare(StudentData studentData, StudentData t1) {
-                if(domain==0)
-                {
-                    ArrayList<CollegeRegisterQuestions> s1=studentData.getPersonal_ques();
-                    ArrayList<CollegeRegisterQuestions> s2=t1.getPersonal_ques();
-                    CollegeRegisterQuestions s11=s1.get(k);
-                    CollegeRegisterQuestions s12=s2.get(k);
-                    if(s==0)
-                        return s11.getAnswer().toLowerCase(Locale.ROOT).compareTo(s12.getAnswer().toLowerCase(Locale.ROOT));
-                    else
-                        return s12.getAnswer().toLowerCase(Locale.ROOT).compareTo(s11.getAnswer().toLowerCase(Locale.ROOT));
+                if(domain==0) {
+                    ArrayList<CollegeRegisterQuestions> s1 = studentData.getPersonal_ques();
+                    ArrayList<CollegeRegisterQuestions> s2 = t1.getPersonal_ques();
+                    CollegeRegisterQuestions s11 = s1.get(k);
+                    CollegeRegisterQuestions s12 = s2.get(k);
+                    int type1 = s11.getType();
+                    Log.e("Type",type1+"");
+                    if (type1 == 2) {
+                        int a1 = Integer.parseInt(s11.getAnswer());
+                        int a2 = Integer.parseInt(s12.getAnswer());
+                        if (s == 0)
+                            return a1-a2;
+                        else
+                            return a2-a1;
+
+                    }
+                    if (type1 == 3) {
+                        double a1 = Double.parseDouble(s11.getAnswer());
+                        double a2 = Double.parseDouble(s12.getAnswer());
+                        if(s==0)
+                            return Double.compare(a1,a2);
+                        else
+                            return Double.compare(a2,a1);
+
+                    }
+                    else {
+                        if (s == 0)
+                            return s11.getAnswer().toLowerCase(Locale.ROOT).compareTo(s12.getAnswer().toLowerCase(Locale.ROOT));
+                        else
+                            return s12.getAnswer().toLowerCase(Locale.ROOT).compareTo(s11.getAnswer().toLowerCase(Locale.ROOT));
+                    }
                 }
                 else
                 {
@@ -634,10 +667,32 @@ Timer t;
                     ArrayList<CollegeRegisterQuestions> s2=t1.getAcademic_ques();
                     CollegeRegisterQuestions s11=s1.get(k);
                     CollegeRegisterQuestions s12=s2.get(k);
-                    if(s==0)
-                        return s11.getAnswer().toLowerCase(Locale.ROOT).compareTo(s12.getAnswer().toLowerCase(Locale.ROOT));
-                    else
-                        return s12.getAnswer().toLowerCase(Locale.ROOT).compareTo(s11.getAnswer().toLowerCase(Locale.ROOT));
+                    int type1 = s11.getType();
+                    Log.e("Type",type1+"");
+                    if (type1 == 2) {
+                        int a1 = Integer.parseInt(s11.getAnswer());
+                        int a2 = Integer.parseInt(s12.getAnswer());
+                        if (s == 0)
+                            return a1-a2;
+                        else
+                            return a2-a1;
+
+                    }
+                    if (type1 == 3) {
+                        double a1 = Double.parseDouble(s11.getAnswer());
+                        double a2 = Double.parseDouble(s12.getAnswer());
+                        if(s==0)
+                            return Double.compare(a1,a2);
+                        else
+                            return Double.compare(a2,a1);
+
+                    }
+                    else {
+                        if (s == 0)
+                            return s11.getAnswer().toLowerCase(Locale.ROOT).compareTo(s12.getAnswer().toLowerCase(Locale.ROOT));
+                        else
+                            return s12.getAnswer().toLowerCase(Locale.ROOT).compareTo(s11.getAnswer().toLowerCase(Locale.ROOT));
+                    }
                 }
 
             }
