@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,7 +31,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,9 +70,13 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                 for (int i = 0; i < faqList.size(); i++) {
                     FAQData thisFaq=new FAQData();
                     DocumentSnapshot d=faqList.get(i);
+                    Timestamp t = (Timestamp) d.get("Sent Time");
+                    Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                    cal.setTimeInMillis(t.getSeconds() * 1000L);
+                    String dateNTime = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
                     thisFaq.setContentPost((String) d.get("Content"));
                     thisFaq.setSenderName((String) d.get("Sender"));
-                    thisFaq.setTimeOfPost((String) d.get("Sent Time"));
+                    thisFaq.setTimeOfPost(dateNTime);
                     thisFaq.setTaggedAdmin((String) d.get("Tagged Admin"));
                     thisFaq.setSenderEmail((String) d.get("SenderEmail"));
                     thisFaq.setHashtags((ArrayList<String>) d.get("HashTags"));
@@ -76,7 +84,11 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     {
                         thisFaq.setFAQanswer((String) d.get("Answer of FAQ"));
                         thisFaq.setTaggedAdminName((String) d.get("AnswerBy"));
-                        thisFaq.setTimeOfAnswer((String) d.get("Answer Time"));
+                        Timestamp t2 = (Timestamp) d.get("Answer Time");
+                        Calendar cal2 = Calendar.getInstance(Locale.ENGLISH);
+                        cal.setTimeInMillis(t2.getSeconds() * 1000L);
+                        String dateNTime2 = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal2).toString();
+                        thisFaq.setTimeOfAnswer(dateNTime2);
                     }
                     faqData.add(thisFaq);
                 }
@@ -117,7 +129,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                     Linkify.addLinks(postContent, Linkify.ALL);
                     postContent.setLinkTextColor(Color.parseColor("#034ABC"));
                     TextView questionTime=viewPost.findViewById(R.id.question_time);
-                    questionTime.setText(currPost.getTimeOfPost().substring(0,20));
+                    questionTime.setText(currPost.getTimeOfPost());
                     TextView sender=viewPost.findViewById(R.id.questionby);
                     sender.setText(currPost.getSenderName());
                     senderEmail=currPost.getSenderEmail();
@@ -166,7 +178,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
                         llAns.setVisibility(View.VISIBLE);
                         answerEmail=currPost.getTaggedAdmin();
                         TextView answerTime=viewPost.findViewById(R.id.answer_time);
-                        answerTime.setText(currPost.getTimeOfAnswer().substring(0,20));
+                        answerTime.setText(currPost.getTimeOfAnswer());
                         TextView answerby=viewPost.findViewById(R.id.refewName);
                         answerby.setPaintFlags(answerby.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                         answerby.setText(currPost.getTaggedAdminName());

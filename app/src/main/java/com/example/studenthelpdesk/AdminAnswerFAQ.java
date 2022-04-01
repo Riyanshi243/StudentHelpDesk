@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,11 +34,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -71,9 +75,13 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                 for (int i = 0; i < faqList.size(); i++) {
                     FAQData thisFaq=new FAQData();
                     DocumentSnapshot d=faqList.get(i);
+                    Timestamp t = (Timestamp) d.get("Sent Time");
+                    Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                    cal.setTimeInMillis(t.getSeconds() * 1000L);
+                    String dateNTime = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
                     thisFaq.setContentPost((String) d.get("Content"));
                     thisFaq.setSenderName((String) d.get("Sender"));
-                    thisFaq.setTimeOfPost((String) d.get("Sent Time"));
+                    thisFaq.setTimeOfPost(dateNTime);
                     thisFaq.setSenderEmail((String) d.get("SenderEmail"));
                     thisFaq.setTaggedAdmin((String) d.get("Tagged Admin"));
                     thisFaq.setHashtags((ArrayList<String>) d.get("HashTags"));
@@ -82,7 +90,11 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     {
                         thisFaq.setFAQanswer((String) d.get("Answer of FAQ"));
                         thisFaq.setTaggedAdminName((String) d.get("AnswerBy"));
-                        thisFaq.setTimeOfAnswer((String) d.get("Answer Time"));
+                        Timestamp t2 = (Timestamp) d.get("Answer Time");
+                        Calendar cal2 = Calendar.getInstance(Locale.ENGLISH);
+                        cal.setTimeInMillis(t2.getSeconds() * 1000L);
+                        String dateNTime2 = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal2).toString();
+                        thisFaq.setTimeOfAnswer(dateNTime2);
                     }
                     faqData.add(thisFaq);
                 }
@@ -123,7 +135,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     Linkify.addLinks(postContent, Linkify.ALL);
                     postContent.setLinkTextColor(Color.parseColor("#034ABC"));
                     TextView questionTime=viewPost.findViewById(R.id.question_time);
-                    questionTime.setText(currPost.getTimeOfPost().substring(0,20));
+                    questionTime.setText(currPost.getTimeOfPost());
                     TextView sender=viewPost.findViewById(R.id.questionby);
                     sender.setText(currPost.getSenderName());
                     senderEmail=currPost.getSenderEmail();
@@ -153,6 +165,8 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                                 toSeeSender(v, senderEmail);
                             }
                         });
+                        if(adminData==null)
+                            return;
                         StorageReference storageReference2 = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(senderEmail);
                         storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
@@ -188,11 +202,13 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     TextView answerTime=viewPost.findViewById(R.id.answer_time);
                     TextView faqAnswer=viewPost.findViewById(R.id.answer);
                     ImageView profilePic=viewPost.findViewById(R.id.profilepic);
+                    EditText answer_to_FAQ=viewPost.findViewById(R.id.answer_to_FAQ);
+                    String anscurr="";
                     if(currPost.getFAQanswer()!=null)
                     {
                         llAns.setVisibility(View.VISIBLE);
                         answerButton.setText("EDIT ANSWER");
-                        answerTime.setText(currPost.getTimeOfAnswer().substring(0,20));
+                        answerTime.setText(currPost.getTimeOfAnswer());
                         answerby.setText(currPost.getTaggedAdminName());
                         answerby.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -202,6 +218,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                         });
                         answerby.setPaintFlags(answerby.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                         faqAnswer.setText(currPost.getFAQanswer());
+                        anscurr=currPost.getFAQanswer();
                         Linkify.addLinks(faqAnswer, Linkify.ALL);
                         faqAnswer.setLinkTextColor(Color.parseColor("#034ABC"));
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(answerEmail);
@@ -223,11 +240,14 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             }
                         });
                     }
+                    String finalAnscurr = anscurr;
                     answerButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             answerFAQll.setVisibility(View.VISIBLE);
                             answerButton.setVisibility(View.GONE);
+                            answer_to_FAQ.setText(finalAnscurr);
+                            answer_to_FAQ.requestFocus();
                         }
                     });
                     postAnswerButton.setOnClickListener(new View.OnClickListener() {
@@ -243,7 +263,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             Date t= Calendar.getInstance().getTime();
                             faqDetails.put("Answer of FAQ",answerToFAQ.getText().toString());
                             String ans=answerToFAQ.getText().toString();
-                            faqDetails.put("Answer Time",t.toString());
+                            faqDetails.put("Answer Time",t);
                             String ansTime=t.toString().substring(0,20);
                             faqDetails.put("AnswerBy",adminData.getAdminName());
                             String admin=adminData.getAdminName();
@@ -259,6 +279,8 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                                     faqAnswer.setText(ans);
                                     Linkify.addLinks(faqAnswer, Linkify.ALL);
                                     faqAnswer.setLinkTextColor(Color.parseColor("#034ABC"));
+                                    answer_to_FAQ.setText(ans);
+                                    answer_to_FAQ.requestFocus();
                                     answerButton.setVisibility(View.VISIBLE);
                                     answerButton.setText("EDIT ANSWER");
                                 }
