@@ -147,7 +147,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
                 android:paddingLeft="10dp"
-                android:text="answer "
+                android:text=""
                 android:background="@drawable/layout_bg_lightcolour"
                 android:textColor="@color/black"
                 android:textSize="18dp" />

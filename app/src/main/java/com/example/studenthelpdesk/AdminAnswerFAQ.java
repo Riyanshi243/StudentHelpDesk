@@ -202,8 +202,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     TextView answerTime=viewPost.findViewById(R.id.answer_time);
                     TextView faqAnswer=viewPost.findViewById(R.id.answer);
                     ImageView profilePic=viewPost.findViewById(R.id.profilepic);
-                    EditText answer_to_FAQ=viewPost.findViewById(R.id.answer_to_FAQ);
-                    String anscurr="";
                     if(currPost.getFAQanswer()!=null)
                     {
                         llAns.setVisibility(View.VISIBLE);
@@ -218,7 +216,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                         });
                         answerby.setPaintFlags(answerby.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                         faqAnswer.setText(currPost.getFAQanswer());
-                        anscurr=currPost.getFAQanswer();
                         Linkify.addLinks(faqAnswer, Linkify.ALL);
                         faqAnswer.setLinkTextColor(Color.parseColor("#034ABC"));
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(answerEmail);
@@ -240,14 +237,13 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             }
                         });
                     }
-                    String finalAnscurr = anscurr;
                     answerButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             answerFAQll.setVisibility(View.VISIBLE);
                             answerButton.setVisibility(View.GONE);
-                            answer_to_FAQ.setText(finalAnscurr);
-                            answer_to_FAQ.requestFocus();
+                            answerToFAQ.setText(faqAnswer.getText().toString());
+                            answerToFAQ.requestFocus();
                         }
                     });
                     postAnswerButton.setOnClickListener(new View.OnClickListener() {
@@ -272,6 +268,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(AdminAnswerFAQ.this, "Answer Posted!", Toast.LENGTH_SHORT).show();
+
                                     answerFAQll.setVisibility(View.GONE);
                                     llAns.setVisibility(View.VISIBLE);
                                     answerby.setText(admin);
@@ -279,8 +276,8 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                                     faqAnswer.setText(ans);
                                     Linkify.addLinks(faqAnswer, Linkify.ALL);
                                     faqAnswer.setLinkTextColor(Color.parseColor("#034ABC"));
-                                    answer_to_FAQ.setText(ans);
-                                    answer_to_FAQ.requestFocus();
+                                    answerToFAQ.setText(ans);
+                                    answerToFAQ.requestFocus();
                                     answerButton.setVisibility(View.VISIBLE);
                                     answerButton.setText("EDIT ANSWER");
                                 }
@@ -288,7 +285,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(AdminAnswerFAQ.this, "Error Occured! Please try again", Toast.LENGTH_SHORT).show();
-                                    //finish();
+
                                 }
                             });
                         }
