@@ -86,19 +86,19 @@ public class Signup extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 listId = (ArrayList<String>) documentSnapshot.get("IDs");
                 String collegeId = listId.get(i);
-                DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString());
+                DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString().trim());
                 userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            String collgeid = (String) documentSnapshot.get("College");
+                            String collgeid = ((String) documentSnapshot.get("College")).toString().trim();
                             if (collgeid.equalsIgnoreCase(collegeId)) {
                                 boolean newUser = (boolean) documentSnapshot.get("New");
                                 if (newUser == true) {
                                     //This is a new user
                                     String category = (String) documentSnapshot.get("Category");
                                     if (category.equalsIgnoreCase("Admin")) {
-                                        adminData.setEmail(email.getText().toString());
+                                        adminData.setEmail(email.getText().toString().trim());
                                         adminData.setPassword(password1.getText().toString());
                                         adminData.setCollegeId(collegeId);
                                         //intent to admin signup page
@@ -108,7 +108,7 @@ public class Signup extends AppCompatActivity {
                                         pbar.setVisibility(View.INVISIBLE);
 
                                     } else if (category.equalsIgnoreCase("Student")) {
-                                        studentData.setEmail(email.getText().toString());
+                                        studentData.setEmail(email.getText().toString().trim());
                                         studentData.setPassword(password1.getText().toString());
                                         studentData.setCollegeid(collegeId);
                                         //intent to student signup step 1 page
@@ -117,7 +117,7 @@ public class Signup extends AppCompatActivity {
                                         ProgressBar pbar = findViewById(R.id.progressBar5);
                                         pbar.setVisibility(View.INVISIBLE);
                                     } else if (category.equalsIgnoreCase("Company")) {
-                                        companyData.setEmail(email.getText().toString());
+                                        companyData.setEmail(email.getText().toString().trim());
                                         companyData.setPassword(password1.getText().toString());
                                         companyData.setCollegeId(collegeId);
                                         //intent to company signup page

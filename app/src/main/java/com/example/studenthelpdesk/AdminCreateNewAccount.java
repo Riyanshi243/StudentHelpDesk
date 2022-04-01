@@ -77,14 +77,14 @@ public class AdminCreateNewAccount extends AppCompatActivity {
                 cat="Company";
             else
                 cat="Student";
-            String s="EMAIL: "+email.getText().toString()+"\nCATEGORY: "+cat;
+            String s="EMAIL: "+email.getText().toString().trim()+"\nCATEGORY: "+cat;
             areYouSure.setMessage(s);
             String finalCat = cat;
             areYouSure.setPositiveButton("YES,Create User", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     FirebaseFirestore f=FirebaseFirestore.getInstance();
-                    DocumentReference docuserInfo = f.collection("All Users On App").document(email.getText().toString());
+                    DocumentReference docuserInfo = f.collection("All Users On App").document(email.getText().toString().trim());
                     //check if user exists
                     docuserInfo.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override

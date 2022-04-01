@@ -56,6 +56,8 @@ public class StudentUploadDetails extends AppCompatActivity {
         ll=findViewById(R.id.linearlay);
         studentData=StudentPage.studentData;
         progressbar=findViewById(R.id.progressBar5);
+        if(studentData==null)
+            return;
         FirebaseFirestore.getInstance().collection("All Colleges")
                 .document(studentData.getCollegeid()).collection("Lock")
                 .document(studentData.getCourse())

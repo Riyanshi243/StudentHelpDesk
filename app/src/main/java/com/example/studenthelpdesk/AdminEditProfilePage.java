@@ -57,6 +57,8 @@ public class AdminEditProfilePage extends AppCompatActivity {
         email.setLinkTextColor(Color.parseColor("#034ABC"));
         department.setText(adminData.getDeptName());
         phone.setText(adminData.getPhoneNumber());
+        Linkify.addLinks(phone, Linkify.ALL);
+        phone.setLinkTextColor(Color.parseColor("#034ABC"));
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(adminData.getEmail());
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

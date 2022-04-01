@@ -68,7 +68,7 @@ public class StudentPage extends AppCompatActivity {
         DocumentReference docUserInfo = ff.collection("All Users On App").document(studentData.getEmail());
         if(studentData==null)
         {
-            startActivity(new Intent(StudentPage.this,Login.class));
+            //startActivity(new Intent(StudentPage.this,Login.class));
             finishAffinity();
             return;
         }
@@ -77,10 +77,6 @@ public class StudentPage extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String cId= (String) documentSnapshot.get("College");
                 studentData.setCollegeid(cId);
-
-
-
-
 
                         DocumentReference docUserInfo2 = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail());
                         docUserInfo2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

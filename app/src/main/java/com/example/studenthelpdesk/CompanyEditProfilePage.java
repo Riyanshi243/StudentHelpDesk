@@ -8,9 +8,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,10 +56,16 @@ public class CompanyEditProfilePage extends AppCompatActivity {
 
         cname.setText(companyData.getCompanyName());
         cemail.setText(companyData.getEmail());
+        Linkify.addLinks(cemail, Linkify.ALL);
+        cemail.setLinkTextColor(Color.parseColor("#034ABC"));
         location.setText(companyData.getLocation());
         repre_name.setText(companyData.getName());
         repre_emailid.setText(companyData.getPersonalEmail());
+        Linkify.addLinks(repre_emailid, Linkify.ALL);
+        repre_emailid.setLinkTextColor(Color.parseColor("#034ABC"));
         repre_number.setText(companyData.getPhone());
+        Linkify.addLinks(repre_number, Linkify.ALL);
+        repre_number.setLinkTextColor(Color.parseColor("#034ABC"));
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference(companyData.getCollegeId()).child("Photograph").child(companyData.getEmail());
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
