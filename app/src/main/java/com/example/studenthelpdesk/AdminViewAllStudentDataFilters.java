@@ -255,7 +255,8 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                 public void onClick(View view) {
                     AdminViewAllStudentData.k= finalI;
                     AdminViewAllStudentData.domain=0;
-                    Toast.makeText(AdminViewAllStudentDataFilters.this, "Apply sorting by selecting appropriate sorting option from menu", Toast.LENGTH_SHORT).show();
+                    AdminViewAllStudentData.sort();
+                    Toast.makeText(AdminViewAllStudentDataFilters.this, "Data sorting", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -270,8 +271,8 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                 public void onClick(View view) {
                     AdminViewAllStudentData.k= finalI;
                     AdminViewAllStudentData.domain=1;
-                    Toast.makeText(AdminViewAllStudentDataFilters.this, "Apply sorting by selecting appropriate sorting option from menu", Toast.LENGTH_SHORT).show();
-
+                    AdminViewAllStudentData.sort();
+                    Toast.makeText(AdminViewAllStudentDataFilters.this, "Data sorting", Toast.LENGTH_SHORT).show();
                 }
             });
         }
