@@ -106,7 +106,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     ll=findViewById(R.id.linearlay);
                     FAQData currPost=faqData.get(0);
                     View viewPost=getLayoutInflater().inflate(R.layout.repeatable_admin_answer_faq,null);
-
                     ArrayList<String> allHashtags = new ArrayList<>();
                     allHashtags= currPost.getHashtags();
                     LinearLayout hashtags=viewPost.findViewById(R.id.hashtagLinearL);
@@ -118,7 +117,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                         hashvale.setText("#"+thisHashtag);
                         hashtags.addView(viewHashtags);
                     }
-
                     String senderEmail,answerEmail;
                     TextView postContent=viewPost.findViewById(R.id.question);
                     postContent.setText(currPost.getContentPost());
@@ -173,7 +171,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             }
                         });
                     }
-
                     Button answerButton=(Button) viewPost.findViewById(R.id.answer_button);
                     Button postAnswerButton= (Button) viewPost.findViewById(R.id.post_answer_button);
                     Button discardButton=(Button) viewPost.findViewById(R.id.discard_button);
@@ -186,14 +183,16 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                         headerMsg.setVisibility(View.GONE);
                         answerButton.setVisibility(View.GONE);
                     }
+                    LinearLayout llAns=viewPost.findViewById(R.id.llAns);
+                    TextView answerby=viewPost.findViewById(R.id.refewName);
+                    TextView answerTime=viewPost.findViewById(R.id.answer_time);
+                    TextView faqAnswer=viewPost.findViewById(R.id.answer);
+                    ImageView profilePic=viewPost.findViewById(R.id.profilepic);
                     if(currPost.getFAQanswer()!=null)
                     {
-                        LinearLayout llAns=viewPost.findViewById(R.id.llAns);
                         llAns.setVisibility(View.VISIBLE);
                         answerButton.setText("EDIT ANSWER");
-                        TextView answerTime=viewPost.findViewById(R.id.answer_time);
                         answerTime.setText(currPost.getTimeOfAnswer().substring(0,20));
-                        TextView answerby=viewPost.findViewById(R.id.refewName);
                         answerby.setText(currPost.getTaggedAdminName());
                         answerby.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -202,11 +201,9 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             }
                         });
                         answerby.setPaintFlags(answerby.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-                        TextView faqAnswer=viewPost.findViewById(R.id.answer);
                         faqAnswer.setText(currPost.getFAQanswer());
                         Linkify.addLinks(faqAnswer, Linkify.ALL);
                         faqAnswer.setLinkTextColor(Color.parseColor("#034ABC"));
-                        ImageView profilePic=viewPost.findViewById(R.id.profilepic);
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(answerEmail);
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
@@ -245,19 +242,31 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             }
                             Date t= Calendar.getInstance().getTime();
                             faqDetails.put("Answer of FAQ",answerToFAQ.getText().toString());
+                            String ans=answerToFAQ.getText().toString();
                             faqDetails.put("Answer Time",t.toString());
+                            String ansTime=t.toString().substring(0,20);
                             faqDetails.put("AnswerBy",adminData.getAdminName());
+                            String admin=adminData.getAdminName();
                             DocumentReference faqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("FAQ").document(currPost.getId());
                             faqDoc.update(faqDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(AdminAnswerFAQ.this, "Answer Posted!", Toast.LENGTH_SHORT).show();
+                                    answerFAQll.setVisibility(View.GONE);
+                                    llAns.setVisibility(View.VISIBLE);
+                                    answerby.setText(admin);
+                                    answerTime.setText(ansTime);
+                                    faqAnswer.setText(ans);
+                                    Linkify.addLinks(faqAnswer, Linkify.ALL);
+                                    faqAnswer.setLinkTextColor(Color.parseColor("#034ABC"));
+                                    answerButton.setVisibility(View.VISIBLE);
+                                    answerButton.setText("EDIT ANSWER");
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(AdminAnswerFAQ.this, "Error Occured! Please try again", Toast.LENGTH_SHORT).show();
-                                    finish();
+                                    //finish();
                                 }
                             });
                         }

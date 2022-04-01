@@ -103,11 +103,10 @@ public class StudentPostFAQ extends AppCompatActivity {
         if(nonEmpty())
         {
             Date t=Calendar.getInstance().getTime();
-            String dateToday=t.toString();
             faqDetails.put("Content",FAQ_content.getText().toString());
             faqDetails.put("Tagged Admin", selectedAdmin);
             faqDetails.put("HashTags",hashtagsName);
-            faqDetails.put("Sent Time",t.toString());
+            faqDetails.put("Sent Time",t);
             if(anonymous.isChecked())
             {
                 faqDetails.put("Sender", "Anonymous");
