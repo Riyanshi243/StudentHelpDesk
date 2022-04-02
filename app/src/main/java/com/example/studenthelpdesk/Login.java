@@ -46,10 +46,10 @@ public class Login extends AppCompatActivity {
         }
         FirebaseFirestore f=FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-        firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(email.getText().toString().trim(),password.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString());
+                DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString().trim());
                 userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -80,7 +80,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
 
-                DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString());
+                DocumentReference userDetails = f.collection("All Users On App").document(email.getText().toString().trim());
                 userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {

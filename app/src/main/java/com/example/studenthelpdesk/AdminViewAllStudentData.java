@@ -257,8 +257,14 @@ Timer t;
                 {
                     StudentData thisStudent=allStudentDatatemp.get(0);
                     allStudentDatatemp.remove(thisStudent);
-                    if(allStudentDatatemp.size()==0)
-                        progressBar.setVisibility(View.INVISIBLE);
+                    if(allStudentDatatemp.size()==0) {
+                        progressBar.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.INVISIBLE);
+                            }
+                        });
+                    }
 
                     if(allCourseAndBranchShow.containsKey(thisStudent.getCourse()))
                     {
@@ -405,7 +411,7 @@ Timer t;
     }
     public void filters(View v) {
         if (progressBar.getVisibility() == View.VISIBLE) {
-            Toast.makeText(AdminViewAllStudentData.this, "Data is Loading.Please Wait", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminViewAllStudentData.this, "Data is Loading. Please Wait", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(AdminViewAllStudentData.this, AdminViewAllStudentDataFilters.class);
@@ -637,13 +643,12 @@ Timer t;
                     int type1 = s11.getType();
                     Log.e("Type",type1+"");
                     if (type1 == 2) {
-                        int a1 = Integer.parseInt(s11.getAnswer());
-                        int a2 = Integer.parseInt(s12.getAnswer());
-                        if (s == 0)
-                            return a1-a2;
+                        double a1 = Double.parseDouble(s11.getAnswer());
+                        double a2 = Double.parseDouble(s12.getAnswer());
+                        if(s==0)
+                            return Double.compare(a1,a2);
                         else
-                            return a2-a1;
-
+                            return Double.compare(a2,a1);
                     }
                     if (type1 == 3) {
                         double a1 = Double.parseDouble(s11.getAnswer());
@@ -652,7 +657,6 @@ Timer t;
                             return Double.compare(a1,a2);
                         else
                             return Double.compare(a2,a1);
-
                     }
                     else {
                         if (s == 0)
