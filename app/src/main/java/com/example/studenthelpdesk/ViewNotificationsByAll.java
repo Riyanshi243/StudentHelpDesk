@@ -24,6 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -118,6 +119,11 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                         TextView info=repeatNotif.findViewById(R.id.info);
                         TextView sender=repeatNotif.findViewById(R.id.reason);
                         ImageView attachment=repeatNotif.findViewById(R.id.attachments);
+                        Timestamp t = n1.getSentTime();
+                        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                        cal.setTimeInMillis(t.getSeconds() * 1000L);
+                        String dateNTime = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
+                        time.setText(dateNTime);
                         header.setText(n1.getTitle());
                         if(n1.getContent().length()<=50) {
                             info.setText(n1.getContent());
