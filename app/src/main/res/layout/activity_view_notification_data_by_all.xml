@@ -86,7 +86,7 @@
                     android:gravity="right"
                     android:inputType="date"
                     android:paddingRight="10dp"
-                    android:text="timestamp"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="16dp" />
                 <TextView

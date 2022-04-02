@@ -45,7 +45,7 @@ public class StudentPage extends AppCompatActivity {
         f=FirebaseAuth.getInstance();
         if(f==null)
         {
-            startActivity(new Intent(this,Login.class));
+            //startActivity(new Intent(this,Login.class));
             finish();
         }
         FirebaseMessaging.getInstance().subscribeToTopic("All");
@@ -443,7 +443,7 @@ public class StudentPage extends AppCompatActivity {
                                                                         long total= (long) documentSnapshot.get("Total");
                                                                         if(studentData==null)
                                                                         {
-                                                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                                                            //startActivity(new Intent(StudentPage.this,Login.class));
                                                                             finishAffinity();
                                                                             return;
                                                                         }
@@ -487,7 +487,7 @@ public class StudentPage extends AppCompatActivity {
                                                                                                 });
                                                                                                 if(studentData==null)
                                                                                                 {
-                                                                                                    startActivity(new Intent(StudentPage.this,Login.class));
+                                                                                                    //startActivity(new Intent(StudentPage.this,Login.class));
                                                                                                     finishAffinity();
                                                                                                     return;
                                                                                                 }
@@ -499,7 +499,7 @@ public class StudentPage extends AppCompatActivity {
                                                                                                         long total= (long) documentSnapshot.get("Total");
                                                                                                         if(studentData==null)
                                                                                                         {
-                                                                                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                                                                                            //startActivity(new Intent(StudentPage.this,Login.class));
                                                                                                             finishAffinity();
                                                                                                             return;
                                                                                                         }
