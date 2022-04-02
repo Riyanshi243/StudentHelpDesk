@@ -58,6 +58,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
         pbar=findViewById(R.id.progressBar5);
         faqData=new ArrayList<>();
         faqDetails=new HashMap<>();
+        ll=findViewById(R.id.linearlay);
 
         CollectionReference docReq = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("FAQ");
         docReq.orderBy("Sent Time", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -115,7 +116,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                 }
                 if(faqData.size()>0)
                 {
-                    ll=findViewById(R.id.linearlay);
+
                     FAQData currPost=faqData.get(0);
                     View viewPost=getLayoutInflater().inflate(R.layout.repeatable_admin_answer_faq,null);
                     ArrayList<String> allHashtags = new ArrayList<>();
