@@ -88,16 +88,22 @@ public class StudentPage extends AppCompatActivity {
                                 String course= (String) documentSnapshot.get("Course");
                                 String name = (String) documentSnapshot.get("Name");
                                 long noOfRequest= (long) documentSnapshot.get("Number of Requests");
+                                if(studentData==null)
+                                    return;
                                 studentData.setName(name);
                                 studentData.setNoOfReq(noOfRequest);
                                 studentData.setBranch(branch);
                                 studentData.setCourse(course);
                                 studentData.setYr(yr);
+                                if(studentData==null)
+                                    return;
                                 FirebaseMessaging.getInstance().subscribeToTopic("Student" + studentData.getCollegeid());
                                 FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid());
                                 FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse());
                                 FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
                                 FirebaseMessaging.getInstance().subscribeToTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
+                                if(studentData==null)
+                                    return;
                                 token.add("Student" + studentData.getCollegeid());
                                 token.add(studentData.getCollegeid());
                                 token.add(studentData.getCollegeid() + "_" + studentData.getCourse());
@@ -166,6 +172,8 @@ public class StudentPage extends AppCompatActivity {
                                                                         return i1;
                                                                     }
                                                                 });
+                                                                if(studentData==null)
+                                                                    return;
                                                                 studentData.setPersonal_ques(personalQ);
                                                                 DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Academic Question");
                                                                 docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -353,6 +361,12 @@ public class StudentPage extends AppCompatActivity {
                         String branch= (String) documentSnapshot.get("Branch");
                         String yr= (String) documentSnapshot.get("Year");
                         String course= (String) documentSnapshot.get("Course");
+                        if(studentData==null)
+                        {
+                            startActivity(new Intent(StudentPage.this,Login.class));
+                            finishAffinity();
+                            return;
+                        }
                         studentData.setBranch(branch);
                         studentData.setCourse(course);
                         studentData.setYr(yr);
@@ -365,6 +379,12 @@ public class StudentPage extends AppCompatActivity {
                                 String course= (String) documentSnapshot.get("Course");
                                 String branch=(String)documentSnapshot.get("Branch");
                                 String year=(String)documentSnapshot.get("Year");
+                                if(studentData==null)
+                                {
+                                    startActivity(new Intent(StudentPage.this,Login.class));
+                                    finishAffinity();
+                                    return;
+                                }
                                 studentData.setCourse(course);
                                 studentData.setBranch(branch);
                                 studentData.setYr(year);
@@ -373,6 +393,8 @@ public class StudentPage extends AppCompatActivity {
                                 heading.setText(name);
                                 email.setText(studentData.getEmail());
                                 reqStatus.setText(reqStatus.getText().toString().substring(0,25)+noOfRequest+" requests");
+                                if(studentData==null)
+                                    return;
                                 StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(studentData.getEmail());
                                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
@@ -395,7 +417,11 @@ public class StudentPage extends AppCompatActivity {
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         long total= (long) documentSnapshot.get("Total");
                                         if(studentData==null)
+                                        {
+                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                            finishAffinity();
                                             return;
+                                        }
                                         studentData.setNoPersonalQ(total);
                                         for (int i=0;i<(int)total;i++)
                                         {
@@ -434,7 +460,11 @@ public class StudentPage extends AppCompatActivity {
                                                                     }
                                                                 });
                                                                 if(studentData==null)
+                                                                {
+                                                                    startActivity(new Intent(StudentPage.this,Login.class));
+                                                                    finishAffinity();
                                                                     return;
+                                                                }
                                                                 studentData.setPersonal_ques(personalQ);
                                                                 DocumentReference docPersQues = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("Questions").document("Academic Question");
                                                                 docPersQues.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -536,7 +566,11 @@ public class StudentPage extends AppCompatActivity {
                                                                                                                             }
                                                                                                                         });
                                                                                                                         if(studentData==null)
+                                                                                                                        {
+                                                                                                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                                                                                                            finishAffinity();
                                                                                                                             return;
+                                                                                                                        }
                                                                                                                         studentData.setUpload_ques(uploadQ);
                                                                                                                         progressBar.setVisibility(View.GONE);
                                                                                                                     }

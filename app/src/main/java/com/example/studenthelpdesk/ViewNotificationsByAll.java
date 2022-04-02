@@ -106,8 +106,9 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                 dref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if(allNotif.size()==0)
+                        if(allNotif.size()==0) {
                             return;
+                        }
 
                         NotificationData n1=allNotif.get(0);
                         View repeatNotif=getLayoutInflater().inflate(R.layout.repeatable_notifications_received,null);
@@ -134,12 +135,7 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                             attachment.setVisibility(View.GONE);
                         sender.setText(n1.getSentBy());
 
-                        Timestamp t = n1.getSentTime();
-                        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-                        cal.setTimeInMillis(t.getSeconds() * 1000L);
-                        String dateNTime = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
-                        time.setText(dateNTime);
-                        repeatNotif.setOnClickListener(new View.OnClickListener() {
+                         repeatNotif.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent intent=new Intent(ViewNotificationsByAll.this,ViewNotificationDataByAll.class);
