@@ -157,7 +157,7 @@ public class RegisterCollege3 extends AppCompatActivity {
                  View lastBranchAndDept=subQuestions.getChildAt(branchNumber-1);
                     EditText lastBranch1=lastBranchAndDept.findViewById(R.id.branch);
                     AutoCompleteTextView dept1=lastBranchAndDept.findViewById(R.id.department_name);
-                    if(lastBranch1.getText().toString().length()==0)
+                    if(lastBranch1.getText().toString().length()==0&&branchNumber==1)
                     {
                         lastBranch1.setError("Save at least 1 branch\nIf no branch enter course name here");
                         return;

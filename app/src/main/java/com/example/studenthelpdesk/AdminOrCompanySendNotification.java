@@ -333,6 +333,9 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                     title.setText("");
                     content.setText("");
                     attach_ll.removeAllViews();
+                    LinearLayout add1=findViewById(R.id.add);
+                    audience.setText("Choose desired audience of notification");
+                    add1.removeAllViews();
                     Toast.makeText(AdminOrCompanySendNotification.this,"Notif sent",Toast.LENGTH_LONG).show();
                 }
             });
@@ -372,6 +375,9 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
                                     content.setText("");
                                     attach_ll.removeAllViews();
                                     allAttach.clear();
+                                    LinearLayout add1=findViewById(R.id.add);
+                                    audience.setText("Choose desired audience of notification");
+                                    add1.removeAllViews();
                                     Toast.makeText(AdminOrCompanySendNotification.this,"Notif sent",Toast.LENGTH_LONG).show();
                                 }
                             });

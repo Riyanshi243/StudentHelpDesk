@@ -45,7 +45,6 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
         uploadDetails=findViewById(R.id.Upload_Details);
         sort=findViewById(R.id.sort);
         adminData=AdminPage.adminData;
-        //adminViewAllStudentData= (AdminViewAllStudentData) getIntent().getExtras().get("Object");
         filterFields=findViewById(R.id.filterFields);
         sort.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
         showSortingList();
