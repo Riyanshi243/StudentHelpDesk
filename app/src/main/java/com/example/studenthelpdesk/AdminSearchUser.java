@@ -128,6 +128,12 @@ public class AdminSearchUser extends AppCompatActivity{
                                 search.setEnabled(true);
                                 msg.setVisibility(View.VISIBLE);
                             }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AdminSearchUser.this, "No document Uploaded", Toast.LENGTH_SHORT).show();
+                                // progressbar.setVisibility(View.INVISIBLE);
+                            }
                         });
                         ll.addView(photo);
                         if(category[0].equalsIgnoreCase("Admin"))
@@ -320,6 +326,12 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                             search.setEnabled(true);
                                                                                                                             msg.setVisibility(View.VISIBLE);
                                                                                                                         }
+                                                                                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                                                                                        @Override
+                                                                                                                        public void onFailure(@NonNull Exception e) {
+                                                                                                                            Toast.makeText(AdminSearchUser.this, "No document Uploaded", Toast.LENGTH_SHORT).show();
+                                                                                                                            // progressbar.setVisibility(View.INVISIBLE);
+                                                                                                                        }
                                                                                                                     });
                                                                                                                     ll.addView(photo);
 
@@ -381,6 +393,12 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                                             intent.putExtra("url", uri.toString());
                                                                                                                                             startActivity(intent);
                                                                                                                                         }
+                                                                                                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                                                                                                        @Override
+                                                                                                                                        public void onFailure(@NonNull Exception e) {
+                                                                                                                                            Toast.makeText(AdminSearchUser.this, "No document Uploaded", Toast.LENGTH_SHORT).show();
+                                                                                                                                            // progressbar.setVisibility(View.INVISIBLE);
+                                                                                                                                        }
                                                                                                                                     });
                                                                                                                                 }
                                                                                                                             });
@@ -396,6 +414,12 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                                         public void onSuccess(Uri uri) {
                                                                                                                                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                                                                                                                             startActivity(intent);
+                                                                                                                                        }
+                                                                                                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                                                                                                        @Override
+                                                                                                                                        public void onFailure(@NonNull Exception e) {
+                                                                                                                                            Toast.makeText(AdminSearchUser.this, "No document Uploaded", Toast.LENGTH_SHORT).show();
+                                                                                                                                            // progressbar.setVisibility(View.INVISIBLE);
                                                                                                                                         }
                                                                                                                                     });
                                                                                                                                 }
@@ -458,7 +482,13 @@ public class AdminSearchUser extends AppCompatActivity{
                                 search.setEnabled(true);
                                 msg.setVisibility(View.VISIBLE);
                             }
-                        });
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AdminSearchUser.this, "No document Uploaded", Toast.LENGTH_SHORT).show();
+                                // progressbar.setVisibility(View.INVISIBLE);
+                            }
+                        });;
                         ll.addView(photo);
                         companyData=new CompanyData();
                         companyData.setEmail(email.getText().toString());
