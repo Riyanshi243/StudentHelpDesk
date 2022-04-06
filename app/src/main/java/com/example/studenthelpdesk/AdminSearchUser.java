@@ -389,7 +389,7 @@ public class AdminSearchUser extends AppCompatActivity{
                                                                                                                                 @Override
                                                                                                                                 public void onClick(View view) {
                                                                                                                                     FirebaseStorage storage = FirebaseStorage.getInstance();
-                                                                                                                                    StorageReference storageRef = storage.getReference(studentData.getCollegeid()).child(a.getQuestion()).child(studentData.getEmail());
+                                                                                                                                    StorageReference storageRef = storage.getReference(cId).child(a.getQuestion()).child(eMail);
                                                                                                                                     Task<Uri> message = storageRef.getDownloadUrl();
                                                                                                                                     message.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                                                                                                         @Override
