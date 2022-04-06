@@ -13,8 +13,8 @@ SDS : https://drive.google.com/file/d/1ArhLNCaqu5epGF9Qnf42WeaxDvzxElot/view?usp
 Download link: https://drive.google.com/file/d/1rK9VU7oEMCRgihpoBmxBfhWbKXNh0fGt/view?usp=sharing
 
 For Testing:
-Student Email: S1@vanasthali.com
-Admin Email: superadmin@vanasthali.com
-Company: c1@vanasthali.com
+Student Email: S1@vanasthali.com <br>
+Admin Email: superadmin@vanasthali.com <br>
+Company: c1@vanasthali.com <br>
 
 Password for all: 12345678
