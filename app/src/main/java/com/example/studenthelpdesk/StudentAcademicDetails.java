@@ -43,6 +43,8 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
         setContentView(R.layout.activity_student_academic_details);
         ll = findViewById(R.id.linearlay);
         studentData = StudentPage.studentData;
+        ll = findViewById(R.id.linearlay);
+
 
         FirebaseFirestore.getInstance().collection("All Colleges")
                 .document(studentData.getCollegeid()).collection("Lock")

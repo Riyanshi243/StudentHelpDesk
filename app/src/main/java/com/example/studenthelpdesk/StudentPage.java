@@ -358,8 +358,10 @@ public class StudentPage extends AppCompatActivity {
                 docUserInfo1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                       if(studentData==null)
+
+                        if(studentData==null)
                         {
+                            //startActivity(new Intent(StudentPage.this,Login.class));
                             finishAffinity();
                             return;
                         }
@@ -374,6 +376,7 @@ public class StudentPage extends AppCompatActivity {
                                 String year=(String)documentSnapshot.get("Year");
                                 if(studentData==null)
                                 {
+                                    //startActivity(new Intent(StudentPage.this,Login.class));
                                     finishAffinity();
                                     return;
                                 }
@@ -410,7 +413,7 @@ public class StudentPage extends AppCompatActivity {
                                         long total= (long) documentSnapshot.get("Total");
                                         if(studentData==null)
                                         {
-                                           // startActivity(new Intent(StudentPage.this,Login.class));
+                                            //startActivity(new Intent(StudentPage.this,Login.class));
                                             finishAffinity();
                                             return;
                                         }
@@ -453,6 +456,7 @@ public class StudentPage extends AppCompatActivity {
                                                                 });
                                                                 if(studentData==null)
                                                                 {
+                                                                    //startActivity(new Intent(StudentPage.this,Login.class));
                                                                     finishAffinity();
                                                                     return;
                                                                 }

@@ -47,7 +47,7 @@ public class StudentUploadDetails extends AppCompatActivity {
     LinearLayout ll;
     View currentQView;
     ProgressBar progressbar;
-    Boolean lock;
+    Boolean lock=true;
     Timer t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
