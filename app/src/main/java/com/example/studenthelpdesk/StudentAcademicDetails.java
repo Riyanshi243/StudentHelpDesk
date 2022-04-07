@@ -43,6 +43,7 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
         setContentView(R.layout.activity_student_academic_details);
         ll = findViewById(R.id.linearlay);
         studentData = StudentPage.studentData;
+
         FirebaseFirestore.getInstance().collection("All Colleges")
                 .document(studentData.getCollegeid()).collection("Lock")
                 .document(studentData.getCourse())
@@ -69,7 +70,7 @@ public class StudentAcademicDetails extends AppCompatActivity implements DatePic
                     }
                 });
             }
-        },1000,1000);
+        },1,1000);
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getAcademic_ques();
         for (CollegeRegisterQuestions a : quesAns) {
             View repeatAnswers = getLayoutInflater().inflate(R.layout.repeatable_student_details, null);

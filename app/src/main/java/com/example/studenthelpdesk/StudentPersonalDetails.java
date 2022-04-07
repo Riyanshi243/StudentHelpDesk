@@ -90,7 +90,7 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                     }
                 });
             }
-        },1000,1);
+        },1,1000);
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getPersonal_ques();
         for(CollegeRegisterQuestions a:quesAns)
         {

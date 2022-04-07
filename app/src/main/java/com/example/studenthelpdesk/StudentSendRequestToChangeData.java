@@ -293,7 +293,7 @@ public class StudentSendRequestToChangeData extends AppCompatActivity implements
             requestData.put("Sender",studentData.getEmail());
             Date t=Calendar.getInstance().getTime();
             String dateToday=t.toString();
-            requestData.put("Sent Time",dateToday);
+            requestData.put("Sent Time",t);
             requestData.put("Status",-1);
             requestData.put("UID",FirebaseAuth.getInstance().getUid());
             requestData.put("Question Id",a.getId());

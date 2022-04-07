@@ -84,7 +84,7 @@ public class StudentUploadDetails extends AppCompatActivity {
                     }
                 });
             }
-        },1000,1000);
+        },1,1000);
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getUpload_ques();
         for(CollegeRegisterQuestions a:quesAns)
         {

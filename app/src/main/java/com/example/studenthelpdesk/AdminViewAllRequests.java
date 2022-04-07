@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,6 +34,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -75,7 +78,12 @@ public class AdminViewAllRequests extends AppCompatActivity {
                     currReq.setChangeTo((String) a.get("Change To"));
                     currReq.setDomain((Long) a.get("Question Domain"));
                     currReq.setId((Long) a.get("Question Id"));
-                    currReq.setSentTime((String) a.get("Sent Time"));
+                    Timestamp t = (Timestamp)  a.get("Sent Time");
+                    Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                    cal.setTimeInMillis(t.getSeconds() * 1000L);
+                    String dateNTime = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
+                    currReq.setSentTime(dateNTime);
+
                     currReq.setReason((String) a.get("Reason"));
                     requestData.add(currReq);
                 }
@@ -110,7 +118,7 @@ public class AdminViewAllRequests extends AppCompatActivity {
                     Linkify.addLinks(reason, Linkify.ALL);
                     reason.setLinkTextColor(Color.parseColor("#034ABC"));
                     email.setText(currReq.getSender());
-                    appliedDate.setText(currReq.getSentTime().substring(0,20));
+                    appliedDate.setText(currReq.getSentTime());
                     accept.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -147,7 +155,7 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                 HashMap<String,Object> reqChange=new HashMap<>();
                                                                 Date t= Calendar.getInstance().getTime();
                                                                 String dateToday=t.toString();
-                                                                reqChange.put("Review Time",dateToday);
+                                                                reqChange.put("Review Time",t);
                                                                 reqChange.put("Status",1);
                                                                 DocumentReference reqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Requests").document(currReq.getDocId());
                                                                 reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -176,7 +184,7 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                 HashMap<String,Object> reqChange=new HashMap<>();
                                                                 Date t= Calendar.getInstance().getTime();
                                                                 String dateToday=t.toString();
-                                                                reqChange.put("Review Time",dateToday);
+                                                                reqChange.put("Review Time",t);
                                                                 reqChange.put("Status",1);
                                                                 DocumentReference reqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Requests").document(currReq.getDocId());
                                                                 reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -205,7 +213,7 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                 HashMap<String,Object> reqChange=new HashMap<>();
                                                                 Date t= Calendar.getInstance().getTime();
                                                                 String dateToday=t.toString();
-                                                                reqChange.put("Review Time",dateToday);
+                                                                reqChange.put("Review Time",t);
                                                                 reqChange.put("Status",1);
                                                                 DocumentReference reqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Requests").document(currReq.getDocId());
                                                                 reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -234,7 +242,7 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                 HashMap<String,Object> reqChange=new HashMap<>();
                                                                 Date t= Calendar.getInstance().getTime();
                                                                 String dateToday=t.toString();
-                                                                reqChange.put("Review Time",dateToday);
+                                                                reqChange.put("Review Time",t);
                                                                 reqChange.put("Status",1);
                                                                 DocumentReference reqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Requests").document(currReq.getDocId());
                                                                 reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -257,7 +265,7 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                         HashMap<String,Object> reqChange=new HashMap<>();
                                                         Date t= Calendar.getInstance().getTime();
                                                         String dateToday=t.toString();
-                                                        reqChange.put("Review Time",dateToday);
+                                                        reqChange.put("Review Time",t);
                                                         reqChange.put("Status",1);
                                                         DocumentReference reqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Requests").document(currReq.getDocId());
                                                         reqDoc.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -306,7 +314,7 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                 reason.setError("Enter a reason");
                                                 return;
                                             }
-                                            reqChange.put("Review Time",dateToday);
+                                            reqChange.put("Review Time",t);
                                             reqChange.put("Reject Reason",reason.getText().toString());
                                             reqChange.put("Status",0);
                                             DocumentReference reqDoc=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Requests").document(currReq.getDocId());
