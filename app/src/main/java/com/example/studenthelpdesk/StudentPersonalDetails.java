@@ -35,7 +35,7 @@ import java.util.TimerTask;
 public class StudentPersonalDetails extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener  {
     StudentData studentData;
     LinearLayout ll;
-    boolean lock;
+    boolean lock=true;
     Timer t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,7 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(studentData==null)
                     return;
+                //Log.e("Branch", studentData.getBranch()+"");
                 lock= (boolean) documentSnapshot.get(studentData.getBranch());
             }});
         t=new Timer();
@@ -90,7 +91,7 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                     }
                 });
             }
-        },1000,1);
+        },1,1000);
         ArrayList<CollegeRegisterQuestions> quesAns = studentData.getPersonal_ques();
         for(CollegeRegisterQuestions a:quesAns)
         {

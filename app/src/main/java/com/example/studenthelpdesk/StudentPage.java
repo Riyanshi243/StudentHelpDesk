@@ -358,18 +358,13 @@ public class StudentPage extends AppCompatActivity {
                 docUserInfo1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        String branch= (String) documentSnapshot.get("Branch");
-                        String yr= (String) documentSnapshot.get("Year");
-                        String course= (String) documentSnapshot.get("Course");
+
                         if(studentData==null)
                         {
-                            startActivity(new Intent(StudentPage.this,Login.class));
+                            //startActivity(new Intent(StudentPage.this,Login.class));
                             finishAffinity();
                             return;
                         }
-                        studentData.setBranch(branch);
-                        studentData.setCourse(course);
-                        studentData.setYr(yr);
                         DocumentReference docUserInfo2 = ff.collection("All Colleges").document(studentData.getCollegeid()).collection("UsersInfo").document(studentData.getEmail());
                         docUserInfo2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
@@ -381,7 +376,7 @@ public class StudentPage extends AppCompatActivity {
                                 String year=(String)documentSnapshot.get("Year");
                                 if(studentData==null)
                                 {
-                                    startActivity(new Intent(StudentPage.this,Login.class));
+                                    //startActivity(new Intent(StudentPage.this,Login.class));
                                     finishAffinity();
                                     return;
                                 }
@@ -418,7 +413,7 @@ public class StudentPage extends AppCompatActivity {
                                         long total= (long) documentSnapshot.get("Total");
                                         if(studentData==null)
                                         {
-                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                            //startActivity(new Intent(StudentPage.this,Login.class));
                                             finishAffinity();
                                             return;
                                         }
@@ -461,7 +456,7 @@ public class StudentPage extends AppCompatActivity {
                                                                 });
                                                                 if(studentData==null)
                                                                 {
-                                                                    startActivity(new Intent(StudentPage.this,Login.class));
+                                                                    //startActivity(new Intent(StudentPage.this,Login.class));
                                                                     finishAffinity();
                                                                     return;
                                                                 }
