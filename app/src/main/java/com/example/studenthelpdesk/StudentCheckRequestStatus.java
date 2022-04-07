@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.text.util.Linkify;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -23,8 +25,10 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -64,12 +68,21 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
                         currReq.setChangeTo((String) a.get("Change To"));
                         currReq.setDomain((Long) a.get("Question Domain"));
                         currReq.setId((Long) a.get("Question Id"));
-                        currReq.setSentTime((String) a.get("Sent Time"));
+                        Timestamp t = (Timestamp)  a.get("Sent Time");
+                        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                        cal.setTimeInMillis(t.getSeconds() * 1000L);
+                        String dateNTime = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
+                        currReq.setSentTime(dateNTime);
                         currReq.setStatus((Long) a.get("Status"));
                         currReq.setReason((String) a.get("Reason"));
                         if(currReq.getStatus()>=0)
                         {
-                            currReq.setAdminTime((String) a.get("Review Time"));
+                            Timestamp t1 = (Timestamp)  a.get("Review Time");
+                            Calendar cal1 = Calendar.getInstance(Locale.ENGLISH);
+                            cal.setTimeInMillis(t.getSeconds() * 1000L);
+                            String dateNTime1 = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
+
+                            currReq.setAdminTime(dateNTime1);
                             if(currReq.getStatus()==0)
                             {
                                 currReq.setRejectReason((String) a.get("Reject Reason"));
@@ -104,7 +117,7 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
                     ImageView del=viewReq.findViewById(R.id.DELETE);
                     header.setText("Change "+currReq.getQuestion()+" From "+currReq.getAnswerNow()+" To "+currReq.getChangeTo());
                     reason.setText(currReq.getReason());
-                    appliedDate.setText(currReq.getSentTime().substring(0,20));
+                    appliedDate.setText(currReq.getSentTime());
                     if(currReq.getStatus()<0)
                     {
                         status.setText("Pending");
@@ -115,7 +128,7 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
                     {
                         status.setText("Accepted");
                         status.setBackgroundColor(Color.GREEN);
-                        date2.setText(currReq.getAdminTime().substring(0,20));
+                        date2.setText(currReq.getAdminTime());
                         date2.setVisibility(View.VISIBLE);
                         reasonText.setVisibility(View.GONE);
                     }
@@ -123,7 +136,7 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
                     {
                         status.setText("Rejected");
                         status.setBackgroundColor(Color.RED);
-                        date2.setText(currReq.getAdminTime().substring(0,20));
+                        date2.setText(currReq.getAdminTime());
                         date2.setVisibility(View.VISIBLE);
                         reasonReject.setText(currReq.getRejectReason());
                         Linkify.addLinks(reasonReject, Linkify.ALL);

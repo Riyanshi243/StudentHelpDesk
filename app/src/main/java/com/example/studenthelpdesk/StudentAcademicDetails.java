@@ -35,15 +35,17 @@ import java.util.TimerTask;
 public class StudentAcademicDetails extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     StudentData studentData;
     LinearLayout ll;
-    Boolean lock=true;
+    Boolean lock;
     Timer t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_academic_details);
+        ll = findViewById(R.id.linearlay);
         studentData = StudentPage.studentData;
         ll = findViewById(R.id.linearlay);
-        
+
+
         FirebaseFirestore.getInstance().collection("All Colleges")
                 .document(studentData.getCollegeid()).collection("Lock")
                 .document(studentData.getCourse())

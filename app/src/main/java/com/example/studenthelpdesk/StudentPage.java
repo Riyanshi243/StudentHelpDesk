@@ -562,7 +562,7 @@ public class StudentPage extends AppCompatActivity {
                                                                                                                         });
                                                                                                                         if(studentData==null)
                                                                                                                         {
-                                                                                                                            startActivity(new Intent(StudentPage.this,Login.class));
+                                                                                                                           // startActivity(new Intent(StudentPage.this,Login.class));
                                                                                                                             finishAffinity();
                                                                                                                             return;
                                                                                                                         }
