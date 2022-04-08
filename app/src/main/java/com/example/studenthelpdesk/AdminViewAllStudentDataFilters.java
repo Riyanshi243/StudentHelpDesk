@@ -324,20 +324,61 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                 EditText filterNameMin=rangeFilter.findViewById(R.id.FilterValueMin);
                 EditText filterNameMax=rangeFilter.findViewById(R.id.FilterValueMax);
                 Button remove=rangeFilter.findViewById(R.id.remove1);
-                questionName.setText(personalQ.get(i).getQuestion());
-                filterNameMin.setText("0");
-                filterNameMax.setText("0");
+                questionName.setText(acadQ.get(i).getQuestion());
+                int finalI=i;
+                HashMap<Integer, HashMap<Integer, ArrayList<Double>>> range = AdminViewAllStudentData.range;
+                if(range.containsKey(0))
+                {
+                    HashMap<Integer, ArrayList<Double>> quesMap = range.get(0);
+                    if(quesMap.containsKey(finalI)) {
+                        filterNameMin.setText(quesMap.get(finalI).get(0)+"");
+                        filterNameMax.setText(quesMap.get(finalI).get(1)+"");
+                    }
+                }
+                else {
+                    filterNameMin.setText(null);
+                    filterNameMax.setText(null);
+                }
                 Button set=rangeFilter.findViewById(R.id.Set);
                 set.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(range.containsKey(0))
+                        {
+                            HashMap<Integer, ArrayList<Double>> quesMap = range.get(0);
+                            ArrayList<Double> minmax=new ArrayList<>();
+                            minmax.add(Double.parseDouble(filterNameMin.getText().toString()));
+                            minmax.add(Double.parseDouble(filterNameMax.getText().toString()));
+                            quesMap.put(finalI,minmax);
+                            range.put(0,quesMap);
+                            AdminViewAllStudentData.sort();
+                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
 
+                        }
+                        else
+                        {
+                            HashMap<Integer, ArrayList<Double>> quesMap = new HashMap<>();
+                            ArrayList<Double> minmax=new ArrayList<>();
+                            minmax.add(Double.parseDouble(filterNameMin.getText().toString()));
+                            minmax.add(Double.parseDouble(filterNameMax.getText().toString()));
+                            quesMap.put(finalI,minmax);
+                            range.put(0,quesMap);
+                            AdminViewAllStudentData.sort();
+                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
+
+                        }
                     }
                 });
                 remove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        if(range.containsKey(0)==false)
+                            return;
+                        HashMap<Integer, ArrayList<Double>> quesMap = range.get(0);
+                        quesMap.remove(finalI);
+                        filterNameMax.setText(null);
+                        filterNameMin.setText(null);
+                        range.put(0,quesMap);
                     }
                 });
                 filterFields.addView(rangeFilter);
@@ -464,6 +505,8 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                             return;
                         HashMap<Integer, ArrayList<Double>> quesMap = range.get(1);
                         quesMap.remove(finalI);
+                        filterNameMax.setText(null);
+                        filterNameMin.setText(null);
                         range.put(1,quesMap);
                     }
                 });
