@@ -324,7 +324,7 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                 EditText filterNameMin=rangeFilter.findViewById(R.id.FilterValueMin);
                 EditText filterNameMax=rangeFilter.findViewById(R.id.FilterValueMax);
                 Button remove=rangeFilter.findViewById(R.id.remove1);
-                questionName.setText(acadQ.get(i).getQuestion());
+                questionName.setText(personalQ.get(i).getQuestion());
                 int finalI=i;
                 HashMap<Integer, HashMap<Integer, ArrayList<Double>>> range = AdminViewAllStudentData.range;
                 if(range.containsKey(0))
