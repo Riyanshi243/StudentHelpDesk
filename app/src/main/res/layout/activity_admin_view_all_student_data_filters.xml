@@ -120,6 +120,17 @@
                         android:textColor="@color/black"
                         android:textSize="22dp" />
 
+                    <TextView
+                        android:id="@+id/Filters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:onClick="clickFilter"
+                        android:padding="10dp"
+                        android:text="Filters"
+                        android:textColor="@color/black"
+                        android:textSize="22dp" />
+
 
                 </LinearLayout>
 
