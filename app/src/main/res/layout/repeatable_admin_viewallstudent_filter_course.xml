@@ -36,8 +36,9 @@
             <Button
                 android:id="@+id/downArrow"
                 android:layout_width="45dp"
-                android:layout_height="25dp"
-                android:layout_gravity="right"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:background="@drawable/ic_baseline_arrow_drop_down" />
         </TableRow>
 

@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
         android:orientation="vertical"
@@ -25,42 +25,44 @@
 
             <EditText
                 android:id="@+id/FilterValueMin"
-                android:layout_width="119dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Min Value"
+                android:hint="Min Val"
                 android:inputType="date|numberSigned|number|numberDecimal" />
 
             <TextView
                 android:id="@+id/Heading2"
-                android:layout_width="wrap_content"
+                android:layout_width="65dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:paddingLeft="5dp"
                 android:text="ENTER YOUR "
+                android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/FilterValueMax"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Max Value"
+                android:hint=" Max Val"
                 android:inputType="date|textShortMessage|numberSigned|number|numberDecimal" />
 
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
             <Button
                 android:id="@+id/Set"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set" />
+                android:text="Set"
+                android:layout_marginRight="20dp"/>
 
             <Button
                 android:id="@+id/remove1"

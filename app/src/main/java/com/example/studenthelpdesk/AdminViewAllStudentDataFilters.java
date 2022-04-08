@@ -93,8 +93,8 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                         CheckBox currBranchName=thisBranch.findViewById(R.id.branchname);
                         currBranchName.setText(b);
                         currBranchName.setChecked(branchShow.get(i));
-                        Button downKey=thisBranch.findViewById(R.id.downArrow);
-                        LinearLayout branchLL=thisBranch.findViewById(R.id.branchLayout);
+                        //Button downKey=thisBranch.findViewById(R.id.downArrow);
+                        //LinearLayout branchLL=thisBranch.findViewById(R.id.branchLayout);
                         int finalI = i;
                         currBranchName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                             @Override
@@ -106,7 +106,7 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
 
                             }
                         });
-                        downKey.setOnClickListener(new View.OnClickListener() {
+                        /*downKey.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 if(branchLL.getChildCount()!=0)
@@ -116,7 +116,7 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                                 }
 
                             }
-                        });
+                        });*/
                         courseLL.addView(thisBranch);
                     }
                 }

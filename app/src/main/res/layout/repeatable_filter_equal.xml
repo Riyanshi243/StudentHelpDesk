@@ -29,10 +29,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:paddingLeft="5dp"
-                android:text="ENTER YOUR "
+                android:text="ENTER YOUR"
+                android:layout_gravity="center"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/FilterValue"
@@ -40,19 +40,22 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Value"
+                android:layout_marginLeft="5dp"
                 android:inputType="textPersonName" />
 
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
             <Button
                 android:id="@+id/set"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set" />
+                android:text="Set"
+                android:layout_marginRight="20dp"/>
 
             <Button
                 android:id="@+id/remove"
@@ -60,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:text="Remove" />
         </TableRow>
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
