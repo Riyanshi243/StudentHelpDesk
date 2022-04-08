@@ -79,6 +79,8 @@ Timer t;
     static int s=1;
     static ArrayList<StudentData> allStudentData=new ArrayList<>();
     static ArrayList<StudentData> allStudentDatatemp=new ArrayList<>();
+    static HashMap<Integer,HashMap<Integer,String>> equal=new HashMap<>();
+    static HashMap<Integer,HashMap<Integer,ArrayList<Double>>> range=new HashMap<>();
     static ArrayList<CollegeRegisterQuestions> allheadings=new ArrayList<>();
     static HashMap<String,ArrayList<String>> allCourseAndBranch=new HashMap<>();
     static HashMap<String,ArrayList<Boolean>> allCourseAndBranchShow=new HashMap<>();
@@ -273,9 +275,59 @@ Timer t;
                             return;
 
                     }
-                    int srno1=srno++;
                     ArrayList<CollegeRegisterQuestions> personalAnswers = thisStudent.getPersonal_ques();
                     ArrayList<CollegeRegisterQuestions> academicAnswers = thisStudent.getAcademic_ques();
+
+                    if(equal.containsKey(0))
+                    {
+                        HashMap<Integer, String> quesMap = equal.get(0);
+                        for(Integer quesNumber:quesMap.keySet())
+                        {
+                            String ans=personalAnswers.get(quesNumber).getAnswer();
+                            if(ans.trim().equalsIgnoreCase(quesMap.get(quesNumber).trim())==false)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    if(equal.containsKey(1))
+                    {
+                        HashMap<Integer, String> quesMap = equal.get(1);
+                        for(Integer quesNumber:quesMap.keySet())
+                        {
+                            String ans=academicAnswers.get(quesNumber).getAnswer();
+                            if(ans.equalsIgnoreCase(quesMap.get(quesNumber))==false)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    if(range.containsKey(0))
+                    {
+                        HashMap<Integer, ArrayList<Double>> quesMap = range.get(0);
+                        for(Integer quesNumber:quesMap.keySet())
+                        {
+                            double min=quesMap.get(quesNumber).get(0);
+                            double max=quesMap.get(quesNumber).get(1);
+                            double ans= Double.parseDouble(personalAnswers.get(quesNumber).getAnswer());
+                            if(ans>max||ans<min)
+                                return;
+                        }
+                    }
+                    if(range.containsKey(1))
+                    {
+                    HashMap<Integer, ArrayList<Double>> quesMap = range.get(1);
+                    for(Integer quesNumber:quesMap.keySet())
+                    {
+                        double min=quesMap.get(quesNumber).get(0);
+                        double max=quesMap.get(quesNumber).get(1);
+                        double ans= Double.parseDouble(academicAnswers.get(quesNumber).getAnswer());
+                        if(ans>max||ans<min)
+                            return;
+                    }
+                }
+
+                    int srno1=srno++;
                     TableRow tr=new TableRow(AdminViewAllStudentData.this);
                     View v1=getLayoutInflater().inflate(R.layout.repeatable_table_content,null);
                     TextView ansSr=v1.findViewById(R.id.table_content);
