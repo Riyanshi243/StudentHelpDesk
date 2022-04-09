@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Min Val"
-                android:inputType="date|numberSigned|number|numberDecimal" />
+                android:inputType="number|numberDecimal" />
 
             <TextView
                 android:id="@+id/Heading2"
@@ -48,7 +48,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:hint=" Max Val"
-                android:inputType="date|textShortMessage|numberSigned|number|numberDecimal" />
+                android:inputType="number|numberDecimal" />
 
         </TableRow>
 
