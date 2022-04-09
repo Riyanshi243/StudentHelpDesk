@@ -92,6 +92,49 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_bg_black"
+                android:onClick="requestData"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.029">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView14"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:onClick="requestData"
+                        app:srcCompat="@drawable/ic_baseline_all_student" />
+
+                    <TextView
+                        android:id="@+id/req_Data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:onClick="requestData"
+                        android:paddingLeft="15dp"
+                        android:text="Request Data"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </TableRow>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginLeft="10dp"
@@ -109,14 +152,14 @@
                     android:layout_height="match_parent" >
 
                     <ImageView
-                        android:id="@+id/imageView3"
+                        android:id="@+id/imageView4"
                         android:layout_width="30dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="10dp"
                         app:srcCompat="@drawable/ic_baseline_all_student" />
 
                     <TextView
-                        android:id="@+id/view_All_data"
+                        android:id="@+id/req_data"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
