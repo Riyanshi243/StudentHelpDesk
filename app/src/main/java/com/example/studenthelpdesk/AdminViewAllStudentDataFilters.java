@@ -280,6 +280,11 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         HashMap<Integer, HashMap<Integer, String>> equal = AdminViewAllStudentData.equal;
+                        if(filterName.getText().toString()==null||filterName.getText().toString().length()==0)
+                        {
+                            filterName.setError("This is compulsory");
+                            return;
+                        }
                         if(equal.containsKey(0))
                         {
                             HashMap<Integer, String> quesMap = equal.get(0);
@@ -343,6 +348,16 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                 set.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(filterNameMax.getText().toString()==null||filterNameMax.getText().toString().length()==0)
+                        {
+                            filterNameMax.setError("This is compulsory");
+                            return;
+                        }
+                        if(filterNameMin.getText().toString()==null||filterNameMin.getText().toString().length()==0)
+                        {
+                            filterNameMin.setError("This is compulsory");
+                            return;
+                        }
                         if(range.containsKey(0))
                         {
                             HashMap<Integer, ArrayList<Double>> quesMap = range.get(0);
@@ -408,6 +423,11 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                 set.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(filterName.getText().toString()==null||filterName.getText().toString().length()==0)
+                        {
+                            filterName.setError("This is compulsory");
+                            return;
+                        }
                         HashMap<Integer, HashMap<Integer, String>> equal = AdminViewAllStudentData.equal;
                         if(equal.containsKey(1))
                         {
@@ -472,6 +492,17 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                 set.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        if(filterNameMax.getText().toString()==null||filterNameMax.getText().toString().length()==0)
+                        {
+                            filterNameMax.setError("This is compulsory");
+                            return;
+                        }
+                        if(filterNameMin.getText().toString()==null||filterNameMin.getText().toString().length()==0)
+                        {
+                            filterNameMin.setError("This is compulsory");
+                            return;
+                        }
                         if(range.containsKey(1))
                         {
                             HashMap<Integer, ArrayList<Double>> quesMap = range.get(1);
