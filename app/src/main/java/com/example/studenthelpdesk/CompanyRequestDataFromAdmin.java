@@ -3,10 +3,6 @@ package com.example.studenthelpdesk;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +11,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,44 +19,46 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.apache.poi.sl.usermodel.Line;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class AdminViewAllStudentDataFilters extends AppCompatActivity {
-    TextView courses, personalDetails,academicDetails,uploadDetails,sort,filter;
+public class CompanyRequestDataFromAdmin extends AppCompatActivity {
+    CompanyData companyData;
+    TextView courses, personalDetails,academicDetails,uploadDetails,filter;
     LinearLayout filterFields;
-    AdminData adminData;
+     ArrayList<CollegeRegisterQuestions> personalQ,academicQ,uploadQ;
+     HashMap<String,ArrayList<Boolean>> allCourseAndBranchRequest=new HashMap<>();
+     HashMap<String,ArrayList<String>> allCourseAndBranch=new HashMap<>();
+     ArrayList<Integer> perQ,acaQ,upQ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_view_all_student_data_filters);
+        setContentView(R.layout.activity_company_request_data_from_admin);
+        companyData=CompanyPage.companyData;
         courses=findViewById(R.id.Courses);
         personalDetails=findViewById(R.id.Personal_Details);
         academicDetails=findViewById(R.id.Academic_Details);
         uploadDetails=findViewById(R.id.Upload_Details);
-        sort=findViewById(R.id.sort);
-        adminData=AdminPage.adminData;
         filter=findViewById(R.id.Filters);
         filterFields=findViewById(R.id.filterFields);
-        sort.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
-        showSortingList();
+        personalQ=new ArrayList<>();
+        academicQ=new ArrayList<>();
+        uploadQ=new ArrayList<>();
+        courses.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
+        getCoursesInCollege();
+        getQuestionsOfAllType();
+        clickCourse(new View(this));
+
     }
     public void clickCourse(View v)
     {
         filterFields.removeAllViews();
         courses.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
-        sort.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         personalDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         academicDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         uploadDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         filter.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
 
-        HashMap<String, ArrayList<String>> allCourseAndBranch = AdminViewAllStudentData.allCourseAndBranch;
-        HashMap<String, ArrayList<Boolean>> allCourseAndBranchShow = AdminViewAllStudentData.allCourseAndBranchShow;
         for(String c:allCourseAndBranch.keySet())
         {
             View thisCourse=getLayoutInflater().inflate(R.layout.repeatable_admin_viewallstudent_filter_course,null);
@@ -72,13 +68,13 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
             LinearLayout courseLL=thisCourse.findViewById(R.id.forBranch);
             Boolean status=true;
             ArrayList<String> branch = allCourseAndBranch.get(c);
-            ArrayList<Boolean> branchShow = allCourseAndBranchShow.get(c);
+            ArrayList<Boolean> branchShow = allCourseAndBranchRequest.get(c);
             for(int i1=0;i1<branchShow.size();i1++)
             {
                 status=status&branchShow.get(i1);
             }
             currCourseName.setChecked(status);
-             downKey.setOnClickListener(new View.OnClickListener() {
+            downKey.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(courseLL.getChildCount()!=0) {
@@ -100,23 +96,13 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                             @Override
                             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                                 branchShow.set(finalI,b);
-                                allCourseAndBranchShow.remove(c);
-                                allCourseAndBranchShow.put(c,branchShow);
+                                allCourseAndBranchRequest.remove(c);
+                                allCourseAndBranchRequest.put(c,branchShow);
                                 AdminViewAllStudentData.appliedfilter();
 
                             }
                         });
-                        /*downKey.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if(branchLL.getChildCount()!=0)
-                                {
-                                    branchLL.removeAllViews();
-                                    return;
-                                }
 
-                            }
-                        });*/
                         courseLL.addView(thisBranch);
                     }
                 }
@@ -127,8 +113,8 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                     for(int i1=0;i1<branchShow.size();i1++)
                     {
                         branchShow.set(i1,b);
-                        allCourseAndBranchShow.remove(c);
-                        allCourseAndBranchShow.put(c,branchShow);
+                        allCourseAndBranchRequest.remove(c);
+                        allCourseAndBranchRequest.put(c,branchShow);
                     }
                     for(int i=0;i<courseLL.getChildCount();i++)
                     {
@@ -146,27 +132,24 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
     {
         filterFields.removeAllViews();
         personalDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
-        sort.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         courses.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         academicDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         uploadDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         filter.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        ArrayList<CollegeRegisterQuestions> perQ = AdminViewAllStudentData.personalQ;
-        for(int i=0;i<perQ.size();i++)
+        perQ=new ArrayList<>();
+        for(int i=0;i<personalQ.size();i++)
         {
             CheckBox c=new CheckBox(this);
-            c.setText(perQ.get(i).getQuestion());
-            if(AdminViewAllStudentData.allheadings.contains(perQ.get(i)))
-                c.setChecked(true);
+            c.setText(personalQ.get(i).getQuestion());
+            c.setChecked(false);
             int finalI = i;
             c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b==false)
-                        AdminViewAllStudentData.allheadings.remove(perQ.get(finalI));
+                        perQ.remove((Integer)(finalI));
                     else
-                        AdminViewAllStudentData.allheadings.add(perQ.get(finalI));
-                    AdminViewAllStudentData.appliedfilter();
+                        perQ.add((finalI));
                 }
             });
             filterFields.addView(c);
@@ -176,27 +159,24 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
     {
         filterFields.removeAllViews();
         academicDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
-        sort.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         personalDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         courses.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         uploadDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         filter.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        ArrayList<CollegeRegisterQuestions> acQ = AdminViewAllStudentData.academicQ;
-        for(int i=0;i<acQ.size();i++)
+        acaQ=new ArrayList<>();
+        for(int i=0;i<academicQ.size();i++)
         {
             CheckBox c=new CheckBox(this);
-            c.setText(acQ.get(i).getQuestion());
-            if(AdminViewAllStudentData.allheadings.contains(acQ.get(i)))
-                c.setChecked(true);
+            c.setText(academicQ.get(i).getQuestion());
+            c.setChecked(false);
             int finalI = i;
             c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b==false)
-                        AdminViewAllStudentData.allheadings.remove(acQ.get(finalI));
+                        acaQ.remove((Integer) (finalI));
                     else
-                        AdminViewAllStudentData.allheadings.add(acQ.get(finalI));
-                    AdminViewAllStudentData.appliedfilter();
+                        acaQ.add((finalI));
                 }
             });
             filterFields.addView(c);
@@ -206,33 +186,30 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
     {
         filterFields.removeAllViews();
         uploadDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
-        sort.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         personalDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         academicDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         courses.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         filter.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        ArrayList<CollegeRegisterQuestions> upQ = AdminViewAllStudentData.uploadQ;
-        for(int i=0;i<upQ.size();i++)
+        upQ = new ArrayList<>();
+        for(int i=0;i<uploadQ.size();i++)
         {
             CheckBox c=new CheckBox(this);
-            c.setText(upQ.get(i).getQuestion());
-            if(AdminViewAllStudentData.allheadings.contains(upQ.get(i)))
-                c.setChecked(true);
+            c.setText(uploadQ.get(i).getQuestion());
+            c.setChecked(false);
             int finalI = i;
             c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b==false)
-                        AdminViewAllStudentData.allheadings.remove(upQ.get(finalI));
+                        upQ.remove((Integer) (finalI));
                     else
-                        AdminViewAllStudentData.allheadings.add(upQ.get(finalI));
-                    AdminViewAllStudentData.appliedfilter();
+                        upQ.add((finalI));
                 }
             });
             filterFields.addView(c);
         }
     }
-    public void clickFilter(View v)
+   /* public void clickFilter(View v)
     {
         filterFields.removeAllViews();
         filter.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
@@ -240,9 +217,6 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
         personalDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         academicDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         uploadDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        sort.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        ArrayList<CollegeRegisterQuestions> personalQ = AdminViewAllStudentData.personalQ;
-        ArrayList<CollegeRegisterQuestions> acadQ = AdminViewAllStudentData.academicQ;
         for(int i=0;i<personalQ.size();i++)
         {
             if(personalQ.get(i).getType()==1||personalQ.get(i).getType()==0||personalQ.get(i).getType()==4)
@@ -253,22 +227,11 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                 Button set=stringFilter.findViewById(R.id.set);
                 Button remove=stringFilter.findViewById(R.id.remove);
                 questionName.setText(personalQ.get(i).getQuestion());
-                HashMap<Integer, HashMap<Integer, String>> equal = AdminViewAllStudentData.equal;
 
                 int finalI = i;
-                if(equal.containsKey(0))
-                {
-                    HashMap<Integer, String> quesMap = equal.get(0);
-                    if(quesMap.containsKey(finalI))
-                        filterName.setText(quesMap.get(finalI));
-                }
-                else {
-                    filterName.setText("");
-                }
                 set.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        HashMap<Integer, HashMap<Integer, String>> equal = AdminViewAllStudentData.equal;
                         if(filterName.getText().toString()==null||filterName.getText().toString().length()==0)
                         {
                             filterName.setError("This is compulsory");
@@ -279,8 +242,6 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                             HashMap<Integer, String> quesMap = equal.get(0);
                             quesMap.put(finalI,filterName.getText().toString());
                             equal.put(0,quesMap);
-                            AdminViewAllStudentData.sort();
-                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
 
                         }
                         else
@@ -444,7 +405,7 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         if(equal.containsKey(1)==false)
-                                return;
+                            return;
                         HashMap<Integer, String> quesMap = equal.get(1);
                         quesMap.remove(finalI);
                         equal.put(1,quesMap);
@@ -533,67 +494,118 @@ public class AdminViewAllStudentDataFilters extends AppCompatActivity {
                 filterFields.addView(rangeFilter);
             }
         }
-    }
-    ///0-string 1 line
-    //1-string multiline
-    // 2-numerical
-    //3-numeric decimal
-    //4-radio
-    //5-date
-    //6-upload
-    //7-dropdown
-
-    public void clickSort(View v)
+    }*/
+    public void getCoursesInCollege()
     {
-        filterFields.removeAllViews();
-        sort.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
-        courses.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        personalDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        academicDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        uploadDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        filter.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        showSortingList();
+        DocumentReference allcourse = FirebaseFirestore.getInstance().collection("All Colleges")
+                .document(companyData.getCollegeId());
+        allcourse.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                ArrayList<String> course = (ArrayList<String>) documentSnapshot.get("Courses");
+                for (String c:course) {
+                    allcourse.collection("Branches").document(c)
+                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            ArrayList<String>branch= (ArrayList<String>) documentSnapshot.get("Branches");
+                            ArrayList<Boolean>branchstatus= new ArrayList<>();
+                            for(String c:branch)
+                                branchstatus.add(true);
+                            allCourseAndBranch.put(c,branch);
+                            allCourseAndBranchRequest.put(c,branchstatus);
+                        }
+                    });
+                }
+            }
+        });
     }
-    public void showSortingList()
+    public void getQuestionsOfAllType()
     {
-        filterFields.removeAllViews();
-        RadioGroup radioGroup=new RadioGroup(this);
-        ArrayList<CollegeRegisterQuestions> personalQ = AdminViewAllStudentData.personalQ;
-        ArrayList<CollegeRegisterQuestions> acadQ = AdminViewAllStudentData.academicQ;
-        for(int i=0;i<personalQ.size();i++)
-        {
-            RadioButton r=new RadioButton(this);
-            r.setText(personalQ.get(i).getQuestion());
-            radioGroup.addView(r);
-            int finalI = i;
-            r.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AdminViewAllStudentData.k= finalI;
-                    AdminViewAllStudentData.domain=0;
-                    AdminViewAllStudentData.sort();
-                    Toast.makeText(AdminViewAllStudentDataFilters.this, "Data sorting", Toast.LENGTH_SHORT).show();
+        DocumentReference personalDetails= FirebaseFirestore.getInstance().collection("All Colleges").document(companyData.getCollegeId()).collection("Questions").document("Personal Question");
+        personalDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                long total=(long)documentSnapshot.get("Total");
+                for (int i=0;i<total;i++)
+                {
+                    int finalI = i;
+                    int finalI1 = i;
+                    personalDetails.collection(i+"").document(i+"")
+                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
+                            crq.setQuestion((String) documentSnapshot.get("Question"));
+                            long x= (long) documentSnapshot.get("Type");
+                            Log.e("Type original",x+" "+crq.getQuestion());
+                            crq.setType((int) x);
+                            crq.setId(finalI);
+                            personalQ.add(crq);
+                            if(finalI1 ==total-1)
+                            {
+                                DocumentReference academicDetails=FirebaseFirestore.getInstance().collection("All Colleges").document(companyData.getCollegeId()).collection("Questions").document("Academic Question");
+                                academicDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        long total2= (long) documentSnapshot.get("Total");
+                                        for (int i=0;i<total2;i++)
+                                        {
+                                            int finalI2 = i;
+                                            academicDetails.collection(i+"").document(i+"")
+                                                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                    CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
+                                                    crq.setQuestion((String) documentSnapshot.get("Question"));
+                                                    long x= (long) documentSnapshot.get("Type");
+                                                    crq.setType((int) x);
+                                                    Log.e("Type original",x+" "+crq.getQuestion());
+                                                    crq.setId(finalI2);
+                                                    academicQ.add(crq);
+                                                    if(finalI2 ==total2-1)
+                                                    {
+                                                        DocumentReference uploadDetails=FirebaseFirestore.getInstance().collection("All Colleges").document(companyData.getCollegeId()).collection("Questions").document("Upload Question");
+                                                        uploadDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                            @Override
+                                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                long total3=(long)documentSnapshot.get("Total");
+                                                                for(int i3=0;i3<total3;i3++)
+                                                                {
+                                                                    int finalI3 = i3;
+                                                                    int finalI4 = i3;
+                                                                    uploadDetails.collection(i3+"").document(i3+"")
+                                                                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                        @Override
+                                                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                            CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
+                                                                            crq.setQuestion((String) documentSnapshot.get("Question"));
+                                                                            long x= (long) documentSnapshot.get("Type");
+                                                                            crq.setType((int) x);
+                                                                            crq.setId(finalI3);
+                                                                            uploadQ.add(crq);
+
+                                                                        }
+                                                                    });
+
+                                                                }
+
+                                                            }
+                                                        });
+                                                    }
+
+                                                }
+                                            });
+
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
                 }
-            });
-        }
-        for(int i=0;i<acadQ.size();i++)
-        {
-            RadioButton r=new RadioButton(this);
-            r.setText(acadQ.get(i).getQuestion());
-            radioGroup.addView(r);
-            int finalI = i;
-            r.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AdminViewAllStudentData.k= finalI;
-                    AdminViewAllStudentData.domain=1;
-                    AdminViewAllStudentData.sort();
-                    Toast.makeText(AdminViewAllStudentDataFilters.this, "Data sorting", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        filterFields.addView(radioGroup);
+            }
+        });
 
     }
-
 }

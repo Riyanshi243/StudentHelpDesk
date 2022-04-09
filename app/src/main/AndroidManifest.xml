@@ -19,6 +19,9 @@
             android:name=".AdminViewListOfCompanies"
             android:exported="false" />
         <activity
+            android:name=".CompanyRequestDataFromAdmin"
+            android:exported="false" />
+        <activity
             android:name=".AdminCompanyPage"
             android:exported="false" />
         <activity
