@@ -138,6 +138,9 @@ public class AdminPage extends AppCompatActivity {
     public void answerFAQ(View v){
         startActivity(new Intent(AdminPage.this, AdminAnswerFAQ.class));
     }
+    public void manageCompany(View v){
+        startActivity(new Intent(AdminPage.this, AdminCompanyPage.class));
+    }
     public void editProfile(View v){
         startActivity(new Intent(AdminPage.this, AdminEditProfilePage.class));
     }
