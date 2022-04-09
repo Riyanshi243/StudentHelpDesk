@@ -183,7 +183,8 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             filterValue=4;
                         ll.removeAllViews();
                         faqData=new ArrayList<>(faqDataMain);
-                        Log.e("FAQ",faqData.size()+" "+faqDataMain.size());
+                        ll_FAQFilter.setVisibility(View.GONE);
+                        filterFAQButton.setText("FILTER FAQs");
                     }
                 });
 
@@ -223,13 +224,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     answerEmail=currPost.getTaggedAdmin();
                     senderEmail=currPost.getSenderEmail();
                     ImageView profilePic2=viewPost.findViewById(R.id.profilepic2);
-                    /*if(filterValue==2)
-                    {
-                        if(!answerEmail.equalsIgnoreCase(adminData.getEmail()))
-                        {
-                            return;
-                        }
-                    }*/
                     if(senderEmail==null)
                     {
                         //anonymous
@@ -280,7 +274,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     EditText answerToFAQ=viewPost.findViewById(R.id.answer_to_FAQ);
                     LinearLayout answerFAQll=viewPost.findViewById(R.id.answerFAQll);
                     TextView headerMsg=viewPost.findViewById(R.id.msg);
-                    //answerEmail=currPost.getTaggedAdmin();
                     if(!answerEmail.equalsIgnoreCase(adminData.getEmail()))
                     {
                         if(filterValue!=1)
@@ -292,7 +285,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                         headerMsg.setVisibility(View.GONE);
                         answerButton.setVisibility(View.GONE);
                     }
-                    Log.e("FAQ tagged in",faqData.size()+"");
                     LinearLayout llAns=viewPost.findViewById(R.id.llAns);
                     TextView answerby=viewPost.findViewById(R.id.refewName);
                     TextView answerTime=viewPost.findViewById(R.id.answer_time);
