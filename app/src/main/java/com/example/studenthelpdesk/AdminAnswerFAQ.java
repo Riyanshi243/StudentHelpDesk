@@ -50,7 +50,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
     static AdminData adminData;
     LinearLayout ll, ll_FAQFilter;
     ProgressBar pbar;
-    ArrayList<FAQData> faqData;
+    ArrayList<FAQData> faqData,faqDataMain;
     HashMap<String, Object> faqDetails;
     Button filterFAQButton, applyButton;
     CheckBox ch1,ch2,ch3,ch4;
@@ -62,6 +62,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
         adminData=AdminPage.adminData;
         pbar=findViewById(R.id.progressBar5);
         faqData=new ArrayList<>();
+        faqDataMain=new ArrayList<>();
         faqDetails=new HashMap<>();
         filterFAQButton=(Button) findViewById(R.id.Filter_FAQs);
         applyButton=(Button) findViewById(R.id.apply);
@@ -110,6 +111,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                         thisFaq.setTimeOfAnswer(dateNTime2);
                     }
                     faqData.add(thisFaq);
+                    faqDataMain.add(thisFaq);
                 }
             }
         });
@@ -179,6 +181,9 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             filterValue=3;
                         if(ch4.isChecked())
                             filterValue=4;
+                        ll.removeAllViews();
+                        faqData=new ArrayList<>(faqDataMain);
+                        Log.e("FAQ",faqData.size()+" "+faqDataMain.size());
                     }
                 });
 
@@ -193,7 +198,6 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                 }
                 if(faqData.size()>0)
                 {
-
                     FAQData currPost=faqData.get(0);
                     View viewPost=getLayoutInflater().inflate(R.layout.repeatable_admin_answer_faq,null);
                     ArrayList<String> allHashtags = new ArrayList<>();
@@ -279,9 +283,16 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     //answerEmail=currPost.getTaggedAdmin();
                     if(!answerEmail.equalsIgnoreCase(adminData.getEmail()))
                     {
+                        if(filterValue!=1)
+                        {
+
+                            faqData.remove(currPost);
+                            return;
+                        }
                         headerMsg.setVisibility(View.GONE);
                         answerButton.setVisibility(View.GONE);
                     }
+                    Log.e("FAQ tagged in",faqData.size()+"");
                     LinearLayout llAns=viewPost.findViewById(R.id.llAns);
                     TextView answerby=viewPost.findViewById(R.id.refewName);
                     TextView answerTime=viewPost.findViewById(R.id.answer_time);
@@ -289,6 +300,10 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     ImageView profilePic=viewPost.findViewById(R.id.profilepic);
                     if(currPost.getFAQanswer()!=null)
                     {
+                        if(filterValue==3) {
+                            faqData.remove(currPost);
+                            return;
+                        }
                         llAns.setVisibility(View.VISIBLE);
                         answerButton.setText("EDIT ANSWER");
                         answerTime.setText(currPost.getTimeOfAnswer());
@@ -321,6 +336,14 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                                 toSeeAnswer(v,answerEmail);
                             }
                         });
+                    }
+                    else
+                    {
+                        if(filterValue==4) {
+
+                            faqData.remove(currPost);
+                            return;
+                        }
                     }
                     answerButton.setOnClickListener(new View.OnClickListener() {
                         @Override

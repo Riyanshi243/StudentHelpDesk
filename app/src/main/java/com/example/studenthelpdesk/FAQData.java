@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class FAQData {
     private String content,sender,senderEmail, time,timeOfAnswer, taggedAdmin,taggedAdminName,FAQanswer,id;
     private ArrayList<String> hashtags;
+    boolean tagged,answered;
 
     public String getId() { return id; }
 
