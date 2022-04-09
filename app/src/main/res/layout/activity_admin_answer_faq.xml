@@ -58,8 +58,17 @@
                 android:textColor="@color/black"
                 android:textSize="16dp" />
 
+            <Button
+                android:id="@+id/Filter_FAQs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/roundedbutton"
+                android:layout_marginBottom="10dp"
+                android:text="FILTER FAQs" />
+
             <LinearLayout
-                android:id="@+id/linearlayout"
+                android:id="@+id/ll_FAQFilter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -71,20 +80,32 @@
                 android:visibility="gone">
 
                 <CheckBox
-                    android:id="@+id/checkBox_student"
+                    android:id="@+id/checkBox1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    android:paddingLeft="10dp"
                     android:checked="true"
+                    android:text="View all FAQ's of college"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:text="View all FAQ's you are tagged in."
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox_admin"
+                    android:id="@+id/checkBox3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -96,7 +117,7 @@
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox_company"
+                    android:id="@+id/checkBox4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -106,6 +127,16 @@
                     android:text="View answered FAQ's you are tagged in."
                     android:textColor="@color/black"
                     android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/apply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/roundedbutton"
+                    android:layout_marginBottom="10dp"
+                    android:text="APPLY" />
 
             </LinearLayout>
 

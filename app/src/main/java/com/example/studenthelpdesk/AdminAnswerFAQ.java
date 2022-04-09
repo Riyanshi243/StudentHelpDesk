@@ -13,6 +13,8 @@ import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,10 +48,13 @@ import java.util.TimerTask;
 
 public class AdminAnswerFAQ extends AppCompatActivity {
     static AdminData adminData;
-    LinearLayout ll;
+    LinearLayout ll, ll_FAQFilter;
     ProgressBar pbar;
     ArrayList<FAQData> faqData;
     HashMap<String, Object> faqDetails;
+    Button filterFAQButton, applyButton;
+    CheckBox ch1,ch2,ch3,ch4;
+    int filterValue=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +63,14 @@ public class AdminAnswerFAQ extends AppCompatActivity {
         pbar=findViewById(R.id.progressBar5);
         faqData=new ArrayList<>();
         faqDetails=new HashMap<>();
+        filterFAQButton=(Button) findViewById(R.id.Filter_FAQs);
+        applyButton=(Button) findViewById(R.id.apply);
         ll=findViewById(R.id.linearlay);
+        ll_FAQFilter=findViewById(R.id.ll_FAQFilter);
+        ch1=findViewById(R.id.checkBox1);
+        ch2=findViewById(R.id.checkBox2);
+        ch3=findViewById(R.id.checkBox3);
+        ch4=findViewById(R.id.checkBox4);
 
         CollectionReference docReq = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("FAQ");
         docReq.orderBy("Sent Time", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -105,6 +117,71 @@ public class AdminAnswerFAQ extends AppCompatActivity {
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                filterFAQButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(filterFAQButton.getText().toString().equals("FILTER FAQs")) {
+                            ll_FAQFilter.setVisibility(View.VISIBLE);
+                            filterFAQButton.setText("CLOSE FILTER");
+                            ch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if(ch1.isChecked())
+                                    {
+                                        check_ch1();
+                                    }
+                                }
+                            });
+                            ch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if(ch2.isChecked())
+                                    {
+                                        check_ch2();
+                                    }
+                                }
+                            });
+                            ch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if(ch3.isChecked())
+                                    {
+                                        check_ch3();
+                                    }
+                                }
+                            });
+                            ch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if(ch4.isChecked())
+                                    {
+                                        check_ch4();
+                                    }
+                                }
+                            });
+                        }
+                        else
+                        {
+                            ll_FAQFilter.setVisibility(View.GONE);
+                            filterFAQButton.setText("FILTER FAQs");
+                        }
+
+                    }
+                });
+                applyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(ch1.isChecked())
+                            filterValue=1;
+                        if(ch2.isChecked())
+                            filterValue=2;
+                        if(ch3.isChecked())
+                            filterValue=3;
+                        if(ch4.isChecked())
+                            filterValue=4;
+                    }
+                });
+
                 if(faqData.size()==0)
                 {
                     pbar.post(new Runnable() {
@@ -139,9 +216,16 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     questionTime.setText(currPost.getTimeOfPost());
                     TextView sender=viewPost.findViewById(R.id.questionby);
                     sender.setText(currPost.getSenderName());
+                    answerEmail=currPost.getTaggedAdmin();
                     senderEmail=currPost.getSenderEmail();
                     ImageView profilePic2=viewPost.findViewById(R.id.profilepic2);
-
+                    /*if(filterValue==2)
+                    {
+                        if(!answerEmail.equalsIgnoreCase(adminData.getEmail()))
+                        {
+                            return;
+                        }
+                    }*/
                     if(senderEmail==null)
                     {
                         //anonymous
@@ -192,7 +276,7 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                     EditText answerToFAQ=viewPost.findViewById(R.id.answer_to_FAQ);
                     LinearLayout answerFAQll=viewPost.findViewById(R.id.answerFAQll);
                     TextView headerMsg=viewPost.findViewById(R.id.msg);
-                    answerEmail=currPost.getTaggedAdmin();
+                    //answerEmail=currPost.getTaggedAdmin();
                     if(!answerEmail.equalsIgnoreCase(adminData.getEmail()))
                     {
                         headerMsg.setVisibility(View.GONE);
@@ -321,6 +405,46 @@ public class AdminAnswerFAQ extends AppCompatActivity {
         Intent intent=new Intent(AdminAnswerFAQ.this,AdminSearchUser.class);
         intent.putExtra("Email",answerEmail);
         startActivity(intent);
+    }
+    public void check_ch1()
+    {
+        if(ch2.isChecked())
+            ch2.setChecked(false);
+        if(ch3.isChecked())
+            ch3.setChecked(false);
+        if(ch4.isChecked())
+            ch4.setChecked(false);
+        ch1.setChecked(true);
+    }
+    public void check_ch2()
+    {
+        if(ch1.isChecked())
+            ch1.setChecked(false);
+        if(ch3.isChecked())
+            ch3.setChecked(false);
+        if(ch4.isChecked())
+            ch4.setChecked(false);
+        ch2.setChecked(true);
+    }
+    public void check_ch3()
+    {
+        if(ch1.isChecked())
+            ch1.setChecked(false);
+        if(ch2.isChecked())
+            ch2.setChecked(false);
+        if(ch4.isChecked())
+            ch4.setChecked(false);
+        ch3.setChecked(true);
+    }
+    public void check_ch4()
+    {
+        if(ch1.isChecked())
+            ch1.setChecked(false);
+        if(ch3.isChecked())
+            ch3.setChecked(false);
+        if(ch2.isChecked())
+            ch2.setChecked(false);
+        ch4.setChecked(true);
     }
 
 }
