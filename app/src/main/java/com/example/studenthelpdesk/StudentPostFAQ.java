@@ -75,7 +75,6 @@ public class StudentPostFAQ extends AppCompatActivity {
                     DocumentSnapshot d=adminDetail.get(i);
                     String category= (String) d.get("Category");
                     String name,dept;
-                    Log.e("Helooooo",category+" "+(String) d.get("Name"));
                     if(category.equalsIgnoreCase("Admin"))
                     {
                         name=(String) d.get("Name");

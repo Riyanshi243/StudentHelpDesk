@@ -36,7 +36,7 @@ public class AdminPage extends AppCompatActivity {
      FirebaseAuth f;
      TextView greetings;
      ImageView profilepic;
-     LinearLayout editReq, lockDatabase;
+     LinearLayout editReq, lockDatabase,manageCompany;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +46,7 @@ public class AdminPage extends AppCompatActivity {
         profilepic=findViewById(R.id.profilePic);
         editReq=findViewById(R.id.editReq);
         lockDatabase=findViewById(R.id.lockDatabase);
+        manageCompany=findViewById(R.id.manageCompany);
         f=FirebaseAuth.getInstance();
         if(f==null)
         {
@@ -74,6 +75,7 @@ public class AdminPage extends AppCompatActivity {
                                 {
                                     editReq.setVisibility(View.VISIBLE);
                                     lockDatabase.setVisibility(View.VISIBLE);
+                                    manageCompany.setVisibility(View.VISIBLE);
                                 }
                                 FirebaseMessaging.getInstance().subscribeToTopic("All");
                                 FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
