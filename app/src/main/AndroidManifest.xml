@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
+            android:name=".AdminViewDataRequestsFromCompany"
+            android:exported="false" />
+        <activity
             android:name=".AdminViewListOfCompanies"
             android:exported="false" />
         <activity

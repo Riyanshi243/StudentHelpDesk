@@ -7,52 +7,43 @@
     tools:context=".AdminCompanyPage">
 
     <ScrollView
+        android:id="@+id/scrollView4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/head_img2"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="casual"
-            android:gravity="center"
-            android:paddingLeft="5dp"
-            android:layout_marginTop="20dp"
-            android:text="name"
-            android:textColor="@color/white"
-            android:textSize="28dp" />
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/scrollView4">
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/profilePic"
-            android:layout_width="190dp"
-            android:layout_height="157dp"
-            android:layout_gravity="center"
-            android:src="@drawable/admin_profile_img"
-            app:civ_border_color="@color/black"
-            app:civ_border_width="1dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="@color/black" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@drawable/head_img"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="MANAGE COMPANIES"
+                    android:textColor="@color/white"
+                    android:textSize="32dp" />
 
-    </LinearLayout>
+            </LinearLayout>
         <ProgressBar
             android:id="@+id/progressBar4"
             style="?android:attr/progressBarStyle"
@@ -89,6 +80,7 @@
                 android:layout_height="200dp"
                 android:layout_row="0"
                 android:layout_column="0"
+                android:onClick="viewDataRequestsFromCompany"
                 android:src="@drawable/data_requests"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -115,7 +107,6 @@
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 tools:targetApi="lollipop">
-
             </androidx.cardview.widget.CardView>
             <ImageView
                 android:id="@+id/listOfCompanies"
