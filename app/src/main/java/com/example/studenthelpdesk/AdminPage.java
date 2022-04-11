@@ -211,4 +211,82 @@ public class AdminPage extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(AdminPage.this,EndScreen.class));
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+        setContentView(R.layout.activity_admin_page);
+        adminData=new AdminData();
+        greetings=findViewById(R.id.name);
+        profilepic=findViewById(R.id.profilePic);
+        editReq=findViewById(R.id.editReq);
+        lockDatabase=findViewById(R.id.lockDatabase);
+        manageCompany=findViewById(R.id.manageCompany);
+        f=FirebaseAuth.getInstance();
+        if(f==null)
+        {
+            startActivity(new Intent(AdminPage.this,Login.class));
+            finishAffinity();
+        }
+        adminData.setEmail(f.getCurrentUser().getEmail());
+        FirebaseFirestore fs=FirebaseFirestore.getInstance();
+        HashSet<String> token=new HashSet<>();
+        token.add("All");
+        token.add(f.getCurrentUser().getEmail());
+        DocumentReference docUserInfo = fs.collection("All Users On App").document(adminData.getEmail());
+        docUserInfo.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String cId= (String) documentSnapshot.get("College");
+                String dept=(String) documentSnapshot.get("Department");
+                adminData.setCollegeId(cId);
+                adminData.setDeptName(dept);
+                fs.collection("All Colleges").document(cId).get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                ArrayList<String> deptData= (ArrayList<String>) documentSnapshot.get("Department for Data");
+                                if (deptData.contains(dept))
+                                {
+                                    editReq.setVisibility(View.VISIBLE);
+                                    lockDatabase.setVisibility(View.VISIBLE);
+                                    manageCompany.setVisibility(View.VISIBLE);
+                                }
+                                FirebaseMessaging.getInstance().subscribeToTopic("All");
+                                FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
+                                FirebaseMessaging.getInstance().subscribeToTopic(cId);
+                                FirebaseMessaging.getInstance().subscribeToTopic("Admin_"+cId);
+                                FirebaseMessaging.getInstance().subscribeToTopic(cId+"_"+dept.replaceAll("\\s", ""));
+                                token.add(cId);
+                                token.add("Admin_"+cId);
+                                token.add(cId+"_"+dept.replaceAll("\\s", ""));
+                                adminData.setToken(token);
+                                DocumentReference docUserInfoAll = fs.collection("All Colleges").document(cId).collection("UsersInfo").document(adminData.getEmail());
+                                docUserInfoAll.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        String name= (String) documentSnapshot.get("Name");
+                                        String phone=(String) documentSnapshot.get("Phone Number");
+                                        adminData.setPhoneNumber(phone);
+                                        adminData.setAdminName(name);
+                                        greetings.setText(name);
+                                        StorageReference storageReference = FirebaseStorage.getInstance().getReference(cId).child("Photograph").child(adminData.getEmail());
+                                        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                Glide.with(AdminPage.this)
+                                                        .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                        .error(R.drawable.admin_profile_img)
+                                                        .placeholder(R.drawable.default_loading_img)
+                                                        .into(profilepic);
+
+                                            }
+                                        });
+
+                                    }
+                                });
+                            }
+                        });
+            }
+        });
+    }
 }
