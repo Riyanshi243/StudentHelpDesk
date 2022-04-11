@@ -625,8 +625,10 @@ public class StudentPage extends AppCompatActivity {
         });
 
     }
+
     @Override
     public void onBackPressed() {
         startActivity(new Intent(StudentPage.this,EndScreen.class));
     }
+
 }
