@@ -246,7 +246,7 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
     //attach Notification
     public void attachNotif(View v)
     {
-        String[] mimeTypes = {"image/*", "application/pdf"};
+        String[] mimeTypes = {"image/*", "application/pdf","application/msword", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.openxmlformats-officedocument.presentationml.presentation"};
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -262,7 +262,6 @@ public class AdminOrCompanySendNotification extends AppCompatActivity {
             for (String mimeType : mimeTypes) {
                 mimeTypesStr += mimeType + "|";
             }
-
             intent.setType(mimeTypesStr.substring(0, mimeTypesStr.length() - 1));
         }
         startActivityForResult(intent,1);

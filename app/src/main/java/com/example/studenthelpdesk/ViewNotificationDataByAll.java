@@ -1,7 +1,9 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -133,6 +135,18 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                                 }
                             });
                         }
+                        /*else if ( a.endsWith(".doc") || a.endsWith(".docx") || a.endsWith(".xls") || a.endsWith(".excel"))
+                        {
+                            storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Intent intent = new Intent(view.getContext(), ViewPDFActivity.class);
+                                    intent.putExtra("url", uri.toString());
+                                    startActivity(intent);
+                                }
+                            });
+
+                        }*/
                         else
                         {
                             //image viewer
@@ -166,8 +180,6 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                                 ll.removeAllViews();
 
                         }
-
-
                     }
                 });
             }
