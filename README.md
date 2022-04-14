@@ -136,5 +136,6 @@ The major User classes in the StudentHelpDesk would be :
   <tr>
     <td><a href="https://github.com/Riyanshi243" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_RiyanshiVerma.jpeg" alt="Riyanshi Verma" style="width:150px;height:150px;"></a></td>
     <td><a href="https://github.com/m-vanshika" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_Vanshika.jpg" alt="Vanshika" style="width:150px;height:150px;"></a></td>
+    <td><a href="https://github.com/mansibhatt3035" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_Vanshika.jpg" alt="Mansi Bhatt" style="width:150px;height:150px;"></a></td>
   </tr>
  </table>
