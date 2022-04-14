@@ -26,6 +26,15 @@ The major User classes in the StudentHelpDesk would be :
 1. New student needs to sign up by giving their complete details i.e., Personal details, Academic details and other related documents as mentioned by their college while college register in app.
 2. They can update their profile information in real time, only when database is unlocked. Also, only changeable fields would be allowed to be changed directly by students, whereas non- changeable fields requires sending a change request to admin (e.g. – Name, college id, etc.).
 3. They will receive notification from the companies as and when they arrive based on eligibility criteria, thereafter, they may register for the same.
+#### Below is the student page
+<table align="center">
+  <tr>
+    <td>Student Page</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/StudentPage.jpg" alt="StudentPage" style="width:300px;height:620px;"></td>
+  </tr>
+ </table>
 
 ### 2. Admin
 1. The Admin has supreme power of the application SHD.
@@ -34,14 +43,31 @@ The major User classes in the StudentHelpDesk would be :
 4. Admin has the responsibility to notify the Company for any application from a student.
 5. Admin has to notify the students regarding any changes in the procedure or selection.
 6. Admin has to lock the database and notify students for the same, before sending the data to requiredcompany.
+#### Below are the Data AdminPage and Department AdminPage
+<table align="center">
+  <tr>
+    <td>Data Admin Page</td>
+     <td>Department Admin Page</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/AdminPage1.jpg" alt="DATA AdminPage" style="width:300px;height:670px;"></td>
+    <td><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/AdminPage2.jpg" alt="AdminPage" style="width:300px;height:670px;"></td>
+  </tr>
+ </table>
 
 ### 3. Company
 1. The Company initially has to register using the details that admin provides them.
 2. The Company can notify the Admin or the TPO as well as send direct notifications to students regarding placement/internship after signup.
 3. The Company can view shortlisted students’ details (based on eligibility criteria) as provided by TPO.
 
-
-
+<table align="center">
+  <tr>
+    <td>Company Page</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/CompanyPage.jpg" alt="CompanyPage" style="width:300px;height:620px;"></td>
+  </tr>
+</table>
 
 ## Assumptions and Dependencies
 ### Assumptions:
@@ -100,3 +126,15 @@ The major User classes in the StudentHelpDesk would be :
 <i><b>Requirements:</b></i> The user must have basic understanding of English language.
 
 ## Developers
+
+<table align="center">
+  <tr>
+    <td>Riyanshi Verma</td>
+     <td>Vanshika</td>
+    <td>Mansi Bhatt</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_RiyanshiVerma.jpeg" alt="Riyanshi Verma" style="width:100px;height:100px;"></td>
+    <td><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_Vanshika.jpg" alt="Vanshika" style="width:100px;height:100px;"></td>
+  </tr>
+ </table>
