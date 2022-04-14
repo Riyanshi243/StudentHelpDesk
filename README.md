@@ -42,6 +42,18 @@ The major User classes in the StudentHelpDesk would be :
 
 
 
+
+## Assumptions and Dependencies
+### Assumptions:
+1. We are assuming that the user should have some basic knowledge of Android mobile.
+2. It is assumed that all users have good internet connectivity.
+3. We are assuming that the Admin-User has all email ids to allow students to create all profiles.
+### Dependencies:
+1. If there is no internet connection, there will be faulty result at client side. Furthermore, Network error will be displayed.
+2. This app won’t work in iOS.
+3. Admin will have to allow each and every user of the college.
+
+
 ## System Features
 
 ### 1. Data Change with Request
@@ -86,3 +98,5 @@ The major User classes in the StudentHelpDesk would be :
 <i><b>Benefits:</b></i> This feature will provide better understanding of the app and its flow to even a new android user.
 <br>
 <i><b>Requirements:</b></i> The user must have basic understanding of English language.
+
+## Developers
