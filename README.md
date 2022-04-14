@@ -59,7 +59,7 @@ The major User classes in the StudentHelpDesk would be :
 1. The Company initially has to register using the details that admin provides them.
 2. The Company can notify the Admin or the TPO as well as send direct notifications to students regarding placement/internship after signup.
 3. The Company can view shortlisted students’ details (based on eligibility criteria) as provided by TPO.
-
+#### Below is the CompanyPage
 <table align="center">
   <tr>
     <td>Company Page</td>
@@ -127,14 +127,14 @@ The major User classes in the StudentHelpDesk would be :
 
 ## Developers
 
-<table align="center">
+<table>
   <tr>
     <td>Riyanshi Verma</td>
      <td>Vanshika</td>
     <td>Mansi Bhatt</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_RiyanshiVerma.jpeg" alt="Riyanshi Verma" style="width:100px;height:100px;"></td>
-    <td><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_Vanshika.jpg" alt="Vanshika" style="width:100px;height:100px;"></td>
+    <td><a href="https://github.com/Riyanshi243"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_RiyanshiVerma.jpeg" alt="Riyanshi Verma" style="width:150px;height:150px;"></a></td>
+    <td><a href="https://github.com/m-vanshika"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_Vanshika.jpg" alt="Vanshika" style="width:150px;height:150px;"></a></td>
   </tr>
  </table>
