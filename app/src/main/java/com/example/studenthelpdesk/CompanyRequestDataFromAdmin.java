@@ -1,8 +1,10 @@
 package com.example.studenthelpdesk;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class CompanyRequestDataFromAdmin extends AppCompatActivity {
@@ -30,6 +36,10 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
      HashMap<String,ArrayList<Boolean>> allCourseAndBranchRequest=new HashMap<>();
      HashMap<String,ArrayList<String>> allCourseAndBranch=new HashMap<>();
      ArrayList<Integer> perQ,acaQ,upQ;
+    HashMap<String,HashMap<String,String>> equal=new HashMap<>();
+    HashMap<String,HashMap<String,ArrayList<Double>>> range=new HashMap<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +54,15 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
         personalQ=new ArrayList<>();
         academicQ=new ArrayList<>();
         uploadQ=new ArrayList<>();
-        courses.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
+
+        perQ = new ArrayList<>();
+        acaQ = new ArrayList<>();
+        upQ = new ArrayList<>();
         getCoursesInCollege();
         getQuestionsOfAllType();
-        clickCourse(new View(this));
-
+        TextView t=new TextView(this);
+        t.setText("Select the required tab");
+        filterFields.addView(t);
     }
     public void clickCourse(View v)
     {
@@ -98,7 +112,6 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                                 branchShow.set(finalI,b);
                                 allCourseAndBranchRequest.remove(c);
                                 allCourseAndBranchRequest.put(c,branchShow);
-                                AdminViewAllStudentData.appliedfilter();
 
                             }
                         });
@@ -122,7 +135,6 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                         CheckBox currBranchName=thisBranch.findViewById(R.id.branchname);
                         currBranchName.setChecked(currCourseName.isChecked());
                     }
-                    AdminViewAllStudentData.appliedfilter();
                 }
             });
             filterFields.addView(thisCourse);
@@ -136,12 +148,12 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
         academicDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         uploadDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         filter.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        perQ=new ArrayList<>();
         for(int i=0;i<personalQ.size();i++)
         {
             CheckBox c=new CheckBox(this);
             c.setText(personalQ.get(i).getQuestion());
-            c.setChecked(false);
+            if(perQ.contains(i))
+                c.setChecked(true);
             int finalI = i;
             c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -163,12 +175,12 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
         courses.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         uploadDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         filter.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        acaQ=new ArrayList<>();
         for(int i=0;i<academicQ.size();i++)
         {
             CheckBox c=new CheckBox(this);
             c.setText(academicQ.get(i).getQuestion());
-            c.setChecked(false);
+            if(acaQ.contains(i))
+                c.setChecked(true);
             int finalI = i;
             c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -190,12 +202,12 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
         academicDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         courses.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
         filter.setBackgroundColor(ContextCompat.getColor(this, R.color.gray_blue_vlight));
-        upQ = new ArrayList<>();
         for(int i=0;i<uploadQ.size();i++)
         {
             CheckBox c=new CheckBox(this);
             c.setText(uploadQ.get(i).getQuestion());
-            c.setChecked(false);
+            if(upQ.contains(i))
+                c.setChecked(true);
             int finalI = i;
             c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -209,7 +221,7 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
             filterFields.addView(c);
         }
     }
-   /* public void clickFilter(View v)
+   public void clickFilter(View v)
     {
         filterFields.removeAllViews();
         filter.setBackgroundColor(ContextCompat.getColor(this, R.color.hint_text));
@@ -227,7 +239,11 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                 Button set=stringFilter.findViewById(R.id.set);
                 Button remove=stringFilter.findViewById(R.id.remove);
                 questionName.setText(personalQ.get(i).getQuestion());
-
+                if(equal.containsKey("0"))
+                {
+                    HashMap<String, String> quesMap = equal.get("0");
+                    filterName.setText(quesMap.get(i+""));
+                }
                 int finalI = i;
                 set.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -237,20 +253,18 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             filterName.setError("This is compulsory");
                             return;
                         }
-                        if(equal.containsKey(0))
+                        if(equal.containsKey("0"))
                         {
-                            HashMap<Integer, String> quesMap = equal.get(0);
-                            quesMap.put(finalI,filterName.getText().toString());
-                            equal.put(0,quesMap);
+                            HashMap<String, String> quesMap = equal.get("0");
+                            quesMap.put(finalI+"",filterName.getText().toString());
+                            equal.put("0",quesMap);
 
                         }
                         else
                         {
-                            HashMap<Integer,String>quesMap=new HashMap<>();
-                            quesMap.put(finalI,filterName.getText().toString());
-                            equal.put(0,quesMap);
-                            AdminViewAllStudentData.sort();
-                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
+                            HashMap<String,String>quesMap=new HashMap<>();
+                            quesMap.put(finalI+"",filterName.getText().toString());
+                            equal.put("0",quesMap);
 
                         }
 
@@ -260,14 +274,12 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                 remove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(equal.containsKey(0)==false)
+                        if(equal.containsKey("0")==false)
                             return;
-                        HashMap<Integer, String> quesMap = equal.get(0);
-                        quesMap.remove(finalI);
-                        equal.put(0,quesMap);
+                        HashMap<String, String> quesMap = equal.get("0");
+                        quesMap.remove(finalI+"");
+                        equal.put("0",quesMap);
                         filterName.setText(null);
-                        AdminViewAllStudentData.sort();
-
                     }
                 });
                 filterFields.addView(stringFilter);
@@ -281,18 +293,15 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                 Button remove=rangeFilter.findViewById(R.id.remove1);
                 questionName.setText(personalQ.get(i).getQuestion());
                 int finalI=i;
-                HashMap<Integer, HashMap<Integer, ArrayList<Double>>> range = AdminViewAllStudentData.range;
-                if(range.containsKey(0))
+                if(range.containsKey("0"))
                 {
-                    HashMap<Integer, ArrayList<Double>> quesMap = range.get(0);
-                    if(quesMap.containsKey(finalI)) {
-                        filterNameMin.setText(quesMap.get(finalI).get(0)+"");
-                        filterNameMax.setText(quesMap.get(finalI).get(1)+"");
+                    HashMap<String, ArrayList<Double>> quesMap = range.get("0");
+                    if(quesMap.containsKey(finalI+""))
+                    {
+                        ArrayList<Double> minmax=quesMap.get(finalI+"");
+                        filterNameMax.setText(minmax.get(1)+"");
+                        filterNameMin.setText(minmax.get(0)+"");
                     }
-                }
-                else {
-                    filterNameMin.setText(null);
-                    filterNameMax.setText(null);
                 }
                 Button set=rangeFilter.findViewById(R.id.Set);
                 set.setOnClickListener(new View.OnClickListener() {
@@ -308,28 +317,24 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             filterNameMin.setError("This is compulsory");
                             return;
                         }
-                        if(range.containsKey(0))
+                        if(range.containsKey("0"))
                         {
-                            HashMap<Integer, ArrayList<Double>> quesMap = range.get(0);
+                            HashMap<String, ArrayList<Double>> quesMap = range.get("0");
                             ArrayList<Double> minmax=new ArrayList<>();
                             minmax.add(Double.parseDouble(filterNameMin.getText().toString()));
                             minmax.add(Double.parseDouble(filterNameMax.getText().toString()));
-                            quesMap.put(finalI,minmax);
-                            range.put(0,quesMap);
-                            AdminViewAllStudentData.sort();
-                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
+                            quesMap.put(finalI+"",minmax);
+                            range.put("0",quesMap);
 
                         }
                         else
                         {
-                            HashMap<Integer, ArrayList<Double>> quesMap = new HashMap<>();
+                            HashMap<String, ArrayList<Double>> quesMap = new HashMap<>();
                             ArrayList<Double> minmax=new ArrayList<>();
                             minmax.add(Double.parseDouble(filterNameMin.getText().toString()));
                             minmax.add(Double.parseDouble(filterNameMax.getText().toString()));
-                            quesMap.put(finalI,minmax);
-                            range.put(0,quesMap);
-                            AdminViewAllStudentData.sort();
-                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
+                            quesMap.put(finalI+"",minmax);
+                            range.put("0",quesMap);
 
                         }
                     }
@@ -337,39 +342,35 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                 remove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(range.containsKey(0)==false)
+                        if(range.containsKey("0")==false)
                             return;
-                        HashMap<Integer, ArrayList<Double>> quesMap = range.get(0);
-                        quesMap.remove(finalI);
+                        HashMap<String, ArrayList<Double>> quesMap = range.get("0");
+                        quesMap.remove(finalI+"");
                         filterNameMax.setText(null);
                         filterNameMin.setText(null);
-                        range.put(0,quesMap);
+                        range.put("0",quesMap);
                     }
                 });
                 filterFields.addView(rangeFilter);
             }
         }
-        for(int i=0;i<acadQ.size();i++)
+        for(int i=0;i<academicQ.size();i++)
         {
-            if(acadQ.get(i).getType()==1||acadQ.get(i).getType()==4)
+            if(academicQ.get(i).getType()==1||academicQ.get(i).getType()==4)
             {
                 View stringFilter=getLayoutInflater().inflate(R.layout.repeatable_filter_equal,null);
                 TextView questionName=stringFilter.findViewById(R.id.Heading2);
                 EditText filterName=stringFilter.findViewById(R.id.FilterValue);
                 Button set=stringFilter.findViewById(R.id.set);
                 Button remove=stringFilter.findViewById(R.id.remove);
-                questionName.setText(acadQ.get(i).getQuestion());
-                HashMap<Integer, HashMap<Integer, String>> equal = AdminViewAllStudentData.equal;
-                int finalI = i;
-                if(equal.containsKey(1))
+                questionName.setText(academicQ.get(i).getQuestion());
+                if(equal.containsKey("1"))
                 {
-                    HashMap<Integer, String> quesMap = equal.get(1);
-                    if(quesMap.containsKey(finalI))
-                        filterName.setText(quesMap.get(finalI));
+                    HashMap<String, String> quesMap = equal.get("1");
+                    filterName.setText(quesMap.get(i+""));
                 }
-                else {
-                    filterName.setText("");
-                }
+                int finalI = i;
+
                 set.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -378,23 +379,18 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             filterName.setError("This is compulsory");
                             return;
                         }
-                        HashMap<Integer, HashMap<Integer, String>> equal = AdminViewAllStudentData.equal;
-                        if(equal.containsKey(1))
+                        if(equal.containsKey("1"))
                         {
-                            HashMap<Integer, String> quesMap = equal.get(1);
-                            quesMap.put(finalI,filterName.getText().toString());
-                            equal.put(0,quesMap);
-                            AdminViewAllStudentData.sort();
-                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
+                            HashMap<String, String> quesMap = equal.get("1");
+                            quesMap.put(finalI+"",filterName.getText().toString());
+                            equal.put("0",quesMap);
 
                         }
                         else
                         {
-                            HashMap<Integer,String>quesMap=new HashMap<>();
-                            quesMap.put(finalI,filterName.getText().toString());
-                            equal.put(0,quesMap);
-                            AdminViewAllStudentData.sort();
-                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
+                            HashMap<String,String>quesMap=new HashMap<>();
+                            quesMap.put(finalI+"",filterName.getText().toString());
+                            equal.put("0",quesMap);
 
                         }
 
@@ -404,40 +400,36 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                 remove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(equal.containsKey(1)==false)
+                        if(equal.containsKey("1")==false)
                             return;
-                        HashMap<Integer, String> quesMap = equal.get(1);
-                        quesMap.remove(finalI);
-                        equal.put(1,quesMap);
+                        HashMap<String, String> quesMap = equal.get(1);
+                        quesMap.remove(finalI+"");
+                        equal.put("1",quesMap);
                         filterName.setText(null);
-                        AdminViewAllStudentData.sort();
 
                     }
                 });
                 filterFields.addView(stringFilter);
             }
-            else if(acadQ.get(i).getType()==2||acadQ.get(i).getType()==3||i==2)
+            else if(academicQ.get(i).getType()==2||academicQ.get(i).getType()==3||i==2)
             {
                 View rangeFilter=getLayoutInflater().inflate(R.layout.repeatable_filter_range,null);
                 TextView questionName=rangeFilter.findViewById(R.id.Heading2);
                 EditText filterNameMin=rangeFilter.findViewById(R.id.FilterValueMin);
                 EditText filterNameMax=rangeFilter.findViewById(R.id.FilterValueMax);
                 Button remove=rangeFilter.findViewById(R.id.remove1);
-                questionName.setText(acadQ.get(i).getQuestion());
+                questionName.setText(academicQ.get(i).getQuestion());
                 int finalI=i;
-                HashMap<Integer, HashMap<Integer, ArrayList<Double>>> range = AdminViewAllStudentData.range;
-                if(range.containsKey(1))
+                if(range.containsKey("1"))
                 {
-                    HashMap<Integer, ArrayList<Double>> quesMap = range.get(1);
-                    if(quesMap.containsKey(finalI)) {
-                        filterNameMin.setText(quesMap.get(finalI).get(0)+"");
-                        filterNameMax.setText(quesMap.get(finalI).get(1)+"");
+                    HashMap<String, ArrayList<Double>> quesMap = range.get("1");
+                    if(quesMap.containsKey(finalI+"")) {
+                        ArrayList<Double> minmax = quesMap.get(finalI + "");
+                        filterNameMax.setText(minmax.get(1) + "");
+                        filterNameMin.setText(minmax.get(0) + "");
                     }
                 }
-                else {
-                    filterNameMin.setText(null);
-                    filterNameMax.setText(null);
-                }
+                Log.e("Academic",academicQ.toString());
                 Button set=rangeFilter.findViewById(R.id.Set);
                 set.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -453,28 +445,24 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             filterNameMin.setError("This is compulsory");
                             return;
                         }
-                        if(range.containsKey(1))
+                        if(range.containsKey("1"))
                         {
-                            HashMap<Integer, ArrayList<Double>> quesMap = range.get(1);
+                            HashMap<String, ArrayList<Double>> quesMap = range.get("1");
                             ArrayList<Double> minmax=new ArrayList<>();
                             minmax.add(Double.parseDouble(filterNameMin.getText().toString()));
                             minmax.add(Double.parseDouble(filterNameMax.getText().toString()));
-                            quesMap.put(finalI,minmax);
-                            range.put(1,quesMap);
-                            AdminViewAllStudentData.sort();
-                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
+                            quesMap.put(finalI+"",minmax);
+                            range.put("1",quesMap);
 
                         }
                         else
                         {
-                            HashMap<Integer, ArrayList<Double>> quesMap = new HashMap<>();
+                            HashMap<String, ArrayList<Double>> quesMap = new HashMap<>();
                             ArrayList<Double> minmax=new ArrayList<>();
                             minmax.add(Double.parseDouble(filterNameMin.getText().toString()));
                             minmax.add(Double.parseDouble(filterNameMax.getText().toString()));
-                            quesMap.put(finalI,minmax);
-                            range.put(1,quesMap);
-                            AdminViewAllStudentData.sort();
-                            Toast.makeText(AdminViewAllStudentDataFilters.this,"Filter Applied",Toast.LENGTH_LONG);
+                            quesMap.put(finalI+"",minmax);
+                            range.put("1",quesMap);
 
                         }
                     }
@@ -482,19 +470,19 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                 remove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(range.containsKey(1)==false)
+                        if(range.containsKey("1")==false)
                             return;
-                        HashMap<Integer, ArrayList<Double>> quesMap = range.get(1);
-                        quesMap.remove(finalI);
+                        HashMap<String, ArrayList<Double>> quesMap = range.get("1");
+                        quesMap.remove(finalI+"");
                         filterNameMax.setText(null);
                         filterNameMin.setText(null);
-                        range.put(1,quesMap);
+                        range.put("1",quesMap);
                     }
                 });
                 filterFields.addView(rangeFilter);
             }
         }
-    }*/
+    }
     public void getCoursesInCollege()
     {
         DocumentReference allcourse = FirebaseFirestore.getInstance().collection("All Colleges")
@@ -519,6 +507,60 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void setRequest(View v)
+    {
+        AlertDialog.Builder ab=new AlertDialog.Builder(this);
+
+        ab.setTitle("Please confirm the information");
+        ab.setMessage("Please enter the name by which this data request is identified");
+
+        View titlePage=getLayoutInflater().inflate(R.layout.repeatable_edit_text_white_layout,null);
+        TextView ques=titlePage.findViewById(R.id.Ques);
+        ques.setVisibility(View.GONE);
+        EditText titleReq=titlePage.findViewById(R.id.editTextTextMultiLine);
+        ab.setView(titlePage);
+        ab.setCancelable(false);
+        ab.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(titleReq.getText().toString()==null)
+                {
+                    titleReq.setError("");
+                    return;
+                }
+                String title=titleReq.getText().toString();
+                Date time= Calendar.getInstance().getTime();
+                String token=FirebaseAuth.getInstance().getCurrentUser().getUid()+" "+time;
+                HashMap<String,Object> requestData=new HashMap<>();
+                requestData.put("Title",title);
+                requestData.put("Sender",companyData.getEmail());
+                requestData.put("Status",0);
+                requestData.put("Time",time);
+                requestData.put("Branches",allCourseAndBranchRequest);
+                requestData.put("Personal Question",perQ);
+                requestData.put("Academic Question",acaQ);
+                requestData.put("Upload Question",upQ);
+                requestData.put("Filters Equal",equal);
+                requestData.put("Filters Range",range);
+                FirebaseFirestore.getInstance().collection("All Colleges").document(companyData.getCollegeId())
+                        .collection("Data Request").document(token)
+                        .set(requestData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(CompanyRequestDataFromAdmin.this, "Request Sent", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            }
+        }).setNegativeButton("Discard", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //do nothing
+            }
+        });
+        ab.create().show();
     }
     public void getQuestionsOfAllType()
     {
