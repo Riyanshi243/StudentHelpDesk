@@ -129,21 +129,21 @@ The major User classes in the StudentHelpDesk would be :
 
 <table>
   <tr>
-    <td>Riyanshi Verma</td>
-     <td>Vanshika</td>
-    <td>Mansi Bhatt</td>
+    <td align="center">Riyanshi Verma</td>
+     <td align="center">Vanshika</td>
+    <td align="center">Mansi Bhatt</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/Riyanshi243" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_RiyanshiVerma.jpeg" alt="Riyanshi Verma" style="width:150px;height:150px;"></a></td>
+    <td><a href="https://github.com/Riyanshi243" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_RiyanshiVerma.jpg" alt="Riyanshi Verma" style="width:150px;height:150px;"></a></td>
     <td><a href="https://github.com/m-vanshika" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_Vanshika.jpg" alt="Vanshika" style="width:150px;height:150px;"></a></td>
     <td><a href="https://github.com/mansibhatt3035" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_MansiBhatt.jpg" alt="Mansi Bhatt" style="width:150px;height:150px;"></a></td>
   </tr>
   <tr>
-    <td><a href="https://www.linkedin.com/in/riyanshi-verma-779535191/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/riyanshi-verma-779535191/" height="20" width="30" /></a>
+    <td align="center"><a href="https://www.linkedin.com/in/riyanshi-verma-779535191/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/riyanshi-verma-779535191/" height="20" width="30" /></a>
 </p></td>
-     <td><a href="https://www.linkedin.com/in/m-vanshika/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/m-vanshika/" height="20" width="30" /></a>
+     <td align="center"><a href="https://www.linkedin.com/in/m-vanshika/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/m-vanshika/" height="20" width="30" /></a>
 </p></td>
-    <td><a href="https://www.linkedin.com/in/mansi-bhatt-740106205/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/mansi-bhatt-740106205/" height="20" width="30" /></a>
+    <td align="center"><a href="https://www.linkedin.com/in/mansi-bhatt-740106205/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/mansi-bhatt-740106205/" height="20" width="30" /></a>
 </p></td>
   </tr>
  </table>
