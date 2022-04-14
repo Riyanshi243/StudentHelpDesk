@@ -214,14 +214,6 @@ public class AdminPage extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        setContentView(R.layout.activity_admin_page);
-        adminData=new AdminData();
-        greetings=findViewById(R.id.name);
-        profilepic=findViewById(R.id.profilePic);
-        editReq=findViewById(R.id.editReq);
-        lockDatabase=findViewById(R.id.lockDatabase);
-        manageCompany=findViewById(R.id.manageCompany);
-        f=FirebaseAuth.getInstance();
         if(f==null)
         {
             startActivity(new Intent(AdminPage.this,Login.class));
@@ -229,9 +221,7 @@ public class AdminPage extends AppCompatActivity {
         }
         adminData.setEmail(f.getCurrentUser().getEmail());
         FirebaseFirestore fs=FirebaseFirestore.getInstance();
-        HashSet<String> token=new HashSet<>();
-        token.add("All");
-        token.add(f.getCurrentUser().getEmail());
+
         DocumentReference docUserInfo = fs.collection("All Users On App").document(adminData.getEmail());
         docUserInfo.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -251,15 +241,6 @@ public class AdminPage extends AppCompatActivity {
                                     lockDatabase.setVisibility(View.VISIBLE);
                                     manageCompany.setVisibility(View.VISIBLE);
                                 }
-                                FirebaseMessaging.getInstance().subscribeToTopic("All");
-                                FirebaseMessaging.getInstance().subscribeToTopic(f.getCurrentUser().getEmail());
-                                FirebaseMessaging.getInstance().subscribeToTopic(cId);
-                                FirebaseMessaging.getInstance().subscribeToTopic("Admin_"+cId);
-                                FirebaseMessaging.getInstance().subscribeToTopic(cId+"_"+dept.replaceAll("\\s", ""));
-                                token.add(cId);
-                                token.add("Admin_"+cId);
-                                token.add(cId+"_"+dept.replaceAll("\\s", ""));
-                                adminData.setToken(token);
                                 DocumentReference docUserInfoAll = fs.collection("All Colleges").document(cId).collection("UsersInfo").document(adminData.getEmail());
                                 docUserInfoAll.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
