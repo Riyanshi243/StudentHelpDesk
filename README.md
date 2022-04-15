@@ -7,7 +7,7 @@ Download link: https://drive.google.com/file/d/1rK9VU7oEMCRgihpoBmxBfhWbKXNh0fGt
 
 ### For Testing: <br>
 Admin Email: superadmin@vanasthali.com <br>
-Student Email: S1@vanasthali.com <br>
+Student Email: s1@vanasthali.com <br>
 Company Email: c1@vanasthali.com <br>
 Password for all: 12345678
 
