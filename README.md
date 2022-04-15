@@ -139,11 +139,18 @@ The major User classes in the StudentHelpDesk would be :
     <td><a href="https://github.com/mansibhatt3035" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_MansiBhatt.jpg" alt="Mansi Bhatt" style="width:150px;height:150px;"></a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/riyanshi-verma-779535191/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" height="30" width="30"/></a>            <a href="mailto:riyanshiverma243@gmail.com?"> <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="30" width="30" /></a>
+    <td align="center">
+      <a href="https://github.com/Riyanshi243" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="30" width="30"/></a>   
+      <a href="https://www.linkedin.com/in/riyanshi-verma-779535191/" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg" height="30" width="30"/></a>
+      <a href="mailto:riyanshiverma243@gmail.com?"> <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="30" width="30" /></a>
 </td>
-     <td align="center"><a href="https://www.linkedin.com/in/m-vanshika/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" height="30" width="30" /></a>
-<a href="mailto:vanshikav.kumar@gmail.com?"> <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="30" width="30" /></a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/mansi-bhatt-740106205/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" height="30" width="30" /></a>
-<a href="mailto:mansi3035@gmail.com?"> <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="30" width="30" /></a></td>
+     <td align="center">
+       <a href="https://github.com/m-vanshika" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="30" width="30"/></a>   
+       <a href="https://www.linkedin.com/in/m-vanshika/" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg" height="30" width="30" /></a>
+       <a href="mailto:vanshikav.kumar@gmail.com?"> <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="30" width="30" /></a></td>
+    <td align="center">
+      <a href="https://github.com/mansibhatt3035" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="30" width="30"/></a> 
+      <a href="https://www.linkedin.com/in/mansi-bhatt-740106205/" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg" height="30" width="30" /></a>
+      <a href="mailto:mansi3035@gmail.com?"> <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="30" width="30" /></a></td>
   </tr>
  </table>
