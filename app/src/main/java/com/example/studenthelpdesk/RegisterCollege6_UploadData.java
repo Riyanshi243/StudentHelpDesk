@@ -44,11 +44,10 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
             EditText question = repeatableView.findViewById(R.id.ans);
             question.requestFocus();
             CheckBox cumpolsary = repeatableView.findViewById(R.id.compulsoryfield);
-            CheckBox changeable = repeatableView.findViewById(R.id.changefield);
             if(question.getText().toString().length()==0)
                 continue;
             thisQuestion.setQuestion(question.getText().toString());
-            thisQuestion.setChangeable(changeable.isChecked());
+            thisQuestion.setChangeable(true);
             thisQuestion.setCompulsory(cumpolsary.isChecked());
             thisQuestion.setType(6);
             allUploadQuestion[c1++] = thisQuestion;
@@ -77,6 +76,8 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         String[] list = {"Upload Data"};
         ArrayAdapter spinnerList = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         dropdown.setAdapter(spinnerList);
+        CheckBox changeable = questionRepeatable.findViewById(R.id.changefield);
+        changeable.setVisibility(View.GONE);
         linearLayout.addView(questionRepeatable);
 
     }
@@ -102,6 +103,7 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
         cumpolsary.setFocusableInTouchMode(false);
         cumpolsary.setClickable(false);
         CheckBox changeable = questionRepeatable.findViewById(R.id.changefield);
+        changeable.setVisibility(View.GONE);
         changeable.setChecked(true);
         changeable.setFocusable(false);
         changeable.setFocusableInTouchMode(false);
@@ -157,7 +159,6 @@ public class RegisterCollege6_UploadData extends AppCompatActivity {
             ArrayAdapter spinnerList=new ArrayAdapter(this,android.R.layout.simple_spinner_item,list);
             dropdown.setAdapter(spinnerList);
             linearLayout.addView(questionRepeatable);
-
         }
     }
 }
