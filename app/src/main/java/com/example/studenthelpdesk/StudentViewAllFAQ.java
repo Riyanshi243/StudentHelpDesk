@@ -256,7 +256,7 @@ public class StudentViewAllFAQ extends AppCompatActivity {
             {
                 k=k.toLowerCase(Locale.ROOT);
                 searchTO=searchTO.toLowerCase(Locale.ROOT);
-                if(k.indexOf(searchTO)!=-1) {
+                if(k.indexOf(searchTO)==0) {
                     faqData.add(f);
                     break;
                 }
