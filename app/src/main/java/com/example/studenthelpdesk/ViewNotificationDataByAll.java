@@ -12,6 +12,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -124,6 +125,7 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                     public void onClick(View view) {
                         FirebaseStorage storage = FirebaseStorage.getInstance();
                         StorageReference storageRef = storage.getReference(cId).child("Notification_"+cId).child(notificationData.getNotifLocation()).child(a);
+
                         if ( a.endsWith(".pdf"))
                         {
                             storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -135,18 +137,19 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                                 }
                             });
                         }
-                        /*else if ( a.endsWith(".doc") || a.endsWith(".docx") || a.endsWith(".xls") || a.endsWith(".excel"))
+                        else if ( a.endsWith(".doc") || a.endsWith(".docx") || a.endsWith(".xls") || a.endsWith(".excel"))
                         {
+                            Log.e("File extension",a);
                             storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Intent intent = new Intent(view.getContext(), ViewPDFActivity.class);
-                                    intent.putExtra("url", uri.toString());
+
+                                    Intent intent=new Intent(Intent.ACTION_VIEW,uri);
                                     startActivity(intent);
                                 }
                             });
 
-                        }*/
+                        }
                         else
                         {
                             //image viewer

@@ -268,7 +268,9 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
 
                         }
 
+                        Log.e("equal",equal.toString());
                     }
+
 
                 });
                 remove.setOnClickListener(new View.OnClickListener() {

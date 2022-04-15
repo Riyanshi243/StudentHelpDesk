@@ -254,6 +254,8 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                         storageReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
+                               if(isDestroyed())
+                                    return;
                                 Glide.with(AdminAnswerFAQ.this)
                                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
                                         .error(R.drawable.error_profile_picture)
@@ -315,6 +317,8 @@ public class AdminAnswerFAQ extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri)
                             {
+                                if(isDestroyed())
+                                    return;
                                 Glide.with(AdminAnswerFAQ.this)
                                         .load(uri).diskCacheStrategy(DiskCacheStrategy.ALL)
                                         .error(R.drawable.error_profile_picture)
