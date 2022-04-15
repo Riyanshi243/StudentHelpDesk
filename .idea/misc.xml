@@ -28,9 +28,6 @@
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_admin_view_all_requests.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_admin_view_all_student_data.xml" value="0.14130434782608695" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_admin_view_all_student_data_filters.xml" value="0.14130434782608695" />
-        <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_admin_view_data_requests_from_company.xml" value="0.14666666666666667" />
-        <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_admin_view_data_requests_from_company_details.xml" value="0.19595959595959597" />
-        <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_admin_view_list_of_companies.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_company_page.xml" value="0.14990942028985507" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_company_request_data_from_admin.xml" value="0.14990942028985507" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_login.xml" value="0.10144927536231885" />
@@ -45,7 +42,6 @@
         <entry key="..\:/StudentHelp/app/src/main/res/layout/activity_studentsignup2_academic_data.xml" value="0.1" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_checkboxes.xml" value="0.14130434782608695" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_college_register_questions.xml" value="0.1" />
-        <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_data_requests_from_company.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_database_filters.xml" value="0.11096014492753623" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_database_filters2.xml" value="0.22" />
         <entry key="..\:/StudentHelp/app/src/main/res/layout/repeatable_date_input_layout.xml" value="0.17552083333333332" />
@@ -104,6 +100,7 @@
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_view_all_requests.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_view_all_student_data.xml" value="0.22" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_view_all_student_data_filters.xml" value="0.22" />
+        <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_admin_view_data_requests_from_company_details.xml" value="0.1286231884057971" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_edit_profile_page.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_page.xml" value="0.17552083333333332" />
         <entry key="..\:/StudentHelpDesk2/app/src/main/res/layout/activity_company_request_data_from_admin.xml" value="0.17552083333333332" />

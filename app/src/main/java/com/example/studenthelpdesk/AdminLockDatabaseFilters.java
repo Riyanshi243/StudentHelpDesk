@@ -156,7 +156,6 @@ public class AdminLockDatabaseFilters extends AppCompatActivity {
                                 if(lock==true)
                                 {
                                     Toast.makeText(AdminLockDatabaseFilters.this,course+" "+branch+" Locked",Toast.LENGTH_LONG).show();
-                                    Log.e("hi",course+" "+branch);
                                     String token="/topics/"+adminData.getCollegeId()+"_"+course+"_"+branch;
                                     FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Your database has been locked","You cannot edit now",AdminLockDatabaseFilters.this,"DatabaseLock");
                                     notificationsSender.SendNotifications();
