@@ -1,13 +1,13 @@
-# StudentHelpDesk
+# StudentHelpDesk📲
 An android app aimed to help the placement cell and students to review and change the data in real time. The app will be having to interfaces - admin and user(student). The students can update few of their details without having to bother the admin. Admins can send notification regarding important announcements via notification feature.
 
-## USE OUR APPLICATION - StudentHelpDesk
+## USE OUR APPLICATION - StudentHelpDesk ⬇️
 
 Download link: https://drive.google.com/file/d/1rK9VU7oEMCRgihpoBmxBfhWbKXNh0fGt/view?usp=sharing
 
 ### For Testing: <br>
 Admin Email: superadmin@vanasthali.com <br>
-Student Email: S1@vanasthali.com <br>
+Student Email: s1@vanasthali.com <br>
 Company Email: c1@vanasthali.com <br>
 Password for all: 12345678
 
@@ -15,14 +15,14 @@ Password for all: 12345678
 <br>
 
 
-## Purpose of Application
+## Purpose of Application ❓
 The Placement Management System, named StudentHelpDesk (SHD) is for the students and companies, which maintains the database for the students where all the students’ records are entered including their academic details, personal details and other related documents such as Resume or Marksheets. This system would provide the facility of viewing both the personal and academic information of the student, it would also search for eligible students and deal with the insertion, updations and deletion of records.
 
-## User Classes and Characteristics
+## User Classes and Characteristics 👥
 
 The major User classes in the StudentHelpDesk would be :
 
-### 1. Student
+### 1. Student 👩🏻‍🎓
 1. New student needs to sign up by giving their complete details i.e., Personal details, Academic details and other related documents as mentioned by their college while college register in app.
 2. They can update their profile information in real time, only when database is unlocked. Also, only changeable fields would be allowed to be changed directly by students, whereas non- changeable fields requires sending a change request to admin (e.g. – Name, college id, etc.).
 3. They will receive notification from the companies as and when they arrive based on eligibility criteria, thereafter, they may register for the same.
@@ -36,7 +36,7 @@ The major User classes in the StudentHelpDesk would be :
   </tr>
  </table>
 
-### 2. Admin
+### 2. Admin 👩🏻‍🏫
 1. The Admin has supreme power of the application SHD.
 2. Admin provides approval to Student and the corporate registration, thereafter, they can follow up for signup or login procedure.
 3. Admin holds the responsibility for maintaining and updating the whole system.
@@ -55,7 +55,7 @@ The major User classes in the StudentHelpDesk would be :
   </tr>
  </table>
 
-### 3. Company
+### 3. Company 🏢
 1. The Company initially has to register using the details that admin provides them.
 2. The Company can notify the Admin or the TPO as well as send direct notifications to students regarding placement/internship after signup.
 3. The Company can view shortlisted students’ details (based on eligibility criteria) as provided by TPO.
@@ -69,7 +69,7 @@ The major User classes in the StudentHelpDesk would be :
   </tr>
 </table>
 
-## Assumptions and Dependencies
+## Assumptions and Dependencies 
 ### Assumptions:
 1. We are assuming that the user should have some basic knowledge of Android mobile.
 2. It is assumed that all users have good internet connectivity.
@@ -80,7 +80,7 @@ The major User classes in the StudentHelpDesk would be :
 3. Admin will have to allow each and every user of the college.
 
 
-## System Features
+## System Features 
 
 ### 1. Data Change with Request
 <i><b>Brief:</b></i> Some of the information, which is of much more importance and set as non-changeable by superadmin eg., Name, Mother’s Name, roll number etc., can be changed only when the admin accepts the request of change.
@@ -139,11 +139,20 @@ The major User classes in the StudentHelpDesk would be :
     <td><a href="https://github.com/mansibhatt3035" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_MansiBhatt.jpg" alt="Mansi Bhatt" style="width:150px;height:150px;"></a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/riyanshi-verma-779535191/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/riyanshi-verma-779535191/" height="20" width="30" /></a>
-</p></td>
-     <td align="center"><a href="https://www.linkedin.com/in/m-vanshika/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/m-vanshika/" height="20" width="30" /></a>
-</p></td>
-    <td align="center"><a href="https://www.linkedin.com/in/mansi-bhatt-740106205/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/mansi-bhatt-740106205/" height="20" width="30" /></a>
-</p></td>
+    <td align="center">
+      <a href="https://github.com/Riyanshi243" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="30" width="30"/></a>   
+      <a href="https://www.linkedin.com/in/riyanshi-verma-779535191/" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg" height="30" width="30"/></a>
+      <a href="mailto:riyanshiverma243@gmail.com?"> <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="30" width="30" /></a>
+</td>
+     <td align="center">
+       <a href="https://github.com/m-vanshika" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="30" width="30"/></a>   
+       <a href="https://www.linkedin.com/in/m-vanshika/" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg" height="30" width="30" /></a>
+       <a href="mailto:vanshikav.kumar@gmail.com?"> <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="30" width="30" /></a></td>
+    <td align="center">
+      <a href="https://github.com/mansibhatt3035" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="30" width="30"/></a> 
+      <a href="https://www.linkedin.com/in/mansi-bhatt-740106205/" target="blank"><img align="center" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg" height="30" width="30" /></a>
+      <a href="mailto:mansi3035@gmail.com?"> <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="30" width="30" /></a></td>
   </tr>
  </table>
+ 
+For any queries/questions or help, please contact us at shd.student.help.desk@gmail.com
