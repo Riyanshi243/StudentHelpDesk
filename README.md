@@ -139,11 +139,11 @@ The major User classes in the StudentHelpDesk would be :
     <td><a href="https://github.com/mansibhatt3035" target="_blank"><img src="https://github.com/Riyanshi243/StudentHelpDesk/blob/master/Images/Photo_MansiBhatt.jpg" alt="Mansi Bhatt" style="width:150px;height:150px;"></a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/riyanshi-verma-779535191/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/riyanshi-verma-779535191/" height="20" width="30" /></a>
+    <td ><a href="https://www.linkedin.com/in/riyanshi-verma-779535191/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" height="30" width="30" /></a><a href="riyanshiverma243@gmail.com" target="blank">    <img align="center" src="https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg" height="50" width="30" /></a>
+</td>
+     <td align="center"><a href="https://www.linkedin.com/in/m-vanshika/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" height="20" width="30" /></a>
 </p></td>
-     <td align="center"><a href="https://www.linkedin.com/in/m-vanshika/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/m-vanshika/" height="20" width="30" /></a>
-</p></td>
-    <td align="center"><a href="https://www.linkedin.com/in/mansi-bhatt-740106205/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/mansi-bhatt-740106205/" height="20" width="30" /></a>
+    <td align="center"><a href="https://www.linkedin.com/in/mansi-bhatt-740106205/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" height="20" width="30" /></a>
 </p></td>
   </tr>
  </table>
