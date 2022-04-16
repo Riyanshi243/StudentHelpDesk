@@ -107,6 +107,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
+            <Button
+                android:id="@+id/downloadExcel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="downloadExcel"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/roundedbutton"
+                android:text="DOWNLOAD DATA" />
 
             <HorizontalScrollView
                 android:id="@+id/HscrollView"
@@ -131,18 +141,6 @@
                     </TableLayout>
                 </LinearLayout>
             </HorizontalScrollView>
-
-            <Button
-                android:id="@+id/downloadExcel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="downloadExcel"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/roundedbutton"
-                android:text="DOWNLOAD DATA" />
-
         </LinearLayout>
     </ScrollView>
 

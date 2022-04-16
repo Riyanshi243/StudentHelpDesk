@@ -1,9 +1,11 @@
 package com.example.studenthelpdesk;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Locale;
 
 public class StudentData {
     private String email,password,collegeid,course=" ",branch=" ",name;
@@ -12,6 +14,14 @@ public class StudentData {
     private ArrayList<CollegeRegisterQuestions> personal_ques,academic_ques,upload_ques;
     private long noOfReq,noPersonalQ,noAcademicQ,noUploadQ;
     HashSet<String> token=new HashSet<>();
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        StudentData ob = (StudentData) obj;
+        if (name.toLowerCase(Locale.ROOT).indexOf(ob.getName().toLowerCase(Locale.ROOT))==0)
+            return true;
+        return false;
+    }
 
     public void setToken(HashSet<String> token) {
         this.token = token;

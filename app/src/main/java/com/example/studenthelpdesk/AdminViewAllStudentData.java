@@ -306,7 +306,7 @@ Timer t;
                         for(Integer quesNumber:quesMap.keySet())
                         {
                             String ans=personalAnswers.get(quesNumber).getAnswer();
-                            if(ans.trim().equalsIgnoreCase(quesMap.get(quesNumber).trim())==false)
+                            if(ans.toLowerCase(Locale.ROOT).trim().indexOf(quesMap.get(quesNumber).toLowerCase(Locale.ROOT).trim())!=0)
                             {
                                 return;
                             }
@@ -318,7 +318,7 @@ Timer t;
                         for(Integer quesNumber:quesMap.keySet())
                         {
                             String ans=academicAnswers.get(quesNumber).getAnswer();
-                            if(ans.equalsIgnoreCase(quesMap.get(quesNumber))==false)
+                            if(ans.toLowerCase(Locale.ROOT).trim().indexOf(quesMap.get(quesNumber).toLowerCase(Locale.ROOT).trim())!=0)
                             {
                                 return;
                             }
