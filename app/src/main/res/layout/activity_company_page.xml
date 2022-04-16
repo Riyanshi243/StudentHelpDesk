@@ -141,6 +141,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/layout_bg_black"
                 android:layout_marginTop="10dp"
+                android:onClick="viewRequestedData"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -156,6 +157,7 @@
                         android:layout_width="30dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="10dp"
+                        android:onClick="viewRequestedData"
                         app:srcCompat="@drawable/ic_baseline_all_student" />
 
                     <TextView
@@ -165,6 +167,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:paddingLeft="15dp"
+                        android:onClick="viewRequestedData"
                         android:text="VIEW ELIGIBLE STUDENTS' DATA >"
                         android:textColor="@color/white"
                         android:textSize="20dp" />
