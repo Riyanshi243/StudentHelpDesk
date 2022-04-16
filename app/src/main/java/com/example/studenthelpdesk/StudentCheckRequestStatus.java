@@ -46,7 +46,8 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
         if(studentData.getNoOfReq()==0)
         {
             TextView t=new TextView(this);
-            t.setText("No request sent");
+            t.setText("  No request sent");
+            t.setTextSize(20);
             ll.addView(t);
         }
         else
