@@ -271,6 +271,9 @@ public class StudentViewAllFAQ extends AppCompatActivity {
 
     public void toSeeSender(View v,String senderEmail)
     {
+        if(studentData!=null)
+            return;
+
         Intent intent=new Intent(StudentViewAllFAQ.this,AdminSearchUser.class);
         intent.putExtra("Email",senderEmail);
         startActivity(intent);
