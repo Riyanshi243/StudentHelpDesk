@@ -3,13 +3,16 @@ package com.example.studenthelpdesk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -21,7 +24,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
     AdminData adminData;
     TextView companyName,title;
     LinearLayout preq,ureq,areq,freq;
-
+    String doc="";
     static HashMap<Integer, HashMap<Integer,String>> equal=new HashMap<>();
     static HashMap<Integer,HashMap<Integer,ArrayList<Double>>> range=new HashMap<>();
     static HashMap<String,ArrayList<Boolean>> allCourseAndBranchRequest=new HashMap<>();
@@ -33,6 +36,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
         adminData=AdminPage.adminData;
         companyName=findViewById(R.id.companyName);
         title=findViewById(R.id.RequestTopic);
+        title.setPaintFlags(title.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         preq=findViewById(R.id.ll_PRequests);
         ureq=findViewById(R.id.ll_URequests);
         areq=findViewById(R.id.ll_ARequests);
@@ -40,16 +44,14 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
         personalQ=new ArrayList<>();
         academicQ=new ArrayList<>();
         uploadQ=new ArrayList<>();
-        String doc="";
+
         if(getIntent().hasExtra("Request")) {
             doc = (getIntent().getStringExtra("Request"));
-            Log.e("Request",doc);
            FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Data Request").document(doc)
                     .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     String companyEmail = (String) documentSnapshot.get("Sender");
-                    Log.e("Sender",companyEmail+" "+documentSnapshot.toString()+" "+documentSnapshot.getString("Sender")+" "+documentSnapshot.get("Time")+" "+ documentSnapshot.exists());
                     FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(companyEmail)
                             .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
@@ -133,9 +135,6 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                         for(int i=0;i<thisbranch.size();i++) {
                             if(thisbranch.get(i)==false)
                                 continue;
-
-                            Log.e("Branches",thisbranch.toString()+i+" "+s);
-
                             int finalI = i;
                             FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId())
                                     .collection("Branches").document(s)
@@ -225,5 +224,24 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
         Intent intent=new Intent(AdminViewDataRequestsFromCompanyDetails.this,AdminViewAllStudentData.class);
         intent.putExtra("From Data Requests",true);
         startActivity(intent);
+    }
+    //0- pending 1- rejected and 2- accepted
+    public void acceptReq(View v)
+    {
+        HashMap<String,Object> reqChange=new HashMap<>();
+        DocumentReference reqStatus=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Data Request").document(doc);
+        reqChange.put("Status",2);
+        reqStatus.update(reqChange);
+        Toast.makeText(AdminViewDataRequestsFromCompanyDetails.this,"Request Accepted",Toast.LENGTH_LONG).show();
+        finish();
+    }
+    public void rejectReq(View v)
+    {
+        HashMap<String,Object> reqChange=new HashMap<>();
+        DocumentReference reqStatus=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Data Request").document(doc);
+        reqChange.put("Status",1);
+        reqStatus.update(reqChange);
+        Toast.makeText(AdminViewDataRequestsFromCompanyDetails.this,"Request Rejected",Toast.LENGTH_LONG).show();
+        finish();
     }
 }

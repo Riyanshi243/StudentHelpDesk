@@ -177,7 +177,6 @@ public class RegisterCollege3 extends AppCompatActivity {
                     if(branchName.length()!=0) {
                         allbranch.add(branchName);
                         alldept.add(dept.getText().toString());
-                        //Log.e("Get name",branchName+" : "+ dept.getText().toString());
                     }
                 }
                 branchOfEachCourse.add(allbranch);

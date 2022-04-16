@@ -162,7 +162,6 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
                                                                         String token="/topics/"+currReq.getUid();
-                                                                        Log.e("Token",token);
                                                                         FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
                                                                         notificationsSender.SendNotifications();
 
@@ -191,7 +190,6 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
                                                                         String token="/topics/"+currReq.getUid();
-                                                                        Log.e("Token",token);
                                                                         FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
                                                                         notificationsSender.SendNotifications();
 
@@ -220,7 +218,6 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
                                                                         String token="/topics/"+currReq.getUid();
-                                                                        Log.e("Token",token);
                                                                         FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
                                                                         notificationsSender.SendNotifications();
 
@@ -249,7 +246,6 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
                                                                         String token="/topics/"+currReq.getUid();
-                                                                        Log.e("Token",token);
                                                                         FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
                                                                         notificationsSender.SendNotifications();
 
@@ -272,7 +268,6 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                             @Override
                                                             public void onSuccess(Void unused) {
                                                                 String token="/topics/"+currReq.getUid();
-                                                                Log.e("Token",token);
                                                                 FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Accepted",currReq.getQuestion()+" changed to "+currReq.getChangeTo(),AdminViewAllRequests.this,"Request");
                                                                 notificationsSender.SendNotifications();
 
@@ -322,7 +317,6 @@ public class AdminViewAllRequests extends AppCompatActivity {
                                                 @Override
                                                 public void onSuccess(Void unused) {
                                                     String token="/topics/"+currReq.getUid();
-                                                    Log.e("Token",token);
                                                     FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Rejected",currReq.getQuestion()+" remains "+currReq.getAnswerNow(),AdminViewAllRequests.this,"Request");
                                                     notificationsSender.SendNotifications();
                                                     //FcmNotificationsSender notificationsSender=new FcmNotificationsSender(token,"Request Rejected","content.getText().toString()",AdminViewAllRequests.this,"Notification");

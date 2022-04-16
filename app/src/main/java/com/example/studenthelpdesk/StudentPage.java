@@ -110,7 +110,6 @@ public class StudentPage extends AppCompatActivity {
                                 token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
                                 token.add(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch() + "_" + studentData.getYr());
                                 studentData.setToken(token);
-                                Log.e("List of tokens",token.toString());
 
                                 heading.setText(name);
                                 email.setText(studentData.getEmail());
@@ -337,7 +336,6 @@ public class StudentPage extends AppCompatActivity {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid() + "_" + studentData.getCourse() + "_" + studentData.getBranch());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch());
         FirebaseMessaging.getInstance().unsubscribeFromTopic(studentData.getCollegeid()+"_"+studentData.getCourse()+"_"+studentData.getBranch()+"_"+studentData.getYr());
-       // Log.e("Hi",studentData.getToken().toString());
         f.signOut();
         Toast.makeText(this,"Logged Out",Toast.LENGTH_LONG).show();
         startActivity(new Intent(StudentPage.this,Login.class));

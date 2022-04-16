@@ -166,7 +166,6 @@ Timer t;
                             CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
                             crq.setQuestion((String) documentSnapshot.get("Question"));
                             long x= (long) documentSnapshot.get("Type");
-                            Log.e("Type original",x+" "+crq.getQuestion());
                             crq.setType((int) x);
                             crq.setId(finalI);
                             personalQ.add(crq);
@@ -189,7 +188,6 @@ Timer t;
                                                     crq.setQuestion((String) documentSnapshot.get("Question"));
                                                     long x= (long) documentSnapshot.get("Type");
                                                     crq.setType((int) x);
-                                                    Log.e("Type original",x+" "+crq.getQuestion());
                                                     crq.setId(finalI2);
                                                     academicQ.add(crq);
                                                     allheadings.add(crq);
@@ -247,7 +245,6 @@ Timer t;
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                //Log.e("Student",allStudentData.size()+"");
                 if(allStudentDatatemp==null)
                     return;
                 if(flag==false&&flag2==true)
@@ -266,7 +263,6 @@ Timer t;
                     LinearLayout LL=findViewById(R.id.ll_Filters);
                     LL.setVisibility(View.GONE);
                     allCourseAndBranchShow=AdminViewDataRequestsFromCompanyDetails.allCourseAndBranchRequest;
-                    Log.e("Branchesabcd", allCourseAndBranchShow.toString());
                 }
                 if(0<allStudentDatatemp.size()&&flag)
                 {
@@ -280,7 +276,6 @@ Timer t;
                             }
                         });
                     }
-                    Log.e("Branchesabc", allCourseAndBranchShow.toString());
                     if(allCourseAndBranchShow.containsKey(thisStudent.getCourse()))
                     {
                         int i=allCourseAndBranch.get(thisStudent.getCourse()).indexOf(thisStudent.getBranch());
@@ -532,7 +527,6 @@ Timer t;
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("File path",e.toString());
                 }
             }
         });
@@ -627,7 +621,6 @@ Timer t;
                     thisStudent.setName((String) d.get("Name"));
                     thisStudent.setBranch((String) d.get("Branch"));
                     thisStudent.setCourse((String) d.get("Course"));
-                    Log.e("Name in order",thisStudent.getName());
                     ArrayList<CollegeRegisterQuestions> studentPersonalDetails=new ArrayList<>();
                     CollectionReference personalQuesDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(email).collection("Personal Question");
                     int finalI = i;
@@ -676,10 +669,7 @@ Timer t;
                                                     thisStudent.setAcademic_ques(studentAcademicDetails);
                                                     {
                                                         allStudentData.add(thisStudent);
-                                                        //Log.e("Adding",allStudentData.toString());
                                                         allStudentDatatemp.add(thisStudent);
-                                                        //Log.e("Temp",allStudentDatatemp.toString());
-
                                                     }
                                                 }
                                             }
@@ -708,7 +698,6 @@ Timer t;
                     CollegeRegisterQuestions s11 = s1.get(k);
                     CollegeRegisterQuestions s12 = s2.get(k);
                     int type1 = s11.getType();
-                    Log.e("Type",type1+"");
                     if (type1 == 2) {
                         double a1 = Double.parseDouble(s11.getAnswer());
                         double a2 = Double.parseDouble(s12.getAnswer());
@@ -739,7 +728,6 @@ Timer t;
                     CollegeRegisterQuestions s11=s1.get(k);
                     CollegeRegisterQuestions s12=s2.get(k);
                     int type1 = s11.getType();
-                    Log.e("Type",type1+"");
                     if (type1 == 2) {
                         int a1 = Integer.parseInt(s11.getAnswer());
                         int a2 = Integer.parseInt(s12.getAnswer());

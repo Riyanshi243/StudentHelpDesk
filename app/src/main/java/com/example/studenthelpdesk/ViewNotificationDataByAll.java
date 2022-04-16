@@ -139,7 +139,6 @@ public class ViewNotificationDataByAll extends AppCompatActivity {
                         }
                         else if ( a.endsWith(".doc") || a.endsWith(".docx") || a.endsWith(".xls") || a.endsWith(".excel"))
                         {
-                            Log.e("File extension",a);
                             storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {

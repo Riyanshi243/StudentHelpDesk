@@ -269,8 +269,6 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             equal.put("0",quesMap);
 
                         }
-
-                        Log.e("equal",equal.toString()+" "+range.toString());
                     }
 
 
@@ -341,8 +339,6 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             range.put("0",quesMap);
 
                         }
-
-                        Log.e("equal",equal.toString()+" "+range.toString());
                     }
                 });
                 remove.setOnClickListener(new View.OnClickListener() {
@@ -399,7 +395,6 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             equal.put("0",quesMap);
 
                         }
-                        Log.e("equal",equal.toString()+range.toString());
 
                     }
 
@@ -436,7 +431,6 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                         filterNameMin.setText(minmax.get(0) + "");
                     }
                 }
-                Log.e("Academic",academicQ.toString());
                 Button set=rangeFilter.findViewById(R.id.Set);
                 set.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -471,8 +465,7 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             quesMap.put(finalI+"",minmax);
                             range.put("1",quesMap);
 
-                        }
-                        Log.e("equal",equal.toString()+" "+range.toString());
+                    }
                     }
                 });
                 remove.setOnClickListener(new View.OnClickListener() {
@@ -532,9 +525,9 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
         ab.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(titleReq.getText().toString()==null)
+                if(titleReq.getText().toString()==null || titleReq.length()==0)
                 {
-                    titleReq.setError("");
+                    titleReq.setError("This is compulsory");
                     return;
                 }
                 String title=titleReq.getText().toString();
@@ -557,7 +550,7 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(CompanyRequestDataFromAdmin.this, "Request Sent", Toast.LENGTH_SHORT).show();
-
+                        finish();
                     }
                 });
 
@@ -589,13 +582,11 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
                             crq.setQuestion((String) documentSnapshot.get("Question"));
                             long x= (long) documentSnapshot.get("Type");
-                            Log.e("Type original",x+" "+crq.getQuestion());
                             crq.setType((int) x);
                             crq.setId(finalI);
                             personalQ.add(crq);
                             if(personalQ.size() ==total)
                             {
-                                Log.e("equal question",personalQ.toString());
                                 Collections.sort(personalQ, new Comparator<CollegeRegisterQuestions>() {
                                     @Override
                                     public int compare(CollegeRegisterQuestions collegeRegisterQuestions, CollegeRegisterQuestions t1) {
@@ -619,7 +610,6 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                                                     crq.setQuestion((String) documentSnapshot.get("Question"));
                                                     long x= (long) documentSnapshot.get("Type");
                                                     crq.setType((int) x);
-                                                    Log.e("Type original",x+" "+crq.getQuestion());
                                                     crq.setId(finalI2);
                                                     academicQ.add(crq);
                                                     if(academicQ.size()==total2)
