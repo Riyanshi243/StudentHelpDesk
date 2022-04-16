@@ -22,10 +22,10 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
     TextView companyName,title;
     LinearLayout preq,ureq,areq,freq;
 
+    static ArrayList<CollegeRegisterQuestions> allheadings=new ArrayList<>();
     static HashMap<Integer, HashMap<Integer,String>> equal=new HashMap<>();
     static HashMap<Integer,HashMap<Integer,ArrayList<Double>>> range=new HashMap<>();
     static HashMap<String,ArrayList<Boolean>> allCourseAndBranchRequest=new HashMap<>();
-    static ArrayList<CollegeRegisterQuestions> personalQ,academicQ,uploadQ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +37,10 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
         ureq=findViewById(R.id.ll_URequests);
         areq=findViewById(R.id.ll_ARequests);
         freq=findViewById(R.id.ll_FRequest);
-        personalQ=new ArrayList<>();
-        academicQ=new ArrayList<>();
-        uploadQ=new ArrayList<>();
+        allheadings=new ArrayList<>();
+        equal=new HashMap<>();
+        range=new HashMap<>();
+        allCourseAndBranchRequest=new HashMap<>();
         String doc="";
         if(getIntent().hasExtra("Request")) {
             doc = (getIntent().getStringExtra("Request"));
@@ -72,7 +73,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                                 thisq.setType((int) t);
                                 thisq.setChangeable((Boolean) documentSnapshot.get("Editable"));
                                 thisq.setCompulsory((Boolean) documentSnapshot.get("Compulsory"));
-                                personalQ.add(thisq);
+                                allheadings.add(thisq);
                                 TextView tv = new TextView(AdminViewDataRequestsFromCompanyDetails.this);
                                 tv.setText(thisq.getQuestion());
                                 preq.addView(tv);
@@ -93,7 +94,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                                 thisq.setType((int) t);
                                 thisq.setChangeable((Boolean) documentSnapshot.get("Editable"));
                                 thisq.setCompulsory((Boolean) documentSnapshot.get("Compulsory"));
-                                academicQ.add(thisq);
+                                allheadings.add(thisq);
                                 TextView tv = new TextView(AdminViewDataRequestsFromCompanyDetails.this);
                                 tv.setText(thisq.getQuestion());
                                 areq.addView(tv);
@@ -114,7 +115,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                                 thisq.setType((int) t);
                                 thisq.setChangeable((Boolean) documentSnapshot.get("Editable"));
                                 thisq.setCompulsory((Boolean) documentSnapshot.get("Compulsory"));
-                                uploadQ.add(thisq);
+                                allheadings.add(thisq);
                                 TextView tv = new TextView(AdminViewDataRequestsFromCompanyDetails.this);
                                 tv.setText(thisq.getQuestion());
                                 ureq.addView(tv);
@@ -133,9 +134,6 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                         for(int i=0;i<thisbranch.size();i++) {
                             if(thisbranch.get(i)==false)
                                 continue;
-
-                            Log.e("Branches",thisbranch.toString()+i+" "+s);
-
                             int finalI = i;
                             FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId())
                                     .collection("Branches").document(s)
