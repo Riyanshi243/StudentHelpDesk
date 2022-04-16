@@ -2,6 +2,7 @@ package com.example.studenthelpdesk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
 
     static HashMap<Integer, HashMap<Integer,String>> equal=new HashMap<>();
     static HashMap<Integer,HashMap<Integer,ArrayList<Double>>> range=new HashMap<>();
-    HashMap<String,ArrayList<Boolean>> allCourseAndBranchRequest=new HashMap<>();
+    static HashMap<String,ArrayList<Boolean>> allCourseAndBranchRequest=new HashMap<>();
     static ArrayList<CollegeRegisterQuestions> personalQ,academicQ,uploadQ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,5 +219,11 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                 }
             });
         }
+    }
+    public void viewThisData(View v)
+    {
+        Intent intent=new Intent(AdminViewDataRequestsFromCompanyDetails.this,AdminViewAllStudentData.class);
+        intent.putExtra("From Data Requests",true);
+        startActivity(intent);
     }
 }

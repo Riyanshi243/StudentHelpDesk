@@ -26,6 +26,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -88,6 +89,8 @@ Timer t;
     ProgressBar progressBar;
     static boolean flag=false,flag2=false;
     static int srno=1;
+
+    Boolean fromWhere=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +109,8 @@ Timer t;
         allStudentData=new ArrayList<>();
         allCourseAndBranch=new HashMap<>();
         allCourseAndBranchShow=new HashMap<>();
+
+
 
         allheadings=new ArrayList<>();
         s=0;k=0;
@@ -255,6 +260,14 @@ Timer t;
                         }
                     });
                 }
+                if(getIntent().hasExtra("From Data Requests"))
+                {
+                    fromWhere= getIntent().getBooleanExtra("From Data Requests",false);
+                    LinearLayout LL=findViewById(R.id.ll_Filters);
+                    LL.setVisibility(View.GONE);
+                    allCourseAndBranchShow=AdminViewDataRequestsFromCompanyDetails.allCourseAndBranchRequest;
+                    Log.e("Branchesabcd", allCourseAndBranchShow.toString());
+                }
                 if(0<allStudentDatatemp.size()&&flag)
                 {
                     StudentData thisStudent=allStudentDatatemp.get(0);
@@ -267,12 +280,14 @@ Timer t;
                             }
                         });
                     }
-
+                    Log.e("Branchesabc", allCourseAndBranchShow.toString());
                     if(allCourseAndBranchShow.containsKey(thisStudent.getCourse()))
                     {
                         int i=allCourseAndBranch.get(thisStudent.getCourse()).indexOf(thisStudent.getBranch());
-                        if(allCourseAndBranchShow.get(thisStudent.getCourse()).get(i)==false)
+                        if(allCourseAndBranchShow.get(thisStudent.getCourse()).get(i)==false) {
+
                             return;
+                        }
 
                     }
                     ArrayList<CollegeRegisterQuestions> personalAnswers = thisStudent.getPersonal_ques();
