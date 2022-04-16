@@ -25,6 +25,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -268,7 +270,7 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
 
                         }
 
-                        Log.e("equal",equal.toString());
+                        Log.e("equal",equal.toString()+" "+range.toString());
                     }
 
 
@@ -339,6 +341,8 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             range.put("0",quesMap);
 
                         }
+
+                        Log.e("equal",equal.toString()+" "+range.toString());
                     }
                 });
                 remove.setOnClickListener(new View.OnClickListener() {
@@ -395,6 +399,7 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             equal.put("0",quesMap);
 
                         }
+                        Log.e("equal",equal.toString()+range.toString());
 
                     }
 
@@ -467,6 +472,7 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             range.put("1",quesMap);
 
                         }
+                        Log.e("equal",equal.toString()+" "+range.toString());
                     }
                 });
                 remove.setOnClickListener(new View.OnClickListener() {
@@ -571,11 +577,12 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 long total=(long)documentSnapshot.get("Total");
+
                 for (int i=0;i<total;i++)
                 {
                     int finalI = i;
                     int finalI1 = i;
-                    personalDetails.collection(i+"").document(i+"")
+                    personalDetails.collection(finalI+"").document(finalI+"")
                             .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -586,8 +593,16 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                             crq.setType((int) x);
                             crq.setId(finalI);
                             personalQ.add(crq);
-                            if(finalI1 ==total-1)
+                            if(personalQ.size() ==total)
                             {
+                                Log.e("equal question",personalQ.toString());
+                                Collections.sort(personalQ, new Comparator<CollegeRegisterQuestions>() {
+                                    @Override
+                                    public int compare(CollegeRegisterQuestions collegeRegisterQuestions, CollegeRegisterQuestions t1) {
+                                        return collegeRegisterQuestions.getId()-t1.getId();
+                                    }
+                                });
+
                                 DocumentReference academicDetails=FirebaseFirestore.getInstance().collection("All Colleges").document(companyData.getCollegeId()).collection("Questions").document("Academic Question");
                                 academicDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
@@ -607,8 +622,16 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                                                     Log.e("Type original",x+" "+crq.getQuestion());
                                                     crq.setId(finalI2);
                                                     academicQ.add(crq);
-                                                    if(finalI2 ==total2-1)
+                                                    if(academicQ.size()==total2)
                                                     {
+
+                                                        Collections.sort(academicQ, new Comparator<CollegeRegisterQuestions>() {
+                                                            @Override
+                                                            public int compare(CollegeRegisterQuestions collegeRegisterQuestions, CollegeRegisterQuestions t1) {
+                                                                return collegeRegisterQuestions.getId()-t1.getId();
+                                                            }
+                                                        });
+
                                                         DocumentReference uploadDetails=FirebaseFirestore.getInstance().collection("All Colleges").document(companyData.getCollegeId()).collection("Questions").document("Upload Question");
                                                         uploadDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                             @Override
@@ -628,6 +651,17 @@ public class CompanyRequestDataFromAdmin extends AppCompatActivity {
                                                                             crq.setType((int) x);
                                                                             crq.setId(finalI3);
                                                                             uploadQ.add(crq);
+                                                                            if(uploadQ.size()==total3)
+                                                                            {
+
+                                                                                Collections.sort(uploadQ, new Comparator<CollegeRegisterQuestions>() {
+                                                                                    @Override
+                                                                                    public int compare(CollegeRegisterQuestions collegeRegisterQuestions, CollegeRegisterQuestions t1) {
+                                                                                        return collegeRegisterQuestions.getId()-t1.getId();
+                                                                                    }
+                                                                                });
+
+                                                                            }
 
                                                                         }
                                                                     });
