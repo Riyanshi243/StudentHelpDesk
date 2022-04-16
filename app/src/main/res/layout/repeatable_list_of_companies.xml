@@ -57,21 +57,12 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
 
-
             <Button
                 android:id="@+id/viewProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:background="@drawable/roundedbutton"
-                android:layout_marginRight="30dp"
                 android:text="VIEW PROFILE" />
-
-            <Button
-                android:id="@+id/dataSent"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="@drawable/roundedbutton"
-                android:text="DATA SENT" />
         </TableRow>
     </LinearLayout>
 

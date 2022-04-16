@@ -39,8 +39,6 @@ public class AdminViewListOfCompanies extends AppCompatActivity {
         pbar=findViewById(R.id.progressBar3);
         ll=findViewById(R.id.ll_listOfCompanies);
         adminData=AdminPage.adminData;
-
-
         CollectionReference allCompanies = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo");
         allCompanies.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -60,7 +58,6 @@ public class AdminViewListOfCompanies extends AppCompatActivity {
                     TextView cName=companyD.findViewById(R.id.cName);
                     ImageView profilepic=companyD.findViewById(R.id.profilePic);
                     Button viewProfile=companyD.findViewById(R.id.viewProfile);
-                    Button dataSent=companyD.findViewById(R.id.dataSent);
                     cName.setText(thisCompany.getCompanyName());
                     StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(eMail);
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -78,15 +75,6 @@ public class AdminViewListOfCompanies extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent intent=new Intent(AdminViewListOfCompanies.this,AdminSearchUser.class);
-                            intent.putExtra("Email",eMail);
-                            startActivity(intent);
-                        }
-                    });
-
-                    dataSent.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent=new Intent(AdminViewListOfCompanies.this,CompanyViewStudentsData.class);
                             intent.putExtra("Email",eMail);
                             startActivity(intent);
                         }
