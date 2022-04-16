@@ -74,6 +74,7 @@ Timer t;
     static ArrayList<CollegeRegisterQuestions> personalQ,academicQ,uploadQ;
     AutoCompleteTextView sortin;
     static AdminData adminData;
+    static CompanyData companyData;
     static TableLayout tl;
     static int domain=0;
     static int k=0;
@@ -85,7 +86,7 @@ Timer t;
     static ArrayList<CollegeRegisterQuestions> allheadings=new ArrayList<>();
     static HashMap<String,ArrayList<String>> allCourseAndBranch=new HashMap<>();
     static HashMap<String,ArrayList<Boolean>> allCourseAndBranchShow=new HashMap<>();
-
+    static String cid="";
     ProgressBar progressBar;
     static boolean flag=false,flag2=false;
     static int srno=1;
@@ -97,6 +98,7 @@ Timer t;
         setContentView(R.layout.activity_admin_view_all_student_data);
         sortin=findViewById(R.id.sortin);
         adminData=AdminPage.adminData;
+        companyData=CompanyPage.companyData;
         progressBar=findViewById(R.id.progressBar5);
         tl=findViewById(R.id.TableLayout);
         personalQ=new ArrayList<>();
@@ -105,6 +107,11 @@ Timer t;
         flag=false;
         flag2=false;
         fromWhere=false;
+        if(adminData!=null) {
+            cid = adminData.getCollegeId();
+        }
+        else
+            cid=companyData.getCollegeId();
         allStudentDatatemp=new ArrayList<>();
         allStudentData=new ArrayList<>();
         allCourseAndBranch=new HashMap<>();
@@ -122,8 +129,6 @@ Timer t;
             range=AdminViewDataRequestsFromCompanyDetails.range;
             allheadings=AdminViewDataRequestsFromCompanyDetails.allheadings;
         }
-
-
 
         s=0;k=0;
         srno=1;
@@ -164,7 +169,7 @@ Timer t;
             }
         });
          {
-            DocumentReference personalDetails = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Personal Question");
+            DocumentReference personalDetails = FirebaseFirestore.getInstance().collection("All Colleges").document(cid).collection("Questions").document("Personal Question");
             personalDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -185,7 +190,7 @@ Timer t;
                                 if(fromWhere==false)
                                     allheadings.add(crq);
                                 if (personalQ.size() == total ) {
-                                    DocumentReference academicDetails = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Academic Question");
+                                    DocumentReference academicDetails = FirebaseFirestore.getInstance().collection("All Colleges").document(cid).collection("Questions").document("Academic Question");
                                     academicDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                         @Override
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -206,7 +211,7 @@ Timer t;
                                                         if(fromWhere==false)
                                                             allheadings.add(crq);
                                                         if (academicQ.size()== total2) {
-                                                            DocumentReference uploadDetails = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Upload Question");
+                                                            DocumentReference uploadDetails = FirebaseFirestore.getInstance().collection("All Colleges").document(cid).collection("Questions").document("Upload Question");
                                                             uploadDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                                 @Override
                                                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -401,7 +406,7 @@ Timer t;
                                 {
                                     AlertDialog.Builder ab=new AlertDialog.Builder(AdminViewAllStudentData.this);
                                     ImageView profilepic=new ImageView(AdminViewAllStudentData.this);
-                                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(adminData.getCollegeId()).child("Photograph").child(thisStudent.getEmail());
+                                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(cid).child("Photograph").child(thisStudent.getEmail());
                                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
                                         public void onSuccess(Uri uri) {
@@ -423,7 +428,7 @@ Timer t;
                                 else
                                 {
                                     FirebaseStorage storage = FirebaseStorage.getInstance();
-                                    StorageReference storageRef = storage.getReference(adminData.getCollegeId()).child(uploadQ.get(finalI1).getQuestion()).child(thisStudent.getEmail());
+                                    StorageReference storageRef = storage.getReference(cid).child(uploadQ.get(finalI1).getQuestion()).child(thisStudent.getEmail());
                                     Task<Uri> message = storageRef.getDownloadUrl();
                                     message.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
@@ -457,7 +462,7 @@ Timer t;
     public static void getHeading()
     {
         DocumentReference allcourse = FirebaseFirestore.getInstance().collection("All Colleges")
-                .document(adminData.getCollegeId());
+                .document(cid);
         allcourse.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -612,7 +617,7 @@ Timer t;
     }
     public static void get(AdminData adminData)
     {
-         CollectionReference studentsAll = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo");
+         CollectionReference studentsAll = FirebaseFirestore.getInstance().collection("All Colleges").document(cid).collection("UsersInfo");
         studentsAll.orderBy("Name", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -631,7 +636,7 @@ Timer t;
                     thisStudent.setBranch((String) d.get("Branch"));
                     thisStudent.setCourse((String) d.get("Course"));
                     ArrayList<CollegeRegisterQuestions> studentPersonalDetails=new ArrayList<>();
-                    CollectionReference personalQuesDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(email).collection("Personal Question");
+                    CollectionReference personalQuesDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(cid).collection("UsersInfo").document(email).collection("Personal Question");
                     int finalI = i;
                     personalQuesDoc.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -657,7 +662,7 @@ Timer t;
                                     ArrayList<CollegeRegisterQuestions> studentAcademicDetails=new ArrayList<>();
 
                                     //once done
-                                    CollectionReference academicQuesDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(email).collection("Academic Question");
+                                    CollectionReference academicQuesDoc = FirebaseFirestore.getInstance().collection("All Colleges").document(cid).collection("UsersInfo").document(email).collection("Academic Question");
                                     academicQuesDoc.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                         @Override
                                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

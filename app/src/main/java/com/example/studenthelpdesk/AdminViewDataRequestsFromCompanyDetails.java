@@ -67,8 +67,21 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
         if(getIntent().hasExtra("From Company"))
         {
             verify.setVisibility(View.GONE);
-            int status=getIntent().getExtras().getInt("Status");
-
+            boolean status=getIntent().getBooleanExtra("Status",false);
+            if(!status)
+            {
+                Button viewData=(Button) findViewById(R.id.view_this_data);
+                viewData.setVisibility(View.INVISIBLE);
+            }
+            TextView msg=findViewById(R.id.msg);
+            msg.setVisibility(View.GONE);
+            companyName.setVisibility(View.GONE);
+            Button sendData=(Button) findViewById(R.id.send_data);
+            sendData.setVisibility(View.GONE);
+            Button RejectData=(Button) findViewById(R.id.reject);
+            RejectData.setVisibility(View.GONE);
+            TextView or=findViewById(R.id.or);
+            or.setVisibility(View.GONE);
         }
         if(getIntent().hasExtra("Request")) {
             doc = (getIntent().getStringExtra("Request"));
@@ -175,7 +188,6 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                             });
                         }
                     }
-
                     HashMap<String, HashMap<String, String>> equal1 = (HashMap<String, HashMap<String, String>>) documentSnapshot.get("Filters Equal");
                     for(String s:equal1.keySet())
                     {
@@ -248,6 +260,10 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
     {
         Intent intent=new Intent(AdminViewDataRequestsFromCompanyDetails.this,AdminViewAllStudentData.class);
         intent.putExtra("From Data Requests",true);
+        if(getIntent().hasExtra("From Company"))
+        {
+            intent.putExtra("From Company", true);
+        }
         startActivity(intent);
     }
     //0- pending 1- rejected and 2- accepted

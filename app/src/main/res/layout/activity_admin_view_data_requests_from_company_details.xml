@@ -194,6 +194,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:onClick="viewThisData"
                 android:background="@drawable/roundedbutton"
                 android:text="VIEW THIS DATA" />
@@ -221,17 +222,18 @@
                 android:text="SEND DATA TO COMPANY" />
 
             <TextView
+                android:id="@+id/or"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
                 android:paddingLeft="5dp"
                 android:text="OR"
                 android:textColor="@color/black"
-                android:gravity="center"
                 android:textSize="26dp" />
 
             <Button
@@ -248,11 +250,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

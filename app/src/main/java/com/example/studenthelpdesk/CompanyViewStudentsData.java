@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -74,7 +75,10 @@ public class CompanyViewStudentsData extends AppCompatActivity {
                             Intent intent=new Intent(CompanyViewStudentsData.this,AdminViewDataRequestsFromCompanyDetails.class);
                             intent.putExtra("Request",r.getId());
                             intent.putExtra("From Company",true);
-                            intent.putExtra("Status", (Integer) r.get("Status"));
+                            if((long) r.get("Status")==2)
+                                intent.putExtra("Status",true);
+                            else
+                                intent.putExtra("Status",false);
                             startActivity(intent);
                         }
                     });
