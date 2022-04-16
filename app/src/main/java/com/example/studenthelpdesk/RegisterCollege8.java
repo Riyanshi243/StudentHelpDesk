@@ -21,6 +21,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class RegisterCollege8 extends AppCompatActivity {
@@ -314,6 +316,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                                             HashMap<String,Object> c=new HashMap<>();
                                                                             c.put("Colleges",collegeNames);
                                                                             c.put("IDs",collegeIds);
+                                                                            Date t1= Calendar.getInstance().getTime();
 
                                                                             collegeTillNow.set(c).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                 @Override
@@ -322,6 +325,7 @@ public class RegisterCollege8 extends AppCompatActivity {
                                                                                     t.setText("PROCESS COMPLETE");
                                                                                     t.setTextSize(40);
                                                                                     cl.addView(t);
+
                                                                                     Toast.makeText(RegisterCollege8.this,"College Registered",Toast.LENGTH_SHORT).show();
                                                                                     startActivity(new Intent(RegisterCollege8.this,AdminPage.class));
                                                                                 }

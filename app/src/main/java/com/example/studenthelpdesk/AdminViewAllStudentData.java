@@ -112,6 +112,7 @@ Timer t;
         }
         else
             cid=companyData.getCollegeId();
+            cid=companyData.getCollegeId();
         allStudentDatatemp=new ArrayList<>();
         allStudentData=new ArrayList<>();
         allCourseAndBranch=new HashMap<>();
