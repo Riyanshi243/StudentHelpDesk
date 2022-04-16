@@ -143,6 +143,10 @@ public class CompanyPage extends AppCompatActivity {
     {
         startActivity(new Intent(CompanyPage.this,CompanyRequestDataFromAdmin.class));
     }
+    public void viewRequestedData(View v)
+    {
+        startActivity(new Intent(CompanyPage.this,CompanyViewStudentsData.class));
+    }
     @Override
     public void onBackPressed() {
         startActivity(new Intent(CompanyPage.this,EndScreen.class));
