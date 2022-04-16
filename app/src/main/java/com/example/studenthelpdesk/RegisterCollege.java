@@ -120,7 +120,6 @@ public class RegisterCollege extends AppCompatActivity {
         pbar.setVisibility(View.VISIBLE);
 
         //everything not empty
-
         if (cname.getText().toString().length() == 0) {
             cname.setError("ENTER COLLEGE NAME");
             cname.requestFocus();
@@ -131,6 +130,13 @@ public class RegisterCollege extends AppCompatActivity {
 
         if (uname.getText().toString().length() == 0) {
             uname.setError("ENTER USERNAME");
+            uname.requestFocus();
+            pbar.setVisibility(View.INVISIBLE);
+            register.setEnabled(true);
+            return false;
+        }
+        if(uname.getText().toString().contains(" ")){
+            uname.setError("Username cannot have a space");
             uname.requestFocus();
             pbar.setVisibility(View.INVISIBLE);
             register.setEnabled(true);
