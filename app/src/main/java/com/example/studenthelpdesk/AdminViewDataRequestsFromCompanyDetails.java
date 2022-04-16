@@ -1,21 +1,31 @@
 package com.example.studenthelpdesk;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +36,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
     LinearLayout preq,ureq,areq,freq;
 
     static ArrayList<CollegeRegisterQuestions> allheadings=new ArrayList<>();
-
+    CheckBox verify;
     String doc="";
     static HashMap<Integer, HashMap<Integer,String>> equal=new HashMap<>();
     static HashMap<Integer,HashMap<Integer,ArrayList<Double>>> range=new HashMap<>();
@@ -38,6 +48,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
         adminData=AdminPage.adminData;
         companyName=findViewById(R.id.companyName);
         title=findViewById(R.id.RequestTopic);
+        verify=findViewById(R.id.checkBox_admin);
         title.setPaintFlags(title.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         preq=findViewById(R.id.ll_PRequests);
         ureq=findViewById(R.id.ll_URequests);
@@ -231,20 +242,77 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
     //0- pending 1- rejected and 2- accepted
     public void acceptReq(View v)
     {
+        if(verify.isChecked()==false)
+        {
+            verify.setError("Please verify");
+            return;
+        }
         HashMap<String,Object> reqChange=new HashMap<>();
         DocumentReference reqStatus=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Data Request").document(doc);
         reqChange.put("Status",2);
-        reqStatus.update(reqChange);
-        Toast.makeText(AdminViewDataRequestsFromCompanyDetails.this,"Request Accepted",Toast.LENGTH_LONG).show();
-        finish();
+        reqStatus.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(AdminViewDataRequestsFromCompanyDetails.this,"Request Accepted",Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AdminViewDataRequestsFromCompanyDetails.this,"Request Acception Failed",Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
     public void rejectReq(View v)
     {
-        HashMap<String,Object> reqChange=new HashMap<>();
-        DocumentReference reqStatus=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Data Request").document(doc);
-        reqChange.put("Status",1);
-        reqStatus.update(reqChange);
-        Toast.makeText(AdminViewDataRequestsFromCompanyDetails.this,"Request Rejected",Toast.LENGTH_LONG).show();
-        finish();
+        EditText et=new EditText(this);
+
+        AlertDialog ab=new AlertDialog.Builder(this)
+        .setTitle("Are you sure?")
+        .setMessage("Provide a reason to reject the request.")
+        .setView(et)
+        .setCancelable(false)
+                .setPositiveButton("Reject",null)
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+        .show();
+
+        Button posButton=ab.getButton(AlertDialog.BUTTON_POSITIVE);
+        posButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String reason = et.getText().toString();
+                if(reason==null||reason.length()==0)
+                {
+                    et.setError("Enter a reason");
+                    return;
+                }
+                HashMap<String,Object> reqChange=new HashMap<>();
+                DocumentReference reqStatus=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Data Request").document(doc);
+                reqChange.put("Status",1);
+                reqChange.put("Reason",reason);
+                reqStatus.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(AdminViewDataRequestsFromCompanyDetails.this,"Request Rejected",Toast.LENGTH_LONG).show();
+                        ab.dismiss();
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminViewDataRequestsFromCompanyDetails.this,"Request Rejection Failed",Toast.LENGTH_LONG).show();
+                        ab.dismiss();
+
+                    }
+                });
+
+            }
+        });
     }
 }

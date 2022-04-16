@@ -46,7 +46,7 @@ public class AdminViewDataRequestsFromCompany extends AppCompatActivity {
                 for(DocumentSnapshot r:requestsDoc)
                 {
                     if((long)r.get("Status")==1 || (long)r.get("Status")==2)
-                        return;
+                        continue;
                     View requestView=getLayoutInflater().inflate(R.layout.repeatable_data_requests_from_company,null);
                     TextView titleT=requestView.findViewById(R.id.topic);
                     titleT.setText((String)r.get("Title"));

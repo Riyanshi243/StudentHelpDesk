@@ -201,14 +201,14 @@
             <CheckBox
                 android:id="@+id/checkBox_admin"
                 android:layout_width="wrap_content"
-                android:paddingLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
                 android:text="I verify, The data is correct."
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/send_data"
