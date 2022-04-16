@@ -52,7 +52,7 @@ public class CompanyViewStudentsData extends AppCompatActivity {
                     if((long)r.get("Status")==1) {
                         TextView status = requestView.findViewById(R.id.status);
                         status.setText("Rejected");
-                        status.setBackgroundColor(Color.RED);
+                        status.setBackgroundColor(Color.parseColor("#e83342"));
                         TextView reasonReject = requestView.findViewById(R.id.reason);
                         reasonReject.setVisibility(View.VISIBLE);
                         reasonReject.setText((String) r.get("Reason"));
@@ -63,7 +63,7 @@ public class CompanyViewStudentsData extends AppCompatActivity {
                     else if((long)r.get("Status")==2) {
                         TextView status = requestView.findViewById(R.id.status);
                         status.setText("Accepted");
-                        status.setBackgroundColor(Color.GREEN);
+                        status.setBackgroundColor(Color.parseColor("#36e034"));
                     }
                     ll.addView(requestView);
                 }

@@ -127,7 +127,7 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
                     else if (currReq.getStatus()>0)
                     {
                         status.setText("Accepted");
-                        status.setBackgroundColor(Color.GREEN);
+                        status.setBackgroundColor(Color.parseColor("#36e034"));
                         date2.setText(currReq.getAdminTime());
                         date2.setVisibility(View.VISIBLE);
                         reasonText.setVisibility(View.GONE);
@@ -135,7 +135,7 @@ public class StudentCheckRequestStatus extends AppCompatActivity {
                     else
                     {
                         status.setText("Rejected");
-                        status.setBackgroundColor(Color.RED);
+                        status.setBackgroundColor(Color.parseColor("#e83342"));
                         date2.setText(currReq.getAdminTime());
                         date2.setVisibility(View.VISIBLE);
                         reasonReject.setText(currReq.getRejectReason());
