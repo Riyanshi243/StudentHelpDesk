@@ -86,7 +86,9 @@ public class AdminViewListOfCompanies extends AppCompatActivity {
                     dataSent.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //DATA SENT INTENT
+                            Intent intent=new Intent(AdminViewListOfCompanies.this,CompanyViewStudentsData.class);
+                            intent.putExtra("Email",eMail);
+                            startActivity(intent);
                         }
                     });
                     ll.addView(companyD);
