@@ -2,11 +2,13 @@ package com.example.studenthelpdesk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.text.util.Linkify;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -48,6 +50,7 @@ public class CompanyViewStudentsData extends AppCompatActivity {
                     Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                     cal.setTimeInMillis(t.getSeconds() * 1000L);
                     String dateNTime = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
+                    Button viewDetails=requestView.findViewById(R.id.ViewDetails);
                     timeT.setText(dateNTime);
                     if((long)r.get("Status")==1) {
                         TextView status = requestView.findViewById(R.id.status);
@@ -65,6 +68,16 @@ public class CompanyViewStudentsData extends AppCompatActivity {
                         status.setText("Accepted");
                         status.setBackgroundColor(Color.GREEN);
                     }
+                    viewDetails.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent=new Intent(CompanyViewStudentsData.this,AdminViewDataRequestsFromCompanyDetails.class);
+                            intent.putExtra("Request",r.getId());
+                            intent.putExtra("From Company",true);
+                            intent.putExtra("Status", (Integer) r.get("Status"));
+                            startActivity(intent);
+                        }
+                    });
                     ll.addView(requestView);
                 }
             }

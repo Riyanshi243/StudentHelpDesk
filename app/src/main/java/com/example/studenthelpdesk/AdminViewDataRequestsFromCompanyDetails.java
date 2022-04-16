@@ -34,18 +34,20 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
     AdminData adminData;
     TextView companyName,title;
     LinearLayout preq,ureq,areq,freq;
-
+    CompanyData companyData;
     static ArrayList<CollegeRegisterQuestions> allheadings=new ArrayList<>();
     CheckBox verify;
     String doc="";
     static HashMap<Integer, HashMap<Integer,String>> equal=new HashMap<>();
     static HashMap<Integer,HashMap<Integer,ArrayList<Double>>> range=new HashMap<>();
     static HashMap<String,ArrayList<Boolean>> allCourseAndBranchRequest=new HashMap<>();
+    String cId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_data_requests_from_company_details);
         adminData=AdminPage.adminData;
+        companyData=CompanyPage.companyData;
         companyName=findViewById(R.id.companyName);
         title=findViewById(R.id.RequestTopic);
         verify=findViewById(R.id.checkBox_admin);
@@ -58,15 +60,24 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
         equal=new HashMap<>();
         range=new HashMap<>();
         allCourseAndBranchRequest=new HashMap<>();
-        
+        if(adminData!=null)
+            cId=adminData.getCollegeId();
+        else if(companyData!=null)
+            cId= companyData.getCollegeId();
+        if(getIntent().hasExtra("From Company"))
+        {
+            verify.setVisibility(View.GONE);
+            int status=getIntent().getExtras().getInt("Status");
+
+        }
         if(getIntent().hasExtra("Request")) {
             doc = (getIntent().getStringExtra("Request"));
-           FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Data Request").document(doc)
+           FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("Data Request").document(doc)
                     .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     String companyEmail = (String) documentSnapshot.get("Sender");
-                    FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("UsersInfo").document(companyEmail)
+                    FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("UsersInfo").document(companyEmail)
                             .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -76,7 +87,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                     title.setText((String) documentSnapshot.get("Title"));
                     ArrayList<Long> personalDataQuestionsReq = (ArrayList<Long>) documentSnapshot.get("Personal Question");
                     for (long l : personalDataQuestionsReq) {
-                        FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId())
+                        FirebaseFirestore.getInstance().collection("All Colleges").document(cId)
                                 .collection("Questions").document("Personal Question")
                                 .collection(l + "").document(l + "")
                                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -97,7 +108,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                     }
                     ArrayList<Long> academicDataQuestionsReq = (ArrayList<Long>) documentSnapshot.get("Academic Question");
                     for (long l : academicDataQuestionsReq) {
-                        FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId())
+                        FirebaseFirestore.getInstance().collection("All Colleges").document(cId)
                                 .collection("Questions").document("Academic Question")
                                 .collection(l + "").document(l + "")
                                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -118,7 +129,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                     }
                     ArrayList<Long> uploadDataQuestionsReq = (ArrayList<Long>) documentSnapshot.get("Upload Question");
                     for (long l : uploadDataQuestionsReq) {
-                        FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId())
+                        FirebaseFirestore.getInstance().collection("All Colleges").document(cId)
                                 .collection("Questions").document("Upload Question")
                                 .collection(l + "").document(l + "")
                                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -150,7 +161,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                             if(thisbranch.get(i)==false)
                                 continue;
                             int finalI = i;
-                            FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId())
+                            FirebaseFirestore.getInstance().collection("All Colleges").document(cId)
                                     .collection("Branches").document(s)
                                     .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
@@ -182,7 +193,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                                 typeq="Academic Question";
                             int b=Integer.parseInt(i);
                             temp.put(b,thismap.get(i));
-                            FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId())
+                            FirebaseFirestore.getInstance().collection("All Colleges").document(cId)
                                     .collection("Questions").document(typeq).collection(i).document(i)
                                     .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
@@ -215,7 +226,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                             ArrayList<Double> r = thismap.get(i);
                             temp.put(b,r);
 
-                            FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId())
+                            FirebaseFirestore.getInstance().collection("All Colleges").document(cId)
                                     .collection("Questions").document(typeq).collection(i).document(i)
                                     .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
@@ -248,7 +259,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
             return;
         }
         HashMap<String,Object> reqChange=new HashMap<>();
-        DocumentReference reqStatus=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Data Request").document(doc);
+        DocumentReference reqStatus=FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("Data Request").document(doc);
         reqChange.put("Status",2);
         reqStatus.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -293,7 +304,7 @@ public class AdminViewDataRequestsFromCompanyDetails extends AppCompatActivity {
                     return;
                 }
                 HashMap<String,Object> reqChange=new HashMap<>();
-                DocumentReference reqStatus=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Data Request").document(doc);
+                DocumentReference reqStatus=FirebaseFirestore.getInstance().collection("All Colleges").document(cId).collection("Data Request").document(doc);
                 reqChange.put("Status",1);
                 reqChange.put("Reason",reason);
                 reqStatus.update(reqChange).addOnSuccessListener(new OnSuccessListener<Void>() {
