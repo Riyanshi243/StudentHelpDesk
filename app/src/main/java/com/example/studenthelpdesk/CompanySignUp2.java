@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class CompanySignUp2 extends AppCompatActivity {
@@ -55,6 +57,7 @@ public class CompanySignUp2 extends AppCompatActivity {
                         f1.createUserWithEmailAndPassword(companyData.getEmail(),companyData.getPassword()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+
                                 setText("SignUp done");
                                 Toast.makeText(CompanySignUp2.this,"Signup done",Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(CompanySignUp2.this,CompanyPage.class));

@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -67,17 +68,17 @@ public class ViewNotificationsByAll extends AppCompatActivity {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> notif1 = queryDocumentSnapshots.getDocuments();
                 int c=0;
+                if(notif1.size()==0)
+                {
+                    TextView t=new TextView(ViewNotificationsByAll.this);
+                    pbar.setVisibility(View.INVISIBLE);
+                    t.setText("  You have received NO Notifications till now.");
+                    t.setTextSize(20);
+                    ll.addView(t);
+                }
                 for(DocumentSnapshot n:notif1)
                 {
                     c++;
-                    if(notif1.size()==c && allNotif.size()==0)
-                    {
-                        TextView t=new TextView(ViewNotificationsByAll.this);
-                        pbar.setVisibility(View.INVISIBLE);
-                        t.setText("  You have received NO Notifications till now.");
-                        t.setTextSize(20);
-                        ll.addView(t);
-                    }
                     NotificationData nd=new NotificationData();
                     nd.setContent((String) n.get("Content"));
                     nd.setTitle((String) n.get("Title"));
@@ -93,6 +94,15 @@ public class ViewNotificationsByAll extends AppCompatActivity {
                     nd.setSentTime(date);
                     if(token.contains(tokenHere))
                         allNotif.add(nd);
+                    if(notif1.size()==notif1.indexOf(n)+1 && allNotif.size()==0)
+                    {
+                        TextView t=new TextView(ViewNotificationsByAll.this);
+                        pbar.setVisibility(View.INVISIBLE);
+                        t.setText("  You have received NO Notifications till now.");
+                        t.setTextSize(20);
+                        ll.addView(t);
+                    }
+
 
                 }
             }
