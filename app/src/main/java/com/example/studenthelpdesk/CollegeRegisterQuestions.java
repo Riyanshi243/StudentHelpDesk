@@ -1,13 +1,25 @@
 package com.example.studenthelpdesk;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.Serializable;
+import java.util.Collections;
 
 public class CollegeRegisterQuestions implements Serializable {
     private String question,answer;
     private boolean changeable,compulsory;
     private int type,id,domain;
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        CollegeRegisterQuestions ob=(CollegeRegisterQuestions) obj;
+        if(question.equalsIgnoreCase(ob.getQuestion()))
+            return true;
+        return false;
+
+    }
+
 
     public void setDomain(int domain) {
         this.domain = domain;

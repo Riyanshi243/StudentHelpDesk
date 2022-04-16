@@ -90,7 +90,7 @@ Timer t;
     static boolean flag=false,flag2=false;
     static int srno=1;
 
-    Boolean fromWhere=false;
+    static Boolean fromWhere=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,15 +104,27 @@ Timer t;
         uploadQ=new ArrayList<>();
         flag=false;
         flag2=false;
-        //creating new instance again on onCreate to avoid repetition of values
+        fromWhere=false;
         allStudentDatatemp=new ArrayList<>();
         allStudentData=new ArrayList<>();
         allCourseAndBranch=new HashMap<>();
         allCourseAndBranchShow=new HashMap<>();
-
-
-
         allheadings=new ArrayList<>();
+        equal=new HashMap<>();
+        range=new HashMap<>();
+        if(getIntent().hasExtra("From Data Requests"))
+        {
+            fromWhere= getIntent().getBooleanExtra("From Data Requests",false);
+            LinearLayout LL=findViewById(R.id.ll_Filters);
+            LL.setVisibility(View.GONE);
+            allCourseAndBranchShow=AdminViewDataRequestsFromCompanyDetails.allCourseAndBranchRequest;
+            equal=AdminViewDataRequestsFromCompanyDetails.equal;
+            range=AdminViewDataRequestsFromCompanyDetails.range;
+            allheadings=AdminViewDataRequestsFromCompanyDetails.allheadings;
+        }
+
+
+
         s=0;k=0;
         srno=1;
         String[] sortinList={"Ascending Order","Descending Order"}; //Ascending = 0 and descending =1
@@ -124,6 +136,7 @@ Timer t;
                 String what="";
                 if(progressBar.getVisibility()==View.VISIBLE)
                 {
+
                     Toast.makeText(AdminViewAllStudentData.this,"Data is Loading.Please Wait",Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -150,96 +163,96 @@ Timer t;
                 sort();
             }
         });
-        DocumentReference personalDetails= FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Personal Question");
-        personalDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                long total=(long)documentSnapshot.get("Total");
-                for (int i=0;i<total;i++)
-                {
-                    int finalI = i;
-                    int finalI1 = i;
-                    personalDetails.collection(i+"").document(i+"")
-                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
-                            crq.setQuestion((String) documentSnapshot.get("Question"));
-                            long x= (long) documentSnapshot.get("Type");
-                            crq.setType((int) x);
-                            crq.setId(finalI);
-                            personalQ.add(crq);
-                            allheadings.add(crq);
-                            if(finalI1 ==total-1)
-                            {
-                                DocumentReference academicDetails=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Academic Question");
-                                academicDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        long total2= (long) documentSnapshot.get("Total");
-                                        for (int i=0;i<total2;i++)
-                                        {
-                                            int finalI2 = i;
-                                            academicDetails.collection(i+"").document(i+"")
-                                                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                @Override
-                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                    CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
-                                                    crq.setQuestion((String) documentSnapshot.get("Question"));
-                                                    long x= (long) documentSnapshot.get("Type");
-                                                    crq.setType((int) x);
-                                                    crq.setId(finalI2);
-                                                    academicQ.add(crq);
-                                                    allheadings.add(crq);
-                                                    if(finalI2 ==total2-1)
-                                                    {
-                                                        DocumentReference uploadDetails=FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Upload Question");
-                                                        uploadDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                            @Override
-                                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                                long total3=(long)documentSnapshot.get("Total");
-                                                                for(int i3=0;i3<total3;i3++)
-                                                                {
-                                                                    int finalI3 = i3;
-                                                                    int finalI4 = i3;
-                                                                    uploadDetails.collection(i3+"").document(i3+"")
-                                                                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                                        @Override
-                                                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                                            CollegeRegisterQuestions crq=new CollegeRegisterQuestions();
-                                                                            crq.setQuestion((String) documentSnapshot.get("Question"));
-                                                                            long x= (long) documentSnapshot.get("Type");
-                                                                            crq.setType((int) x);
-                                                                            crq.setId(finalI3);
-                                                                            uploadQ.add(crq);
-                                                                            allheadings.add(crq);
-                                                                            if(uploadQ.size() ==total3) {
+         {
+            DocumentReference personalDetails = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Personal Question");
+            personalDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    long total = (long) documentSnapshot.get("Total");
+                    for (int i = 0; i < total; i++) {
+                        int finalI = i;
+                        int finalI1 = i;
+                        personalDetails.collection(i + "").document(i + "")
+                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                CollegeRegisterQuestions crq = new CollegeRegisterQuestions();
+                                crq.setQuestion((String) documentSnapshot.get("Question"));
+                                long x = (long) documentSnapshot.get("Type");
+                                crq.setType((int) x);
+                                crq.setId(finalI);
+                                    personalQ.add(crq);
+                                if(fromWhere==false)
+                                    allheadings.add(crq);
+                                if (personalQ.size() == total ) {
+                                    DocumentReference academicDetails = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Academic Question");
+                                    academicDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            long total2 = (long) documentSnapshot.get("Total");
+                                            for (int i = 0; i < total2; i++) {
+                                                int finalI2 = i;
+                                                academicDetails.collection(i + "").document(i + "")
+                                                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                        CollegeRegisterQuestions crq = new CollegeRegisterQuestions();
+                                                        crq.setQuestion((String) documentSnapshot.get("Question"));
+                                                        long x = (long) documentSnapshot.get("Type");
+                                                        crq.setType((int) x);
+                                                        Log.e("Type original", x + " " + crq.getQuestion());
+                                                        crq.setId(finalI2);
+                                                            academicQ.add(crq);
+                                                        if(fromWhere==false)
+                                                            allheadings.add(crq);
+                                                        if (academicQ.size()== total2) {
+                                                            DocumentReference uploadDetails = FirebaseFirestore.getInstance().collection("All Colleges").document(adminData.getCollegeId()).collection("Questions").document("Upload Question");
+                                                            uploadDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                @Override
+                                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                    long total3 = (long) documentSnapshot.get("Total");
+                                                                    for (int i3 = 0; i3 < total3; i3++) {
+                                                                        int finalI3 = i3;
+                                                                        uploadDetails.collection(i3 + "").document(i3 + "")
+                                                                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                            @Override
+                                                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                                CollegeRegisterQuestions crq = new CollegeRegisterQuestions();
+                                                                                crq.setQuestion((String) documentSnapshot.get("Question"));
+                                                                                long x = (long) documentSnapshot.get("Type");
+                                                                                crq.setType((int) x);
+                                                                                crq.setId(finalI3);
+                                                                                    uploadQ.add(crq);
+                                                                                if(fromWhere==false)
+                                                                                    allheadings.add(crq);
+                                                                                if (uploadQ.size() == total3) {
 
-                                                                                show();
-                                                                                get(adminData);
-                                                                                flag2=true;
+                                                                                    show();
+                                                                                    get(adminData);
+                                                                                    flag2 = true;
+                                                                                }
                                                                             }
-                                                                        }
-                                                                    });
+                                                                        });
+
+                                                                    }
 
                                                                 }
+                                                            });
+                                                        }
 
-                                                            }
-                                                        });
                                                     }
+                                                });
 
-                                                }
-                                            });
-
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
         getHeading();
         t=new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
@@ -247,6 +260,7 @@ Timer t;
             public void run() {
                 if(allStudentDatatemp==null)
                     return;
+
                 if(flag==false&&flag2==true)
                 {
                     tl.post(new Runnable() {
@@ -256,13 +270,6 @@ Timer t;
                             flag2=false;
                         }
                     });
-                }
-                if(getIntent().hasExtra("From Data Requests"))
-                {
-                    fromWhere= getIntent().getBooleanExtra("From Data Requests",false);
-                    LinearLayout LL=findViewById(R.id.ll_Filters);
-                    LL.setVisibility(View.GONE);
-                    allCourseAndBranchShow=AdminViewDataRequestsFromCompanyDetails.allCourseAndBranchRequest;
                 }
                 if(0<allStudentDatatemp.size()&&flag)
                 {
@@ -351,6 +358,8 @@ Timer t;
                     Linkify.addLinks(ansemail, Linkify.ALL);
                     ansemail.setLinkTextColor(Color.parseColor("#034ABC"));
                     tr.addView(v2);
+                    Log.e("All headings",allheadings.toString()+" "+personalQ.toString());
+
                     for (int i=0;i<personalAnswers.size();i++)
                     {
                         CollegeRegisterQuestions p = personalAnswers.get(i);
@@ -447,7 +456,6 @@ Timer t;
     }
     public static void getHeading()
     {
-
         DocumentReference allcourse = FirebaseFirestore.getInstance().collection("All Colleges")
                 .document(adminData.getCollegeId());
         allcourse.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -463,7 +471,8 @@ Timer t;
                             ArrayList<Boolean>branchstatus= new ArrayList<>();
                             for(String c:branch)
                                 branchstatus.add(true);
-                            allCourseAndBranchShow.put(c,branchstatus);
+                            if(fromWhere==false)
+                                allCourseAndBranchShow.put(c,branchstatus);
                             allCourseAndBranch.put(c,branch);
                         }
                     });
@@ -835,5 +844,6 @@ Timer t;
         super.onBackPressed();
         t.purge();
         t.cancel();
+        fromWhere=false;
     }
 }
