@@ -89,26 +89,25 @@
                 android:text="TOPIC"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="22dp" />
+                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/RequestPdata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:paddingLeft="5dp"
                 android:text="Fields from Personal Data"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="22dp" />
+                android:textSize="18dp" />
 
             <LinearLayout
                 android:id="@+id/ll_PRequests"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:paddingLeft="15dp"
@@ -122,20 +121,19 @@
                 android:id="@+id/RequestAdata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:paddingLeft="5dp"
                 android:text="Fields from Academic Data"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="22dp" />
+                android:textSize="18dp" />
 
             <LinearLayout
                 android:id="@+id/ll_ARequests"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:paddingLeft="15dp"
@@ -147,20 +145,19 @@
                 android:id="@+id/RequestUdata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:paddingLeft="5dp"
                 android:text="Fields from Document Data"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="22dp" />
+                android:textSize="18dp" />
 
             <LinearLayout
                 android:id="@+id/ll_URequests"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:paddingLeft="15dp"
@@ -171,20 +168,19 @@
                 android:id="@+id/RequestFilterReq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:paddingLeft="5dp"
                 android:text="Requirements"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="22dp" />
+                android:textSize="18dp" />
 
             <LinearLayout
                 android:id="@+id/ll_FRequest"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:paddingLeft="15dp"
@@ -197,6 +193,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:onClick="viewThisData"
                 android:background="@drawable/roundedbutton"
                 android:text="VIEW THIS DATA" />
@@ -219,6 +216,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:onClick="acceptReq"
                 android:background="@drawable/roundedbutton"
                 android:text="SEND DATA TO COMPANY" />
 
@@ -244,6 +242,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/roundedbutton"
                 android:text="REJECT THIS REQUEST"
+                android:onClick="rejectReq"
                 android:layout_marginBottom="30dp"/>
 
 

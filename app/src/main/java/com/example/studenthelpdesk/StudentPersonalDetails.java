@@ -56,7 +56,6 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(studentData==null)
                     return;
-                //Log.e("Branch", studentData.getBranch()+"");
                 lock= (boolean) documentSnapshot.get(studentData.getBranch());
             }});
         t=new Timer();
@@ -128,11 +127,9 @@ public class StudentPersonalDetails extends AppCompatActivity  implements DatePi
                                 @Override
                                 public void onClick(View v) {
                                     {
-
                                         String answer=saveData(typeInput,a);
                                         if(answer.length()==0 && a.isCumplolsory())
                                         {
-                                            //Toast.makeText(StudentPersonalDetails.this, "ERROORR", Toast.LENGTH_SHORT).show();
                                             EditText answer1= (EditText) setError(a.getType(),typeInput);
                                             if(answer1!=null) {
                                                 answer1.setError("This is Compulsory");

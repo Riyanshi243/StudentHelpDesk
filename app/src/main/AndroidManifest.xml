@@ -127,9 +127,6 @@
             android:name=".AdminSignUp"
             android:exported="false" />
         <activity
-            android:name=".StudentReviewAllData"
-            android:exported="false" />
-        <activity
             android:name=".StudentSignup3_UploadData"
             android:exported="false" />
         <activity
