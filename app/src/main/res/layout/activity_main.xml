@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/splash_screen">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="418dp"
         android:layout_height="730dp"
-        android:background="@drawable/splash_screen"
         android:gravity="bottom|center"
-        android:onClick="letTheUserLoggedIn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.175"

@@ -4,15 +4,16 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
-        android:id="@+id/ll"
+        android:id="@+id/linearlay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="20dp"
-        android:background="@color/box_bg"
+        android:background="@drawable/layout_bg"
         android:duplicateParentState="true"
         android:orientation="vertical"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,7 @@
                 android:textSize="18dp" />
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/reason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reason for request"
@@ -104,7 +105,8 @@
                 android:inputType="date"
                 android:text="TextView"
                 android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:visibility="gone" />
 
         </TableRow>
 
@@ -141,7 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="REASON"
+            android:text="REASON :"
             android:textColor="@color/black"
             android:textSize="18dp"
             android:visibility="visible" />
@@ -151,13 +153,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:inputType="textMultiLine"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
+            android:inputType="textMultiLine"
             android:text="reason"
             android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/DELETE"

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AdminSignUp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="122dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            android:background="@drawable/head_img">
+
+            <TextView
+                android:id="@+id/head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+
+                android:text="SIGNUP"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar5"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="Please fill up your required details here!"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColorHint="@color/hint_text"
+                    android:backgroundTint="@color/box_bg">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/deptName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="none"
+                        android:text="Choose your department" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <EditText
+                    android:id="@+id/adminname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="Enter your Name"
+                    android:inputType="textCapSentences"
+                    android:minHeight="48dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    tools:ignore="SpeakableTextPresentCheck" />
+                <EditText
+                    android:id="@+id/contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="Enter your phone number"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="5dp"
+                        android:text="Upload your profile picture"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <Button
+                        android:id="@+id/upload"
+                        android:layout_width="40dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ic_baseline_upload_file"
+                        android:onClick="uploadPic" />
+
+                    <ImageView
+                        android:id="@+id/uplodingdone"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/ic_baseline_done" />
+                </TableRow>
+
+                <Button
+                    android:id="@+id/signup"
+                    android:layout_width="157dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/roundedbutton"
+                    android:onClick="saveAndNext"
+                    android:text="SIGN-UP" />
+
+                <TextView
+                    android:id="@+id/login"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+
+                    android:layout_marginBottom="60dp"
+                    android:text="@string/already_a_user_nlogin_instead"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_text"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

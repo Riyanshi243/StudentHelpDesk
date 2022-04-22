@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:padding="5dp"
+        android:background="@drawable/layout_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029">
+
+        <TextView
+            android:id="@+id/Heading2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="ENTER YOUR "
+            android:paddingLeft="5dp"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="start|top"
+            android:paddingLeft="5dp"
+            android:inputType="textCapSentences"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:hint="Your " />
+
+        <TextView
+            android:id="@+id/Heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="ENTER YOUR "
+            android:paddingLeft="5dp"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:id="@+id/AddSubQuestions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center_vertical|center"
+            android:gravity="center_horizontal|center_vertical">
+
+            <Button
+                android:id="@+id/addsubQ"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/roundedbutton"
+                android:text="ADD NEW BRANCH" />
+
+            <Button
+                android:id="@+id/complete"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:background="@drawable/roundedbutton"
+                android:text="SAVE THIS COURSE" />
+
+
+        </TableRow>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

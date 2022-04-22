@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_notif"
         android:title="notif"
-        android:icon="@drawable/ic_baseline_notifications_normal"
+        android:icon="@drawable/ic_baseline_notifications"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_logout"

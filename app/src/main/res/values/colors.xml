@@ -8,10 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_gray">#bababa</color>
+    <color name="background_gray2">#F7F7F7</color>
+    <color name="box_blue">#DFDEDE</color>
     <color name="hint_text">#858383</color>
     <color name="box_bg">#e8e6e6</color>
-    <color name="yellow_bg">#F0CD6C</color>
-    <color name="red_bg">#FF1201</color>
-    <color name="green_bg">#5CF018</color>
-    <color name="blue_text">#0A64F3</color>
+    <color name="yellow_bg">#F3FDC939</color>
+    <color name="red_bg">#e83342</color>
+    <color name="green_bg">#36e034</color>
+    <color name="blue_text">#034ABC</color>
+    <color name="gray_blue_vlight">#E5E7EA</color>
+
 </resources>

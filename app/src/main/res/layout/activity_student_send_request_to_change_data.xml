@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_white"
+    android:background="@color/white"
     tools:context=".StudentSendRequestToChangeData">
 
     <ScrollView
@@ -14,28 +14,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            android:background="@drawable/head_img">
+
+            <TextView
+                android:id="@+id/head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="EDIT REQUEST TO ADMIN"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+
+        </LinearLayout>
+
 
             <TextView
                 android:id="@+id/welcome"
                 android:layout_width="match_parent"
-                android:paddingLeft="5dp"
-                android:fontFamily="casual"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
-                android:text="Hello ID"
+                android:layout_marginRight="10dp"
+                android:fontFamily="casual"
+                android:paddingLeft="5dp"
+                android:text="Hello"
                 android:textColor="@color/black"
                 android:textSize="24dp" />
+
 
             <TextView
                 android:id="@+id/currentVal_msg"
@@ -44,6 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:text="Current Value of "
                 android:textColor="@color/black"
                 android:textSize="24dp" />
@@ -51,26 +74,22 @@
             <TextView
                 android:id="@+id/currentVal"
                 android:layout_width="match_parent"
-                android:paddingLeft="5dp"
+                android:paddingLeft="8dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="CURRENT VALUE"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/black"
-                android:background="@color/background_gray"
+                android:background="@drawable/layout_bg"
                 android:textSize="24dp" />
 
-            <EditText
-                android:id="@+id/newcurrentval"
+            <LinearLayout
+                android:id="@+id/linearlay"
                 android:layout_width="match_parent"
-                android:paddingLeft="5dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:hint="New value that needs to be placed"
-                android:inputType="textPersonName"
-                android:textColor="@color/hint_text"
-                android:textColorHint="@android:color/darker_gray" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
 
             <EditText
                 android:id="@+id/reasontochange"
@@ -78,11 +97,14 @@
                 android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="14dp"
+                android:layout_marginLeft="14dp"
                 android:gravity="start|top"
+                android:textSize="20dp"
                 android:hint="Reason to change your field"
                 android:inputType="textMultiLine"
-                android:textColor="@color/hint_text"
+                android:textColor="@color/black"
                 android:textColorHint="@android:color/darker_gray" />
 
             <Button
@@ -91,7 +113,9 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/roundedbutton"
+                android:onClick="sendRequest"
                 android:text="SEND REQUEST" />
 
         </LinearLayout>

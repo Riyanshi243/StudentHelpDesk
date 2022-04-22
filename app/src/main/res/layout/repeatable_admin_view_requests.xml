@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textMultiLine"
+            android:text="email of student"
+            android:textColor="@color/blue_text"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/request_Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Header"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/reason_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="REASON : "
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+
+            <TextView
+                android:id="@+id/reason_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Reason for request"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:paddingRight="5dp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+
+            <Button
+                android:id="@+id/rej"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/roundedbutton"
+                android:layout_marginRight="30dp"
+                android:text="REJECT" />
+
+            <Button
+                android:id="@+id/acc"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/roundedbutton"
+                android:text="ACCEPT" />
+        </TableRow>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

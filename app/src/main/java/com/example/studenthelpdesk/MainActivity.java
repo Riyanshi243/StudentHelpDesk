@@ -1,47 +1,40 @@
 package com.example.studenthelpdesk;
 
-import androidx.annotation.NonNull;
-//package com.example.hp.splashscreen;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+//import android.support.v7.app.AppCompatActivity;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Handler;
-//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
+        import android.os.Handler;
+import android.os.Looper;
 import android.widget.TextView;
 import android.widget.Toast;
-/*
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;*/
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN_TIME_OUT=2000;
-    static boolean isadmin=true,done=true;
-    /*
+    static boolean done=true;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             showCustomDialog();
         }
         else {
-            int SPLASH_SCREEN = 4000;
+            int SPLASH_SCREEN = 2000;
             if (done == false)
                 new Handler().postDelayed(() -> {
                 }, SPLASH_SCREEN);
@@ -66,31 +59,46 @@ public class MainActivity extends AppCompatActivity {
                         if (firebaseAuth != null) {
                             String email = firebaseAuth.getEmail();
                             FirebaseFirestore fstore = FirebaseFirestore.getInstance();
-                            DocumentReference dref = fstore.collection("AllowedUser").document(email);
+                            DocumentReference dref = fstore.collection("All Users On App").document(email);
                             dref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    Map<String, Object> m = documentSnapshot.getData();
-                                    isadmin = (boolean) m.get("Admin");
-                                    if (isadmin) {
-                                        startActivity(new Intent(MainActivity.this, Admin_page.class));
+                                    String category= (String) documentSnapshot.get("Category");
+                                    if(category==null)
+                                    {
+                                        startActivity(new Intent(MainActivity.this,Login.class));
                                         finish();
-                                    } else {
+                                    }
+                                    else if(category.equalsIgnoreCase("Admin"))
+                                    {
+                                        startActivity(new Intent(MainActivity.this,AdminPage.class));
+                                        finish();
+                                    }
+                                    else if(category.equalsIgnoreCase("Student"))
+                                    {
+                                        startActivity(new Intent(MainActivity.this,StudentPage.class));
+                                        finish();
 
-                                        startActivity(new Intent(MainActivity.this, Student_page.class));
+                                    }
+                                    else if(category.equalsIgnoreCase("Company"))
+                                    {
+
+                                        startActivity(new Intent(MainActivity.this,CompanyPage.class));
                                         finish();
                                     }
                                 }
-
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(MainActivity.this, Login.class);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             });
 
+
                         } else {
-                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(MainActivity.this, Login.class);
                             startActivity(intent);
                             finish();
                         }
@@ -100,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-            }, 4000, 8000);
+            }, 2000, 2000);
             done = false;
             text.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -110,48 +118,57 @@ public class MainActivity extends AppCompatActivity {
                     if (firebaseAuth != null) {
                         String email = firebaseAuth.getEmail();
                         FirebaseFirestore fstore = FirebaseFirestore.getInstance();
-                        DocumentReference dref = fstore.collection("AllowedUser").document(email);
+                        DocumentReference dref = fstore.collection("All Users On App").document(email);
                         dref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                Map<String, Object> m = documentSnapshot.getData();
-                                isadmin = (boolean) m.get("Admin");
-                                if (isadmin) {
-                                    startActivity(new Intent(MainActivity.this, Admin_page.class));
+                                String category= (String) documentSnapshot.get("Category");
+                                if(category==null)
+                                {
+                                    startActivity(new Intent(MainActivity.this,Login.class));
                                     finish();
-                                } else {
+                                }
+                                else if(category.equalsIgnoreCase("Admin"))
+                                {
+                                    startActivity(new Intent(MainActivity.this,AdminPage.class));
+                                    finish();
+                                }
+                                else if(category.equalsIgnoreCase("Student"))
+                                {
+                                    startActivity(new Intent(MainActivity.this,StudentPage.class));
+                                    finish();
 
-                                    startActivity(new Intent(MainActivity.this, Student_page.class));
+                                }
+                                else if(category.equalsIgnoreCase("Company"))
+                                {
+
+                                    startActivity(new Intent(MainActivity.this,CompanyPage.class));
                                     finish();
                                 }
                             }
-
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainActivity.this, Login.class);
+                                startActivity(intent);
+                                finish();
                             }
                         });
 
+
                     } else {
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(MainActivity.this, Login.class);
                         startActivity(intent);
-                        SPLASH_SCREEN_TIME_OUT = -1;
                         finish();
                     }
                 }
 
             });
         }
-    }*/
-
-    public void letTheUserLoggedIn(View view)
-    {
-        //Toast.makeText(MainActivity.this,"HIIIIII",Toast.LENGTH_LONG).show();
-
-
     }
-   /*
+
+
+
     private boolean isConnected(MainActivity mainActivity) {
         ConnectivityManager connectivityManager= (ConnectivityManager) mainActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiConn=connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -165,18 +182,18 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
-    }*/
+    }
     private void showCustomDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage("Please Connect to the Internet to proceed further")
+        builder.setMessage("PLEASE CONNECT OT THE INTERNET TO PROCEED FURTHER")
                 .setCancelable(false)
-                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                .setPositiveButton("CONNECT", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //do nothing

@@ -1,28 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.studenthelpdesk">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentHelpDesk">
         <activity
-            android:name=".StudentReviewAllData"
+            android:name=".CompanyViewStudentsData"
             android:exported="false" />
         <activity
-            android:name=".StudentUploadDocuments"
+            android:name=".AdminViewDataRequestsFromCompanyDetails"
             android:exported="false" />
         <activity
-            android:name=".StudentGetAcademicData"
+            android:name=".AdminViewDataRequestsFromCompany"
             android:exported="false" />
         <activity
-            android:name=".StudentGetPersonalData"
+            android:name=".AdminViewListOfCompanies"
+            android:exported="false" />
+        <activity
+            android:name=".CompanyRequestDataFromAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".AdminCompanyPage"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewAllStudentDataFilters"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewAllStudentData"
+            android:exported="false" />
+        <activity
+            android:name=".AdminLockDatabaseFilters"
+            android:exported="false" />
+        <activity
+            android:name=".EndScreen"
+            android:exported="false" />
+        <activity
+            android:name=".ViewNotificationDataByAll"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege2_1"
+            android:exported="false" />
+        <activity
+            android:name=".ViewPDFActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CompanyEditProfilePage"
+            android:exported="false" />
+        <activity
+            android:name=".AdminEditProfilePage"
+            android:exported="false" />
+        <activity
+            android:name=".AdminAnswerFAQ"
+            android:exported="false" />
+        <activity
+            android:name=".AdminSearchUser"
+            android:exported="false" />
+        <activity
+            android:name=".AdminOrCompanySendNotification"
+            android:exported="false" />
+        <activity
+            android:name=".CompanySignUp2"
+            android:exported="false" />
+        <activity
+            android:name=".CompanySignUp"
+            android:exported="false" />
+        <activity
+            android:name=".CompanyPage"
+            android:exported="false" />
+        <activity
+            android:name=".AdminSignUp2"
+            android:exported="false" />
+        <activity
+            android:name=".StudentViewAllFAQ"
+            android:exported="false" />
+        <activity
+            android:name=".StudentPostFAQ"
+            android:exported="false" />
+        <activity
+            android:name=".ViewNotificationsByAll"
+            android:exported="false" />
+        <activity
+            android:name=".StudentUploadDetails"
+            android:exported="false" />
+        <activity
+            android:name=".StudentAcademicDetails"
+            android:exported="false" />
+        <activity
+            android:name=".StudentPersonalDetails"
+            android:exported="false" />
+        <activity
+            android:name=".StudentSignupDone"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewAllRequests"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege8"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege7_SuperAdminSignup"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege6_UploadData"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege5_AcademicQuestions"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege4_PersonalQuestions"
+            android:exported="false" />
+        <activity
+            android:name=".AdminCreateNewAccount"
+            android:exported="false" />
+        <activity
+            android:name=".AdminSignUp"
+            android:exported="false" />
+        <activity
+            android:name=".StudentSignup3_UploadData"
+            android:exported="false" />
+        <activity
+            android:name=".StudentSignup2_AcademicData"
+            android:exported="false" />
+        <activity
+            android:name=".StudentSignup1_PersonalData"
             android:exported="false" />
         <activity
             android:name=".StudentCheckRequestStatus"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege3"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCollege2"
             android:exported="false" />
         <activity
             android:name=".AdminPage"
@@ -32,9 +152,12 @@
             android:exported="false" />
         <activity
             android:name=".RegisterCollege"
-            android:exported="false" />
+            android:exported="false" /> <!-- android:windowSoftInputMode="stateVisible|adjustPan"/> -->
         <activity
             android:name=".Signup"
+            android:exported="false" />
+        <activity
+            android:name=".StudentSendRequestToChangeData"
             android:exported="false" />
         <activity
             android:name=".Login"
@@ -48,6 +171,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".FirebaseMessagingService"
+            android:exported="false"
+            android:permission="TODO"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

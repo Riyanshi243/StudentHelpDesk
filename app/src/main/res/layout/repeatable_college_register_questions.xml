@@ -11,7 +11,9 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/box_bg"
+        android:padding="5dp"
+        android:background="@drawable/layout_bg"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +27,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="Question:"
+            android:paddingLeft="5dp"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -35,8 +38,8 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:textColor="@color/hint_text"
+            android:inputType="textCapSentences"
+            android:textColor="@color/black"
             android:textSize="20dp"
             android:hint="Enter your question..." />
 
@@ -59,7 +62,7 @@
         <Spinner
             android:id="@+id/dropdown"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginBottom="20dp"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown" />

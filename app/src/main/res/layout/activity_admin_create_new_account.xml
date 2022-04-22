@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AdminCreateNewAccount">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            android:background="@drawable/head_img">
+            <TextView
+                android:id="@+id/head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+
+                android:text="NEW USER ACCOUNT"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+        </LinearLayout>
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:ems="10"
+                android:hint="Email ID"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="20sp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <CheckBox
+                android:id="@+id/checkBox_student"
+                android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Is user a STUDENT?"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:checked="true"/>
+
+            <CheckBox
+                android:id="@+id/checkBox_admin"
+                android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Is user an ADMIN?"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+            <CheckBox
+                android:id="@+id/checkBox_company"
+                android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Is user a COMPANY?"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/done"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/roundedbutton"
+                android:onClick="createUser"
+                android:text="CREATE ACCOUNT" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

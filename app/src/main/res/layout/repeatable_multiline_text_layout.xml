@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,10 +35,10 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:textColor="@color/hint_text"
+            android:inputType="textMultiLine|textCapSentences"
+            android:textColor="@color/black"
             android:textSize="20dp"
-            android:hint="Your " />
+            android:hint="Your answer..." />
 
 
     </LinearLayout>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textMultiLine"
+            android:text="You are tagged in this post!"
+            android:textColor="@color/red_bg"
+            android:layout_marginBottom="10dp"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:id="@+id/hashtagLinearL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <!-- add hastags in this linear layout -->
+        </LinearLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp">
+
+            <ImageView
+                android:id="@+id/profilepic2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:onClick="toSeeAnswer"
+                app:srcCompat="@drawable/error_profile_picture" />
+
+            <TextView
+                android:id="@+id/questionby"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:onClick="toSeeSender"
+                android:text="NAME: "
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </TableRow>
+
+        <TextView
+            android:id="@+id/question_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/hint_text"
+            android:text="timeofpost"
+            android:textSize="10dp"/>
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Question"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingRight="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/llAns"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/profilepic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/admin_profile_img" />
+
+                <TextView
+                    android:id="@+id/refewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:paddingLeft="0dp"
+                    android:text="Answered by: "
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+            </TableRow>
+
+            <TextView
+                android:id="@+id/answer_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="10dp"
+                android:text="Answer_time"
+                android:textColor="@color/hint_text"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="10dp"
+                android:text=""
+                android:background="@drawable/layout_bg_lightcolour"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/answer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/roundedbutton"
+            android:text="ANSWER THIS FAQ"/>
+
+        <LinearLayout
+            android:id="@+id/answerFAQll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/answer_to_FAQ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:textSize="18dp"
+                android:gravity="start|top"
+                android:hint="Type your answer..."
+                android:inputType="textMultiLine"
+                android:visibility="visible" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/discard_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/roundedbutton"
+                    android:text="DISCARD"
+                    android:visibility="visible" />
+                <Button
+                    android:id="@+id/post_answer_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/roundedbutton"
+                    android:text="POST ANSWER"
+                    android:visibility="visible" />
+
+            </TableRow>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

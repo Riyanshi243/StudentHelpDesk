@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:id="@+id/hashtagLinearL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_bg"
+            android:orientation="horizontal">
+            <!--add hashtags here-->
+        </LinearLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp">
+
+            <ImageView
+                android:id="@+id/profilepic_student"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:onClick="toSeeAnswer"
+                app:srcCompat="@drawable/error_profile_picture" />
+
+            <TextView
+                android:id="@+id/questionby"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="NAME: "
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </TableRow>
+
+
+        <TextView
+            android:id="@+id/question_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/hint_text"
+            android:text="Question_time"
+            android:textSize="10dp"/>
+
+        <TextView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:paddingRight="5dp"
+                android:text="Question"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:layout_marginBottom="10dp"/>
+
+
+        <LinearLayout
+            android:id="@+id/llAns"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp">
+
+
+                <ImageView
+                    android:id="@+id/profilepic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:onClick="toSeeAnswer"
+                    app:srcCompat="@drawable/error_profile_picture" />
+
+                <TextView
+                    android:id="@+id/refewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Answered by: "
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+            </TableRow>
+            <TextView
+                android:id="@+id/answer_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/hint_text"
+                android:text="Answer_time"
+                android:textSize="10dp"/>
+
+            <TextView
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="answer "
+                android:paddingLeft="5dp"
+                android:background="@drawable/layout_bg_lightcolour"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

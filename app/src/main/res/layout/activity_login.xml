@@ -4,15 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_white"
-
+    android:background="@color/white"
     tools:context=".Login">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,13 +19,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/login_img"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            android:background="@drawable/head_img">
+            <TextView
+                android:id="@+id/head"
                 android:layout_width="match_parent"
-                android:layout_height="165dp"
-                android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/login" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+
+                android:text="LOGIN"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+
 
             <ProgressBar
                 android:id="@+id/progressBar4"
@@ -36,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="invisible" />
+        </LinearLayout>
 
             <EditText
                 android:id="@+id/email"
@@ -43,7 +54,7 @@
                 android:paddingLeft="15dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="70dp"
                 android:ems="10"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
@@ -79,39 +90,50 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <TextView
+                android:id="@+id/forgetPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:gravity="right"
+                android:onClick="forgetPassword"
+                android:text="Forgot your Password?"
+                android:textColor="@color/blue_text" />
 
             <Button
                 android:id="@+id/login"
                 android:layout_width="157dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-
+                android:layout_marginTop="20dp"
+                android:background="@drawable/roundedbutton"
+                android:onClick="Login"
                 android:text="LOGIN" />
 
             <TextView
                 android:id="@+id/signin"
-                android:layout_width="103dp"
-                android:layout_height="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="50dp"
                 android:gravity="center"
-
+                android:onClick="signUp"
                 android:text="@string/no_account_ncreate_one"
-                android:textColor="@color/blue_text"
-                android:textStyle="italic" />
+                android:textColor="@color/blue_text" />
+
 
             <TextView
-                android:id="@+id/forgetPassword"
-                android:layout_width="136dp"
-                android:layout_height="48dp"
+                android:id="@+id/college_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
-
-                android:text="Forgot Password"
-                android:textColor="@color/blue_text"
-                android:textStyle="italic" />
+                android:onClick="register"
+                android:text="@string/new_here_register_your_college"
+                android:textColor="@color/blue_text" />
         </LinearLayout>
     </ScrollView>
 
